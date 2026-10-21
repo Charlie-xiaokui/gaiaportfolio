@@ -2,7 +2,7 @@
   "name": "maria-astro-theme",
   "description": "A free Astro portfolio theme for UX and product designers, with MDX case studies, a resume page, light and dark modes, and cookie consent.",
   "type": "module",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": "Andrei Alba",
   "license": "MIT",
   "private": true,
@@ -41,19 +41,19 @@
     "yaml": "^2.8.3"
   },
   "dependencies": {
-    "@astrojs/mdx": "^8.0.3",
+    "@astrojs/mdx": "^8.1.0",
     "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.3.8",
+    "astro": "^7.4.1",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "@types/node": "^24.13.6",
-    "prettier": "^3.9.9",
-    "prettier-plugin-astro": "^1.1.0",
+    "@astrojs/check": "^0.9.11",
+    "@types/node": "^24.19.2",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.1",
     "typescript": "^5.9.3",
-    "vite": "^8.3.4"
+    "vite": "^8.3.5"
   }
 }

@@ -2,6 +2,11 @@
 
 All notable changes to Maria are documented here.
 
+## 3.0.1 - 2026-10-21
+
+- Updated Astro to 7.4.1 and other dependencies.
+- Updated `AGENTS.md` for Astro 7.
+
 ## 3.0.0 - 2026-10-08
 
 - Redesigned the theme with a warm neutral palette, a lime accent, larger editorial type, and refined light and dark modes.

@@ -1,26 +1,10 @@
 ---
-import { Image } from 'astro:assets';
-import portrait from '@/assets/images/maria.webp';
 import Icon from '@/components/ui/Icon.astro';
 import { hero } from '@/config/home';
-import { siteConfig } from '@/config/site';
 ---
 
 <section class="shell pt-14 pb-20 sm:pt-20 sm:pb-28 lg:pt-24" aria-labelledby="hero-title">
-  {siteConfig.availability.enabled && (
-    <p class="rise inline-flex items-center gap-3 rounded-full border border-line bg-surface py-1.5 pr-4 pl-1.5 text-sm text-body shadow-[0_1px_2px_rgb(18_18_17/0.04)]">
-      <Image
-        src={portrait}
-        alt=""
-        width={56}
-        height={56}
-        loading="eager"
-        class="size-7 rounded-full object-cover object-top"
-      />
-      <span class="availability-dot" aria-hidden="true" />
-      {siteConfig.availability.label}
-    </p>
-  )}
+  <p class="rise eyebrow">introduction</p>
 
   <h1 id="hero-title" class="rise mt-8 max-w-[17ch] text-display" style="--rise-step: 1">
     {hero.greeting} {hero.title} <span class="serif">{hero.highlight}</span>
@@ -30,12 +14,9 @@ import { siteConfig } from '@/config/site';
     <div class="rise" style="--rise-step: 2">
       <p class="max-w-xl text-lead text-body">{hero.text}</p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a class="btn btn-primary" href={hero.primary.href}>
-          {hero.primary.label}
-          <Icon name="arrow-right" class="icon-nudge size-4" />
-        </a>
-        <a class="btn btn-ghost" href={hero.secondary.href}>
+        <a class="btn btn-primary" href={hero.secondary.href}>
           {hero.secondary.label}
+          <Icon name="arrow-right" class="icon-nudge size-4" />
         </a>
       </div>
     </div>
@@ -54,31 +35,3 @@ import { siteConfig } from '@/config/site';
   </div>
 </section>
 
-<style>
-  .availability-dot {
-    position: relative;
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 999px;
-    background: #22a55b;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .availability-dot::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: inherit;
-      animation: ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
-    }
-  }
-
-  @keyframes ping {
-    75%,
-    100% {
-      transform: scale(2.4);
-      opacity: 0;
-    }
-  }
-</style>

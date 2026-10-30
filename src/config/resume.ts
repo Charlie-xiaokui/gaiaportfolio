@@ -5,9 +5,9 @@ import webflow from '@/assets/logos/webflow.svg';
 
 export const resume = {
   eyebrow: 'Resume',
-  title: '10+ years shaping digital products through UX, UI, and',
-  highlight: 'systems thinking.',
-  text: 'My work centres on product clarity: bringing structure to messy workflows, overloaded interfaces, and growing systems that need to scale without becoming harder to use.',
+  title: 'I make complicated things feel',
+  highlight: 'clear and easy to use.',
+  text: "I'm Maria, a product designer focused on turning dense workflows, fuzzy requirements, and overloaded interfaces into experiences people can navigate with confidence.",
   snapshot: [
     { label: 'Location', value: 'Lisbon, Portugal' },
     { label: 'Focus', value: 'UX and product design' },

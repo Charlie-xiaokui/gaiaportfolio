@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import Icon from '@/components/ui/Icon.astro';
-import PageHero from '@/components/ui/PageHero.astro';
 import { resume } from '@/config/resume';
 import { siteConfig } from '@/config/site';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -14,23 +13,27 @@ import { profileSchema } from '@/lib/schema';
   type="profile"
   structuredData={profileSchema('/resume/')}
 >
-  <PageHero eyebrow={resume.eyebrow} title={resume.title} highlight={resume.highlight} text={resume.text}>
+  <header class="shell grid items-end gap-12 pt-16 sm:pt-24 lg:grid-cols-[minmax(0,1fr)_352px] lg:gap-16">
+    <div>
+      <p class="rise eyebrow">{resume.eyebrow}</p>
+      <h1 class="rise mt-6 max-w-[20ch] text-headline" style="--rise-step: 1">
+        {resume.title} <span class="serif">{resume.highlight}</span>
+      </h1>
+      <p class="rise mt-6 max-w-2xl text-lead text-body" style="--rise-step: 2">{resume.text}</p>
     <div class="rise mt-8 flex flex-wrap gap-3" style="--rise-step: 3">
-      {siteConfig.resumePdf && (
-        <a class="btn btn-primary" href={siteConfig.resumePdf} download>
-          <Icon name="download" class="size-4" />
-          Download PDF
-        </a>
-      )}
-      <a
-        class:list={['btn', siteConfig.resumePdf ? 'btn-ghost' : 'btn-primary']}
-        href={`mailto:${siteConfig.author.email}`}
-      >
-        {siteConfig.author.email}
-        <Icon name="arrow-up-right" class="icon-nudge-diagonal size-4" />
+      <a class="btn btn-primary" href="/">
+        View works
+        <Icon name="arrow-right" class="icon-nudge size-4" />
       </a>
     </div>
-  </PageHero>
+    </div>
+    <div class="rise relative overflow-hidden rounded-3xl" style="--rise-step: 3">
+      <img src="https://app.paper.design/static/flowers.webp" alt="Flowers" class="aspect-[4/5] w-full object-cover" />
+      <span class="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-sm font-medium text-[#121211]">
+        <Icon name="map-pin" class="size-3.5" /> Hangzhou, Zhejiang
+      </span>
+    </div>
+  </header>
 
   <div class="shell mt-20 sm:mt-28">
     <section class="resume-row reveal" aria-labelledby="snapshot-title">

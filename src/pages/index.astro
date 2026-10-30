@@ -1,37 +1,67 @@
 ---
-import Hero from '@/components/home/Hero.astro';
-import Services from '@/components/home/Services.astro';
-import Testimonials from '@/components/home/Testimonials.astro';
 import Icon from '@/components/ui/Icon.astro';
 import SectionHead from '@/components/ui/SectionHead.astro';
-import ProjectCard from '@/components/work/ProjectCard.astro';
-import { work } from '@/config/home';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { getProjects } from '@/lib/work';
-
-const projects = await getProjects();
-const selected = projects.toSorted((a, b) => Number(b.data.featured) - Number(a.data.featured)).slice(0, work.limit);
+const detail = '/work/nextpoint/';
+const cases = [
+  { title: '抖音来客首页视图升级', text: '按用户职责而非行业重构首页，一套平台三套视图，直接贴合各岗位的工作动线', tags: ['APP 设计', '复杂产品视图拆分'], color: '#C9E6EF', image: '/laike-cover-transparent.png' },
+  { title: '可视化查询重构', text: '平衡数据分析新手易用性与专家效率，经4期灰度上线', tags: ['WEB 设计', '生产力工具产品重构'], color: '#BFE9EE' },
+  { title: '仪表盘优化专项', text: '搭建图表评估体系，同步优化图表组件和仪表盘Demo', tags: ['数据报表设计', '设计驱动业务增长'], color: '#DCD3FB' },
+  { title: '飞书Aily市场重构', text: '按用户职责而非行业重构首页，一套平台三套视图，直接贴合各岗位的工作动线', tags: ['Agent 搭建平台', '前台应用和租户管理串联'], color: '#BDEEDB' },
+  { title: '飞书妙搭专家模式', text: '实现从单任务到多任务并行，开发环境与线上环境隔离', tags: ['AI coding 应用开发平台', '保持易用性且能力增强'], color: '#BDEEDB' },
+];
+const explorations = [
+  { title: 'Demo 演示', icon: 'lightbulb' }, { title: 'Figma 插件', icon: 'workflow' },
+  { title: '可复用资产', icon: 'layers' }, { title: '边界场景设计', icon: 'pen-tool' },
+] as const;
 ---
-
-<BaseLayout>
-  <Hero />
-
+<BaseLayout closing={false}>
+  <header class="shell grid items-end gap-12 pt-16 pb-20 sm:pt-24 sm:pb-28 lg:grid-cols-[minmax(0,1fr)_352px] lg:gap-16">
+    <div>
+      <p class="rise eyebrow">introduction</p>
+      <h1 class="rise intro-title mt-10" style="--rise-step: 1"><span>你好,我叫</span>戴冠宇</h1>
+      <p class="rise intro-copy mt-10 max-w-[674px]" style="--rise-step: 2">专业能力：可独立承担大型产品需求，深度挖掘关键价值，持续带来正向业务收益<br />协作与项目：跨团队协作与项目管理能力突出，能够主导产设研合作项目并高效拿到结果<br />学习与拓展：自学 SQL，从0成长为产品设计接口人；协同商家制定运营策略（完成 12 条视频的剪辑发布）</p>
+      <div class="rise mt-12" style="--rise-step: 3"><a class="btn btn-primary" href="/resume/">关于我 <Icon name="arrow-right" class="icon-nudge size-4" /></a></div>
+    </div>
+    <div class="rise relative overflow-hidden rounded-3xl" style="--rise-step: 3">
+      <img src="https://app.paper.design/static/flowers.webp" alt="Flowers" class="aspect-[4/5] w-full object-cover" />
+      <span class="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-sm font-medium text-[#121211]"><Icon name="map-pin" class="size-3.5" /> Hangzhou, Zhejiang</span>
+    </div>
+  </header>
   <section id="work" class="shell" aria-labelledby="work-title">
-    <SectionHead id="work-title" eyebrow={work.eyebrow} title={work.title} text={work.text}>
-      {projects.length > selected.length && (
-        <a class="btn btn-ghost" href="/work/">
-          All work
-          <Icon name="arrow-right" class="icon-nudge size-4" />
-        </a>
-      )}
-    </SectionHead>
+    <SectionHead id="work-title" eyebrow="Selected work" title="作品案例" text="以下是我在职期间的一些工作产出，包括B端、C端、组件、VibeCoding等" />
     <div class="mt-12 grid gap-x-8 gap-y-16 md:grid-cols-2">
-      {selected.map((project, index) => (
-        <ProjectCard project={project} eager={index < 2} />
-      ))}
+      {cases.map((item, index) => <article class="case-card reveal relative">
+        <div class="relative aspect-5/4 overflow-hidden rounded-card" style={`background:${item.color}`}>
+          {item.image ? <img src={item.image} alt="抖音来客首页视图展示" class="case-image" loading="lazy" /> : <div class="case-placeholder absolute top-[12%] left-[8%] aspect-[8/5] w-[115%]"></div>}
+          <span class="case-arrow absolute top-5 right-5 grid size-11 place-items-center rounded-full bg-inverse text-on-inverse" aria-hidden="true"><Icon name="arrow-up-right" class="size-5" /></span>
+        </div>
+        <div class="mt-6"><h3 class="text-title"><a href={index === 0 ? '/work/laike/' : detail} class="after:absolute after:inset-0">{item.title}</a></h3><p class="mt-1.5 text-sm leading-7 text-muted">{item.text}</p><ul class="mt-5 flex flex-wrap gap-2" aria-label="项目标签">{item.tags.map((tag) => <li class="chip">{tag}</li>)}</ul></div>
+      </article>)}
     </div>
   </section>
-
-  <Services />
-  <Testimonials />
+  <section class="shell mt-24 sm:mt-32" aria-labelledby="explore-title">
+    <SectionHead id="explore-title" eyebrow="explore" title="AI 设计工作流探索" />
+    <div class="mt-12 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+      {explorations.map((item) => <article class="explore-card reveal flex flex-col bg-surface p-8">
+        <span class="grid size-11 place-items-center rounded-xl bg-accent text-night"><Icon name={item.icon} class="size-5" /></span>
+        <div class="mt-10 min-h-30"><h3 class="text-title">{item.title}</h3><p class="mt-3 text-[15px] leading-6 text-muted">用于前期探索方案演示，让用户、产品研发对设计方案有实际感受</p></div>
+        <a href={detail} class="explore-more mt-4 inline-flex w-fit items-center gap-1.5 text-[17px]" aria-label={`查看更多：${item.title}`}>更多 <Icon name="arrow-right" class="icon-nudge size-5" /></a>
+      </article>)}
+    </div>
+  </section>
 </BaseLayout>
+<style>
+  .intro-title { font-family: 'PingFang SC', sans-serif; font-size: clamp(2.5rem, 5.42vw, 78px); font-weight: 500; letter-spacing: 0.1em; line-height: 1.02; }
+  .intro-title span { font-weight: 200; }
+  .intro-copy { color: var(--muted); font-size: 14px; letter-spacing: 0.01em; line-height: 2; }
+  .case-placeholder { border-radius: 14px; box-shadow: 0 2px 6px #1212110f, 0 30px 60px -24px #1212114d; outline: 1px solid #12121114; }
+  .case-image { position: absolute; top: 7.06%; left: 50%; width: 115%; max-width: none; transform: translateX(-50%); border-radius: 14px; }
+  .case-arrow { opacity: 0; scale: .6; transition: opacity 250ms ease, scale 450ms var(--ease-out-expo); }
+  .case-card:hover .case-arrow, .case-card:has(a:focus-visible) .case-arrow { opacity: 1; scale: 1; }
+  .case-card:has(a:focus-visible) { outline: 2px solid var(--ink); outline-offset: 8px; border-radius: var(--radius-card); }
+  .explore-more { opacity: 0; transition: opacity 200ms ease; }
+  .explore-card:hover .explore-more, .explore-card:focus-within .explore-more { opacity: 1; }
+  @media (hover: none) { .explore-more { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .case-arrow, .explore-more { transition: none; } }
+</style>

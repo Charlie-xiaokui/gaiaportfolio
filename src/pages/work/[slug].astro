@@ -36,6 +36,7 @@ const meta = [
 ---
 
 <BaseLayout
+  closing={false}
   title={`${client} case study`}
   description={summary}
   image={cover}
@@ -48,7 +49,7 @@ const meta = [
       <nav aria-label="Breadcrumb" class="rise">
         <ol class="flex items-center gap-2 text-sm text-muted">
           <li>
-            <a class="hover:text-ink" href="/work/">
+            <a class="hover:text-ink" href="/">
               Work
             </a>
           </li>
@@ -119,6 +120,11 @@ const meta = [
 </BaseLayout>
 
 <style>
+  :global(body),
+  :global(body *) {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+
   .case-prose > :global(*) {
     margin-inline: auto;
   }

@@ -4,7 +4,7 @@ export const hero = {
   highlight: 'actually make sense.',
   text: 'Ten-plus years helping teams turn messy problems into clear, useful experiences. Corporations, startups, scrappy independents: if there is a user confused somewhere, I want to fix that.',
   primary: { label: 'See selected work', href: '/#work' },
-  secondary: { label: 'About me', href: '/about/' },
+  secondary: { label: 'About me', href: '/resume/' },
   facts: [
     { value: '10+', label: 'years in product design' },
     { value: '40+', label: 'products shipped' },

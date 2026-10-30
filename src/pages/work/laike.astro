@@ -1,0 +1,179 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import NextProject from '@/components/work/NextProject.astro';
+import { getProjects } from '@/lib/work';
+const next = (await getProjects()).find((project) => project.id === 'bcombs');
+
+const figures = {
+  problem: '/laike-case/laike-02.webp',
+  research: '/laike-case/laike-04.webp',
+  roles: '/laike-case/laike-08.webp',
+  clerk: '/laike-case/laike-09.webp',
+  management: '/laike-case/laike-10.webp',
+  data: '/laike-case/laike-15.webp',
+  decision: '/laike-case/laike-18.webp',
+  comparison: '/laike-case/laike-20.webp',
+  outcome: '/laike-case/laike-21.webp',
+  system: '/laike-case/laike-22.webp',
+};
+---
+<BaseLayout title="抖音来客首页视图升级" description="从行业化到角色化的转型，让首页适配不同岗位的真实工作。" type="article" closing={false}>
+  <article class="case-study">
+    <header class="shell pt-12 sm:pt-16">
+      <nav aria-label="面包屑" class="rise text-sm text-muted"><a href="/">作品案例</a> <span aria-hidden="true"> / </span> <span class="text-ink">抖音来客首页视图升级</span></nav>
+      <h1 class="rise case-title mt-12" style="--rise-step: 1">从行业化到角色化的转型</h1>
+      <dl class="rise case-meta mt-12" style="--rise-step: 3">
+        <div><dt>职责</dt><dd>项目设计 OWNER</dd></div>
+        <div><dt>工作内容</dt><dd>商家调研与角色动线梳理、线上方案分析与竞品调研、设计探索与原型制作</dd></div>
+        <div><dt>项目成果</dt><dd>0–1 完成店员版与管理版设计上线；店员版 CPO 保持低于 1，管理版周活跃渗透率提升 39%。</dd></div>
+      </dl>
+    </header>
+
+    <section class="shell story-section reveal" aria-labelledby="problem-title">
+      <div class="story-copy"><p class="eyebrow">01 / 背景与问题</p><h2 id="problem-title">同一个首页，难以服务所有人</h2><p>原有首页按行业拆分为外卖版、到店版和综合版，但各版本仍有大量共同功能。商家反馈许多功能用不上，而不同岗位的真实工作场景，也难以被同一条浏览动线兼顾。</p></div>
+      <figure class="story-figure"><img src={figures.problem} alt="原有外卖版、到店版和综合版首页，以及功能冗余和动线错配的问题" loading="lazy" /><figcaption>原有行业视图与用户反馈</figcaption></figure>
+    </section>
+
+    <section class="shell story-section reveal" aria-labelledby="research-title">
+      <div class="story-copy"><p class="eyebrow">02 / 研究与洞察</p><h2 id="research-title">从用户职责出发，重新理解首页</h2><p>通过商家调研与角色动线梳理，我们发现差异化诉求背后，是不同的职责范围：店员需要快速完成履约，运营人员需要处理日常经营，而店长更关注结果与策略。</p></div>
+      <div class="research-tabs story-figure" data-research-tabs>
+        <div class="research-tablist" role="tablist" aria-label="研究与洞察">
+          <button type="button" role="tab" id="tab-users" aria-controls="panel-users" aria-selected="true">用户分类</button>
+          <button type="button" role="tab" id="tab-competitors" aria-controls="panel-competitors" aria-selected="false" tabindex="-1">竞品分析</button>
+          <button type="button" role="tab" id="tab-logic" aria-controls="panel-logic" aria-selected="false" tabindex="-1">拆分逻辑</button>
+        </div>
+        <div class="research-panels">
+          <div class="research-panel is-active" id="panel-users" role="tabpanel" aria-labelledby="tab-users"><img src="/laike-case/research-users.png" width="7680" height="3580" alt="用户分类" /></div>
+          <div class="research-panel" id="panel-competitors" role="tabpanel" aria-labelledby="tab-competitors" aria-hidden="true"><img src="/laike-case/research-competitors.png" width="7680" height="3580" alt="竞品分析" /></div>
+          <div class="research-panel" id="panel-logic" role="tabpanel" aria-labelledby="tab-logic" aria-hidden="true"><img src="/laike-case/research-logic.png" width="7680" height="3580" alt="拆分逻辑" /></div>
+        </div>
+      </div>
+      <div class="principle"><span>设计方向</span><p>从面向信息架构的传统工作台，转向基于动线和场景的角色化工作台。</p></div>
+    </section>
+
+    <section class="shell story-section reveal" aria-labelledby="solution-title">
+      <div class="story-copy"><p class="eyebrow">03 / 设计方案</p><h2 id="solution-title">三种角色，三条清晰动线</h2><p>首页结构直接映射角色的工作流程：优先呈现最常做、最需要关注的事情，再把相关功能组织到容易理解的位置。</p></div>
+      <div class="role-list"><div><span>01</span><h3>店员版</h3><p>聚焦线下履约，将扫码验券和输码验券放在最醒目位置，并串联撤销、退款与每日经营统计。</p></div><div><span>02</span><h3>管理版</h3><p>围绕线上经营，串联经营结果、常用工具、重要待办与平台引导，让运营工作有序展开。</p></div><div><span>03</span><h3>决策版</h3><p>为店长聚合经营大盘、关键结果与机会或异常，帮助快速判断整体情况和重点事项。</p></div></div>
+      <figure class="story-figure"><img src={figures.clerk} alt="店员版首页将高频验券、低频处理与经营统计按工作顺序排列" loading="lazy" /><figcaption>店员版：线下履约的极简主义</figcaption></figure>
+      <div class="subsection-heading"><h3>02 管理版：线上经营的场景化串联</h3><p>围绕线上经营，串联经营结果、常用工具、重要待办与平台引导，让运营工作有序展开</p></div>
+      <figure class="story-figure compact"><img src="/laike-case/management-01.png" alt="管理版方案展示 01" loading="lazy" width="7680" height="4320" /></figure>
+      <figure class="story-figure compact"><img src="/laike-case/management-02.png" alt="管理版方案展示 02" loading="lazy" width="7680" height="4320" /></figure>
+      <figure class="story-figure compact"><img src="/laike-case/management-03.png" alt="管理版方案展示 03" loading="lazy" width="7680" height="4320" /></figure>
+      <figure class="story-figure compact"><img src="/laike-case/management-04.png" alt="管理版方案展示 04" loading="lazy" width="7680" height="4320" /></figure>
+      <figure class="story-figure compact"><img src="/laike-case/management-05.png" alt="管理版方案展示 05" loading="lazy" width="7680" height="4320" /></figure>
+      <figure class="story-figure compact"><img src="/laike-case/management-06.png" alt="管理版方案展示 06" loading="lazy" width="7680" height="4320" /></figure>
+      <figure class="story-figure compact"><img src="/laike-case/management-07.png" alt="管理版方案展示 07" loading="lazy" width="7680" height="4320" /></figure>
+      <figure class="story-figure compact"><img src="/laike-case/management-08.png" alt="管理版方案展示 08" loading="lazy" width="7680" height="4320" /></figure>
+      <div class="subsection-heading"><h3>03 决策版：战略洞察的决策驾驶舱</h3><p>为店长聚合经营大盘、关键结果与机会或异常，帮助快速判断整体情况和重点事项。</p></div>
+      <figure class="story-figure compact"><img src={figures.decision} alt="决策版首页汇总经营大盘、关键结果和机会与异常" loading="lazy" /></figure>
+      <figure class="story-figure compact"><img src="/laike-case/decision-2.png" alt="决策版方案展示" loading="lazy" /></figure>
+      <div class="subsection-heading"><h3>改版前后：首页视图映射角色实际工作流</h3><p>为店长聚合经营大盘、关键结果与机会或异常，帮助快速判断整体情况和重点事项。</p></div>
+      <figure class="story-figure"><img src={figures.comparison} alt="改版前的统一首页与改版后的三种角色首页对比" loading="lazy" /></figure>
+    </section>
+
+    <section class="shell story-section reveal" aria-labelledby="outcome-title">
+      <div class="story-copy"><p class="eyebrow">04 / 上线与沉淀</p><h2 id="outcome-title">让不同角色，各得其所</h2><p>店员版和管理版完成从 0 到 1 的设计与上线。角色化视图更贴合个性化需求，同时在版本切换中关注体验稳定性。</p></div>
+      <figure class="story-figure"><img src={figures.outcome} alt="上线效果：旧版、店员版与管理版的 WAU、周活跃渗透率和 CPO 对比" loading="lazy" /><figcaption>角色视图上线后的核心指标对比</figcaption></figure>
+      <figure class="story-figure"><img src={figures.system} alt="管理版首页、常用功能、底部标签和图标等设计规范" loading="lazy" /><figcaption>沉淀视图规范，支持后续迭代</figcaption></figure>
+      <div class="principle"><span>升级感受</span><p>每一次升级都是一次产品思路的转变</p></div>
+    </section>
+  </article>
+  {next && <NextProject project={next} />}
+</BaseLayout>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-research-tabs]').forEach((container) => {
+    const tabs = Array.from(container.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let timer: ReturnType<typeof setInterval> | undefined;
+    let elapsed = 0;
+    let lastTick = 0;
+    const stop = () => { if (timer) clearInterval(timer); timer = undefined; };
+    const start = () => {
+      stop();
+      if (reduced.matches || document.hidden) return;
+      lastTick = performance.now();
+      timer = setInterval(() => {
+        const now = performance.now();
+        elapsed += now - lastTick;
+        lastTick = now;
+        const index = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+        tabs[index].style.setProperty('--progress', String(Math.min(elapsed / 5000, 1)));
+        if (elapsed >= 5000) activate(tabs[(index + 1) % tabs.length]);
+      }, 40);
+    };
+    const activate = (tab: HTMLButtonElement) => {
+      elapsed = 0;
+      tabs.forEach((item) => {
+        item.style.setProperty('--progress', '0');
+        const selected = item === tab;
+        item.setAttribute('aria-selected', String(selected));
+        item.tabIndex = selected ? 0 : -1;
+        const panel = document.getElementById(item.getAttribute('aria-controls') || '');
+        if (panel) { panel.classList.toggle('is-active', selected); panel.setAttribute('aria-hidden', String(!selected)); }
+      });
+    };
+    start();
+    document.addEventListener('visibilitychange', start);
+    reduced.addEventListener('change', start);
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => { activate(tab); start(); });
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        activate(tabs[next]);
+        start();
+        tabs[next].focus();
+      });
+    });
+  });
+</script>
+<style>
+  :global(body), :global(body *) { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+  .case-title { font-size: clamp(2.8rem, 5.2vw, 4.25rem); line-height: 1.02; letter-spacing: -.04em; font-weight: 500; }
+  .case-lead { max-width: 42rem; font-size: clamp(1.1rem, 1.6vw, 1.3rem); line-height: 1.8; color: var(--body); }
+  .case-meta { display: grid; gap: 1.75rem; padding-block: 2rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .case-meta dt { font-size: .8125rem; color: var(--muted); } .case-meta dd { margin-top: .35rem; line-height: 1.7; }
+  .case-hero { background: #c9e6ef; border-radius: 24px; overflow: hidden; display: flex; justify-content: center; padding: 3rem 2rem 0; }
+  .case-hero img { width: min(100%, 1056px); height: auto; }
+  .story-section { padding-top: 150px; }
+  .story-copy { max-width: 840px; margin-left: 40px; }
+  .story-copy h2 { margin-top: 1.5rem; font-size: clamp(2rem, 3.34vw, 3rem); line-height: 1.2917; letter-spacing: -.03em; font-weight: 500; }
+  .story-copy h3 { font-size: clamp(1.5rem, 2vw, 2rem); line-height: 1.3; font-weight: 500; }
+  .story-copy > p:not(.eyebrow) { margin-top: 1.5rem; font-size: 1.125rem; line-height: 34px; color: var(--body); }
+  .story-follow { margin-top: 5rem; }
+  .story-figure { margin-top: 4rem; } .story-figure img { width: 100%; height: auto; border-radius: 24px; } .story-figure figcaption { margin-top: 1rem; color: var(--muted); font-size: .875rem; text-align: center; }
+  .story-figure.compact { margin-top: 2rem; }
+  .research-tabs { background: #000; border-radius: 24px; padding: 24px 40px 0; display: flex; flex-direction: column; align-items: center; gap: 24px; overflow: hidden; }
+  .research-tablist { display: flex; justify-content: space-between; width: min(100%, 240px); padding: 4px; }
+  .research-tablist button { flex: 0 0 auto; position: relative; border: 0; background: transparent; padding: 0 0 6px; color: #bcbcbc; font-size: 14px; font-weight: 300; line-height: 34px; cursor: pointer; white-space: nowrap; }
+  .research-tablist button[aria-selected='true'] { color: #e9e9e9; font-weight: 600; }
+  .research-tablist button[aria-selected='true']::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: var(--accent); transform: scaleX(var(--progress, 0)); transform-origin: left; }
+  @media (prefers-reduced-motion: no-preference) {
+    .research-tablist button { transition: color 220ms ease; }
+    .research-panel { transition: opacity 200ms ease, visibility 0s linear 200ms; }
+    .research-panel.is-active { transition: opacity 200ms ease, visibility 0s; }
+  }
+  .research-tablist button:focus-visible { outline: 2px solid white; outline-offset: 2px; }
+  .research-panels { width: 100%; position: relative; }
+  .research-panel { position: absolute; inset: 0; width: 100%; opacity: 0; visibility: hidden; pointer-events: none; }
+  .research-panel.is-active { position: relative; opacity: 1; visibility: visible; }
+  .research-panel img { display: block; width: 100%; aspect-ratio: 1120 / 569; height: auto; object-fit: cover; object-position: center bottom; border-radius: 0; }
+  .research-toggle { color: #ddd; background: transparent; border: 1px solid #777; border-radius: 999px; padding: 8px 16px; font-size: 14px; cursor: pointer; }
+  .research-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .research-tablist button[aria-selected='true']::after { transform: scaleX(1); } }
+  @media (max-width: 47.99rem) { .research-tabs { padding: 20px 12px 0; } .research-panel img { aspect-ratio: auto; object-fit: contain; } }
+  .subsection-heading { max-width: 840px; margin: 150px auto 0; text-align: center; }
+  .subsection-heading h3 { font-size: 24px; font-weight: 500; line-height: 30px; }
+  .subsection-heading p { margin-top: 12px; color: var(--muted); font-size: 14px; line-height: 28px; }
+  @media (max-width: 47.99rem) { .story-section { padding-top: 96px; } .story-copy { margin-left: 0; } .subsection-heading { margin-top: 6rem; } }
+  .insight-grid, .role-list, .metrics { display: grid; gap: 1px; overflow: hidden; border: 0; border-radius: 0; background: var(--line); margin-top: 4rem; }
+  .insight-grid > div, .role-list > div, .metrics > div { background: var(--surface); padding: 2rem; }
+  .role-list > div { display: flex; flex-direction: column; gap: 18px; }
+  .insight-grid span, .role-list span { color: var(--muted); font-size: .875rem; line-height: 18px; } .insight-grid h3, .role-list h3 { font-size: 24px; line-height: 30px; font-weight: 500; margin: 0; } .insight-grid p, .role-list p { color: var(--body); font-size: 16px; line-height: 28px; margin: 0; }
+  .principle { margin-top: 5rem; border-radius: 24px; background: #171716; color: #fafaf7; padding: 80px; } .principle span { color: #a8a8a2; font-size: 14px; line-height: 18px; } .principle p { max-width: 800px; margin-top: 24px; font-size: clamp(1.5rem, 2.8vw, 2.5rem); line-height: 58px; }
+  .metrics strong { display: block; font-size: clamp(2rem, 4vw, 3rem); font-weight: 500; letter-spacing: -.04em; } .metrics span { display: block; color: var(--muted); margin-top: .5rem; } .metric-note { color: var(--muted); font-size: .875rem; margin-top: 1rem; }
+  .closing-thought { max-width: 900px; margin: 7rem auto 0; font-size: clamp(2rem, 4vw, 3.75rem); line-height: 1.35; letter-spacing: -.03em; text-align: center; }
+  @media (min-width: 48rem) { .case-meta { grid-template-columns: 168px 480px 1fr; gap: 40px; } .insight-grid { grid-template-columns: repeat(2, 1fr); } .role-list, .metrics { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 47.99rem) { .principle { padding: 40px 28px; } .principle p { line-height: 1.45; } }
+</style>

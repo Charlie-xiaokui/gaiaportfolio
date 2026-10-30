@@ -4,7 +4,7 @@ export interface NavLink {
 }
 
 export const siteConfig = {
-  name: 'Maria',
+  name: "Gaia's Portfolio",
   title: 'Maria - Product designer portfolio',
   description:
     'Maria is a product designer who turns dense workflows and fuzzy requirements into clear, trustworthy digital products. Selected work, case studies, and resume.',
@@ -47,9 +47,8 @@ export const siteConfig = {
 };
 
 export const navigation: NavLink[] = [
-  { label: 'Work', href: '/work/' },
-  { label: 'About', href: '/about/' },
-  { label: 'Resume', href: '/resume/' },
+  { label: 'Work', href: '/' },
+  { label: 'About Me', href: '/resume/' },
 ];
 
 export const legalLinks: NavLink[] = [

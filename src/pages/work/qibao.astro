@@ -1,0 +1,571 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const fig = {
+  model: '/qibao-case/model-map.jpg',
+  cDecision: '/qibao-case/c-decision.jpg',
+  cOrder: '/qibao-case/c-order.jpg',
+  bOldNew: '/qibao-case/b-old-new.jpg',
+  bWorkbench: '/qibao-case/b-workbench.jpg',
+  bMobile: '/qibao-case/b-mobile.jpg',
+  trustOnline: '/qibao-case/trust-online.jpg',
+  trustSop: '/qibao-case/trust-sop.jpg',
+  handoff: '/qibao-case/handoff.jpg',
+  opsBanner: '/qibao-case/ops-banner.jpg',
+  results: '/qibao-case/results.jpg',
+};
+
+const roles = [
+  {
+    key: 'c',
+    tab: 'C端 · 敢下单',
+    title: 'C 端：把服务信息变成决策依据',
+    body: '用户需要快速理解快保利益、门店差异、可约时间、订单进度与正品保障。设计重点是前置透传、卡片化状态和显性反馈。',
+    points: [
+      '首页与服务详情透传“30分钟快保”、超时赔付与正品保障等利益点。',
+      '以门店为维度的卡片、筛选与优惠信息，帮助用户选到合适的门店。',
+      '预约是 30 分钟时效成立的前提；订单状态让用户随时知道服务进度。',
+    ],
+    image: fig.cDecision,
+    alt: 'C 端首页、服务详情、开单二维码弹窗与门店列表原稿',
+    caption: '真实原稿：首页、服务详情、开单弹窗与门店',
+  },
+  {
+    key: 'b',
+    tab: 'B端 · 能交付',
+    title: 'B 端：让认证店也能按统一节奏交付',
+    body: '门店侧要把线上下单后的开单、施工、安心检测、核销、交车串起来，并在手机场景里降低操作门槛。',
+    points: [
+      '新增功能聚合型工作台，承接开单、仓储、预约、缺货等高频任务。',
+      '重构作业流程，让维修保养与安心检测按现场真实分工并行。',
+      '把 Pad 的大而全界面拆成手机上的连续步骤，适配认证店人员能力。',
+    ],
+    image: fig.bWorkbench,
+    alt: 'B 端手机商户端工作台与功能分层原稿',
+    caption: '真实原稿：手机商户端工作台',
+  },
+  {
+    key: 's',
+    tab: 'S端 · 供得准',
+    title: 'S 端：把采购、支付与商家信息补成闭环',
+    body: '认证店扩张后，B2B 平台需要支持平台采购、多商家销售同一配件、在线支付与商家信息补齐，否则门店侧的正品与履约承诺缺少后台支撑。',
+    points: [
+      '平台化采购与在线支付，降低新增认证店的接入门槛。',
+      '允许不同商家销售同一配件，同时在平台补齐商家信息。',
+      '用结构化信息支撑前端的授权、配件与服务展示。',
+    ],
+    image: fig.trustOnline,
+    alt: '线上正品授权与商品信息透传原稿',
+    caption: '真实原稿：线上入口、商品详情与正品页',
+  },
+  {
+    key: 'o',
+    tab: '运营 · 看得懂',
+    title: '运营：先让用户看见，再转化为预约',
+    body: '运营侧负责活动入口、首页氛围与优惠透传。视觉不是单独的装饰，而是让“30分钟快保”在复杂首页中被快速识别。',
+    points: [
+      '沉浸式 Banner 与背景建立活动氛围，强化“30”与小桔养车记忆点。',
+      '用动效与差异化视觉突出限时优惠和服务入口。',
+      '活动信息最终回流到服务详情、预约与门店选择，而非停留在曝光。',
+    ],
+    image: fig.opsBanner,
+    alt: '车生活首页活动氛围与 Banner 原稿',
+    caption: '真实原稿：首页活动氛围与 Banner',
+  },
+];
+
+const journeySteps = [
+  { n: '1', t: '看见爆品', d: '首页 Banner 与活动氛围突出“30分钟”和优惠，让用户先识别到一个明确产品。' },
+  { n: '2', t: '理解服务', d: '详情页透传机油品牌、服务内容、正品保障、30分钟快保与门店信息。' },
+  { n: '3', t: '选门店与时间', d: '门店卡片承接距离、评分、服务与优惠；预约把等待前置为可计划的时间。' },
+  { n: '4', t: '到店后反馈', d: '二维码快速开单，订单状态卡片化，支付、预约、导航、施工状态显性化。' },
+];
+
+const sopSteps = [
+  { t: '货架 / 仓库取货', h: '让材料先被看见', d: '从货架或仓库取出本次服务使用的材料，让用户在施工前就能接触到实物，而不是只看到最终报价。', tags: ['看到实物', '确认项目', '进入施工'] },
+  { t: '引导完成验真', h: '把验真权交给用户', d: '现场引导用户完成验真操作，让品牌授权和防伪码不只是线上页面里的说明，而是本次订单可以亲自确认的动作。', tags: ['扫码验证', '当场确认', '解除顾虑'] },
+  { t: '转交施工', h: '验证后再转交施工', d: '材料确认后再进入施工，顺序上先解决信任、再进入技术性的保养操作，减少“已经换上才怀疑”的被动。', tags: ['先验证', '后施工', '顺序清晰'] },
+  { t: '交还剩余机油', h: '离店时留下证据', d: '结算交车时交还剩余机油，配合环检报告、结算单、安心检测单、发票、车钥匙与定制信封，完成最后一次正品提醒。', tags: ['剩余物料', '完整单据', '可追溯'] },
+];
+---
+
+<BaseLayout
+  title="汽车维保30分钟快保 · 多端联动促进成交"
+  description="用 C 端、B 端、S 端与线下 SOP 的联动，把时间不确定、材料不放心的保养，重构成用户敢下单、门店能交付、正品可感知的标准化产品。"
+  type="article"
+  closing={false}
+>
+  <article class="qibao-case">
+    <header class="shell pt-12 sm:pt-16">
+      <nav aria-label="面包屑" class="rise text-sm text-muted">
+        <a href="/">作品案例</a> <span aria-hidden="true"> / </span>
+        <span class="text-ink">汽车维保“30分钟快保”服务</span>
+      </nav>
+      <p class="rise kicker mt-12" style="--rise-step:1">多端服务设计 / 流程重构 / 信任体系</p>
+      <h1 class="rise case-title mt-6" style="--rise-step:2">把一次不确定的小保养，做成可承诺的“30分钟快保”</h1>
+      <p class="rise case-lead mt-8" style="--rise-step:3">这不是单端页面改版，而是用 C 端、B 端、S 端与线下 SOP 的联动，把“时间不确定、材料不放心”的服务，重构成用户敢下单、门店能交付、正品可感知的标准化产品。</p>
+      <dl class="rise case-meta mt-12" style="--rise-step:4">
+        <div><dt>项目主题</dt><dd>汽车维保“30分钟快保”爆品与多端服务闭环</dd></div>
+        <div><dt>设计范围</dt><dd>C 端用户、B 端门店、S 端供应链与运营的多端联动设计</dd></div>
+        <div><dt>项目成果</dt><dd>快保单 GMV 86W；NPS 80.1%→83.5%；正品可验知晓率 24%→56%</dd></div>
+      </dl>
+    </header>
+
+    <div class="shell mt-14">
+      <figure class="hero-panel">
+        <img src={fig.model} width="848" height="653" alt="小桔养车从直营店到认证店，用标准化 SOP 发展 30 分钟快保的多端关系图" fetchpriority="high" data-lightbox />
+        <figcaption>用标准化 SOP，同时建立稳定的时间预期与产品预期</figcaption>
+      </figure>
+    </div>
+
+    <!-- 01 问题 -->
+    <section class="shell story-section reveal" aria-labelledby="problem-title">
+      <div class="story-copy">
+        <p class="eyebrow">01 / 背景与问题</p>
+        <h2 id="problem-title">增长的难点，不是没有流量，而是服务无法被稳定承诺</h2>
+        <p>行业供大于求、平台竞争加剧。小桔养车从直营店扩展到品类授权和认证店后，仅靠直营管控已无法保证每家店的体验一致。</p>
+      </div>
+      <div class="problem-grid">
+        <article class="problem-card">
+          <span class="badge red">问题一 · 时间不可预期</span>
+          <h3>同是小保养，每家店的交付节奏都不一样</h3>
+          <p>不同门店在流程、人员分工和系统使用上差异明显，用户到店后无法判断要等多久，很难形成明确的下单理由。</p>
+        </article>
+        <article class="problem-card">
+          <span class="badge amber">问题二 · 正品不可验证</span>
+          <h3>机油等关键材料就在眼前，用户却难以确认来源</h3>
+          <p>材料是否为真、是否被替换、剩余机油如何处理，都缺少能被用户看见和参与验证的环节。</p>
+        </article>
+      </div>
+      <div class="thesis">
+        <div><span>设计命题</span><strong>用标准化 SOP 打造“30分钟快保”爆品</strong></div>
+        <div class="thesis-arrow" aria-hidden="true">→</div>
+        <div><span>同时建立两种预期</span><strong>稳定的时间预期 × 稳定的产品 / 材料预期</strong></div>
+      </div>
+    </section>
+
+    <!-- 02 角色 -->
+    <section class="shell story-section reveal" aria-labelledby="roles-title">
+      <div class="story-copy">
+        <p class="eyebrow">02 / 角色拆解</p>
+        <h2 id="roles-title">一个服务承诺，为什么要四端一起改</h2>
+        <p>切换角色可以看到同一目标在不同角色上的设计任务。关键不是多做几个页面，而是把承诺拆成每一端必须完成的动作。</p>
+      </div>
+      <div class="role-tabs" data-role-tabs role="tablist" aria-label="多端角色">
+        {roles.map((role, i) => (
+          <button type="button" role="tab" id={`qibao-role-tab-${role.key}`} aria-controls={`qibao-role-panel-${role.key}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} class={i === 0 ? 'is-active' : ''} data-role-key={role.key}>{role.tab}</button>
+        ))}
+      </div>
+      <div class="role-panels">
+        {roles.map((role, i) => (
+          <div class={`role-panel${i === 0 ? ' is-active' : ''}`} id={`qibao-role-panel-${role.key}`} role="tabpanel" aria-labelledby={`qibao-role-tab-${role.key}`} aria-hidden={i === 0 ? 'false' : 'true'} data-role-panel={role.key}>
+            <div class="role-text">
+              <h3>{role.title}</h3>
+              <p>{role.body}</p>
+              <ul>{role.points.map((point) => <li>{point}</li>)}</ul>
+            </div>
+            <figure class="role-figure">
+              <img src={role.image} alt={role.alt} loading="lazy" data-lightbox />
+              <figcaption>{role.caption}</figcaption>
+            </figure>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 03 C端决策链 -->
+    <section class="dark-section" aria-labelledby="journey-title">
+      <div class="shell story-section reveal">
+        <div class="story-copy on-dark">
+          <p class="eyebrow">03 / C 端决策链</p>
+          <h2 id="journey-title">从被活动吸引到按时到店，每一步都要减少不确定性</h2>
+          <p>快保不是用户点进详情页才开始的。运营入口、服务说明、门店选择、二维码开单、订单进度与预约反馈共同构成决策链。</p>
+        </div>
+        <ol class="journey-map">
+          {journeySteps.map((step) => (
+            <li><b>{step.n}　{step.t}</b><p>{step.d}</p></li>
+          ))}
+        </ol>
+        <div class="seg-toggle" data-journey-toggle role="tablist" aria-label="C 端决策阶段">
+          <button type="button" role="tab" aria-selected="true" class="is-active" data-journey="decision">决策前 · 首页 / 详情 / 门店 / 开单</button>
+          <button type="button" role="tab" aria-selected="false" data-journey="status">决策后 · 订单 / 预约 / 反馈</button>
+        </div>
+        <figure class="shot-panel on-dark">
+          <img class="journey-img is-active" data-journey-img="decision" src={fig.cDecision} width="1530" height="1201" alt="C 端首页、服务详情、开单弹窗与门店决策链路原稿" loading="lazy" data-lightbox />
+          <img class="journey-img" data-journey-img="status" src={fig.cOrder} width="1530" height="1246" alt="C 端订单状态卡片化与预约流程原稿" loading="lazy" data-lightbox />
+          <figcaption class="on-dark">点击切换决策前的信息透传与决策后的状态反馈</figcaption>
+        </figure>
+        <div class="two-col">
+          <figure class="shot-panel on-dark">
+            <img src={fig.cOrder} width="1530" height="1246" alt="订单状态与预约流程原稿" loading="lazy" data-lightbox />
+            <figcaption class="on-dark">订单状态卡片化，减少用户反复询问</figcaption>
+          </figure>
+          <figure class="shot-panel on-dark">
+            <img src={fig.bOldNew} width="1155" height="1163" alt="B 端新旧界面对比" loading="lazy" data-lightbox />
+            <figcaption class="on-dark">线上订单必须被门店标准化接住</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 流程重构 -->
+    <section class="shell story-section reveal" aria-labelledby="flow-title">
+      <div class="story-copy">
+        <p class="eyebrow">04 / 关键决策一</p>
+        <h2 id="flow-title">系统原来按“一个人串行”设计，现场其实是“两个人并行”</h2>
+        <p>这是项目里最典型的流程取舍：如果系统继续把施工、安心检测、核销、交车排成一条线，30 分钟承诺就很难稳定达成。</p>
+      </div>
+      <div class="seg-toggle light" data-flow-toggle role="tablist" aria-label="作业流程对照">
+        <button type="button" role="tab" aria-selected="true" class="is-active" data-flow="old">旧流程 · 串行等待</button>
+        <button type="button" role="tab" aria-selected="false" data-flow="new">新流程 · 并行重叠</button>
+      </div>
+      <div class="flow-board">
+        <div class="lane"><span class="lane-name">维修保养</span><div class="lane-track"><div class="bar bar-work" id="qibao-bar-work">施工</div></div></div>
+        <div class="lane"><span class="lane-name">安心检测</span><div class="lane-track"><div class="bar bar-check" id="qibao-bar-check">安心检测</div></div></div>
+        <div class="lane"><span class="lane-name">结算离店</span><div class="lane-track"><div class="bar bar-verify" id="qibao-bar-verify">核销</div><div class="bar bar-deliver" id="qibao-bar-deliver">交车</div></div></div>
+        <p class="flow-note" id="qibao-flow-note">旧流程把施工、安心检测、核销、交车依次排列，系统节奏与线下两名工作人员并行作业的真实情况不一致。</p>
+      </div>
+      <div class="persona-grid">
+        <article class="persona"><span class="badge">自营店 SA</span><h3>专业、服务项目多</h3><p>需要处理更复杂的事务，Pad 端的信息密度与多入口仍有使用场景。</p></article>
+        <article class="persona"><span class="badge amber">认证店 SA</span><h3>相对业余、服务项目少</h3><p>更重要的是高效完成一件事，因此手机端把复杂表单拆成连续步骤。</p></article>
+      </div>
+      <figure class="shot-panel">
+        <img src={fig.bMobile} width="975" height="1050" alt="Pad 端到 Mobile 端的信息聚焦设计原稿" loading="lazy" data-lightbox />
+        <figcaption>化整为零、信息聚焦、串联核心流程：基本信息 → 环检信息 → 添加服务 → 开始施工</figcaption>
+      </figure>
+    </section>
+
+    <!-- 05 正品透传 -->
+    <section class="shell story-section reveal" aria-labelledby="trust-title">
+      <div class="story-copy">
+        <p class="eyebrow">05 / 关键决策二</p>
+        <h2 id="trust-title">正品不是一句承诺，而是线上可查、线下可验、离店可带走的证据链</h2>
+        <p>用户担心的不是“页面有没有写正品”，而是我这次保养用的那瓶机油，能不能被看见、验证并追溯。</p>
+      </div>
+      <div class="two-col trust-cols">
+        <article class="trust-card">
+          <h3>线上：在决策前反复透传</h3>
+          <p>正品信息分布在 O2O 首页、B2C 首页、O2O 服务详情、B2C 商品详情与正品页，用品牌直采、正品保障、防伪验证、假一赔十、授权书与供应链图片建立信任。</p>
+          <figure><img src={fig.trustOnline} width="1545" height="1261" alt="线上正品授权入口原稿" loading="lazy" data-lightbox /></figure>
+        </article>
+        <article class="trust-card">
+          <h3>线下：把验证动作嵌入 SOP</h3>
+          <p>真正解除顾虑的时刻发生在门店：取货时让用户看到材料，施工前引导扫码验真，结算交车时交还剩余机油，让“正品”从品牌话术变成本次订单的具体证据。</p>
+          <figure><img src={fig.trustSop} width="1260" height="638" alt="线下正品告知 SOP 原稿" loading="lazy" data-lightbox /></figure>
+        </article>
+      </div>
+      <div class="sop-walk">
+        <h3>逐步查看：线下正品告知 SOP</h3>
+        <p class="sop-cost">落地成本：约 1 周线下 SOP 培训</p>
+        <div class="sop-buttons" role="tablist" aria-label="正品告知步骤">
+          {sopSteps.map((step, i) => (
+            <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} class={i === 0 ? 'is-active' : ''} data-sop={i}>{step.t}</button>
+          ))}
+        </div>
+        <div class="sop-body">
+          <div><h4 id="qibao-sop-title">{sopSteps[0].h}</h4><p id="qibao-sop-text">{sopSteps[0].d}</p><div class="sop-tags" id="qibao-sop-tags">{sopSteps[0].tags.map((tag) => <span>{tag}</span>)}</div></div>
+          <figure><img src={fig.trustSop} width="1260" height="638" alt="正品告知 SOP 四步：取货、验真、施工、交还剩余机油" loading="lazy" data-lightbox /></figure>
+        </div>
+      </div>
+      <figure class="shot-panel">
+        <img src={fig.handoff} width="1440" height="1246" alt="交车物品清单原稿" loading="lazy" data-lightbox />
+        <figcaption>交车不是说一声“好了”：双手递交、送司机上车、引导离店，并交付完整单据与定制信封</figcaption>
+      </figure>
+    </section>
+
+    <!-- 06 结果 -->
+    <section class="dark-section" aria-labelledby="result-title">
+      <div class="shell story-section reveal">
+        <div class="story-copy on-dark">
+          <p class="eyebrow">06 / 项目结果</p>
+          <h2 id="result-title">结果验证的是“承诺—系统—现场动作”是否真正闭环</h2>
+          <p>快保 GMV、NPS 与正品知晓率分别对应成交、体验和信任三条线索。这里只呈现原始资料口径，不额外推导增长率。</p>
+        </div>
+        <div class="result-grid">
+          <div class="metric-board">
+            <div class="metrics">
+              <div class="metric"><b>86W</b><span>30分钟快保单 GMV</span></div>
+              <div class="metric"><b>83.5%</b><span>NPS 80.1% → 83.5%，提升 3.4 个百分点</span></div>
+              <div class="metric"><b>56%</b><span>正品可验知晓率 24% → 56%，提升 32 个百分点</span></div>
+            </div>
+            <figure class="metric-figure"><img src={fig.results} width="1553" height="1170" alt="项目成果与爆品累计单量趋势原稿" loading="lazy" data-lightbox /></figure>
+            <p class="metric-note">口径说明：86W 在原稿中由“单店日均单量 5.6 × 认证店数 8 × 客均单价 300”推导呈现；爆品累计单量在 04.18、05.08、05.29、06.24 分别记录为 954、1892、2956，起点为“30分钟爆品上线”。本页只复述材料，不外推缺失日期的销量。</p>
+          </div>
+          <aside class="ability-card">
+            <h3>这个案例体现的设计能力</h3>
+            <p><b>把模糊业务问题改写成可设计的产品承诺。</b>从“体验不稳定”收敛到“30分钟”和“正品可验”两个用户能理解的承诺。</p>
+            <p><b>做多端责任划分。</b>C 端负责决策，B 端负责履约，S 端负责供应链与信息，运营负责入口与氛围。</p>
+            <p><b>把现场 SOP 当成体验设计的一部分。</b>授权页解决认知，扫码验真解决当下顾虑，剩余物料和交车清单让信任延续到离店。</p>
+            <p><b>用结果反向验证设计。</b>成交、满意度与正品知晓率分别检验商业、服务与信任目标，而不是只看界面是否好看。</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="shell back-link"><a href="/">返回作品集 <span aria-hidden="true">↗</span></a></div>
+  </article>
+
+  <div class="qibao-lightbox" id="qibao-lightbox" aria-hidden="true">
+    <button type="button" class="qibao-lightbox-close" id="qibao-lightbox-close" aria-label="关闭">×</button>
+    <div class="qibao-lightbox-body" id="qibao-lightbox-body"></div>
+  </div>
+</BaseLayout>
+
+<script>
+  (function () {
+    try {
+      var reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+      // 多端角色切换（手动，不自动轮播）
+      document.querySelectorAll<HTMLElement>('[data-role-tabs]').forEach(function (tablist) {
+        var tabs = Array.from(tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+        var panels = Array.from(document.querySelectorAll<HTMLElement>('[data-role-panel]'));
+        function activate(key: string) {
+          tabs.forEach(function (tab) {
+            var selected = tab.dataset.roleKey === key;
+            tab.setAttribute('aria-selected', String(selected));
+            tab.classList.toggle('is-active', selected);
+            tab.tabIndex = selected ? 0 : -1;
+          });
+          panels.forEach(function (panel) {
+            var selected = panel.dataset.rolePanel === key;
+            panel.classList.toggle('is-active', selected);
+            panel.setAttribute('aria-hidden', String(!selected));
+          });
+        }
+        tabs.forEach(function (tab, index) {
+          tab.addEventListener('click', function () { activate(tab.dataset.roleKey || ''); });
+          tab.addEventListener('keydown', function (event) {
+            if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            var next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+            activate(tabs[next].dataset.roleKey || '');
+            tabs[next].focus();
+          });
+        });
+      });
+
+      // C 端决策前 / 决策后切换
+      document.querySelectorAll<HTMLElement>('[data-journey-toggle]').forEach(function (toggle) {
+        var btns = Array.from(toggle.querySelectorAll<HTMLButtonElement>('button'));
+        var imgs = Array.from(document.querySelectorAll<HTMLImageElement>('[data-journey-img]'));
+        btns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var key = btn.dataset.journey;
+            btns.forEach(function (b) { b.setAttribute('aria-selected', String(b === btn)); b.classList.toggle('is-active', b === btn); });
+            imgs.forEach(function (img) { img.classList.toggle('is-active', img.dataset.journeyImg === key); });
+          });
+        });
+      });
+
+      // 旧 / 新流程对照
+      var flowData: Record<string, { work: [string, string]; check: [string, string]; verify: [string, string]; deliver: [string, string]; note: string }> = {
+        old: { work: ['0%', '32%'], check: ['32%', '24%'], verify: ['56%', '12%'], deliver: ['68%', '14%'], note: '旧流程把施工、安心检测、核销、交车依次排列，系统节奏与线下两名工作人员并行作业的真实情况不一致。' },
+        new: { work: ['0%', '42%'], check: ['8%', '34%'], verify: ['42%', '12%'], deliver: ['54%', '14%'], note: '新流程让安心检测与维修保养重叠，完成后再进入核销与交车。系统模型匹配现场分工，为 30 分钟承诺创造条件。' },
+      };
+      function setFlow(mode: string) {
+        var d = flowData[mode];
+        var map: Record<string, [string, string]> = { work: d.work, check: d.check, verify: d.verify, deliver: d.deliver };
+        Object.keys(map).forEach(function (k) {
+          var el = document.getElementById('qibao-bar-' + k) as HTMLElement | null;
+          if (el) { el.style.left = map[k][0]; el.style.width = map[k][1]; }
+        });
+        var note = document.getElementById('qibao-flow-note');
+        if (note) note.textContent = d.note;
+        document.querySelectorAll<HTMLElement>('[data-flow]').forEach(function (btn) {
+          var selected = btn.dataset.flow === mode;
+          btn.setAttribute('aria-selected', String(selected));
+          btn.classList.toggle('is-active', selected);
+        });
+      }
+      document.querySelectorAll<HTMLElement>('[data-flow]').forEach(function (btn) {
+        btn.addEventListener('click', function () { setFlow(btn.dataset.flow || 'old'); });
+      });
+      setFlow('old');
+
+      // 正品 SOP 分步
+      var sopData = [
+        { h: '让材料先被看见', d: '从货架或仓库取出本次服务使用的材料，让用户在施工前就能接触到实物，而不是只看到最终报价。', tags: ['看到实物', '确认项目', '进入施工'] },
+        { h: '把验真权交给用户', d: '现场引导用户完成验真操作，让品牌授权和防伪码不只是线上页面里的说明，而是本次订单可以亲自确认的动作。', tags: ['扫码验证', '当场确认', '解除顾虑'] },
+        { h: '验证后再转交施工', d: '材料确认后再进入施工，顺序上先解决信任、再进入技术性的保养操作，减少“已经换上才怀疑”的被动。', tags: ['先验证', '后施工', '顺序清晰'] },
+        { h: '离店时留下证据', d: '结算交车时交还剩余机油，配合环检报告、结算单、安心检测单、发票、车钥匙与定制信封，完成最后一次正品提醒。', tags: ['剩余物料', '完整单据', '可追溯'] },
+      ];
+      var sopBtns = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-sop]'));
+      sopBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var i = Number(btn.dataset.sop);
+          var data = sopData[i];
+          var title = document.getElementById('qibao-sop-title');
+          var text = document.getElementById('qibao-sop-text');
+          var tags = document.getElementById('qibao-sop-tags');
+          if (title) title.textContent = data.h;
+          if (text) text.textContent = data.d;
+          if (tags) tags.innerHTML = data.tags.map(function (t) { return '<span>' + t + '</span>'; }).join('');
+          sopBtns.forEach(function (b) { b.setAttribute('aria-selected', String(b === btn)); b.classList.toggle('is-active', b === btn); });
+        });
+      });
+
+      // 原稿灯箱
+      var box = document.getElementById('qibao-lightbox');
+      var body = document.getElementById('qibao-lightbox-body');
+      var closeBtn = document.getElementById('qibao-lightbox-close');
+      function closeBox() { if (!box || !body) return; box.classList.remove('is-open'); box.setAttribute('aria-hidden', 'true'); body.innerHTML = ''; }
+      document.querySelectorAll<HTMLImageElement>('[data-lightbox]').forEach(function (img) {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', function () {
+          if (!box || !body) return;
+          var clone = img.cloneNode(true) as HTMLImageElement;
+          clone.removeAttribute('loading');
+          clone.style.cursor = 'default';
+          body.innerHTML = '';
+          body.appendChild(clone);
+          box.classList.add('is-open');
+          box.setAttribute('aria-hidden', 'false');
+        });
+      });
+      if (closeBtn) closeBtn.addEventListener('click', closeBox);
+      if (box) box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeBox(); });
+
+      // 滚动揭示（低动效时直接显示）
+      var revealEls = Array.from(document.querySelectorAll('.reveal'));
+      if (!reduce.matches && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('in'); });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  })();
+</script>
+
+<style>
+  :global(body), :global(body *) { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+  .qibao-case { --q-ink:#171b22; --q-muted:#68717d; --q-paper:#f5f1e8; --q-card:#fffdf8; --q-blue:#1684ee; --q-deep:#111827; --q-teal:#0aa6a0; --q-orange:#ff8a00; --q-red:#f04a3f; --q-line:#ded6c9; padding-bottom: 96px; }
+  .qibao-case .shell { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+  .qibao-case .kicker { color: var(--q-orange); font-size: 13px; letter-spacing: .14em; font-weight: 700; }
+  .case-title { font-size: clamp(38px, 5.6vw, 72px); line-height: 1.08; letter-spacing: -.04em; font-weight: 600; max-width: 20ch; }
+  .case-lead { max-width: 52rem; font-size: clamp(17px, 1.8vw, 22px); line-height: 1.8; color: var(--q-muted); }
+  .case-meta { display: grid; gap: 28px; padding-block: 32px; border-top: 1px solid var(--q-line); border-bottom: 1px solid var(--q-line); }
+  .case-meta dt { font-size: 13px; color: var(--q-muted); } .case-meta dd { margin-top: 8px; line-height: 1.7; }
+  .hero-panel { background: var(--q-deep); border-radius: 24px; padding: 40px; margin: 0; text-align: center; }
+  .hero-panel img { max-width: 100%; height: auto; border-radius: 14px; margin-inline: auto; }
+  .hero-panel figcaption { margin-top: 18px; color: #c7d0dc; font-size: 14px; }
+  .story-section { padding-top: 140px; }
+  .story-copy { max-width: 840px; margin-left: 0; }
+  .story-copy .eyebrow { color: var(--q-orange); font-size: 13px; letter-spacing: .12em; font-weight: 700; }
+  .story-copy h2 { margin-top: 20px; font-size: clamp(30px, 4vw, 50px); line-height: 1.2; letter-spacing: -.03em; font-weight: 600; }
+  .story-copy > p:not(.eyebrow) { margin-top: 22px; font-size: 18px; line-height: 34px; color: var(--q-muted); }
+  .story-copy.on-dark h2 { color: #fff; } .story-copy.on-dark > p { color: #aeb8c5; }
+
+  .problem-grid { display: grid; gap: 22px; margin-top: 56px; grid-template-columns: 1fr; }
+  .problem-card { background: var(--q-card); border: 1px solid var(--q-line); border-radius: 24px; padding: 30px; }
+  .problem-card h3 { margin: 16px 0 10px; font-size: 23px; } .problem-card p { margin: 0; color: var(--q-muted); line-height: 1.8; }
+  .badge { display: inline-flex; align-items: center; min-height: 32px; padding: 4px 13px; border-radius: 999px; background: #eef5ff; color: #0b6bcb; font-weight: 700; font-size: 13px; }
+  .badge.red { background: #ffeded; color: #c9342c; } .badge.amber { background: #fff2df; color: #c45d00; }
+  .thesis { margin-top: 24px; background: var(--q-deep); color: #fff; border-radius: 24px; padding: 30px; display: grid; gap: 18px; align-items: center; }
+  .thesis span { display: block; color: #9aa5b4; font-size: 13px; margin-bottom: 8px; } .thesis strong { font-size: 20px; line-height: 1.5; }
+  .thesis-arrow { font-size: 30px; color: var(--q-orange); text-align: center; }
+
+  .role-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; background: var(--q-deep); border-radius: 20px 20px 0 0; margin-top: 56px; overflow: hidden; }
+  .role-tabs button { min-height: 68px; border: 0; background: transparent; color: #9aa5b4; border-bottom: 3px solid transparent; padding: 14px; cursor: pointer; font-weight: 600; font-size: 15px; }
+  .role-tabs button.is-active { color: #fff; background: #1d2738; border-bottom-color: var(--q-orange); }
+  .role-tabs button:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+  .role-panels { border: 1px solid var(--q-line); border-top: 0; border-radius: 0 0 20px 20px; overflow: hidden; background: #fff; }
+  .role-panel { display: none; padding: 32px; gap: 30px; grid-template-columns: 1fr; }
+  .role-panel.is-active { display: grid; }
+  .role-text h3 { font-size: 28px; margin: 0 0 12px; } .role-text > p { color: var(--q-muted); line-height: 1.8; margin: 0 0 18px; }
+  .role-text ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .role-text li { padding: 14px 16px; border-radius: 14px; background: #f6f3ed; border-left: 4px solid var(--q-blue); line-height: 1.6; }
+  .role-figure { margin: 0; background: #f3f5f8; border-radius: 18px; padding: 16px; } .role-figure img { border-radius: 12px; width: 100%; height: auto; }
+  .role-figure figcaption, figcaption { color: var(--q-muted); font-size: 13px; margin-top: 12px; text-align: center; }
+
+  .dark-section { background: var(--q-deep); color: #fff; margin-top: 140px; }
+  .dark-section .story-section { padding-top: 110px; padding-bottom: 110px; }
+  .dark-section .story-copy .eyebrow { color: #ffb13b; }
+  .journey-map { list-style: none; margin: 48px 0 0; padding: 0; display: grid; gap: 14px; grid-template-columns: 1fr; counter-reset: step; }
+  .journey-map li { position: relative; border: 1px solid rgba(255,255,255,.14); border-radius: 20px; padding: 22px; background: rgba(255,255,255,.05); }
+  .journey-map b { display: block; font-size: 19px; margin-bottom: 8px; } .journey-map p { margin: 0; color: #c5cedb; font-size: 14px; line-height: 1.7; }
+  .seg-toggle { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .seg-toggle button { border: 1px solid rgba(255,255,255,.2); background: transparent; color: #d5dce7; border-radius: 999px; padding: 11px 18px; cursor: pointer; font-size: 15px; min-height: 44px; }
+  .seg-toggle button.is-active { background: var(--q-orange); border-color: var(--q-orange); color: #111; font-weight: 700; }
+  .seg-toggle.light button { border-color: var(--q-line); color: var(--q-ink); }
+  .seg-toggle.light button.is-active { background: var(--q-ink); border-color: var(--q-ink); color: #fff; }
+  .seg-toggle button:focus-visible { outline: 2px solid var(--q-orange); outline-offset: 2px; }
+  .shot-panel { margin: 28px 0 0; border-radius: 24px; overflow: hidden; background: #fff; border: 1px solid var(--q-line); padding: 16px; }
+  .shot-panel.on-dark { background: #1b2434; border-color: rgba(255,255,255,.12); }
+  .shot-panel img { width: 100%; height: auto; border-radius: 14px; }
+  figcaption.on-dark, .shot-panel figcaption.on-dark { color: #aeb8c5; }
+  .two-col { display: grid; gap: 22px; margin-top: 22px; grid-template-columns: 1fr; }
+  .journey-img { display: none; } .journey-img.is-active { display: block; }
+
+  .flow-board { background: #fff; border: 1px solid var(--q-line); border-radius: 26px; padding: 28px; margin-top: 28px; }
+  .lane { display: grid; gap: 14px; grid-template-columns: 1fr; align-items: center; margin-bottom: 16px; }
+  .lane-name { font-weight: 700; color: var(--q-muted); }
+  .lane-track { position: relative; min-height: 68px; background: #f2eee6; border-radius: 14px; }
+  .bar { position: absolute; top: 12px; bottom: 12px; border-radius: 11px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; transition: left .55s cubic-bezier(.22,1,.36,1), width .55s cubic-bezier(.22,1,.36,1); }
+  .bar-work { background: #293241; left: 0; width: 32%; } .bar-check { background: var(--q-teal); left: 32%; width: 24%; }
+  .bar-verify { background: var(--q-blue); left: 56%; width: 12%; } .bar-deliver { background: var(--q-orange); color: #1e1500; left: 68%; width: 14%; }
+  .flow-note { margin: 20px 0 0; padding: 16px 18px; border-radius: 14px; background: #eef6ff; color: #16558f; line-height: 1.7; }
+  .persona-grid { display: grid; gap: 22px; margin-top: 24px; grid-template-columns: 1fr; }
+  .persona { border: 1px solid var(--q-line); border-radius: 22px; padding: 26px; background: #fff; }
+  .persona h3 { margin: 16px 0 10px; font-size: 22px; } .persona p { margin: 0; color: var(--q-muted); line-height: 1.8; }
+
+  .trust-cols { gap: 24px; } .trust-card { background: #fff; border: 1px solid var(--q-line); border-radius: 24px; padding: 26px; }
+  .trust-card h3 { margin: 0 0 12px; font-size: 23px; } .trust-card > p { color: var(--q-muted); line-height: 1.8; margin: 0 0 18px; }
+  .trust-card figure { margin: 0; } .trust-card figure img { border-radius: 14px; width: 100%; height: auto; }
+  .sop-walk { margin-top: 28px; background: #fff; border: 1px solid var(--q-line); border-radius: 26px; padding: 28px; }
+  .sop-walk h3 { margin: 0; font-size: 24px; } .sop-cost { margin: 8px 0 22px; color: var(--q-muted); font-size: 14px; }
+  .sop-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sop-buttons button { border: 1px solid var(--q-line); background: #f7f3eb; border-radius: 14px; padding: 14px 10px; min-height: 56px; cursor: pointer; font-size: 15px; }
+  .sop-buttons button.is-active { background: var(--q-teal); color: #fff; border-color: var(--q-teal); font-weight: 700; }
+  .sop-buttons button:focus-visible { outline: 2px solid var(--q-teal); outline-offset: 2px; }
+  .sop-body { display: grid; gap: 24px; grid-template-columns: 1fr; margin-top: 24px; align-items: center; }
+  .sop-body h4 { font-size: 26px; margin: 0 0 12px; } .sop-body p { color: var(--q-muted); line-height: 1.8; margin: 0 0 16px; }
+  .sop-body figure { margin: 0; } .sop-body figure img { border-radius: 16px; border: 1px solid var(--q-line); width: 100%; height: auto; }
+  .sop-tags { display: flex; flex-wrap: wrap; gap: 10px; } .sop-tags span { background: #f6f3ed; border-radius: 10px; padding: 10px 14px; font-size: 14px; }
+
+  .result-grid { display: grid; gap: 24px; grid-template-columns: 1fr; margin-top: 8px; }
+  .metric-board { background: linear-gradient(135deg, #1d2738, #141d2d); border: 1px solid rgba(255,255,255,.12); border-radius: 26px; padding: 28px; }
+  .metrics { display: grid; gap: 14px; grid-template-columns: 1fr; margin-bottom: 24px; }
+  .metric { border-radius: 16px; padding: 20px; background: rgba(255,255,255,.06); }
+  .metric b { display: block; font-size: 32px; line-height: 1.1; color: #ffb13b; } .metric span { display: block; font-size: 13px; color: #b8c2cf; margin-top: 8px; line-height: 1.6; }
+  .metric-figure { margin: 0; border-radius: 16px; overflow: hidden; } .metric-figure img { width: 100%; height: auto; }
+  .metric-note { color: #cbd4df; font-size: 13px; line-height: 1.8; margin: 18px 0 0; padding: 16px; border-left: 4px solid var(--q-orange); background: rgba(255,255,255,.06); border-radius: 10px; }
+  .ability-card { background: #1d2738; border: 1px solid rgba(255,255,255,.12); border-radius: 26px; padding: 28px; }
+  .ability-card h3 { margin: 0 0 18px; font-size: 23px; } .ability-card p { color: #b8c2cf; line-height: 1.85; margin: 0 0 16px; } .ability-card p:last-child { margin-bottom: 0; } .ability-card b { color: #fff; }
+  .back-link { margin-top: 120px; border-top: 1px solid var(--q-line); padding: 36px 0 0; }
+  .back-link a { font-size: 18px; } .back-link a:hover { text-decoration: underline; }
+
+  .qibao-lightbox { position: fixed; inset: 0; z-index: 80; background: rgba(10,14,20,.9); display: none; align-items: center; justify-content: center; padding: 30px; }
+  .qibao-lightbox.is-open { display: flex; }
+  .qibao-lightbox-body img { max-width: min(1180px, 94vw); max-height: 86vh; border-radius: 14px; }
+  .qibao-lightbox-close { position: fixed; top: 22px; right: 24px; width: 46px; height: 46px; border-radius: 50%; border: 0; background: #fff; font-size: 22px; cursor: pointer; }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (min-width: 760px) {
+    .case-meta { grid-template-columns: 1fr 1.4fr 1.4fr; gap: 40px; }
+    .problem-grid, .persona-grid { grid-template-columns: 1fr 1fr; }
+    .thesis { grid-template-columns: 1fr auto 1fr; } .thesis-arrow { transform: none; }
+    .role-tabs { grid-template-columns: repeat(4, 1fr); }
+    .role-panel.is-active { grid-template-columns: .9fr 1.1fr; }
+    .journey-map { grid-template-columns: repeat(4, 1fr); }
+    .two-col { grid-template-columns: 1fr 1fr; }
+    .lane { grid-template-columns: 92px 1fr; gap: 18px; }
+    .sop-buttons { grid-template-columns: repeat(4, 1fr); }
+    .sop-body { grid-template-columns: 1fr 1fr; }
+    .metrics { grid-template-columns: repeat(3, 1fr); }
+    .result-grid { grid-template-columns: 1.25fr .75fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; } .bar, .role-tabs button, .journey-img { transition: none; }
+  }
+</style>

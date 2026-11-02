@@ -4,9 +4,10 @@ import SectionHead from '@/components/ui/SectionHead.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 const detail = '/work/nextpoint/';
 const cases = [
-  { title: '抖音来客首页视图升级', text: '按用户职责而非行业重构首页，一套平台三套视图，直接贴合各岗位的工作动线', tags: ['APP 设计', '复杂产品视图拆分'], color: '#C9E6EF', image: '/laike-cover-transparent.png' },
-  { title: '可视化查询重构', text: '平衡数据分析新手易用性与专家效率，经4期灰度上线', tags: ['WEB 设计', '生产力工具产品重构'], color: '#BFE9EE' },
-  { title: '仪表盘优化专项', text: '搭建图表评估体系，同步优化图表组件和仪表盘Demo', tags: ['数据报表设计', '设计驱动业务增长'], color: '#DCD3FB' },
+  { title: '抖音来客首页视图升级', href: '/work/laike/', text: '按用户职责而非行业重构首页，一套平台三套视图，直接贴合各岗位的工作动线', tags: ['APP 设计', '复杂产品视图拆分'], color: '#C9E6EF', image: '/laike-cover-transparent.png' },
+  { title: '仪表盘优化专项', href: '/work/dashboard/', text: '搭建图表评估体系，同步优化图表组件和仪表盘Demo', tags: ['数据报表设计', '设计驱动业务增长'], color: '#DCD3FB', image: '/dashboard-case/dashboard-hd-19.jpg' },
+  { title: '汽车维保“30分钟快保”', href: '/work/qibao/', text: '用 C 端、B 端、S 端与线下 SOP 的联动，把不确定的小保养做成可承诺、可验真的标准化产品', tags: ['多端服务设计', '流程重构与信任体系'], color: '#232A3D', image: '/qibao-case/cover.jpg', contain: true },
+  { title: '可视化查询重构', href: '/work/viz/', text: '降低新手学习门槛而不牺牲专业能力，重构 BI 编辑器路径，经 4 期灰度陪伴用户完成迁移', tags: ['WEB 设计', '生产力工具产品重构'], color: '#BFE9EE', image: '/viz-case/hero.jpg' },
   { title: '飞书Aily市场重构', text: '按用户职责而非行业重构首页，一套平台三套视图，直接贴合各岗位的工作动线', tags: ['Agent 搭建平台', '前台应用和租户管理串联'], color: '#BDEEDB' },
   { title: '飞书妙搭专家模式', text: '实现从单任务到多任务并行，开发环境与线上环境隔离', tags: ['AI coding 应用开发平台', '保持易用性且能力增强'], color: '#BDEEDB' },
 ];
@@ -31,12 +32,12 @@ const explorations = [
   <section id="work" class="shell" aria-labelledby="work-title">
     <SectionHead id="work-title" eyebrow="Selected work" title="作品案例" text="以下是我在职期间的一些工作产出，包括B端、C端、组件、VibeCoding等" />
     <div class="mt-12 grid gap-x-8 gap-y-16 md:grid-cols-2">
-      {cases.map((item, index) => <article class="case-card reveal relative">
+      {cases.map((item) => <article class="case-card reveal relative">
         <div class="relative aspect-5/4 overflow-hidden rounded-card" style={`background:${item.color}`}>
-          {item.image ? <img src={item.image} alt="抖音来客首页视图展示" class="case-image" loading="lazy" /> : <div class="case-placeholder absolute top-[12%] left-[8%] aspect-[8/5] w-[115%]"></div>}
+          {item.image ? <img src={item.image} alt={item.title} class:list={["case-image", { "is-contain": item.contain }]} loading="lazy" /> : <div class="case-placeholder absolute top-[12%] left-[8%] aspect-[8/5] w-[115%]"></div>}
           <span class="case-arrow absolute top-5 right-5 grid size-11 place-items-center rounded-full bg-inverse text-on-inverse" aria-hidden="true"><Icon name="arrow-up-right" class="size-5" /></span>
         </div>
-        <div class="mt-6"><h3 class="text-title"><a href={index === 0 ? '/work/laike/' : detail} class="after:absolute after:inset-0">{item.title}</a></h3><p class="mt-1.5 text-sm leading-7 text-muted">{item.text}</p><ul class="mt-5 flex flex-wrap gap-2" aria-label="项目标签">{item.tags.map((tag) => <li class="chip">{tag}</li>)}</ul></div>
+        <div class="mt-6"><h3 class="text-title"><a href={item.href ?? detail} class="after:absolute after:inset-0">{item.title}</a></h3><p class="mt-1.5 text-sm leading-7 text-muted">{item.text}</p><ul class="mt-5 flex flex-wrap gap-2" aria-label="项目标签">{item.tags.map((tag) => <li class="chip">{tag}</li>)}</ul></div>
       </article>)}
     </div>
   </section>
@@ -57,6 +58,7 @@ const explorations = [
   .intro-copy { color: var(--muted); font-size: 14px; letter-spacing: 0.01em; line-height: 2; }
   .case-placeholder { border-radius: 14px; box-shadow: 0 2px 6px #1212110f, 0 30px 60px -24px #1212114d; outline: 1px solid #12121114; }
   .case-image { position: absolute; top: 7.06%; left: 50%; width: 115%; max-width: none; transform: translateX(-50%); border-radius: 14px; }
+  .case-image.is-contain { top: 50%; left: 50%; width: 92%; transform: translate(-50%, -50%); object-fit: contain; border-radius: 10px; }
   .case-arrow { opacity: 0; scale: .6; transition: opacity 250ms ease, scale 450ms var(--ease-out-expo); }
   .case-card:hover .case-arrow, .case-card:has(a:focus-visible) .case-arrow { opacity: 1; scale: 1; }
   .case-card:has(a:focus-visible) { outline: 2px solid var(--ink); outline-offset: 8px; border-radius: var(--radius-card); }

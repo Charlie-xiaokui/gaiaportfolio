@@ -1,0 +1,39 @@
+/* Shared portfolio presentation. Source content and product screenshots retain their own identity. */
+:root body article:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) {
+  --d-ink:var(--ink);--d-muted:var(--body);--d-accent:var(--ink);--d-deep:#171716;--d-line:var(--line);--d-paper:var(--sunken);
+  --v-ink:var(--ink);--v-muted:var(--body);--v-accent:var(--ink);--v-deep:#171716;--v-line:var(--line);--v-panel:var(--sunken);--v-tint:var(--sunken);
+  --q-ink:var(--ink);--q-muted:var(--body);--q-paper:var(--canvas);--q-card:var(--surface);--q-deep:#262533;--q-line:var(--line);--q-orange:var(--accent);
+  --case-bg:var(--canvas);--case-ink:var(--ink);--case-muted:var(--body);--case-blue:var(--ink);--case-line:var(--line);--case-night:#171716;--case-soft:var(--sunken);--case-white:var(--surface);
+  background:var(--canvas)!important;color:var(--ink);font-family:'PingFang SC','Microsoft YaHei',sans-serif;
+}
+:is(.dash-case,.viz-case,.qibao-case) .shell,.miaoda-case .case-wrap {width:100%!important;max-width:1280px!important;padding-inline:40px!important;margin-inline:auto}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) h1 {font-size:clamp(38px,4.8vw,68px)!important;font-weight:500!important;line-height:1.15!important;letter-spacing:-.035em!important;text-wrap:balance}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) h2 {font-size:clamp(28px,3.35vw,48px)!important;font-weight:500!important;line-height:1.3!important;letter-spacing:-.025em!important;text-wrap:balance}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(.case-lead,.lead) {font-size:clamp(18px,1.6vw,22px)!important;line-height:1.85!important;max-width:840px!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(.kicker,.label,.eyebrow) {font-size:13px!important;font-weight:500!important;letter-spacing:.06em!important}
+:is(.dash-case,.viz-case,.qibao-case) .story-section {padding-top:128px!important}
+.miaoda-case .section {padding-block:80px!important}
+.aily-case :is(.context,.chapter,.future) {margin-top:128px}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(.case-meta,.meta) {padding-block:32px!important;gap:32px!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(.case-meta,.meta) dd {font-size:17px!important;line-height:1.8!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(.hero-panel,.hero-stage,.shot-panel,.gallery,.source-open) {border-radius:16px!important;box-shadow:none!important}
+:is(.dash-case,.viz-case) :is(.hero-panel,.hero-stage) {background:var(--sunken)!important;border-color:var(--line)!important;padding:24px!important}
+:is(.dash-case,.viz-case,.qibao-case) .hero-panel img {box-shadow:none!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(.text-card,.problem-card,.two-layers article,.background-pair>div,.task-preview,.demo,.task-demo,.environment-demo) {border-radius:12px!important;box-shadow:none!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) figcaption {font-size:14px!important;line-height:1.8!important;margin-top:16px!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) button {min-height:44px}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) button:is(.is-active,[aria-selected=true],[aria-pressed=true]) {background:var(--accent)!important;color:#121211!important;border-color:var(--accent)!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(button,a,summary):focus-visible {outline:2px solid var(--accent-strong)!important;outline-offset:4px!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case) .qibao-case .dark-section {background:#262533!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case) .dark-section :is(.eyebrow,.structure-label,.path-number) {color:#d4f84a!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case) .dark-section .story-copy>p {color:#c7c7bf!important}
+.aily-case header {padding-inline:0}
+.aily-case .chapter>h2,.aily-case .chapter>.label {margin-left:0}
+.aily-case .reason {margin-inline:0}
+@media(max-width:767px){
+ :is(.dash-case,.viz-case,.qibao-case) .shell,.miaoda-case .case-wrap {padding-inline:20px!important}
+ :is(.dash-case,.viz-case,.qibao-case) .story-section {padding-top:80px!important}
+ .miaoda-case .section {padding-block:56px!important}
+ .aily-case :is(.context,.chapter,.future) {margin-top:80px}
+ :is(.dash-case,.viz-case) :is(.hero-panel,.hero-stage) {padding:12px!important}
+}

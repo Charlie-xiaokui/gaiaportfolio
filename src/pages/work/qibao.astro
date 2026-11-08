@@ -1,8 +1,9 @@
 ---
+import '@/styles/case-unified.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const fig = {
-  model: '/qibao-case/model-map.jpg',
+  model: '/qibao-case/pdf-final-page.png',
   cDecision: '/qibao-case/c-decision.jpg',
   cOrder: '/qibao-case/c-order.jpg',
   bOldNew: '/qibao-case/b-old-new.jpg',
@@ -12,7 +13,6 @@ const fig = {
   trustSop: '/qibao-case/trust-sop.jpg',
   handoff: '/qibao-case/handoff.jpg',
   opsBanner: '/qibao-case/ops-banner.jpg',
-  results: '/qibao-case/results.jpg',
 };
 
 const roles = [
@@ -75,10 +75,10 @@ const roles = [
 ];
 
 const journeySteps = [
-  { n: '1', t: '看见爆品', d: '首页 Banner 与活动氛围突出“30分钟”和优惠，让用户先识别到一个明确产品。' },
-  { n: '2', t: '理解服务', d: '详情页透传机油品牌、服务内容、正品保障、30分钟快保与门店信息。' },
-  { n: '3', t: '选门店与时间', d: '门店卡片承接距离、评分、服务与优惠；预约把等待前置为可计划的时间。' },
-  { n: '4', t: '到店后反馈', d: '二维码快速开单，订单状态卡片化，支付、预约、导航、施工状态显性化。' },
+  { n: '1', t: '看见爆品', d: '首页 Banner 突出 “30 分钟快保” 与优惠，帮助用户快速识别服务价值' },
+  { n: '2', t: '理解服务', d: '详情页透传机油品牌、服务内容、正品保障、30分钟快保与门店信息' },
+  { n: '3', t: '选门店与时间', d: '门店卡片承接距离、评分、服务与优惠；预约把等待前置为可计划的时间' },
+  { n: '4', t: '到店后反馈', d: '二维码快速开单，订单状态卡片化，支付、预约、导航、施工状态显性化' },
 ];
 
 const sopSteps = [
@@ -99,13 +99,12 @@ const sopSteps = [
     <header class="shell pt-12 sm:pt-16">
       <nav aria-label="面包屑" class="rise text-sm text-muted">
         <a href="/">作品案例</a> <span aria-hidden="true"> / </span>
-        <span class="text-ink">汽车维保“30分钟快保”服务</span>
+        <span class="text-ink">汽车维保服务体验设计</span>
       </nav>
-      <p class="rise kicker mt-12" style="--rise-step:1">多端服务设计 / 流程重构 / 信任体系</p>
-      <h1 class="rise case-title mt-6" style="--rise-step:2">把一次不确定的小保养，做成可承诺的“30分钟快保”</h1>
-      <p class="rise case-lead mt-8" style="--rise-step:3">这不是单端页面改版，而是用 C 端、B 端、S 端与线下 SOP 的联动，把“时间不确定、材料不放心”的服务，重构成用户敢下单、门店能交付、正品可感知的标准化产品。</p>
-      <dl class="rise case-meta mt-12" style="--rise-step:4">
-        <div><dt>项目主题</dt><dd>汽车维保“30分钟快保”爆品与多端服务闭环</dd></div>
+      <h1 class="rise case-title mt-8" style="--rise-step:1">多端协同，提升用户确定感</h1>
+      <p class="rise case-lead mt-8" style="--rise-step:2">联动 C 端、B 端、S 端与线下 SOP，把“时间不确定、材料不放心”的服务，重构成用户敢下单、门店能交付、正品可感知的标准化产品</p>
+      <dl class="rise case-meta mt-12" style="--rise-step:3">
+        <div><dt>职责</dt><dd>B端设计 &amp; S端设计</dd></div>
         <div><dt>设计范围</dt><dd>C 端用户、B 端门店、S 端供应链与运营的多端联动设计</dd></div>
         <div><dt>项目成果</dt><dd>快保单 GMV 86W；NPS 80.1%→83.5%；正品可验知晓率 24%→56%</dd></div>
       </dl>
@@ -113,191 +112,139 @@ const sopSteps = [
 
     <div class="shell mt-14">
       <figure class="hero-panel">
-        <img src={fig.model} width="848" height="653" alt="小桔养车从直营店到认证店，用标准化 SOP 发展 30 分钟快保的多端关系图" fetchpriority="high" data-lightbox />
-        <figcaption>用标准化 SOP，同时建立稳定的时间预期与产品预期</figcaption>
+        <img src={fig.model} width="3200" height="1800" alt="汽车维保业务 PDF 最后一页：100% 正品保障与正品可验知晓率提升" fetchpriority="high" data-lightbox />
       </figure>
     </div>
 
     <!-- 01 问题 -->
     <section class="shell story-section reveal" aria-labelledby="problem-title">
-      <div class="story-copy">
+      <div class="story-copy paper-head">
         <p class="eyebrow">01 / 背景与问题</p>
-        <h2 id="problem-title">增长的难点，不是没有流量，而是服务无法被稳定承诺</h2>
-        <p>行业供大于求、平台竞争加剧。小桔养车从直营店扩展到品类授权和认证店后，仅靠直营管控已无法保证每家店的体验一致。</p>
+        <h2 id="problem-title">不是没有流量，而是无法稳定承诺</h2>
+        <p>行业供大于求、平台竞争加剧。小桔养车从直营店扩展到品类授权和认证店后，仅靠直营管控已无法保证每家店的体验一致</p>
       </div>
       <div class="problem-grid">
         <article class="problem-card">
           <span class="badge red">问题一 · 时间不可预期</span>
-          <h3>同是小保养，每家店的交付节奏都不一样</h3>
-          <p>不同门店在流程、人员分工和系统使用上差异明显，用户到店后无法判断要等多久，很难形成明确的下单理由。</p>
+          <h3>同一个小保养<br />不同店的交付时间不一样</h3>
+          <p>不同门店在流程、人员分工和系统使用上差异明显，用户到店后无法判断要等多久，很难形成明确的下单理由</p>
         </article>
         <article class="problem-card">
-          <span class="badge amber">问题二 · 正品不可验证</span>
-          <h3>机油等关键材料就在眼前，用户却难以确认来源</h3>
-          <p>材料是否为真、是否被替换、剩余机油如何处理，都缺少能被用户看见和参与验证的环节。</p>
+          <span class="badge red">问题二 · 正品不可验证</span>
+          <h3>机油等关键材料<br />用户却难以确认来源</h3>
+          <p>材料是否为真、是否被替换、剩余机油如何处理，都缺少能被用户看见和参与验证的环节</p>
         </article>
-      </div>
-      <div class="thesis">
-        <div><span>设计命题</span><strong>用标准化 SOP 打造“30分钟快保”爆品</strong></div>
-        <div class="thesis-arrow" aria-hidden="true">→</div>
-        <div><span>同时建立两种预期</span><strong>稳定的时间预期 × 稳定的产品 / 材料预期</strong></div>
       </div>
     </section>
 
     <!-- 02 角色 -->
-    <section class="shell story-section reveal" aria-labelledby="roles-title">
-      <div class="story-copy">
-        <p class="eyebrow">02 / 角色拆解</p>
+    <section class="shell story-section reveal touchpoint-section" aria-labelledby="roles-title">
+      <div class="story-copy paper-head">
+        <p class="eyebrow">02 / 触点拆解</p>
         <h2 id="roles-title">一个服务承诺，为什么要四端一起改</h2>
-        <p>切换角色可以看到同一目标在不同角色上的设计任务。关键不是多做几个页面，而是把承诺拆成每一端必须完成的动作。</p>
+        <p>承诺不是一句话，是一条链：运营让活动先被看见；C 端讲清服务，用户才敢下单；B 端理顺流程，认证店才交得出；S 端补齐采购与正品，配件才供得上</p>
       </div>
-      <div class="role-tabs" data-role-tabs role="tablist" aria-label="多端角色">
-        {roles.map((role, i) => (
-          <button type="button" role="tab" id={`qibao-role-tab-${role.key}`} aria-controls={`qibao-role-panel-${role.key}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} class={i === 0 ? 'is-active' : ''} data-role-key={role.key}>{role.tab}</button>
-        ))}
-      </div>
-      <div class="role-panels">
-        {roles.map((role, i) => (
-          <div class={`role-panel${i === 0 ? ' is-active' : ''}`} id={`qibao-role-panel-${role.key}`} role="tabpanel" aria-labelledby={`qibao-role-tab-${role.key}`} aria-hidden={i === 0 ? 'false' : 'true'} data-role-panel={role.key}>
-            <div class="role-text">
-              <h3>{role.title}</h3>
-              <p>{role.body}</p>
-              <ul>{role.points.map((point) => <li>{point}</li>)}</ul>
-            </div>
-            <figure class="role-figure">
-              <img src={role.image} alt={role.alt} loading="lazy" data-lightbox />
-              <figcaption>{role.caption}</figcaption>
-            </figure>
-          </div>
-        ))}
+      <div class="touchpoint-grid">
+        <article class="touchpoint-card"><p class="touchpoint-label">运营</p><h3>看得懂</h3><p class="touchpoint-desc">先让用户看见，再转化为预约</p></article>
+        <article class="touchpoint-card"><p class="touchpoint-label">C端</p><h3>敢下单</h3><p class="touchpoint-desc">把服务信息变成决策依据</p></article>
+        <article class="touchpoint-card"><p class="touchpoint-label">B端</p><h3>能交付</h3><p class="touchpoint-desc">让认证店也能按统一节奏交付</p></article>
+        <article class="touchpoint-card"><p class="touchpoint-label">S端</p><h3>供得准</h3><p class="touchpoint-desc">补齐采购、支付与商家信息</p></article>
       </div>
     </section>
 
     <!-- 03 C端决策链 -->
     <section class="dark-section" aria-labelledby="journey-title">
       <div class="shell story-section reveal">
-        <div class="story-copy on-dark">
-          <p class="eyebrow">03 / C 端决策链</p>
-          <h2 id="journey-title">从被活动吸引到按时到店，每一步都要减少不确定性</h2>
-          <p>快保不是用户点进详情页才开始的。运营入口、服务说明、门店选择、二维码开单、订单进度与预约反馈共同构成决策链。</p>
+        <div class="story-copy on-dark journey-paper-head">
+          <p class="eyebrow">03 / 运营 和 C端</p>
+          <h2 id="journey-title">从活动吸引到按时到店，每一步都要减少不确定性</h2>
+          <p>快保不是用户点进详情页才开始的，运营入口、服务说明、门店选择、二维码开单、订单进度与预约反馈共同构成决策链</p>
         </div>
         <ol class="journey-map">
           {journeySteps.map((step) => (
             <li><b>{step.n}　{step.t}</b><p>{step.d}</p></li>
           ))}
         </ol>
-        <div class="seg-toggle" data-journey-toggle role="tablist" aria-label="C 端决策阶段">
-          <button type="button" role="tab" aria-selected="true" class="is-active" data-journey="decision">决策前 · 首页 / 详情 / 门店 / 开单</button>
-          <button type="button" role="tab" aria-selected="false" data-journey="status">决策后 · 订单 / 预约 / 反馈</button>
-        </div>
-        <figure class="shot-panel on-dark">
-          <img class="journey-img is-active" data-journey-img="decision" src={fig.cDecision} width="1530" height="1201" alt="C 端首页、服务详情、开单弹窗与门店决策链路原稿" loading="lazy" data-lightbox />
-          <img class="journey-img" data-journey-img="status" src={fig.cOrder} width="1530" height="1246" alt="C 端订单状态卡片化与预约流程原稿" loading="lazy" data-lightbox />
-          <figcaption class="on-dark">点击切换决策前的信息透传与决策后的状态反馈</figcaption>
-        </figure>
-        <div class="two-col">
-          <figure class="shot-panel on-dark">
-            <img src={fig.cOrder} width="1530" height="1246" alt="订单状态与预约流程原稿" loading="lazy" data-lightbox />
-            <figcaption class="on-dark">订单状态卡片化，减少用户反复询问</figcaption>
-          </figure>
-          <figure class="shot-panel on-dark">
-            <img src={fig.bOldNew} width="1155" height="1163" alt="B 端新旧界面对比" loading="lazy" data-lightbox />
-            <figcaption class="on-dark">线上订单必须被门店标准化接住</figcaption>
-          </figure>
+        <div class="journey-gallery">
+          <img src="/qibao-case/运营首页@4x.png" width="4800" height="2420" alt="运营首页：30 分钟快保活动 Banner 与首页入口" loading="lazy" data-lightbox />
+          <img src="/qibao-case/服务透传@4x.png" width="4800" height="2716" alt="服务透传：C 端首页、服务详情、二维码开单与门店选择" loading="lazy" data-lightbox />
+          <img src="/qibao-case/预约反馈@4x.png" width="4800" height="2672" alt="预约反馈：订单状态卡片与预约流程" loading="lazy" data-lightbox />
         </div>
       </div>
     </section>
 
-    <!-- 04 流程重构 -->
-    <section class="shell story-section reveal" aria-labelledby="flow-title">
-      <div class="story-copy">
-        <p class="eyebrow">04 / 关键决策一</p>
-        <h2 id="flow-title">系统原来按“一个人串行”设计，现场其实是“两个人并行”</h2>
-        <p>这是项目里最典型的流程取舍：如果系统继续把施工、安心检测、核销、交车排成一条线，30 分钟承诺就很难稳定达成。</p>
+    <!-- 04 B 端关键决策 -->
+    <section class="shell story-section reveal b-paper-section" aria-labelledby="flow-title">
+      <div class="story-copy paper-head">
+        <p class="eyebrow">04 / B端解决方案</p>
+        <h2 id="flow-title">让门店按真实工作方式交付</h2>
+        <p>原系统的串行流程与单一设备操作，难以适配门店实际。解决方案从作业协同与设备适配入手，减少交付阻力，流程与现场并行，界面与人员能力匹配，门店才能稳定兑现前台的服务承诺。</p>
       </div>
-      <div class="seg-toggle light" data-flow-toggle role="tablist" aria-label="作业流程对照">
-        <button type="button" role="tab" aria-selected="true" class="is-active" data-flow="old">旧流程 · 串行等待</button>
-        <button type="button" role="tab" aria-selected="false" data-flow="new">新流程 · 并行重叠</button>
+      <div class="b-paper-cards">
+        <article><span class="badge">01 / 流程重构</span><h3>支持双人并行，减少流程等待</h3><p>现场由两名员工同步完成维保与安心检测，旧流程却要求依次操作。新流程支持两项作业并行，完成后统一进入核销与交车，减少系统等待</p></article>
+        <article><span class="badge amber">02 / 分设备设计</span><h3>适配门店差异，区分操作方式</h3><p>Pad 端以中心化工作台承载分散操作，支持灵活切换；手机端将操作串联为连续步骤，引导逐步完成任务</p></article>
       </div>
-      <div class="flow-board">
-        <div class="lane"><span class="lane-name">维修保养</span><div class="lane-track"><div class="bar bar-work" id="qibao-bar-work">施工</div></div></div>
-        <div class="lane"><span class="lane-name">安心检测</span><div class="lane-track"><div class="bar bar-check" id="qibao-bar-check">安心检测</div></div></div>
-        <div class="lane"><span class="lane-name">结算离店</span><div class="lane-track"><div class="bar bar-verify" id="qibao-bar-verify">核销</div><div class="bar bar-deliver" id="qibao-bar-deliver">交车</div></div></div>
-        <p class="flow-note" id="qibao-flow-note">旧流程把施工、安心检测、核销、交车依次排列，系统节奏与线下两名工作人员并行作业的真实情况不一致。</p>
-      </div>
-      <div class="persona-grid">
-        <article class="persona"><span class="badge">自营店 SA</span><h3>专业、服务项目多</h3><p>需要处理更复杂的事务，Pad 端的信息密度与多入口仍有使用场景。</p></article>
-        <article class="persona"><span class="badge amber">认证店 SA</span><h3>相对业余、服务项目少</h3><p>更重要的是高效完成一件事，因此手机端把复杂表单拆成连续步骤。</p></article>
-      </div>
-      <figure class="shot-panel">
-        <img src={fig.bMobile} width="975" height="1050" alt="Pad 端到 Mobile 端的信息聚焦设计原稿" loading="lazy" data-lightbox />
-        <figcaption>化整为零、信息聚焦、串联核心流程：基本信息 → 环检信息 → 添加服务 → 开始施工</figcaption>
+      <figure class="b-paper-images">
+        <img src="/qibao-case/b-solution-final.png" width="3600" height="5802" alt="B端解决方案：流程重构与分设备设计完整长图" loading="lazy" data-lightbox />
       </figure>
     </section>
 
     <!-- 05 正品透传 -->
-    <section class="shell story-section reveal" aria-labelledby="trust-title">
-      <div class="story-copy">
-        <p class="eyebrow">05 / 关键决策二</p>
-        <h2 id="trust-title">正品不是一句承诺，而是线上可查、线下可验、离店可带走的证据链</h2>
+    <section class="shell story-section reveal trust-paper-section" aria-labelledby="trust-title">
+      <div class="story-copy paper-head">
+        <p class="eyebrow">05 / 全链路正品透传</p>
+        <h2 id="trust-title">正品不是一句承诺，<br />而是线上可查、线下可验、离店可带走的证据链</h2>
         <p>用户担心的不是“页面有没有写正品”，而是我这次保养用的那瓶机油，能不能被看见、验证并追溯。</p>
       </div>
-      <div class="two-col trust-cols">
-        <article class="trust-card">
-          <h3>线上：在决策前反复透传</h3>
-          <p>正品信息分布在 O2O 首页、B2C 首页、O2O 服务详情、B2C 商品详情与正品页，用品牌直采、正品保障、防伪验证、假一赔十、授权书与供应链图片建立信任。</p>
-          <figure><img src={fig.trustOnline} width="1545" height="1261" alt="线上正品授权入口原稿" loading="lazy" data-lightbox /></figure>
-        </article>
-        <article class="trust-card">
-          <h3>线下：把验证动作嵌入 SOP</h3>
-          <p>真正解除顾虑的时刻发生在门店：取货时让用户看到材料，施工前引导扫码验真，结算交车时交还剩余机油，让“正品”从品牌话术变成本次订单的具体证据。</p>
-          <figure><img src={fig.trustSop} width="1260" height="638" alt="线下正品告知 SOP 原稿" loading="lazy" data-lightbox /></figure>
-        </article>
+      <div class="trust-paper-gallery">
+        <img src="/qibao-case/trust-paper-17.png" width="2934" height="1650" alt="正品授权线上透传：从首页入口到服务与商品详情" loading="lazy" data-lightbox />
+        <img src="/qibao-case/trust-paper-18.png" width="2934" height="1650" alt="正品授权线上透传：正品页与授权证明" loading="lazy" data-lightbox />
+        <div class="trust-paper-crop"><img src="/qibao-case/trust-paper-20.png" width="2934" height="1650" alt="线下正品告知 SOP：取货、验真、施工与交还剩余机油" loading="lazy" data-lightbox /></div>
+        <img src="/qibao-case/trust-paper-22.png" width="2934" height="1650" alt="交车物品清单：报告、单据、发票、车钥匙与定制信封" loading="lazy" data-lightbox />
       </div>
-      <div class="sop-walk">
-        <h3>逐步查看：线下正品告知 SOP</h3>
-        <p class="sop-cost">落地成本：约 1 周线下 SOP 培训</p>
-        <div class="sop-buttons" role="tablist" aria-label="正品告知步骤">
-          {sopSteps.map((step, i) => (
-            <button type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} class={i === 0 ? 'is-active' : ''} data-sop={i}>{step.t}</button>
-          ))}
-        </div>
-        <div class="sop-body">
-          <div><h4 id="qibao-sop-title">{sopSteps[0].h}</h4><p id="qibao-sop-text">{sopSteps[0].d}</p><div class="sop-tags" id="qibao-sop-tags">{sopSteps[0].tags.map((tag) => <span>{tag}</span>)}</div></div>
-          <figure><img src={fig.trustSop} width="1260" height="638" alt="正品告知 SOP 四步：取货、验真、施工、交还剩余机油" loading="lazy" data-lightbox /></figure>
-        </div>
-      </div>
-      <figure class="shot-panel">
-        <img src={fig.handoff} width="1440" height="1246" alt="交车物品清单原稿" loading="lazy" data-lightbox />
-        <figcaption>交车不是说一声“好了”：双手递交、送司机上车、引导离店，并交付完整单据与定制信封</figcaption>
-      </figure>
     </section>
 
     <!-- 06 结果 -->
-    <section class="dark-section" aria-labelledby="result-title">
+    <section class="dark-section result-section" aria-labelledby="result-title">
       <div class="shell story-section reveal">
-        <div class="story-copy on-dark">
+        <div class="story-copy on-dark result-heading">
           <p class="eyebrow">06 / 项目结果</p>
-          <h2 id="result-title">结果验证的是“承诺—系统—现场动作”是否真正闭环</h2>
-          <p>快保 GMV、NPS 与正品知晓率分别对应成交、体验和信任三条线索。这里只呈现原始资料口径，不额外推导增长率。</p>
+          <h2 id="result-title">“承诺—系统—现场动作”是否真正闭环</h2>
+          <p>快保 GMV、NPS 与正品知晓率分别对应成交、体验和信任三条线索。</p>
         </div>
-        <div class="result-grid">
-          <div class="metric-board">
-            <div class="metrics">
-              <div class="metric"><b>86W</b><span>30分钟快保单 GMV</span></div>
-              <div class="metric"><b>83.5%</b><span>NPS 80.1% → 83.5%，提升 3.4 个百分点</span></div>
-              <div class="metric"><b>56%</b><span>正品可验知晓率 24% → 56%，提升 32 个百分点</span></div>
+        <div class="metric-board">
+          <div class="metrics" aria-label="项目结果的三个指标">
+            <div class="metric metric-gmv">
+              <div class="gmv-terms">
+                <div class="gmv-term"><span class="gmv-value">5.6</span><span class="gmv-label">单店日均单量</span></div>
+                <div class="gmv-term"><span class="gmv-value">8</span><span class="gmv-label">认证店数</span></div>
+                <div class="gmv-term"><span class="gmv-value">300</span><span class="gmv-label">客均单价</span></div>
+                <div class="gmv-term gmv-total"><strong class="gmv-value">86<em>W</em></strong><span class="gmv-label">30分钟快保单GMV</span></div>
+              </div>
             </div>
-            <figure class="metric-figure"><img src={fig.results} width="1553" height="1170" alt="项目成果与爆品累计单量趋势原稿" loading="lazy" data-lightbox /></figure>
-            <p class="metric-note">口径说明：86W 在原稿中由“单店日均单量 5.6 × 认证店数 8 × 客均单价 300”推导呈现；爆品累计单量在 04.18、05.08、05.29、06.24 分别记录为 954、1892、2956，起点为“30分钟爆品上线”。本页只复述材料，不外推缺失日期的销量。</p>
+            <div class="metric metric-change"><div class="metric-equation"><span>80.1<em>%</em></span><i class="metric-arrow">⟶</i><strong>83.5<em>%</em></strong></div><div class="metric-caption">NPS变化</div></div>
+            <div class="metric metric-change"><div class="metric-equation"><span>24<em>%</em></span><i class="metric-arrow">⟶</i><strong>56<em>%</em></strong></div><div class="metric-caption">正品可验知晓率</div></div>
           </div>
-          <aside class="ability-card">
-            <h3>这个案例体现的设计能力</h3>
-            <p><b>把模糊业务问题改写成可设计的产品承诺。</b>从“体验不稳定”收敛到“30分钟”和“正品可验”两个用户能理解的承诺。</p>
-            <p><b>做多端责任划分。</b>C 端负责决策，B 端负责履约，S 端负责供应链与信息，运营负责入口与氛围。</p>
-            <p><b>把现场 SOP 当成体验设计的一部分。</b>授权页解决认知，扫码验真解决当下顾虑，剩余物料和交车清单让信任延续到离店。</p>
-            <p><b>用结果反向验证设计。</b>成交、满意度与正品知晓率分别检验商业、服务与信任目标，而不是只看界面是否好看。</p>
-          </aside>
+          <figure class="result-chart">
+            <div class="result-chart-scroll">
+              <svg viewBox="0 0 1120 365" role="img" aria-labelledby="result-chart-title result-chart-desc" xmlns="http://www.w3.org/2000/svg">
+                <title id="result-chart-title">30 分钟快保爆品累计单量持续增长</title>
+                <desc id="result-chart-desc">4 月 18 日上线；5 月 8 日累计 954 单；5 月 29 日累计 1892 单；6 月 24 日累计 2956 单。</desc>
+                <defs><pattern id="result-chart-grid" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M 0 0 V 246" fill="none" stroke="#777783" stroke-opacity=".48" stroke-width="1" stroke-dasharray="2 3" /></pattern></defs>
+                <rect x="58" y="46" width="1004" height="246" fill="url(#result-chart-grid)" />
+                <path d="M 58 292 H 1062" fill="none" stroke="#d0d0d3" stroke-width="1" />
+                <path d="M 58 253 C 191 250 284 240 394 226 S 618 198 702 178 S 937 122 1036 96" fill="none" stroke="#FF9900" stroke-width="3.5" stroke-linecap="round" />
+                <g fill="#252531" stroke="#FF9900" stroke-width="3"><circle cx="58" cy="253" r="5.5" /><circle cx="394" cy="226" r="5.5" /><circle cx="702" cy="178" r="5.5" /><circle cx="1036" cy="96" r="5.5" /></g>
+                <g class="result-chart-badges" text-anchor="middle">
+                  <g transform="translate(0 208)"><rect width="116" height="27" rx="2" fill="#FF9900" /><path d="M 54 27 L 58 33 L 62 27" fill="#FF9900" /><text x="58" y="18">30分钟快保上线</text></g>
+                  <g transform="translate(330 181)"><rect width="128" height="27" rx="2" fill="#FF9900" /><path d="M 60 27 L 64 33 L 68 27" fill="#FF9900" /><text x="64" y="18">爆品累计单量：954</text></g>
+                  <g transform="translate(638 133)"><rect width="128" height="27" rx="2" fill="#FF9900" /><path d="M 60 27 L 64 33 L 68 27" fill="#FF9900" /><text x="64" y="18">爆品累计单量：1892</text></g>
+                  <g transform="translate(970 51)"><rect width="132" height="27" rx="2" fill="#FF9900" /><path d="M 62 27 L 66 33 L 70 27" fill="#FF9900" /><text x="66" y="18">爆品累计单量：2956</text></g>
+                </g>
+                <g class="result-chart-dates" text-anchor="middle"><text x="76" y="320">04.18</text><text x="394" y="320">05.08</text><text x="702" y="320">05.29</text><text x="1036" y="320">06.24</text></g>
+              </svg>
+            </div>
+          </figure>
         </div>
       </div>
     </section>
@@ -341,19 +288,6 @@ const sopSteps = [
             var next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
             activate(tabs[next].dataset.roleKey || '');
             tabs[next].focus();
-          });
-        });
-      });
-
-      // C 端决策前 / 决策后切换
-      document.querySelectorAll<HTMLElement>('[data-journey-toggle]').forEach(function (toggle) {
-        var btns = Array.from(toggle.querySelectorAll<HTMLButtonElement>('button'));
-        var imgs = Array.from(document.querySelectorAll<HTMLImageElement>('[data-journey-img]'));
-        btns.forEach(function (btn) {
-          btn.addEventListener('click', function () {
-            var key = btn.dataset.journey;
-            btns.forEach(function (b) { b.setAttribute('aria-selected', String(b === btn)); b.classList.toggle('is-active', b === btn); });
-            imgs.forEach(function (img) { img.classList.toggle('is-active', img.dataset.journeyImg === key); });
           });
         });
       });
@@ -447,27 +381,34 @@ const sopSteps = [
 
 <style>
   :global(body), :global(body *) { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
-  .qibao-case { --q-ink:#171b22; --q-muted:#68717d; --q-paper:#f5f1e8; --q-card:#fffdf8; --q-blue:#1684ee; --q-deep:#111827; --q-teal:#0aa6a0; --q-orange:#ff8a00; --q-red:#f04a3f; --q-line:#ded6c9; padding-bottom: 96px; }
+  .qibao-case { --q-ink:#171b22; --q-muted:#68717d; --q-paper:#f5f1e8; --q-card:#fffdf8; --q-blue:#1684ee; --q-deep:#262533; --q-teal:#0aa6a0; --q-orange:#ff8a00; --q-red:#f04a3f; --q-line:#ded6c9; padding-bottom: 96px; }
   .qibao-case .shell { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
   .qibao-case .kicker { color: var(--q-orange); font-size: 13px; letter-spacing: .14em; font-weight: 700; }
+  .qibao-case > header .case-title { max-width: none; }
+  .qibao-case > header .case-lead { max-width: 56rem !important; }
   .case-title { font-size: clamp(38px, 5.6vw, 72px); line-height: 1.08; letter-spacing: -.04em; font-weight: 600; max-width: 20ch; }
   .case-lead { max-width: 52rem; font-size: clamp(17px, 1.8vw, 22px); line-height: 1.8; color: var(--q-muted); }
   .case-meta { display: grid; gap: 28px; padding-block: 32px; border-top: 1px solid var(--q-line); border-bottom: 1px solid var(--q-line); }
   .case-meta dt { font-size: 13px; color: var(--q-muted); } .case-meta dd { margin-top: 8px; line-height: 1.7; }
-  .hero-panel { background: var(--q-deep); border-radius: 24px; padding: 40px; margin: 0; text-align: center; }
-  .hero-panel img { max-width: 100%; height: auto; border-radius: 14px; margin-inline: auto; }
-  .hero-panel figcaption { margin-top: 18px; color: #c7d0dc; font-size: 14px; }
+  .hero-panel { background: transparent; border-radius: 0; padding: 0; margin: 0; text-align: center; }
+  .hero-panel img { display: block; width: 100%; height: auto; border-radius: 14px; margin-inline: auto; }
   .story-section { padding-top: 140px; }
   .story-copy { max-width: 840px; margin-left: 0; }
   .story-copy .eyebrow { color: var(--q-orange); font-size: 13px; letter-spacing: .12em; font-weight: 700; }
   .story-copy h2 { margin-top: 20px; font-size: clamp(30px, 4vw, 50px); line-height: 1.2; letter-spacing: -.03em; font-weight: 600; }
   .story-copy > p:not(.eyebrow) { margin-top: 22px; font-size: 18px; line-height: 34px; color: var(--q-muted); }
   .story-copy.on-dark h2 { color: #fff; } .story-copy.on-dark > p { color: #aeb8c5; }
+  .story-copy.paper-head .eyebrow { gap: 9.6px; color: #6a6964; font-size: 13px; line-height: 16px; letter-spacing: .08em !important; font-weight: 500; }
+  .story-copy.paper-head .eyebrow::before { width: 7.19531px; height: 7.19531px; flex-shrink: 0; background: #d4f84a; box-shadow: 0 0 0 1px #1212112e; }
+  .story-copy.paper-head h2 { margin-top: 20px; line-height: 1.3; letter-spacing: -0.849225px !important; font-weight: 500; color: #121211; }
+  .story-copy.paper-head > p:not(.eyebrow) { margin-top: 22px; font-size: 18px; line-height: 34px; color: #3b3b38; }
 
-  .problem-grid { display: grid; gap: 22px; margin-top: 56px; grid-template-columns: 1fr; }
-  .problem-card { background: var(--q-card); border: 1px solid var(--q-line); border-radius: 24px; padding: 30px; }
-  .problem-card h3 { margin: 16px 0 10px; font-size: 23px; } .problem-card p { margin: 0; color: var(--q-muted); line-height: 1.8; }
-  .badge { display: inline-flex; align-items: center; min-height: 32px; padding: 4px 13px; border-radius: 999px; background: #eef5ff; color: #0b6bcb; font-weight: 700; font-size: 13px; }
+  .problem-grid { display: grid; gap: 40px; margin-top: 64px; grid-template-columns: 1fr; }
+  .problem-card { display: flex; flex-direction: column; gap: 16px; background: #fff; border: 0; border-radius: 16px !important; padding: 30px; }
+  .problem-card h3 { margin: 0; font-size: 28px; line-height: 1.6; letter-spacing: .1em; font-weight: 500; color: #121211; text-wrap: balance; white-space: pre-wrap; }
+  .problem-card p { margin: 0; font-size: 17px; line-height: 1.8; color: #3b3b38; text-wrap: pretty; }
+  .problem-card .badge { width: fit-content; }
+  .badge { display: inline-flex; align-items: center; min-height: 32px; padding: 4px 13px; border-radius: 999px; background: #eef5ff; color: #0b6bcb; font-weight: 600; font-size: 13px; line-height: 1.6; }
   .badge.red { background: #ffeded; color: #c9342c; } .badge.amber { background: #fff2df; color: #c45d00; }
   .thesis { margin-top: 24px; background: var(--q-deep); color: #fff; border-radius: 24px; padding: 30px; display: grid; gap: 18px; align-items: center; }
   .thesis span { display: block; color: #9aa5b4; font-size: 13px; margin-bottom: 8px; } .thesis strong { font-size: 20px; line-height: 1.5; }
@@ -486,7 +427,7 @@ const sopSteps = [
   .role-figure { margin: 0; background: #f3f5f8; border-radius: 18px; padding: 16px; } .role-figure img { border-radius: 12px; width: 100%; height: auto; }
   .role-figure figcaption, figcaption { color: var(--q-muted); font-size: 13px; margin-top: 12px; text-align: center; }
 
-  .dark-section { background: var(--q-deep); color: #fff; margin-top: 140px; }
+  .dark-section { background: #262533; color: #fff; margin-top: 140px; }
   .dark-section .story-section { padding-top: 110px; padding-bottom: 110px; }
   .dark-section .story-copy .eyebrow { color: #ffb13b; }
   .journey-map { list-style: none; margin: 48px 0 0; padding: 0; display: grid; gap: 14px; grid-template-columns: 1fr; counter-reset: step; }
@@ -504,6 +445,9 @@ const sopSteps = [
   figcaption.on-dark, .shot-panel figcaption.on-dark { color: #aeb8c5; }
   .two-col { display: grid; gap: 22px; margin-top: 22px; grid-template-columns: 1fr; }
   .journey-img { display: none; } .journey-img.is-active { display: block; }
+  .journey-gallery { display: grid; gap: 80px; margin-top: 80px; }
+  .journey-gallery img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+  @media (max-width: 767px) { .journey-gallery { gap: 48px; margin-top: 56px; } }
 
   .flow-board { background: #fff; border: 1px solid var(--q-line); border-radius: 26px; padding: 28px; margin-top: 28px; }
   .lane { display: grid; gap: 14px; grid-template-columns: 1fr; align-items: center; margin-bottom: 16px; }
@@ -516,6 +460,15 @@ const sopSteps = [
   .persona-grid { display: grid; gap: 22px; margin-top: 24px; grid-template-columns: 1fr; }
   .persona { border: 1px solid var(--q-line); border-radius: 22px; padding: 26px; background: #fff; }
   .persona h3 { margin: 16px 0 10px; font-size: 22px; } .persona p { margin: 0; color: var(--q-muted); line-height: 1.8; }
+  .b-decision { margin-top: 76px; }
+  .b-decision-copy { max-width: 760px; margin-bottom: 28px; }
+  .b-decision-copy span { color: #59728d; font-size: 13px; font-weight: 700; letter-spacing: .08em; }
+  .b-decision-copy h3 { margin: 12px 0 14px; font-size: clamp(26px, 3vw, 36px); line-height: 1.4; letter-spacing: -.025em; }
+  .b-decision-copy p { margin: 0; color: var(--q-muted); font-size: 17px; line-height: 1.9; }
+  .b-proof { margin: 28px 0 0; }
+  .b-proof img { display: block; width: 100%; height: auto; border-radius: 18px; }
+  .b-proof figcaption { margin-top: 12px; text-align: left; }
+  .b-conclusion { margin: 72px 0 0; padding: 28px 0; border-top: 1px solid var(--q-line); border-bottom: 1px solid var(--q-line); color: var(--q-ink); font-size: clamp(20px, 2.5vw, 28px); line-height: 1.6; font-weight: 500; }
 
   .trust-cols { gap: 24px; } .trust-card { background: #fff; border: 1px solid var(--q-line); border-radius: 24px; padding: 26px; }
   .trust-card h3 { margin: 0 0 12px; font-size: 23px; } .trust-card > p { color: var(--q-muted); line-height: 1.8; margin: 0 0 18px; }
@@ -531,15 +484,37 @@ const sopSteps = [
   .sop-body figure { margin: 0; } .sop-body figure img { border-radius: 16px; border: 1px solid var(--q-line); width: 100%; height: auto; }
   .sop-tags { display: flex; flex-wrap: wrap; gap: 10px; } .sop-tags span { background: #f6f3ed; border-radius: 10px; padding: 10px 14px; font-size: 14px; }
 
-  .result-grid { display: grid; gap: 24px; grid-template-columns: 1fr; margin-top: 8px; }
-  .metric-board { background: linear-gradient(135deg, #1d2738, #141d2d); border: 1px solid rgba(255,255,255,.12); border-radius: 26px; padding: 28px; }
-  .metrics { display: grid; gap: 14px; grid-template-columns: 1fr; margin-bottom: 24px; }
-  .metric { border-radius: 16px; padding: 20px; background: rgba(255,255,255,.06); }
-  .metric b { display: block; font-size: 32px; line-height: 1.1; color: #ffb13b; } .metric span { display: block; font-size: 13px; color: #b8c2cf; margin-top: 8px; line-height: 1.6; }
-  .metric-figure { margin: 0; border-radius: 16px; overflow: hidden; } .metric-figure img { width: 100%; height: auto; }
-  .metric-note { color: #cbd4df; font-size: 13px; line-height: 1.8; margin: 18px 0 0; padding: 16px; border-left: 4px solid var(--q-orange); background: rgba(255,255,255,.06); border-radius: 10px; }
-  .ability-card { background: #1d2738; border: 1px solid rgba(255,255,255,.12); border-radius: 26px; padding: 28px; }
-  .ability-card h3 { margin: 0 0 18px; font-size: 23px; } .ability-card p { color: #b8c2cf; line-height: 1.85; margin: 0 0 16px; } .ability-card p:last-child { margin-bottom: 0; } .ability-card b { color: #fff; }
+  .result-heading { max-width: none; }
+  .qibao-case .result-section { background: #262533 !important; }
+  .result-section .story-section { padding-top: 58px; padding-bottom: 78px; }
+  .result-heading .eyebrow { display: flex; align-items: center; gap: 12px; color: #c7c7bf !important; }
+  .result-heading .eyebrow::before { content: ''; width: 8px; height: 8px; flex: none; border-radius: 50%; background: #d4f84a; }
+  .result-heading h2 { max-width: 1000px; }
+  .result-heading > p:not(.eyebrow) { color: #c7c7bf; }
+  .metric-board { margin-top: 50px; padding: 0; background: transparent; }
+  .metrics { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: start; }
+  .metric { min-width: 0; }
+  .metric-equation { display: flex; align-items: flex-end; height: 72px; white-space: nowrap; gap: .18em; color: #fff; font-size: clamp(26px, 2.6vw, 38px); font-weight: 400; letter-spacing: -.04em; }
+  .metric-equation > span { line-height: 1; }
+  .metric-equation strong { position: relative; top: 4px; color: #fff; font-size: 1.65em; font-weight: 700; line-height: 1; letter-spacing: -.05em; }
+  .metric-equation em { margin-left: 7px; color: #b9b9c0; font-size: .36em; font-style: normal; font-weight: 400; vertical-align: baseline; }
+  .metric-equation i { font-size: .5em; font-style: normal; line-height: 1; }
+  .metric-equation .metric-arrow { position: relative; top: -5px; margin-inline: .35em; font-size: .85em; font-weight: 300; }
+  .gmv-terms { display: grid; grid-template-columns: 1.15fr .85fr 1fr 1.5fr; gap: 12px; align-items: end; }
+  .gmv-term { position: relative; display: flex; flex-direction: column; align-items: center; min-width: 0; text-align: center; }
+  .gmv-term:not(:last-child)::after { content: '×'; position: absolute; right: -11px; top: 41px; color: #fff; font-size: 20px; line-height: 26px; }
+  .gmv-term:nth-child(3)::after { content: '='; }
+  .gmv-value { display: flex; align-items: flex-end; justify-content: center; height: 72px; color: #fff; font-size: clamp(25px, 2.6vw, 38px); font-weight: 400; line-height: 1; letter-spacing: -.04em; white-space: nowrap; }
+  .gmv-total .gmv-value { position: relative; top: 4px; font-size: clamp(44px, 4.4vw, 62px); font-weight: 700; letter-spacing: -.05em; }
+  .gmv-value em { position: relative; bottom: 5px; margin-left: 4px; color: #b9b9c0; font-size: .35em; font-style: normal; font-weight: 400; }
+  .gmv-label { display: block; margin-top: 10px; color: #b9b9c0; font-size: 10px; line-height: 1.35; white-space: nowrap; }
+  .metric-change { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .metric-caption { margin-top: 10px; color: #b9b9c0; font-size: 12px; text-align: center; }
+  .result-chart { margin: 55px 0 0; }
+  .result-chart-scroll { overflow-x: auto; }
+  .result-chart svg { display: block; width: 100%; min-width: 650px; height: auto; font-family: 'PingFang SC', 'PingFangSC-Regular', system-ui, sans-serif; }
+  .result-chart-badges text { fill: #fff; font-size: 11px; font-weight: 600; }
+  .result-chart-dates { fill: #fff; font-size: 16px; font-weight: 600; }
   .back-link { margin-top: 120px; border-top: 1px solid var(--q-line); padding: 36px 0 0; }
   .back-link a { font-size: 18px; } .back-link a:hover { text-decoration: underline; }
 
@@ -562,9 +537,132 @@ const sopSteps = [
     .lane { grid-template-columns: 92px 1fr; gap: 18px; }
     .sop-buttons { grid-template-columns: repeat(4, 1fr); }
     .sop-body { grid-template-columns: 1fr 1fr; }
-    .metrics { grid-template-columns: repeat(3, 1fr); }
-    .result-grid { grid-template-columns: 1.25fr .75fr; }
+    .metrics { grid-template-columns: 1.25fr 1fr 1fr; gap: 36px; }
   }
+  /* finesse · component: role-tabs · tokens: inherited · scope: role module only */
+  .qibao-case .role-tabs {
+    background: transparent; border-radius: 0; overflow: visible;
+    gap: 8px; padding: 0 0 14px; border-bottom: 1px solid var(--q-line);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .qibao-case .role-tabs button {
+    position: relative; min-width: 0; min-height: 48px; padding: 12px 8px;
+    border: 0; border-radius: 8px; color: var(--q-muted); font-size: 15px;
+    font-weight: 500; white-space: nowrap; background: transparent;
+  }
+  .qibao-case .role-tabs button.is-active {
+    background: var(--sunken) !important; color: var(--q-ink) !important;
+  }
+  .qibao-case .role-tabs button.is-active::after {
+    content: ''; position: absolute; bottom: -15px; left: 20%; right: 20%;
+    height: 3px; border-radius: 2px; background: var(--accent);
+  }
+  .qibao-case .role-tabs button:active { transform: translateY(1px); }
+  .qibao-case .role-tabs button:disabled { opacity: .5; cursor: not-allowed; }
+  .qibao-case .role-tabs button:focus-visible {
+    outline: 2px solid var(--q-ink) !important; outline-offset: 3px !important;
+  }
+  @media (hover: hover) {
+    .qibao-case .role-tabs button:not(.is-active):not(:disabled):hover {
+      background: var(--sunken); color: var(--q-ink);
+    }
+  }
+  .qibao-case .role-panels {
+    background: transparent; border: 0; border-radius: 0; overflow: visible;
+  }
+  .qibao-case .role-panel { padding: 28px 0 0; gap: 28px; align-items: start; }
+  .qibao-case .role-panel.is-active { grid-template-columns: minmax(0, 1fr); }
+  .qibao-case .role-text { min-width: 0; }
+  .qibao-case .role-text h3 {
+    font-size: 25px; line-height: 1.45; letter-spacing: -.025em;
+    font-weight: 500; margin: 0 0 16px; text-wrap: pretty;
+  }
+  .qibao-case .role-text > p {
+    font-size: 16px; line-height: 1.9; margin: 0 0 26px; color: var(--q-muted);
+  }
+  .qibao-case .role-text ul { gap: 0; }
+  .qibao-case .role-text li {
+    position: relative; padding: 17px 0 17px 22px; border: 0;
+    border-top: 1px solid var(--q-line); border-radius: 0; background: transparent;
+    font-size: 16px; line-height: 1.8; color: var(--q-ink);
+  }
+  .qibao-case .role-text li::before {
+    content: ''; position: absolute; top: 28px; left: 0;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--q-muted);
+  }
+  .qibao-case .role-figure {
+    min-width: 0; margin: 0; padding: 18px; border-radius: 12px;
+    background: var(--sunken); border: 1px solid var(--q-line);
+  }
+  .qibao-case .role-figure img {
+    display: block; width: 100%; height: auto; max-height: 540px;
+    object-fit: contain; border-radius: 6px; cursor: zoom-in;
+  }
+  .qibao-case .role-figure figcaption {
+    text-align: left; color: var(--q-muted); font-size: 13px !important;
+    line-height: 1.7 !important; margin-top: 14px !important;
+  }
+  @media (min-width: 900px) {
+    .qibao-case .role-tabs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .qibao-case .role-panel { padding-top: 36px; gap: 48px; }
+    .qibao-case .role-panel.is-active { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
+    .qibao-case .role-text h3 { font-size: 28px; }
+    .qibao-case .role-figure { padding: 24px; }
+  }
+  .qibao-case .touchpoint-section { display: flex; flex-direction: column; gap: 64px; padding-block: 128px; background: #fafaf7; font-synthesis: none; }
+  .touchpoint-section .paper-head .eyebrow { gap: 9.6px; }
+  .touchpoint-section .paper-head .eyebrow::before { width: 7.19531px; height: 7.19531px; flex-shrink: 0; background: #d4f84a; box-shadow: 0 0 0 1px #1212112e; }
+  .touchpoint-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .touchpoint-card { display: flex; flex-direction: column; align-items: stretch; gap: 32px; padding: 60px 12px; border-radius: 16px; background: #f2f2ed; text-align: center; }
+  .touchpoint-card .touchpoint-label { margin: 0; font-size: 20px; line-height: 16px; letter-spacing: .08em; font-weight: 500; color: #6a6964; }
+  .touchpoint-card h3 { margin: 0; height: 63px; flex-shrink: 0; font-size: 48px; line-height: 1.3; letter-spacing: 5px; font-weight: 500; color: #121211; }
+  .touchpoint-card .touchpoint-desc { margin: 0; font-size: 18px; line-height: 34px; color: #3b3b38; }
+  .touchpoint-section + .dark-section { margin-top: 0; }
+  @media (max-width: 1000px) { .touchpoint-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 767px) {
+    .qibao-case .touchpoint-section { padding-block: 80px; gap: 40px; }
+    .touchpoint-grid { gap: 16px; }
+    .touchpoint-card { padding: 32px 12px; gap: 20px; }
+    .touchpoint-card h3 { font-size: 32px; letter-spacing: 2px; height: auto; }
+    .touchpoint-card .touchpoint-label { font-size: 16px; }
+    .touchpoint-card .touchpoint-desc { font-size: 15px; line-height: 26px; }
+  }
+  @media (max-width: 359px) { .touchpoint-grid { grid-template-columns: minmax(0, 1fr); } }
+  .qibao-case .journey-paper-head { max-width: 840px; font-synthesis: none; overflow-wrap: anywhere; }
+  .qibao-case .journey-paper-head .eyebrow { gap: 9.6px; font-size: 13px !important; letter-spacing: .78px !important; line-height: 1.6; color: #c7c7bf !important; font-weight: 500; }
+  .qibao-case .journey-paper-head .eyebrow::before { width: 7.19531px; height: 7.19531px; flex-shrink: 0; border-radius: 50%; background: #d4f84a; box-shadow: 0 0 0 1px #525252; rotate: 270deg; }
+  .qibao-case .journey-paper-head h2 { margin-top: 20px; letter-spacing: -.849225px !important; line-height: 1.5 !important; font-weight: 500 !important; color: #fff; text-wrap: balance; }
+  .qibao-case .journey-map { gap: 20px; grid-template-columns: minmax(0, 1fr); }
+  .qibao-case .journey-map li { padding: 22px; border-radius: 20px; background: #ffffff0d; border: 1px solid #ffffff24; }
+  .qibao-case .journey-map b { font-size: 19px; font-weight: 600; line-height: 1.6; margin-bottom: 8px; color: #fff; }
+  .qibao-case .journey-map p { font-size: 14px; line-height: 1.7; color: #c5cedb; text-wrap: pretty; }
+  @media (min-width: 600px) { .qibao-case .journey-map { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1000px) { .qibao-case .journey-map { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .qibao-case .journey-paper-head > p:not(.eyebrow) { margin-top: 22px; font-size: 18px; line-height: 34px; color: #c7c7bf !important; text-wrap: pretty; }
+  @media (min-width: 1000px) { .qibao-case .journey-paper-head h2 { font-size: 48px !important; } }
+  .qibao-case .b-paper-section { display: flex; flex-direction: column; gap: 64px; background: #fafaf7; font-synthesis: none; }
+  .qibao-case .trust-paper-section { width: min(1280px, calc(100% - 40px)); display: flex; flex-direction: column; gap: 64px; padding: 128px 40px 0; background: #fafaf7; font-synthesis: none; }
+  .trust-paper-section .paper-head { max-width: none; }
+  .trust-paper-section .paper-head .eyebrow { gap: 9.6px; color: #6a6964; font-weight: 500; }
+  .trust-paper-section .paper-head .eyebrow::before { width: 7.2px; height: 7.2px; flex-shrink: 0; border-radius: 50%; background: #d4f84a; box-shadow: 0 0 0 1px #1212112e; }
+  .trust-paper-section .paper-head h2 { max-width: 1200px; font-size: clamp(30px, 4vw, 48px); line-height: 1.5; letter-spacing: -1.2px !important; }
+  .trust-paper-section .paper-head > p:not(.eyebrow) { color: #3b3b38; }
+  .trust-paper-gallery { width: 100%; overflow: hidden; border: 1px solid #e6e5df; border-radius: 28px; background: #fff; }
+  .trust-paper-gallery > img, .trust-paper-crop img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+  .trust-paper-crop { width: 100%; aspect-ratio: 1200 / 505; overflow: hidden; }
+  .trust-paper-crop img { width: 100%; }
+  @media (max-width: 767px) { .qibao-case .trust-paper-section { gap: 40px; padding: 80px 0 0; } .trust-paper-gallery { border-radius: 18px; } }
+  .b-paper-section .paper-head h2 { letter-spacing: -1.2px !important; }
+  .b-paper-section .paper-head .eyebrow { gap: 9.6px; }
+  .b-paper-section .paper-head .eyebrow::before { width: 7.19531px; height: 7.19531px; flex-shrink: 0; background: #d4f84a; box-shadow: 0 0 0 1px #1212112e; }
+  .b-paper-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+  .b-paper-cards article { padding: 26px; border-radius: 22px; background: #fff; border: 1px solid #e6e5df; }
+  .b-paper-cards .badge { font-weight: 600; line-height: 1.6; }
+  .b-paper-cards h3 { margin: 16px 0 10px; font-size: 22px; line-height: 1.6; font-weight: 500; color: #121211; text-wrap: balance; }
+  .b-paper-cards p { margin: 0; font-size: 17px; line-height: 1.8; color: #3b3b38; text-wrap: pretty; }
+  .b-paper-images img { display: block; width: 100%; height: auto; border-radius: 20px; cursor: zoom-in; }
+  @media (min-width: 1000px) { .b-paper-section .paper-head h2 { font-size: 48px !important; } }
+  @media (max-width: 767px) { .qibao-case .b-paper-section { gap: 40px; } .b-paper-cards { grid-template-columns: minmax(0, 1fr); } }
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; } .bar, .role-tabs button, .journey-img { transition: none; }
   }

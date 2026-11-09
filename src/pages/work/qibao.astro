@@ -103,8 +103,7 @@ const sopSteps = [
       </nav>
       <h1 class="rise case-title mt-8" style="--rise-step:1">多端协同，提升用户确定感</h1>
       <p class="rise case-lead mt-8" style="--rise-step:2">联动 C 端、B 端、S 端与线下 SOP，把“时间不确定、材料不放心”的服务，重构成用户敢下单、门店能交付、正品可感知的标准化产品</p>
-      <dl class="rise case-meta mt-12" style="--rise-step:3">
-        <div><dt>职责</dt><dd>B端设计 &amp; S端设计</dd></div>
+      <dl class="case-meta-summary">
         <div><dt>设计范围</dt><dd>C 端用户、B 端门店、S 端供应链与运营的多端联动设计</dd></div>
         <div><dt>项目成果</dt><dd>快保单 GMV 86W；NPS 80.1%→83.5%；正品可验知晓率 24%→56%</dd></div>
       </dl>
@@ -390,6 +389,16 @@ const sopSteps = [
   .case-lead { max-width: 52rem; font-size: clamp(17px, 1.8vw, 22px); line-height: 1.8; color: var(--q-muted); }
   .case-meta { display: grid; gap: 28px; padding-block: 32px; border-top: 1px solid var(--q-line); border-bottom: 1px solid var(--q-line); }
   .case-meta dt { font-size: 13px; color: var(--q-muted); } .case-meta dd { margin-top: 8px; line-height: 1.7; }
+  .qibao-case .case-meta-summary {
+    display: grid; grid-template-columns: 1fr; gap: 32px;
+    margin-top: 48px; padding-block: 32px;
+    border-top: 1px solid #e6e5df; border-bottom: 1px solid #e6e5df;
+  }
+  .case-meta-summary dt { font-size: 13px; line-height: 1.6; font-weight: 400; color: #3b3b38; }
+  .case-meta-summary dd { margin: 8px 0 0; font-size: 17px; line-height: 1.8; font-weight: 400; color: #121211; }
+  @media (min-width: 760px) {
+    .qibao-case .case-meta-summary { grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+  }
   .hero-panel { background: transparent; border-radius: 0; padding: 0; margin: 0; text-align: center; }
   .hero-panel img { display: block; width: 100%; height: auto; border-radius: 14px; margin-inline: auto; }
   .story-section { padding-top: 140px; }

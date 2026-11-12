@@ -5,65 +5,13 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 const a = (name: string) => `/dashboard-case/${name}.jpg`;
 
 const decisions = [
-  {
-    key: 'axis',
-    tab: '坐标轴',
-    title: '标签不再挤成一条线',
-    problem: '轴标签被遮挡或过度旋转，读者很难快速找到对应信息。',
-    choice: '时间轴采用抽样展示；分类轴支持纵排与旋转，根据数据情况调整标签策略。',
-    trade: '时间抽样减少拥挤，但不再显示所有标签；分类轴则需要兼顾完整文字和可用空间。',
-    image: a('轴标签对照'),
-    alt: '时间抽样与分类轴标签策略的前后对照原稿',
-    caption: '时间抽样 + 分类轴纵排 / 旋转',
-  },
-  {
-    key: 'label',
-    tab: '数据标签',
-    title: '让信息与背景拉开距离',
-    problem: '标签颜色看不清、彼此重叠，长内容又容易被截断。',
-    choice: '根据图元颜色智能反色；采用先占位先绘制策略，必要时隐藏部分标签；长内容自动换行。',
-    trade: '优先保证可读，不强行显示每一个标签；标签与数据图形之间保留足够辨识度。',
-    image: a('标签对照'),
-    alt: '数据标签智能反色、局部隐藏与自动换行对照原稿',
-    caption: '智能反色、局部隐藏与自动换行',
-  },
-  {
-    key: 'width',
-    tab: '图元宽度',
-    title: '数据变多变少，秩序仍然成立',
-    problem: '极多与极少数据让图元过细或过粗，同一仪表盘里的图表显得不协调。',
-    choice: '结合仪表盘排布，设置图元宽度档位和范围，而不是所有场景都用同一固定宽度。',
-    trade: '宽度档位优先适应数据和视觉均衡，不追求所有图表拥有完全相同的柱宽。',
-    image: a('图元对照'),
-    alt: '固定宽度与宽度档位方案对照原稿',
-    caption: '从固定宽度到宽度档位',
-  },
-  {
-    key: 'tip',
-    tab: '提示信息',
-    title: '提示框不该比数据更抢眼',
-    problem: '提示位置左右晃动；用户想看总计和更多明细时，现有信息又不够。',
-    choice: '明确提示框与鼠标的位置关系，仅在视窗边缘和图表交界触发位置切换；支持自定义提示内容。',
-    trade: '稳定位置与边界避让并存；自定义内容增加场景适配能力，不把所有信息强塞进默认提示框。',
-    image: a('提示信息对照'),
-    alt: '提示框位置规范与自定义内容对照原稿',
-    caption: '位置规范与自定义提示内容',
-  },
+  { key: 'axis', tab: '坐标轴', alt: '时间抽样与分类轴标签策略' },
+  { key: 'label', tab: '数据标签', alt: '数据标签反色、避让与换行' },
+  { key: 'width', tab: '图元展示', alt: '图元宽度档位对照' },
+  { key: 'tip', tab: '提示信息', alt: '提示框位置与自定义内容' },
 ];
 
-const inspects = [
-  { key: 'metrics', title: '核心指标：先交代构成', desc: '核心指标用“总计 = 质量 + 体验”的构成关系组织，帮助读者先建立整张仪表盘的理解框架。', short: '用异形、重色与加法关系明确拆解思路' },
-  { key: 'trend', title: '趋势：让总体和局部关联', desc: '趋势图采用双轴展示，颜色关联总体与模块，让读者看清变化趋势与构成关系。', short: '双轴图配合一致的颜色关系' },
-  { key: 'rank', title: '排行：先给读者关键线索', desc: '热门反馈从条形图改成排行榜，并突出结论性信息。读者先找到需要关注的线索，再向维度分析深入。', short: '把条形图改为排行榜，突出结论性信息' },
-  { key: 'visual', title: '行业表达：从汽车语言提炼', desc: '头部、指标卡和容器提炼汽车行业的流线、几何与简洁特征。全局图表加强存在感，重复的分维度图表保持轻量。', short: '流线、几何与简洁图形贯穿头部和容器' },
-];
-
-const scoreRows = [
-  { name: '清晰度', before: 6.7, after: 8.1 },
-  { name: '易读性', before: 6.5, after: 7.9 },
-  { name: '美观度', before: 7.0, after: 7.7 },
-  { name: '流畅度', before: 7.2, after: 8.0 },
-];
+const demoTabs = ['头部氛围', '指标卡设计', '提取行业特征', '4类仪表盘输出'];
 ---
 
 <BaseLayout
@@ -72,206 +20,309 @@ const scoreRows = [
   type="article"
   closing={false}
 >
-  <article class="dash-case">
-    <header class="shell pt-12 sm:pt-16">
-      <nav aria-label="面包屑" class="rise text-sm text-muted">
-        <a href="/">作品案例</a> <span aria-hidden="true"> / </span>
-        <span class="text-ink">仪表盘优化专项</span>
-      </nav>
-      <p class="rise kicker mt-12" style="--rise-step:1">图表设计 / 数据体验</p>
-      <h1 class="rise case-title mt-6" style="--rise-step:2">好看的图表，只是第一步</h1>
-      <p class="rise case-lead mt-8" style="--rise-step:3">客户说“看不清”，售前却需要“讲得清”。我从这些模糊的反馈出发，和团队一起建立评估标准、优化图表，再把散乱的仪表盘重组为有层次、有行业辨识度的产品演示。</p>
-      <dl class="rise case-meta mt-12" style="--rise-step:4">
-        <div><dt>我的角色</dt><dd>项目设计负责人：图表体验梳理、评估体系搭建与 Demo 设计优化</dd></div>
-        <div><dt>核心工作</dt><dd>图表治理（92 个问题自查、四维评估）/ 商业仪表盘 Demo 重构</dd></div>
-        <div><dt>项目成果</dt><dd>图表整体评分 6.8 → 7.9（+16.2%）；多主题 Demo 获“超出预期”评价</dd></div>
+  <article class="case-media-hover dash-case">
+    <header class="shell case-header">
+      <div class="flex flex-col items-start">
+        <nav aria-label="面包屑" class="case-header-breadcrumb rise">
+          <a href="/">作品案例</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">仪表盘优化专项</span>
+        </nav>
+        <h1 class="case-title text-balance self-stretch case-header-title rise" style="--rise-step: 2">
+          让图表更好读，让仪表盘讲清业务
+        </h1>
+      </div>
+      <p class="text-pretty case-header-intro rise" style="--rise-step: 3">
+        客户说“看不清”，售前却需要“讲得清”。从模糊的反馈出发，建立评估标准、优化图表，再把散乱的仪表盘重组为有层次、有行业辨识度的产品演示
+      </p>
+      <dl class="dashboard-meta case-header-meta rise" style="--rise-step: 4">
+        <div>
+          <dt>我的职责</dt>
+          <dd>项目设计 Owner</dd>
+        </div>
+        <div>
+          <dt>工作范围</dt>
+          <dd>
+            <ul role="list">
+              <li>根据实际场景，解决图表展示问题，全方位提升图表视觉效果</li>
+              <li>根据产品销售策略，结合目标行业特征，定向优化仪表盘demo</li>
+            </ul>
+          </dd>
+        </div>
+        <div>
+          <dt>项目结果</dt>
+          <dd>
+            <ul role="list">
+              <li>图表整体评分 6.8 → 7.9（+16.2%）</li>
+              <li>作为学习材料供81.4%的新用户学习</li>
+            </ul>
+          </dd>
+        </div>
       </dl>
     </header>
 
-    <div class="shell mt-14">
-      <figure class="hero-panel">
-        <img src={a('汽车反馈成品')} width="1500" height="844" alt="优化后的汽车用户反馈仪表盘" fetchpriority="high" data-lightbox />
-        <figcaption>从零散展示，到逐层阅读的汽车用户反馈仪表盘</figcaption>
-      </figure>
-    </div>
-
-    <!-- 01 问题 -->
-    <section class="shell story-section reveal" aria-labelledby="problem-title">
+    <section class="shell story-section reveal problem-section" aria-labelledby="problem-title">
       <div class="story-copy">
-        <p class="eyebrow">01 / 从反馈切入</p>
-        <h2 id="problem-title">问题不是“还不够漂亮”，而是信息没有被读懂</h2>
-        <p>这是一个报表产品。商业售卖中，客户反复提到图表残缺、模糊、挤在一起，但这些词无法直接变成设计任务；另一端，售前 Demo 缺少故事线与行业特征，也难以有效展示产品能力。</p>
+        <p class="eyebrow">01 / 背景与问题</p>
+        <h2 id="problem-title">客户看不清图表，售前讲不清业务</h2>
+        <p>
+          商业售卖中，客户反复提到图表残缺、模糊、挤在一起，但这些词无法直接变成设计任务；另一端，售前 Demo
+          缺少故事线与行业特征，也难以有效展示产品能力
+        </p>
       </div>
-      <blockquote class="pull-quote">“阅读性很低、有残缺、很糊、坨在一起……”</blockquote>
-      <div class="two-layers">
-        <article><span class="layer-tag">图表层 · 先让信息可读</span><p>轴标签、数据标签、图元宽度、提示信息——先解决单张图表能否准确传达信息。</p></article>
-        <article><span class="layer-tag">页面层 · 再让业务可理解</span><p>故事线、视觉层次、行业表达——再解决整张仪表盘能否带着读者理解业务。</p></article>
-      </div>
-      <figure class="shot-panel">
-        <img src="/dashboard-case/dashboard-hd-02.jpg" width="1920" height="1080" alt="客户反馈与售前演示的两类问题原稿" loading="lazy" data-lightbox />
-        <figcaption>客户反馈与售前演示，是两类需要分开处理的问题</figcaption>
-      </figure>
-      <div class="role-boundary">
-        <h3>我负责设计推进，标准与落地由团队共同完成</h3>
-        <div class="boundary-grid">
-          <p><b>我的责任边界：</b>围绕实际场景识别设计机会，推进图表体验问题梳理、评估体系搭建与 Demo 的设计优化。</p>
-          <p><b>团队共同工作：</b>业务、产品、研发和设计共同讨论评估标准，结合图表能力、场景需求与测试反馈协作落实。评估体系与项目结果不归为个人独立成果。</p>
-        </div>
+      <div class="problem-images">
+        <img
+          src="/dashboard-case/problem-01.png"
+          width="3840"
+          height="2160"
+          alt="图表展示问题"
+          loading="lazy"
+          data-lightbox
+        />
+        <img
+          src="/dashboard-case/problem-02.png"
+          width="3840"
+          height="2160"
+          alt="售前仪表盘 Demo 的问题"
+          loading="lazy"
+          data-lightbox
+        />
       </div>
     </section>
 
-    <!-- 02 标准 -->
-    <section class="shell story-section reveal" aria-labelledby="standard-title">
+    <section class="shell story-section reveal problem-section" aria-labelledby="standard-title">
       <div class="story-copy">
-        <p class="eyebrow">02 / 把感受变成标准</p>
-        <h2 id="standard-title">先对“好图表”形成共同判断</h2>
-        <p>如果团队只说“更清楚一点”，优化就很难被验证。我们从体验自查和专家讨论中，把图表表现拆成可描述的维度，再关联到具体影响因素，让每一次改动都能解释为什么。</p>
+        <p class="eyebrow">02 / 评估标准和高优问题</p>
+        <h2 id="standard-title">建立评估标准，明确优化重点</h2>
+        <p>
+          通过体验自查和专家讨论，把图表表现拆成可描述的维度，再关联到具体影响因素；之后结合用户反馈与评估结果，聚焦轴标签、数据标签、图元展示和提示信息四类高优问题
+        </p>
       </div>
-      <ol class="path">
-        <li><b>场景自查</b><p>走查正常、极少、极多数据场景，按组件构成整理并提取共性问题。</p></li>
-        <li><b>共同定义标准</b><p>邀请业务、产品、研发、设计专家，经三版迭代，围绕设计目的与影响因素建立体系。</p></li>
-        <li><b>聚焦优先问题</b><p>综合客户反馈、设计自查与图表评估，把关注点收敛为四类高优问题。</p></li>
-      </ol>
-      <div class="fact-grid">
-        <div class="fact"><strong>92</strong><span>自查发现的图表问题</span></div>
-        <div class="fact"><strong>12</strong><span>参与讨论的图表专家</span></div>
-        <div class="fact"><strong>3 版</strong><span>评估体系迭代</span></div>
-        <div class="fact"><strong>4 维度</strong><span>清晰度 / 美观度 / 易读性 / 流畅度</span></div>
+      <div class="problem-images">
+        <img
+          src="/dashboard-case/standard-01.png"
+          width="3840"
+          height="2160"
+          alt="图表评估标准"
+          loading="lazy"
+          data-lightbox
+        />
+        <img
+          src="/dashboard-case/standard-02.png"
+          width="3840"
+          height="2160"
+          alt="四类高优图表问题"
+          loading="lazy"
+          data-lightbox
+        />
       </div>
-      <details class="source-details">
-        <summary>看评估体系与原始依据</summary>
-        <figure class="shot-panel"><img src="/dashboard-case/dashboard-hd-04.jpg" width="1920" height="1080" alt="评估维度与影响因素原稿" loading="lazy" data-lightbox /><figcaption>评估维度与影响因素</figcaption></figure>
-        <p class="metric-note">逐字稿明确清晰度权重为 40%，其他权重未提供，因此不补造完整权重分布；原稿第 5 页的问题比例缺少统计样本口径，不作为新增量化结论展示。</p>
-      </details>
     </section>
 
     <!-- 03 四个决策 -->
-    <section class="shell story-section reveal" aria-labelledby="decision-title">
+    <section class="shell story-section reveal problem-section" aria-labelledby="decision-title">
       <div class="story-copy">
-        <p class="eyebrow">03 / 让图表适应真实数据</p>
-        <h2 id="decision-title">不是多给几个开关，而是少让用户手动调整</h2>
-        <p>四类问题背后有一个共同点：数据条件变化时，原有展示规则失效。方向是把常见场景的处理变成系统策略，同时保留必要的场景弹性。点击各项查看真实对照。</p>
+        <p class="eyebrow">03 / 图表优化</p>
+        <h2 id="decision-title">让图表自动适应真实数据</h2>
+        <p>
+          四类问题背后有一个共同点：数据条件变化时，原有展示规则失效。方向是把常见场景的处理变成系统策略，同时保留必要的场景弹性
+        </p>
       </div>
-      <div class="decision-tabs" data-decision-tabs role="tablist" aria-label="四项图表设计决策">
-        {decisions.map((d, i) => (
-          <button type="button" role="tab" id={`dash-decision-tab-${d.key}`} aria-controls={`dash-decision-panel-${d.key}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} class={i === 0 ? 'is-active' : ''} data-decision-key={d.key}>{d.tab}</button>
-        ))}
-      </div>
-      {decisions.map((d, i) => (
-        <div class={`decision-panel${i === 0 ? ' is-active' : ''}`} id={`dash-decision-panel-${d.key}`} role="tabpanel" aria-labelledby={`dash-decision-tab-${d.key}`} aria-hidden={i === 0 ? 'false' : 'true'} data-decision-panel={d.key}>
-          <div class="decision-text">
-            <h3>{d.title}</h3>
-            <p class="dp"><b>问题</b>{d.problem}</p>
-            <p class="dp"><b>设计选择</b>{d.choice}</p>
-            <p class="dp trade"><b>为什么这样取舍</b>{d.trade}</p>
-          </div>
-          <figure class="decision-figure"><img src={d.image} alt={d.alt} loading="lazy" data-lightbox /><figcaption>{d.caption}</figcaption></figure>
+      <div class="decision-gallery">
+        <div class="decision-tabs" data-decision-tabs role="tablist" aria-label="四项图表设计决策">
+          {decisions.map((d, i) => (
+            <button
+              type="button"
+              role="tab"
+              id={`dash-decision-tab-${d.key}`}
+              aria-controls={`dash-decision-panel-${d.key}`}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              tabindex={i === 0 ? 0 : -1}
+              class={i === 0 ? 'is-active' : ''}
+              data-decision-key={d.key}
+            >
+              {d.tab}
+            </button>
+          ))}
         </div>
-      ))}
-    </section>
-
-    <!-- 04 Demo 故事 -->
-    <section class="dark-section" aria-labelledby="story-title">
-      <div class="shell story-section reveal">
-        <div class="story-copy on-dark">
-          <p class="eyebrow">04 / 从组件走向业务故事</p>
-          <h2 id="story-title">图表变清楚之后，还需要一条阅读路径</h2>
-          <p>汽车用户反馈 Demo 的目标，是监控反馈数据、为产品优化提供依据。原来的图表各自成立，但组合起来缺少顺序。我们先理解主题、目的与核心指标，再把内容重组为逐层下钻的结构。</p>
+        <div class="decision-viewport">
+          {decisions.map((d, i) => (
+            <div
+              class:list={['decision-panel', { 'is-active': i === 0 }]}
+              id={`dash-decision-panel-${d.key}`}
+              role="tabpanel"
+              aria-labelledby={`dash-decision-tab-${d.key}`}
+              aria-hidden={i !== 0}
+              data-decision-panel={d.key}
+            >
+              <img
+                src={`/dashboard-case/decision-0${i + 1}.png`}
+                width="3840"
+                height="2160"
+                alt={d.alt}
+                loading="lazy"
+                data-lightbox
+              />
+            </div>
+          ))}
         </div>
-        <ol class="path on-dark">
-          <li><b>先看大盘</b><p>从核心指标和变化趋势，知道整体发生了什么。</p></li>
-          <li><b>再找差异</b><p>用热门反馈与分维度分析，缩小需要关注的范围。</p></li>
-          <li><b>最后看明细</b><p>回到具体反馈，继续查找业务细节。</p></li>
-        </ol>
-        <figure class="shot-panel on-dark">
-          <img src="/dashboard-case/dashboard-hd-13.jpg" width="1920" height="1080" alt="从杂乱动线到逐层下钻的阅读结构原稿" loading="lazy" data-lightbox />
-          <figcaption class="on-dark">从杂乱动线，到逐层下钻的阅读结构</figcaption>
-        </figure>
-
-        <div class="inspect-head">
-          <h3>点击一个设计切入点，把“变好看”说具体</h3>
-          <p>视觉设计集中在最影响第一印象与阅读效率的地方：核心指标、趋势与排行，以及头部、指标卡、容器。不是每个组件都装饰，而是按信息重要性分配视觉重量。</p>
-        </div>
-        <div class="inspect">
-          <figure class="shot-panel on-dark inspect-figure">
-            <img src={a('汽车反馈成品')} width="1500" height="844" alt="汽车用户反馈仪表盘成品，可点击放大" loading="lazy" data-lightbox />
-            <figcaption class="on-dark">汽车用户反馈仪表盘成品</figcaption>
-          </figure>
-          <div class="inspect-controls" role="group" aria-label="设计切入点">
-            {inspects.map((it, i) => (
-              <button type="button" class={i === 0 ? 'is-active' : ''} aria-pressed={i === 0 ? 'true' : 'false'} data-inspect-key={it.key} data-inspect-desc={it.desc}>
-                <b>{it.title}</b><span>{it.short}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-        <p class="inspect-desc on-dark" id="dash-inspect-desc" aria-live="polite">{inspects[0].desc}</p>
-
-        <div class="header-compare">
-          <figure class="shot-panel on-dark"><img src={a('头部优化前')} alt="头部优化前：仅有标题" loading="lazy" data-lightbox /><figcaption class="on-dark">头部优化前：仅有标题，缺少整体氛围</figcaption></figure>
-          <figure class="shot-panel on-dark"><img src={a('头部优化后')} alt="头部优化后：字体、图形、氛围共同组织" loading="lazy" data-lightbox /><figcaption class="on-dark">头部优化后：字体、图形、氛围共同组织</figcaption></figure>
-        </div>
-        <details class="source-details on-dark-details">
-          <summary>看指标卡、容器与行业语言的细节设计</summary>
-          <div class="detail-pair">
-            <figure class="shot-panel on-dark"><img src={a('指标卡')} alt="信息层级与 mini 环图原稿" loading="lazy" data-lightbox /><figcaption class="on-dark">指标卡：信息层级与 mini 环图</figcaption></figure>
-            <figure class="shot-panel on-dark"><img src={a('容器设计')} alt="图表容器视觉语言原稿" loading="lazy" data-lightbox /><figcaption class="on-dark">容器：全局图表强化，分维度图表轻量修饰</figcaption></figure>
-          </div>
-          <figure class="shot-panel on-dark"><img src={a('行业语言')} alt="汽车行业元素提炼原稿" loading="lazy" data-lightbox /><figcaption class="on-dark">从汽车行业的流线、几何与简洁特征提炼界面语言</figcaption></figure>
-        </details>
       </div>
     </section>
 
     <!-- 05 验证 -->
-    <section class="shell story-section reveal" aria-labelledby="result-title">
+    <section class="shell story-section reveal problem-section" aria-labelledby="result-title">
       <div class="story-copy">
-        <p class="eyebrow">05 / 回到同一套标准验证</p>
-        <h2 id="result-title">有没有变好，不只靠设计师判断</h2>
-        <p>使用真实数据在原环境和测试环境搭建对照看板，先让用户比较差异，再收集维度评分与影响因素。评分用于验证当前改善，问题提及频率则继续指导后续优先级。</p>
+        <p class="eyebrow">04 / 图表效果</p>
+        <h2 id="result-title">用同一套标准验证优化效果</h2>
+        <p>
+          使用真实数据在原环境和测试环境搭建对照看板，先让用户比较差异，再收集维度评分与影响因素。评分用来比较各维度的改善。仍被至少
+          20% 的参与者提及的问题，继续按图表组件和评分维度归类，作为后续迭代的依据
+        </p>
       </div>
-      <div class="result-grid">
-        <div class="score-board">
-          <div class="result-title">+16.2%</div>
-          <p class="result-sub">24 位测试样本、1 对 1 访谈；图表整体平均分从 <b>6.8 提升至 7.9</b>。</p>
-          <div class="score-list">
-            {scoreRows.map((row) => (
-              <div class="score-row">
-                <span class="score-name">{row.name}</span>
-                <div class="score-track" aria-label={`${row.name}优化前${row.before}，优化后${row.after}`}>
-                  <span class="score-before" style={`width:${row.before * 10}%`}></span>
-                  <span class="score-after" style={`width:${row.after * 10}%`}></span>
-                </div>
-                <span class="score-val">{row.before} → {row.after}</span>
+      <div class="problem-images result-images">
+        <img
+          src="/dashboard-case/result-01.png"
+          width="3840"
+          height="2160"
+          alt="图表效果验证，图一"
+          loading="lazy"
+          data-lightbox
+        />
+        <img
+          src="/dashboard-case/result-02.png"
+          width="3840"
+          height="2160"
+          alt="图表效果验证，图二"
+          loading="lazy"
+          data-lightbox
+        />
+      </div>
+    </section>
+
+    <section class="dark-section demo-section" aria-labelledby="story-title">
+      <div class="shell story-section problem-section">
+        <div class="story-copy on-dark">
+          <p class="eyebrow">05 / 售前 Demo 重构</p>
+          <h2 id="story-title">梳理故事线：看趋势-找差异-查明细</h2>
+          <p>
+            先明确看板主题、使用目的和核心指标，再将分散的图表按 “大盘趋势 — 维度对比 — 明细查询”
+            重新组织，形成逐层深入的阅读路径，让售前演示能围绕业务问题展开，而不只是逐个介绍图表功能
+          </p>
+        </div>
+        <ol class="demo-steps">
+          {['重构故事线', '提升视觉效果', '融合行业特征'].map((step, index) => (
+            <li>
+              <span>0{index + 1}</span> {step}
+            </li>
+          ))}
+        </ol>
+        <div class="problem-images result-images demo-images">
+          <img
+            src="/dashboard-case/demo-story-01.png"
+            width="3840"
+            height="2160"
+            alt="售前 Demo 故事线梳理"
+            loading="lazy"
+            data-lightbox
+          />
+          <img
+            src="/dashboard-case/demo-story-02.png"
+            width="3840"
+            height="2160"
+            alt="售前 Demo 阅读路径重构"
+            loading="lazy"
+            data-lightbox
+          />
+        </div>
+        <div class="demo-visual">
+          <h3>视觉效果+行业特征</h3>
+          <p>
+            在理顺故事线的基础上，重点优化头部、指标卡与图表容器，并融入行业视觉特征，在突出核心数据的同时，让 Demo
+            更贴合目标行业的演示场景
+          </p>
+        </div>
+        <div class="decision-gallery">
+          <div class="decision-tabs" data-decision-tabs role="tablist" aria-label="视觉效果与行业特征">
+            {demoTabs.map((tab, i) => (
+              <button
+                type="button"
+                role="tab"
+                id={`demo-tab-${i}`}
+                aria-controls={`demo-panel-${i}`}
+                aria-selected={i === 0}
+                tabindex={i === 0 ? 0 : -1}
+                data-decision-key={String(i)}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+          <div class="decision-viewport">
+            {demoTabs.map((tab, i) => (
+              <div
+                class:list={['decision-panel', { 'is-active': i === 0 }]}
+                id={`demo-panel-${i}`}
+                role="tabpanel"
+                aria-labelledby={`demo-tab-${i}`}
+                aria-hidden={i !== 0}
+                data-decision-panel={String(i)}
+              >
+                <img
+                  src={`/dashboard-case/demo-visual-0${i + 1}.png`}
+                  width="3840"
+                  height="2160"
+                  alt={tab}
+                  loading="lazy"
+                  data-lightbox
+                />
               </div>
             ))}
           </div>
-          <p class="score-key">灰色：优化前　蓝色：优化后　·　四维度共用 0–10 分刻度</p>
         </div>
-        <aside class="business-stats">
-          <div><strong>超出预期</strong><p>多主题 Demo 产出在双月总结中获得项目团队评价。</p></div>
-          <div><strong>1600+</strong><p>学习 Demo 材料的用户；原稿记录，未作为签单增长证明。</p></div>
-          <div><strong>220+</strong><p>完成学习和看板搭建；采用本轮确认口径。</p></div>
-        </aside>
       </div>
-      <p class="metric-note">这里能证明的是图表体验评分改善和 Demo 的学习使用反馈，不能据此推导签单率、营收或转化率提升。16.2% 按 (7.9 − 6.8) ÷ 6.8 计算并保留一位小数。</p>
-      <div class="principle">
-        <span>长期价值</span>
-        <p>让一次优化，成为后续可复用的起点：整理图表组件、通用元素与使用说明书供各业务线取用。评估体系负责持续发现问题，设计规范负责减少重复解决问题。</p>
-      </div>
-      <details class="source-details">
-        <summary>看验证过程与图表规范沉淀</summary>
-        <div class="detail-pair">
-          <figure class="shot-panel"><img src="/dashboard-case/dashboard-hd-10.jpg" width="1920" height="1080" alt="数据收集与结果分析原稿" loading="lazy" data-lightbox /><figcaption>数据收集与结果分析</figcaption></figure>
-          <figure class="shot-panel"><img src="/dashboard-case/dashboard-hd-11.jpg" width="1920" height="1080" alt="图表组件和使用说明原稿" loading="lazy" data-lightbox /><figcaption>图表组件和使用说明书</figcaption></figure>
-        </div>
-      </details>
     </section>
 
-    <div class="shell back-link"><a href="/">返回作品集 <span aria-hidden="true">↗</span></a></div>
+    <section class="shell story-section reveal outcome-section" aria-labelledby="adoption-title">
+      <div class="story-copy">
+        <p class="eyebrow">06 / 项目成果</p>
+        <h2 id="adoption-title">售前演示也成了用户的学习范例</h2>
+        <p>多主题 Demo 上线后，用户可以参考这些范例学习如何组织数据、搭建自己的看板</p>
+      </div>
+      <aside class="business-stats">
+        <div>
+          <strong>超出预期</strong>
+          <p>多主题 Demo 产出在双月总结中获得项目团队“超出预期”的评价</p>
+        </div>
+        <div>
+          <strong>1600+</strong>
+          <p>学习 Demo 材料的用户</p>
+        </div>
+        <div>
+          <strong>220+</strong>
+          <p>完成学习和看板搭建的用户</p>
+        </div>
+      </aside>
+      <img
+        class="outcome-image"
+        src="/dashboard-case/outcome-05.png"
+        width="3840"
+        height="2160"
+        alt="项目成果与用户学习反馈"
+        loading="lazy"
+        data-lightbox
+      />
+    </section>
+
+    <div class="shell back-link">
+      <a href="/">
+        返回作品集 <span aria-hidden="true">↗</span>
+      </a>
+    </div>
   </article>
 
   <div class="dash-lightbox" id="dash-lightbox" aria-hidden="true">
-    <button type="button" class="dash-lightbox-close" id="dash-lightbox-close" aria-label="关闭">×</button>
+    <button type="button" class="dash-lightbox-close" id="dash-lightbox-close" aria-label="关闭">
+      ×
+    </button>
     <div class="dash-lightbox-body" id="dash-lightbox-body"></div>
   </div>
 </BaseLayout>
@@ -284,8 +335,23 @@ const scoreRows = [
       // 四项图表设计决策切换
       document.querySelectorAll<HTMLElement>('[data-decision-tabs]').forEach(function (tablist) {
         var tabs = Array.from(tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
-        var panels = Array.from(document.querySelectorAll<HTMLElement>('[data-decision-panel]'));
-        function activate(key: string) {
+        var panels = Array.from(
+          tablist.closest('.decision-gallery')!.querySelectorAll<HTMLElement>('[data-decision-panel]'),
+        );
+        let request = 0;
+        let animations: Animation[] = [];
+        async function activate(key: string) {
+          const token = ++request;
+          const incoming = panels.find((panel) => panel.dataset.decisionPanel === key);
+          if (!incoming || incoming.classList.contains('is-active')) return;
+          await incoming
+            .querySelector('img')
+            ?.decode()
+            .catch(() => {});
+          if (token !== request) return;
+          const outgoing = panels.find((panel) => panel.classList.contains('is-active'));
+          animations.forEach((animation) => animation.cancel());
+          animations = [];
           tabs.forEach(function (tab) {
             var selected = tab.dataset.decisionKey === key;
             tab.setAttribute('aria-selected', String(selected));
@@ -297,30 +363,39 @@ const scoreRows = [
             panel.classList.toggle('is-active', selected);
             panel.setAttribute('aria-hidden', String(!selected));
           });
+          if (!outgoing || reduce.matches) return;
+          const direction = panels.indexOf(incoming) > panels.indexOf(outgoing) ? 1 : -1;
+          const options = { duration: 520, easing: 'cubic-bezier(0.25, 0.8, 0.25, 1)' };
+          animations = [
+            outgoing.animate(
+              [
+                { transform: 'translateX(0)', visibility: 'visible' },
+                { transform: `translateX(${-direction * 100}%)`, visibility: 'visible' },
+              ],
+              options,
+            ),
+            incoming.animate(
+              [{ transform: `translateX(${direction * 100}%)` }, { transform: 'translateX(0)' }],
+              options,
+            ),
+          ];
         }
         tabs.forEach(function (tab, index) {
-          tab.addEventListener('click', function () { activate(tab.dataset.decisionKey || ''); });
+          tab.addEventListener('click', function () {
+            activate(tab.dataset.decisionKey || '');
+          });
           tab.addEventListener('keydown', function (event) {
             if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
             event.preventDefault();
-            var next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+            var next =
+              event.key === 'Home'
+                ? 0
+                : event.key === 'End'
+                  ? tabs.length - 1
+                  : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
             activate(tabs[next].dataset.decisionKey || '');
             tabs[next].focus();
           });
-        });
-      });
-
-      // 仪表盘设计切入点
-      var inspectButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-inspect-key]'));
-      var inspectDesc = document.getElementById('dash-inspect-desc');
-      inspectButtons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          inspectButtons.forEach(function (b) {
-            var selected = b === btn;
-            b.classList.toggle('is-active', selected);
-            b.setAttribute('aria-pressed', String(selected));
-          });
-          if (inspectDesc) inspectDesc.textContent = btn.dataset.inspectDesc || '';
         });
       });
 
@@ -328,7 +403,12 @@ const scoreRows = [
       var box = document.getElementById('dash-lightbox');
       var bodyEl = document.getElementById('dash-lightbox-body');
       var closeBtn = document.getElementById('dash-lightbox-close');
-      function closeBox() { if (!box || !bodyEl) return; box.classList.remove('is-open'); box.setAttribute('aria-hidden', 'true'); bodyEl.innerHTML = ''; }
+      function closeBox() {
+        if (!box || !bodyEl) return;
+        box.classList.remove('is-open');
+        box.setAttribute('aria-hidden', 'true');
+        bodyEl.innerHTML = '';
+      }
       document.querySelectorAll<HTMLImageElement>('[data-lightbox]').forEach(function (img) {
         img.style.cursor = 'zoom-in';
         img.addEventListener('click', function () {
@@ -343,20 +423,35 @@ const scoreRows = [
         });
       });
       if (closeBtn) closeBtn.addEventListener('click', closeBox);
-      if (box) box.addEventListener('click', function (e) { if (e.target === box) closeBox(); });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeBox(); });
+      if (box)
+        box.addEventListener('click', function (e) {
+          if (e.target === box) closeBox();
+        });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeBox();
+      });
 
       // 滚动揭示
       var revealEls = Array.from(document.querySelectorAll('.reveal'));
       if (!reduce.matches && 'IntersectionObserver' in window) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
-          });
-        }, { threshold: 0.1 });
-        revealEls.forEach(function (el) { io.observe(el); });
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+        revealEls.forEach(function (el) {
+          io.observe(el);
+        });
       } else {
-        revealEls.forEach(function (el) { el.classList.add('in'); });
+        revealEls.forEach(function (el) {
+          el.classList.add('in');
+        });
       }
     } catch (error) {
       console.error(error);
@@ -365,124 +460,748 @@ const scoreRows = [
 </script>
 
 <style>
-  :global(body), :global(body *) { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; }
-  .dash-case { --d-ink:#142036; --d-muted:#57647a; --d-accent:#1555df; --d-deep:#0b1424; --d-line:#d5dce6; --d-paper:#f5f7fa; padding-bottom: 96px; }
-  .dash-case .shell { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
-  .dash-case .kicker { color: var(--d-accent); font-size: 13px; letter-spacing: .14em; font-weight: 700; }
-  .case-title { font-size: clamp(38px, 5.6vw, 70px); line-height: 1.08; letter-spacing: -.04em; font-weight: 650; }
-  .case-lead { max-width: 50rem; font-size: clamp(17px, 1.8vw, 22px); line-height: 1.8; color: var(--d-muted); }
-  .case-meta { display: grid; gap: 28px; padding-block: 32px; border-top: 1px solid var(--d-line); border-bottom: 1px solid var(--d-line); }
-  .case-meta dt { font-size: 13px; color: var(--d-muted); } .case-meta dd { margin-top: 8px; line-height: 1.7; }
-  .hero-panel { margin: 0; background: #e6eefc; border-radius: 20px; padding: 32px; text-align: center; }
-  .hero-panel img { max-width: 100%; height: auto; border-radius: 12px; margin-inline: auto; box-shadow: 0 20px 35px rgba(23,55,91,.15); }
-  .hero-panel figcaption { margin-top: 16px; color: #345171; font-size: 14px; }
+  /* finesse · register=brand · existing portfolio palette · editorial case */
+  .dash-case .story-copy .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9.6px;
+    color: var(--muted);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #d4f84a;
+  }
+  .dash-case .dark-section {
+    background: #1e1f20;
+  }
+  .demo-section .decision-gallery,
+  .demo-section .demo-images,
+  .demo-steps li {
+    background: #2a2b2c;
+    border-color: #444544;
+  }
+  .demo-section .decision-tabs button {
+    color: #fafaf7;
+    border-color: #666764;
+  }
+  .demo-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    margin: 48px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .demo-steps li {
+    position: relative;
+    padding: 24px 12px;
+    border: 1px solid #444544;
+    border-radius: 24px;
+    text-align: center;
+    color: #fafaf7;
+    font-size: 18px;
+  }
+  .demo-steps li:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    left: 100%;
+    width: 24px;
+    color: #c7c7bf;
+  }
+  .demo-steps li span {
+    color: #d4f84a;
+  }
+  .demo-section .demo-images {
+    margin-top: 20px;
+  }
+  .demo-visual {
+    margin-top: 64px;
+  }
+  .demo-visual h3 {
+    color: #fafaf7;
+    font-size: clamp(26px, 4vw, 34px);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .demo-visual p {
+    max-width: 900px;
+    margin-top: 12px;
+    color: #c7c7bf;
+    font-size: 17px;
+    line-height: 1.85;
+  }
+  .demo-section .decision-gallery {
+    margin-top: 32px;
+  }
+  @media (max-width: 599px) {
+    .demo-steps {
+      grid-template-columns: 1fr;
+    }
+    .demo-steps li:not(:last-child)::after {
+      content: '↓';
+      left: calc(50% - 12px);
+      top: 100%;
+    }
+  }
+  .dash-case .dark-section .eyebrow {
+    color: #c7c7bf !important;
+  }
+  .dash-case .chart-results {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .dash-case .business-stats {
+    margin-top: 36px;
+  }
+  .dash-case .business-stats > div {
+    background: var(--surface);
+  }
+  @media (min-width: 760px) {
+    .dash-case .business-stats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
 
-  .story-section { padding-top: 130px; }
-  .story-copy { max-width: 840px; }
-  .story-copy .eyebrow { color: var(--d-accent); font-size: 13px; letter-spacing: .12em; font-weight: 700; }
-  .story-copy h2 { margin-top: 20px; font-size: clamp(30px, 4vw, 48px); line-height: 1.22; letter-spacing: -.03em; font-weight: 650; }
-  .story-copy > p:not(.eyebrow) { margin-top: 22px; font-size: 18px; line-height: 34px; color: var(--d-muted); }
-  .story-copy.on-dark h2 { color: #fff; } .story-copy.on-dark > p { color: #aebace; }
+  .dash-case {
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+  .dash-case {
+    --d-ink: #142036;
+    --d-muted: #57647a;
+    --d-accent: #1555df;
+    --d-deep: #0b1424;
+    --d-line: #d5dce6;
+    --d-paper: #f5f7fa;
+    padding-bottom: 96px;
+  }
+  .dash-case .shell {
+    width: min(1120px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+  .dash-case .kicker {
+    color: var(--d-accent);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    font-weight: 700;
+  }
+  .case-title {
+    font-size: clamp(38px, 5.6vw, 70px);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    font-weight: 650;
+  }
+  .dashboard-meta {
+    display: grid;
+    gap: 24px;
+    padding-block: 32px;
+    border-block: 1px solid var(--line);
+  }
+  .dashboard-meta li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.35em;
+  }
+  .dashboard-meta li::before {
+    content: '•';
+    color: var(--muted);
+  }
+  .hero-panel {
+    margin: 0;
+    background: #e6eefc;
+    border-radius: 20px;
+    padding: 32px;
+    text-align: center;
+  }
+  .hero-panel img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-inline: auto;
+    box-shadow: 0 20px 35px rgba(23, 55, 91, 0.15);
+  }
+  .hero-panel figcaption {
+    margin-top: 16px;
+    color: #345171;
+    font-size: 14px;
+  }
 
-  .pull-quote { margin: 44px 0 0; padding: 26px 0; border-bottom: 1px solid var(--d-line); font-size: clamp(24px, 3vw, 32px); line-height: 1.5; color: var(--d-ink); }
-  .two-layers { display: grid; gap: 18px; margin-top: 28px; grid-template-columns: 1fr; }
-  .two-layers article { background: #fff; border: 1px solid var(--d-line); border-radius: 18px; padding: 26px; }
-  .layer-tag { display: inline-block; color: var(--d-accent); font-weight: 700; font-size: 15px; margin-bottom: 12px; }
-  .two-layers p { margin: 0; color: var(--d-muted); line-height: 1.8; }
-  .shot-panel { margin: 32px 0 0; background: #fff; border: 1px solid var(--d-line); border-radius: 18px; padding: 16px; }
-  .shot-panel.on-dark { background: #101c30; border-color: #293a53; }
-  .shot-panel img { width: 100%; height: auto; border-radius: 12px; }
-  figcaption { color: var(--d-muted); font-size: 13px; margin-top: 12px; text-align: center; }
-  figcaption.on-dark { color: #bacce3; }
-  .role-boundary { margin-top: 32px; background: #fff; border: 1px solid var(--d-line); border-radius: 18px; padding: 28px; }
-  .role-boundary h3 { margin: 0 0 18px; font-size: 21px; }
-  .boundary-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
-  .boundary-grid p { margin: 0; color: var(--d-muted); line-height: 1.8; } .boundary-grid b { color: var(--d-ink); }
+  .story-section {
+    padding-top: 130px;
+  }
+  .problem-section .story-copy {
+    max-width: 900px;
+  }
+  .problem-section .story-copy > p:not(.eyebrow) {
+    margin-top: 24px;
+    line-height: 1.85;
+    text-wrap: pretty;
+  }
+  .problem-images {
+    display: grid;
+    gap: 16px;
+    margin-top: 48px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: var(--sunken);
+  }
+  .problem-images.result-images {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
+  .problem-images img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+  }
+  @media (min-width: 760px) {
+    .problem-images {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .story-copy {
+    max-width: 840px;
+  }
+  .story-copy .eyebrow {
+    color: var(--d-accent);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+  .story-copy h2 {
+    margin-top: 20px;
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.22;
+    letter-spacing: -0.03em;
+    font-weight: 650;
+  }
+  .story-copy > p:not(.eyebrow) {
+    margin-top: 22px;
+    font-size: 18px;
+    line-height: 34px;
+    color: var(--d-muted);
+  }
+  .story-copy.on-dark h2 {
+    color: #fff;
+  }
+  .story-copy.on-dark > p {
+    color: #aebace;
+  }
 
-  .path { list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 0; grid-template-columns: 1fr; background: #fff; border: 1px solid var(--d-line); border-radius: 18px; overflow: hidden; }
-  .path li { padding: 26px; border-bottom: 1px solid var(--d-line); } .path li:last-child { border-bottom: 0; }
-  .path b { display: block; color: var(--d-accent); margin-bottom: 8px; font-size: 18px; }
-  .path p { margin: 0; font-size: 15px; color: var(--d-muted); line-height: 1.7; }
-  .path.on-dark { background: #101c30; border-color: #293a53; } .path.on-dark li { border-color: #293a53; } .path.on-dark p { color: #aebace; }
-  .fact-grid { display: grid; gap: 18px; grid-template-columns: 1fr 1fr; margin-top: 28px; }
-  .fact { background: #fff; border: 1px solid var(--d-line); border-radius: 16px; padding: 24px; }
-  .fact strong { display: block; font-size: clamp(30px, 4vw, 40px); line-height: 1.2; font-weight: 650; font-variant-numeric: tabular-nums; }
-  .fact span { font-size: 14px; color: var(--d-muted); }
+  .pull-quote {
+    margin: 44px 0 0;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--d-line);
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.5;
+    color: var(--d-ink);
+  }
+  .two-layers {
+    display: grid;
+    gap: 18px;
+    margin-top: 28px;
+    grid-template-columns: 1fr;
+  }
+  .two-layers article {
+    background: #fff;
+    border: 1px solid var(--d-line);
+    border-radius: 18px;
+    padding: 26px;
+  }
+  .layer-tag {
+    display: inline-block;
+    color: var(--d-accent);
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  .two-layers p {
+    margin: 0;
+    color: var(--d-muted);
+    line-height: 1.8;
+  }
+  .shot-panel {
+    margin: 32px 0 0;
+    background: #fff;
+    border: 1px solid var(--d-line);
+    border-radius: 18px;
+    padding: 16px;
+  }
+  .shot-panel.on-dark {
+    background: #101c30;
+    border-color: #293a53;
+  }
+  .shot-panel img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+  figcaption {
+    color: var(--d-muted);
+    font-size: 13px;
+    margin-top: 12px;
+    text-align: center;
+  }
+  figcaption.on-dark {
+    color: #bacce3;
+  }
+  .role-boundary {
+    margin-top: 32px;
+    background: #fff;
+    border: 1px solid var(--d-line);
+    border-radius: 18px;
+    padding: 28px;
+  }
+  .role-boundary h3 {
+    margin: 0 0 18px;
+    font-size: 21px;
+  }
+  .boundary-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+  .boundary-grid p {
+    margin: 0;
+    color: var(--d-muted);
+    line-height: 1.8;
+  }
+  .boundary-grid b {
+    color: var(--d-ink);
+  }
 
-  .decision-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
-  .decision-tabs button { border: 1px solid var(--d-line); background: #fff; color: var(--d-ink); border-radius: 999px; padding: 11px 20px; min-height: 44px; cursor: pointer; font-size: 15px; }
-  .decision-tabs button.is-active { background: var(--d-accent); border-color: var(--d-accent); color: #fff; font-weight: 600; }
-  .decision-tabs button:focus-visible { outline: 3px solid #3384ff; outline-offset: 3px; }
-  .decision-panel { display: none; margin-top: 22px; background: #fff; border: 1px solid var(--d-line); border-radius: 20px; padding: 28px; gap: 30px; grid-template-columns: 1fr; }
-  .decision-panel.is-active { display: grid; }
-  .decision-text h3 { margin: 0 0 18px; font-size: 24px; }
-  .dp { margin: 0 0 14px; color: var(--d-muted); line-height: 1.8; } .dp b { display: block; color: var(--d-ink); margin-bottom: 4px; }
-  .dp.trade { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--d-line); } .dp.trade b { color: var(--d-accent); }
-  .decision-figure { margin: 0; } .decision-figure img { width: 100%; height: auto; border-radius: 12px; }
+  .path {
+    list-style: none;
+    margin: 40px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    grid-template-columns: 1fr;
+    background: #fff;
+    border: 1px solid var(--d-line);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .path li {
+    padding: 26px;
+    border-bottom: 1px solid var(--d-line);
+  }
+  .path li:last-child {
+    border-bottom: 0;
+  }
+  .path b {
+    display: block;
+    color: var(--d-accent);
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+  .path p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--d-muted);
+    line-height: 1.7;
+  }
+  .path.on-dark {
+    background: #101c30;
+    border-color: #293a53;
+  }
+  .path.on-dark li {
+    border-color: #293a53;
+  }
+  .path.on-dark p {
+    color: #aebace;
+  }
+  .fact-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 28px;
+  }
+  .fact {
+    background: #fff;
+    border: 1px solid var(--d-line);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .fact strong {
+    display: block;
+    font-size: clamp(30px, 4vw, 40px);
+    line-height: 1.2;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+  }
+  .fact span {
+    font-size: 14px;
+    color: var(--d-muted);
+  }
 
-  .dark-section { background: var(--d-deep); color: #e9eff9; margin-top: 130px; }
-  .dark-section .story-section { padding-top: 100px; padding-bottom: 100px; }
-  .dark-section .eyebrow { color: #71b3ff !important; }
-  .inspect-head { max-width: 840px; margin-top: 64px; } .inspect-head h3 { font-size: clamp(24px, 3vw, 32px); margin: 0 0 14px; }
-  .inspect-head p { color: #aebace; line-height: 1.8; margin: 0; }
-  .inspect { display: grid; gap: 24px; grid-template-columns: 1fr; margin-top: 28px; }
-  .inspect-controls { display: grid; gap: 12px; align-content: start; }
-  .inspect-controls button { text-align: left; border: 1px solid #293a53; background: #101c30; color: #e9eff9; border-radius: 14px; padding: 18px 20px; min-height: 44px; cursor: pointer; }
-  .inspect-controls button b { display: block; font-size: 16px; margin-bottom: 6px; }
-  .inspect-controls button span { font-size: 14px; color: #aebace; }
-  .inspect-controls button.is-active { background: var(--d-accent); border-color: var(--d-accent); }
-  .inspect-controls button.is-active span { color: #e3edff; }
-  .inspect-controls button:focus-visible { outline: 3px solid #71b3ff; outline-offset: 2px; }
-  .inspect-desc { margin-top: 20px; line-height: 1.8; max-width: 840px; }
-  .inspect-desc.on-dark { color: #c6d4e8; }
-  .header-compare { display: grid; gap: 20px; grid-template-columns: 1fr; margin-top: 28px; }
-  .detail-pair { display: grid; gap: 20px; grid-template-columns: 1fr; margin-top: 20px; }
+  .decision-gallery {
+    margin-top: 48px;
+    padding: 24px;
+    border-radius: 16px;
+    background: var(--sunken);
+  }
+  .decision-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .decision-tabs button {
+    border: 1px solid #d3d2ca;
+    background: transparent;
+    color: var(--ink);
+    border-radius: 99px;
+    padding: 10px 16px;
+    min-height: 44px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .decision-viewport {
+    display: grid;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+  .decision-panel {
+    grid-area: 1 / 1;
+    min-width: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .decision-panel.is-active {
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .decision-panel img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+  @media (max-width: 759px) {
+    .decision-gallery {
+      padding: 16px;
+    }
+  }
 
-  .result-grid { display: grid; gap: 24px; grid-template-columns: 1fr; margin-top: 40px; }
-  .score-board { background: #fff; border: 1px solid var(--d-line); border-radius: 20px; padding: 30px; }
-  .result-title { font-size: clamp(48px, 7vw, 72px); line-height: 1.05; font-weight: 650; color: var(--d-accent); font-variant-numeric: tabular-nums; }
-  .result-sub { margin-top: 16px; color: var(--d-muted); line-height: 1.8; }
-  .score-list { display: grid; gap: 16px; margin-top: 28px; }
-  .score-row { display: grid; grid-template-columns: 72px 1fr 96px; gap: 14px; align-items: center; font-size: 14px; }
-  .score-track { position: relative; height: 16px; background: #e6eaf1; border-radius: 2px; }
-  .score-before, .score-after { position: absolute; left: 0; height: 6px; background: #9ba9bd; }
-  .score-after { top: 8px; height: 6px; background: var(--d-accent); }
-  .score-name { color: var(--d-muted); } .score-val { font-variant-numeric: tabular-nums; color: var(--d-ink); text-align: right; }
-  .score-key { margin-top: 18px; font-size: 14px; color: var(--d-muted); }
-  .business-stats { display: grid; gap: 18px; align-content: start; }
-  .business-stats > div { background: #fff; border: 1px solid var(--d-line); border-radius: 18px; padding: 26px; }
-  .business-stats strong { font-size: 34px; display: block; line-height: 1.3; }
-  .business-stats p { margin: 8px 0 0; font-size: 15px; color: var(--d-muted); line-height: 1.7; }
-  .metric-note { margin-top: 24px; font-size: 14px; color: var(--d-muted); line-height: 1.8; padding: 16px 18px; background: #fff; border-left: 4px solid var(--d-accent); border-radius: 10px; }
-  .principle { margin-top: 32px; border-radius: 20px; background: var(--d-ink); color: #f0f5fc; padding: 44px; }
-  .principle span { color: #9fb2cc; font-size: 14px; } .principle p { max-width: 800px; margin: 18px 0 0; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.6; }
+  .dark-section {
+    background: var(--d-deep);
+    color: #e9eff9;
+    margin-top: 130px;
+  }
+  .dark-section .story-section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .inspect-head {
+    max-width: 840px;
+    margin-top: 64px;
+  }
+  .inspect-head h3 {
+    font-size: clamp(24px, 3vw, 32px);
+    margin: 0 0 14px;
+  }
+  .inspect-head p {
+    color: #aebace;
+    line-height: 1.8;
+    margin: 0;
+  }
+  .inspect {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+  }
+  .inspect-controls {
+    display: grid;
+    gap: 12px;
+    align-content: start;
+  }
+  .inspect-controls button {
+    text-align: left;
+    border: 1px solid #293a53;
+    background: #101c30;
+    color: #e9eff9;
+    border-radius: 14px;
+    padding: 18px 20px;
+    min-height: 44px;
+    cursor: pointer;
+  }
+  .inspect-controls button b {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  .inspect-controls button span {
+    font-size: 14px;
+    color: #aebace;
+  }
+  .inspect-controls button.is-active {
+    background: var(--d-accent);
+    border-color: var(--d-accent);
+  }
+  .inspect-controls button.is-active span {
+    color: #e3edff;
+  }
+  .inspect-controls button:focus-visible {
+    outline: 3px solid #71b3ff;
+    outline-offset: 2px;
+  }
+  .inspect-desc {
+    margin-top: 20px;
+    line-height: 1.8;
+    max-width: 840px;
+  }
+  .inspect-desc.on-dark {
+    color: #c6d4e8;
+  }
+  .header-compare {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr;
+    margin-top: 28px;
+  }
+  .detail-pair {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr;
+    margin-top: 20px;
+  }
 
-  .source-details { margin-top: 28px; border: 1px solid var(--d-line); background: #fff; border-radius: 16px; padding: 20px 24px; }
-  .source-details summary { cursor: pointer; min-height: 44px; font-weight: 600; }
-  .source-details.on-dark-details { background: #101c30; border-color: #293a53; color: #e9eff9; }
-  .source-details .metric-note { background: #f5f7fa; }
-  .back-link { margin-top: 110px; border-top: 1px solid var(--d-line); padding: 36px 0 0; }
-  .back-link a { font-size: 18px; } .back-link a:hover { text-decoration: underline; }
+  .result-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr;
+    margin-top: 40px;
+  }
+  .score-board {
+    background: #fff;
+    border: 1px solid var(--d-line);
+    border-radius: 20px;
+    padding: 30px;
+  }
+  .result-title {
+    font-size: clamp(48px, 7vw, 72px);
+    line-height: 1.05;
+    font-weight: 650;
+    color: var(--d-accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .result-sub {
+    margin-top: 16px;
+    color: var(--d-muted);
+    line-height: 1.8;
+  }
+  .score-list {
+    display: grid;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .score-row {
+    display: grid;
+    grid-template-columns: 72px 1fr 96px;
+    gap: 14px;
+    align-items: center;
+    font-size: 14px;
+  }
+  .score-track {
+    position: relative;
+    height: 16px;
+    background: #e6eaf1;
+    border-radius: 2px;
+  }
+  .score-before,
+  .score-after {
+    position: absolute;
+    left: 0;
+    height: 6px;
+    background: #9ba9bd;
+  }
+  .score-after {
+    top: 8px;
+    height: 6px;
+    background: var(--d-accent);
+  }
+  .score-name {
+    color: var(--d-muted);
+  }
+  .score-val {
+    font-variant-numeric: tabular-nums;
+    color: var(--d-ink);
+    text-align: right;
+  }
+  .score-key {
+    margin-top: 18px;
+    font-size: 14px;
+    color: var(--d-muted);
+  }
+  .outcome-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    outline: 1px solid var(--line);
+  }
+  .business-stats {
+    display: grid;
+    gap: 20px;
+    padding-bottom: 20px;
+    align-content: start;
+  }
+  .business-stats > div {
+    background: #fff;
+    border: 1px solid var(--d-line);
+    border-radius: 20px;
+    padding: 26px;
+  }
+  .business-stats strong {
+    font-weight: 600;
+    font-size: 34px;
+    display: block;
+    line-height: 1.3;
+  }
+  .business-stats p {
+    margin: 8px 0 0;
+    font-size: 15px;
+    color: var(--d-muted);
+    line-height: 1.7;
+  }
+  .principle {
+    margin-top: 32px;
+    border-radius: 20px;
+    background: var(--d-ink);
+    color: #f0f5fc;
+    padding: 44px;
+  }
+  .principle span {
+    color: #9fb2cc;
+    font-size: 14px;
+  }
+  .principle p {
+    max-width: 800px;
+    margin: 18px 0 0;
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.6;
+  }
 
-  .dash-lightbox { position: fixed; inset: 0; z-index: 80; background: rgba(8,15,27,.92); display: none; align-items: center; justify-content: center; padding: 30px; }
-  .dash-lightbox.is-open { display: flex; }
-  .dash-lightbox-body img { max-width: min(1180px, 94vw); max-height: 86vh; border-radius: 12px; }
-  .dash-lightbox-close { position: fixed; top: 22px; right: 24px; width: 46px; height: 46px; border-radius: 50%; border: 0; background: #fff; font-size: 22px; cursor: pointer; }
+  .source-details {
+    margin-top: 28px;
+    border: 1px solid var(--d-line);
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px 24px;
+  }
+  .source-details summary {
+    cursor: pointer;
+    min-height: 44px;
+    font-weight: 600;
+  }
+  .source-details.on-dark-details {
+    background: #101c30;
+    border-color: #293a53;
+    color: #e9eff9;
+  }
+  .back-link {
+    margin-top: 110px;
+    border-top: 1px solid var(--d-line);
+    padding: 36px 0 0;
+  }
+  .back-link a {
+    font-size: 18px;
+  }
+  .back-link a:hover {
+    text-decoration: underline;
+  }
 
-  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease; }
-  .reveal.in { opacity: 1; transform: none; }
+  .dash-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: rgba(8, 15, 27, 0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+  }
+  .dash-lightbox.is-open {
+    display: flex;
+  }
+  .dash-lightbox-body img {
+    max-width: min(1180px, 94vw);
+    max-height: 86vh;
+    border-radius: 12px;
+  }
+  .dash-lightbox-close {
+    position: fixed;
+    top: 22px;
+    right: 24px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 0;
+    background: #fff;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.6s ease,
+      transform 0.6s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
 
   @media (min-width: 760px) {
-    .case-meta { grid-template-columns: 1fr 1.2fr 1.2fr; gap: 36px; }
-    .two-layers, .boundary-grid { grid-template-columns: 1fr 1fr; }
-    .path { grid-template-columns: repeat(3, 1fr); }
-    .path li { border-bottom: 0; border-right: 1px solid var(--d-line); }
-    .path li:last-child { border-right: 0; }
-    .path.on-dark li { border-right-color: #293a53; } .path.on-dark li:last-child { border-right: 0; }
-    .decision-panel.is-active { grid-template-columns: .8fr 1.2fr; }
-    .inspect { grid-template-columns: 1.35fr .65fr; }
-    .header-compare, .detail-pair { grid-template-columns: 1fr 1fr; }
-    .result-grid { grid-template-columns: 1.15fr .85fr; }
+    .dashboard-meta {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1.5fr);
+      gap: 40px;
+    }
+    .two-layers,
+    .boundary-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .path {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .path li {
+      border-bottom: 0;
+      border-right: 1px solid var(--d-line);
+    }
+    .path li:last-child {
+      border-right: 0;
+    }
+    .path.on-dark li {
+      border-right-color: #293a53;
+    }
+    .path.on-dark li:last-child {
+      border-right: 0;
+    }
+    .inspect {
+      grid-template-columns: 1.35fr 0.65fr;
+    }
+    .header-compare,
+    .detail-pair {
+      grid-template-columns: 1fr 1fr;
+    }
+    .result-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
   }
-  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
 </style>

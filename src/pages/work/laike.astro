@@ -18,24 +18,25 @@ const figures = {
 };
 ---
 <BaseLayout title="抖音来客首页视图升级" description="从行业化到角色化的转型，让首页适配不同岗位的真实工作。" type="article" closing={false}>
-  <article class="case-study">
-    <header class="shell pt-12 sm:pt-16">
-      <nav aria-label="面包屑" class="rise text-sm text-muted"><a href="/">作品案例</a> <span aria-hidden="true"> / </span> <span class="text-ink">抖音来客首页视图升级</span></nav>
-      <h1 class="rise case-title mt-12" style="--rise-step: 1">从行业化到角色化的转型</h1>
-      <dl class="rise case-meta mt-12" style="--rise-step: 3">
+  <article class="case-media-hover case-study">
+    <header class="shell case-header">
+      <nav aria-label="面包屑" class="case-header-breadcrumb rise"><a href="/">作品案例</a> <span aria-hidden="true"> / </span> <span aria-current="page">抖音来客首页视图升级</span></nav>
+      <h1 class="case-title case-header-title rise" style="--rise-step: 2">从行业化到角色化的转型</h1>
+      <p class="case-lead case-header-intro rise" style="--rise-step: 3">商家首页过去按行业拆成外卖版、到店版和综合版，功能越堆越多，却仍接不住不同岗位的工作。这次改版从职责出发，重构成店员、运营、店长三条角色动线</p>
+      <dl class="case-meta case-header-meta rise" style="--rise-step: 4">
         <div><dt>职责</dt><dd>项目设计 OWNER</dd></div>
         <div><dt>工作内容</dt><dd>商家调研与角色动线梳理、线上方案分析与竞品调研、设计探索与原型制作</dd></div>
-        <div><dt>项目成果</dt><dd>0–1 完成店员版与管理版设计上线；店员版 CPO 保持低于 1，管理版周活跃渗透率提升 39%。</dd></div>
+        <div><dt>项目成果</dt><dd>0–1 完成店员版与管理版设计上线；店员版 CPO 保持低于 1，管理版周活跃渗透率提升 39%</dd></div>
       </dl>
     </header>
 
     <section class="shell story-section reveal" aria-labelledby="problem-title">
-      <div class="story-copy"><p class="eyebrow">01 / 背景与问题</p><h2 id="problem-title">同一个首页，难以服务所有人</h2><p>原有首页按行业拆分为外卖版、到店版和综合版，但各版本仍有大量共同功能。商家反馈许多功能用不上，而不同岗位的真实工作场景，也难以被同一条浏览动线兼顾。</p></div>
+      <div class="story-copy"><p class="eyebrow">01 / 背景与问题</p><h2 id="problem-title">同一个首页，难以服务所有人</h2><p>原有首页按行业拆分为外卖版、到店版和综合版，但各版本仍有大量共同功能。商家反馈许多功能用不上，而不同岗位的真实工作场景，也难以被同一条浏览动线兼顾</p></div>
       <figure class="story-figure"><img src={figures.problem} alt="原有外卖版、到店版和综合版首页，以及功能冗余和动线错配的问题" loading="lazy" /><figcaption>原有行业视图与用户反馈</figcaption></figure>
     </section>
 
     <section class="shell story-section reveal" aria-labelledby="research-title">
-      <div class="story-copy"><p class="eyebrow">02 / 研究与洞察</p><h2 id="research-title">从用户职责出发，重新理解首页</h2><p>通过商家调研与角色动线梳理，我们发现差异化诉求背后，是不同的职责范围：店员需要快速完成履约，运营人员需要处理日常经营，而店长更关注结果与策略。</p></div>
+      <div class="story-copy"><p class="eyebrow">02 / 研究与洞察</p><h2 id="research-title">从用户职责出发，重新理解首页</h2><p>通过商家调研与角色动线梳理，我们发现差异化诉求背后，是不同的职责范围：店员需要快速完成履约，运营人员需要处理日常经营，而店长更关注结果与策略</p></div>
       <div class="research-tabs story-figure" data-research-tabs>
         <div class="research-tablist" role="tablist" aria-label="研究与洞察">
           <button type="button" role="tab" id="tab-users" aria-controls="panel-users" aria-selected="true">用户分类</button>
@@ -48,12 +49,12 @@ const figures = {
           <div class="research-panel" id="panel-logic" role="tabpanel" aria-labelledby="tab-logic" aria-hidden="true"><img src="/laike-case/research-logic.png" width="7680" height="3580" alt="拆分逻辑" /></div>
         </div>
       </div>
-      <div class="principle"><span>设计方向</span><p>从面向信息架构的传统工作台，转向基于动线和场景的角色化工作台。</p></div>
+      <div class="principle"><span>设计方向</span><p>从面向信息架构的传统工作台，转向基于动线和场景的角色化工作台</p></div>
     </section>
 
     <section class="shell story-section reveal" aria-labelledby="solution-title">
-      <div class="story-copy"><p class="eyebrow">03 / 设计方案</p><h2 id="solution-title">三种角色，三条清晰动线</h2><p>首页结构直接映射角色的工作流程：优先呈现最常做、最需要关注的事情，再把相关功能组织到容易理解的位置。</p></div>
-      <div class="role-list"><div><span>01</span><h3>店员版</h3><p>聚焦线下履约，将扫码验券和输码验券放在最醒目位置，并串联撤销、退款与每日经营统计。</p></div><div><span>02</span><h3>管理版</h3><p>围绕线上经营，串联经营结果、常用工具、重要待办与平台引导，让运营工作有序展开。</p></div><div><span>03</span><h3>决策版</h3><p>为店长聚合经营大盘、关键结果与机会或异常，帮助快速判断整体情况和重点事项。</p></div></div>
+      <div class="story-copy"><p class="eyebrow">03 / 设计方案</p><h2 id="solution-title">三种角色，三条清晰动线</h2><p>首页结构直接映射角色的工作流程：优先呈现最常做、最需要关注的事情，再把相关功能组织到容易理解的位置</p></div>
+      <div class="role-list"><div><span>01</span><h3>店员版</h3><p>聚焦线下履约，将扫码验券和输码验券放在最醒目位置，并串联撤销、退款与每日经营统计</p></div><div><span>02</span><h3>管理版</h3><p>围绕线上经营，串联经营结果、常用工具、重要待办与平台引导，让运营工作有序展开</p></div><div><span>03</span><h3>决策版</h3><p>为店长聚合经营大盘、关键结果与机会或异常，帮助快速判断整体情况和重点事项</p></div></div>
       <figure class="story-figure"><img src={figures.clerk} alt="店员版首页将高频验券、低频处理与经营统计按工作顺序排列" loading="lazy" /><figcaption>店员版：线下履约的极简主义</figcaption></figure>
       <div class="subsection-heading"><h3>02 管理版：线上经营的场景化串联</h3><p>围绕线上经营，串联经营结果、常用工具、重要待办与平台引导，让运营工作有序展开</p></div>
       <figure class="story-figure compact"><img src="/laike-case/management-01.png" alt="管理版方案展示 01" loading="lazy" width="7680" height="4320" /></figure>
@@ -64,15 +65,15 @@ const figures = {
       <figure class="story-figure compact"><img src="/laike-case/management-06.png" alt="管理版方案展示 06" loading="lazy" width="7680" height="4320" /></figure>
       <figure class="story-figure compact"><img src="/laike-case/management-07.png" alt="管理版方案展示 07" loading="lazy" width="7680" height="4320" /></figure>
       <figure class="story-figure compact"><img src="/laike-case/management-08.png" alt="管理版方案展示 08" loading="lazy" width="7680" height="4320" /></figure>
-      <div class="subsection-heading"><h3>03 决策版：战略洞察的决策驾驶舱</h3><p>为店长聚合经营大盘、关键结果与机会或异常，帮助快速判断整体情况和重点事项。</p></div>
+      <div class="subsection-heading"><h3>03 决策版：战略洞察的决策驾驶舱</h3><p>为店长聚合经营大盘、关键结果与机会或异常，帮助快速判断整体情况和重点事项</p></div>
       <figure class="story-figure compact"><img src={figures.decision} alt="决策版首页汇总经营大盘、关键结果和机会与异常" loading="lazy" /></figure>
       <figure class="story-figure compact"><img src="/laike-case/decision-2.png" alt="决策版方案展示" loading="lazy" /></figure>
-      <div class="subsection-heading"><h3>改版前后：首页视图映射角色实际工作流</h3><p>为店长聚合经营大盘、关键结果与机会或异常，帮助快速判断整体情况和重点事项。</p></div>
+      <div class="subsection-heading"><h3>改版前后：首页视图映射角色实际工作流</h3><p>为店长聚合经营大盘、关键结果与机会或异常，帮助快速判断整体情况和重点事项</p></div>
       <figure class="story-figure"><img src={figures.comparison} alt="改版前的统一首页与改版后的三种角色首页对比" loading="lazy" /></figure>
     </section>
 
     <section class="shell story-section reveal" aria-labelledby="outcome-title">
-      <div class="story-copy"><p class="eyebrow">04 / 上线与沉淀</p><h2 id="outcome-title">让不同角色，各得其所</h2><p>店员版和管理版完成从 0 到 1 的设计与上线。角色化视图更贴合个性化需求，同时在版本切换中关注体验稳定性。</p></div>
+      <div class="story-copy"><p class="eyebrow">04 / 上线与沉淀</p><h2 id="outcome-title">让不同角色，各得其所</h2><p>店员版和管理版完成从 0 到 1 的设计与上线。角色化视图更贴合个性化需求，同时在版本切换中关注体验稳定性</p></div>
       <figure class="story-figure"><img src={figures.outcome} alt="上线效果：旧版、店员版与管理版的 WAU、周活跃渗透率和 CPO 对比" loading="lazy" /><figcaption>角色视图上线后的核心指标对比</figcaption></figure>
       <figure class="story-figure"><img src={figures.system} alt="管理版首页、常用功能、底部标签和图标等设计规范" loading="lazy" /><figcaption>沉淀视图规范，支持后续迭代</figcaption></figure>
       <div class="principle"><span>升级感受</span><p>每一次升级都是一次产品思路的转变</p></div>

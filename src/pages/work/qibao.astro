@@ -95,15 +95,15 @@ const sopSteps = [
   type="article"
   closing={false}
 >
-  <article class="qibao-case">
-    <header class="shell pt-12 sm:pt-16">
-      <nav aria-label="面包屑" class="rise text-sm text-muted">
+  <article class="case-media-hover qibao-case">
+    <header class="shell case-header">
+      <nav aria-label="面包屑" class="case-header-breadcrumb rise">
         <a href="/">作品案例</a> <span aria-hidden="true"> / </span>
-        <span class="text-ink">汽车维保服务体验设计</span>
+        <span aria-current="page">汽车维保服务体验设计</span>
       </nav>
-      <h1 class="rise case-title mt-8" style="--rise-step:1">多端协同，提升用户确定感</h1>
-      <p class="rise case-lead mt-8" style="--rise-step:2">联动 C 端、B 端、S 端与线下 SOP，把“时间不确定、材料不放心”的服务，重构成用户敢下单、门店能交付、正品可感知的标准化产品</p>
-      <dl class="case-meta-summary">
+      <h1 class="case-title case-header-title rise" style="--rise-step: 2">多端协同，提升用户确定感</h1>
+      <p class="case-lead case-header-intro rise" style="--rise-step: 3">联动 C 端、B 端、S 端与线下 SOP，把“时间不确定、材料不放心”的服务，重构成用户敢下单、门店能交付、正品可感知的标准化产品</p>
+      <dl class="case-meta-summary case-header-meta rise" style="--rise-step: 4">
         <div><dt>设计范围</dt><dd>C 端用户、B 端门店、S 端供应链与运营的多端联动设计</dd></div>
         <div><dt>项目成果</dt><dd>快保单 GMV 86W；NPS 80.1%→83.5%；正品可验知晓率 24%→56%</dd></div>
       </dl>
@@ -177,7 +177,7 @@ const sopSteps = [
       <div class="story-copy paper-head">
         <p class="eyebrow">04 / B端解决方案</p>
         <h2 id="flow-title">让门店按真实工作方式交付</h2>
-        <p>原系统的串行流程与单一设备操作，难以适配门店实际。解决方案从作业协同与设备适配入手，减少交付阻力，流程与现场并行，界面与人员能力匹配，门店才能稳定兑现前台的服务承诺。</p>
+        <p>原系统的串行流程与单一设备操作，难以适配门店实际。解决方案从作业协同与设备适配入手，减少交付阻力，流程与现场并行，界面与人员能力匹配，门店才能稳定兑现前台的服务承诺</p>
       </div>
       <div class="b-paper-cards">
         <article><span class="badge">01 / 流程重构</span><h3>支持双人并行，减少流程等待</h3><p>现场由两名员工同步完成维保与安心检测，旧流程却要求依次操作。新流程支持两项作业并行，完成后统一进入核销与交车，减少系统等待</p></article>
@@ -193,7 +193,7 @@ const sopSteps = [
       <div class="story-copy paper-head">
         <p class="eyebrow">05 / 全链路正品透传</p>
         <h2 id="trust-title">正品不是一句承诺，<br />而是线上可查、线下可验、离店可带走的证据链</h2>
-        <p>用户担心的不是“页面有没有写正品”，而是我这次保养用的那瓶机油，能不能被看见、验证并追溯。</p>
+        <p>用户担心的不是“页面有没有写正品”，而是我这次保养用的那瓶机油，能不能被看见、验证并追溯</p>
       </div>
       <div class="trust-paper-gallery">
         <img src="/qibao-case/trust-paper-17.png" width="2934" height="1650" alt="正品授权线上透传：从首页入口到服务与商品详情" loading="lazy" data-lightbox />
@@ -209,7 +209,7 @@ const sopSteps = [
         <div class="story-copy on-dark result-heading">
           <p class="eyebrow">06 / 项目结果</p>
           <h2 id="result-title">“承诺—系统—现场动作”是否真正闭环</h2>
-          <p>快保 GMV、NPS 与正品知晓率分别对应成交、体验和信任三条线索。</p>
+          <p>快保 GMV、NPS 与正品知晓率分别对应成交、体验和信任三条线索</p>
         </div>
         <div class="metric-board">
           <div class="metrics" aria-label="项目结果的三个指标">
@@ -391,13 +391,11 @@ const sopSteps = [
   .case-meta dt { font-size: 13px; color: var(--q-muted); } .case-meta dd { margin-top: 8px; line-height: 1.7; }
   .qibao-case .case-meta-summary {
     display: grid; grid-template-columns: 1fr; gap: 32px;
-    margin-top: 48px; padding-block: 32px;
+    padding-block: 32px;
     border-top: 1px solid #e6e5df; border-bottom: 1px solid #e6e5df;
   }
-  .case-meta-summary dt { font-size: 13px; line-height: 1.6; font-weight: 400; color: #3b3b38; }
-  .case-meta-summary dd { margin: 8px 0 0; font-size: 17px; line-height: 1.8; font-weight: 400; color: #121211; }
   @media (min-width: 760px) {
-    .qibao-case .case-meta-summary { grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+    .qibao-case .case-meta-summary { grid-template-columns: 1fr 1fr; align-items: center; }
   }
   .hero-panel { background: transparent; border-radius: 0; padding: 0; margin: 0; text-align: center; }
   .hero-panel img { display: block; width: 100%; height: auto; border-radius: 14px; margin-inline: auto; }

@@ -44,10 +44,10 @@ const meta = [
   type="article"
   structuredData={caseStudySchema(project, share.src)}
 >
-  <article style={`--tint: ${tint}`}>
-    <header class="shell pt-12 sm:pt-16">
-      <nav aria-label="Breadcrumb" class="rise">
-        <ol class="flex items-center gap-2 text-sm text-muted">
+  <article class="case-media-hover" style={`--tint: ${tint}`}>
+    <header class="shell case-header">
+      <nav aria-label="Breadcrumb" class="case-header-breadcrumb rise">
+        <ol class="flex items-center gap-2 flex-wrap">
           <li>
             <a class="hover:text-ink" href="/">
               Work
@@ -61,19 +61,19 @@ const meta = [
           </li>
         </ol>
       </nav>
-      <h1 class="rise mt-8 max-w-[22ch] text-headline" style="--rise-step: 1">
+      <h1 class="max-w-[22ch] text-headline case-header-title rise" style="--rise-step: 2">
         {title}
       </h1>
-      <p class="rise mt-6 max-w-2xl text-lead text-body" style="--rise-step: 2">
+      <p class="max-w-2xl text-lead text-body case-header-intro rise" style="--rise-step: 3">
         {summary}
       </p>
 
-      <div class="rise mt-12 grid gap-8 border-t border-line pt-8 lg:grid-cols-[1fr_auto]" style="--rise-step: 3">
+      <div class="grid border-t border-line lg:grid-cols-[1fr_auto] case-header-meta rise" style="--rise-step: 4">
         <dl class="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 lg:flex lg:gap-14">
           {meta.map((item) => (
             <div>
-              <dt class="text-sm text-muted">{item.label}</dt>
-              <dd class="mt-1 font-medium">{item.value}</dd>
+              <dt>{item.label}</dt>
+              <dd>{item.value}</dd>
             </div>
           ))}
         </dl>

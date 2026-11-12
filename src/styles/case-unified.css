@@ -9,7 +9,8 @@
 :is(.dash-case,.viz-case,.qibao-case) .shell,.miaoda-case .case-wrap {width:100%!important;max-width:1280px!important;padding-inline:40px!important;margin-inline:auto}
 :is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) h1 {font-size:clamp(38px,4.8vw,68px)!important;font-weight:500!important;line-height:1.15!important;letter-spacing:-.035em!important;text-wrap:balance}
 :is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) h2 {font-size:clamp(28px,3.35vw,48px)!important;font-weight:500!important;line-height:1.3!important;letter-spacing:-.025em!important;text-wrap:balance}
-:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(.case-lead,.lead) {font-size:clamp(18px,1.6vw,22px)!important;line-height:1.85!important;max-width:840px!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(.case-lead,.lead) {font-size:clamp(18px,1.6vw,22px)!important;line-height:1.85!important}
+:is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(.case-lead,.lead):not(.case-header-intro) {max-width:840px!important}
 :is(.dash-case,.viz-case,.qibao-case,.miaoda-case,.aily-case) :is(.kicker,.label,.eyebrow) {font-size:13px!important;font-weight:500!important;letter-spacing:.06em!important}
 :is(.dash-case,.viz-case,.qibao-case) .story-section {padding-top:128px!important}
 .miaoda-case .section {padding-block:80px!important}

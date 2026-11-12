@@ -3,60 +3,60 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="妙搭支持专家模式" description="承接专业开发，让简单体验不变复杂" closing={false}>
-  <article class="miaoda-paper">
+  <article class="case-media-hover miaoda-paper">
     <div class="[font-synthesis:none] wrap-anywhere antialiased text-xs/4">
       <div class="overflow-clip bg-[#FAFAF7]">
-        <div class="w-full max-w-7xl pt-14 px-10 mx-auto">
-          <div class="flex flex-col items-start w-full gap-16">
-            <div class="flex flex-col items-start gap-8">
-              <div class="flex flex-col items-start gap-12">
-                <div class="items-center flex gap-2 self-stretch">
+        <div class="w-full max-w-7xl px-10 mx-auto case-header">
+          <div class="flex flex-col items-start w-full">
+            <div class="flex flex-col items-start">
+              <div class="flex flex-col items-start">
+                <div class="items-center flex gap-2 self-stretch case-header-breadcrumb rise">
                   <div>
                     <a
                       href="/"
                       aria-label="返回作品集首页"
-                      class="inline-block text-[14px] leading-[142.857%] font-['Hanken_Grotesk',system-ui,sans-serif] text-[#6A6964] hover:text-[#121211] focus-visible:outline-2 focus-visible:outline-offset-4"
+                      class="focus-visible:outline-2 focus-visible:outline-offset-4"
                     >
                       作品案例
                     </a>
                   </div>
-                  <div class="text-[14px] leading-[142.857%] wrap-normal font-['Hanken_Grotesk',system-ui,sans-serif] text-[#6A6964]">
+                  <div >
                     /
                   </div>
                   <div>
-                    <div class="inline-block text-[14px] leading-[142.857%] font-['Hanken_Grotesk',system-ui,sans-serif] text-[#121211]">
+                    <div aria-current="page">
                       妙搭支持专家模式
                     </div>
                   </div>
                 </div>
-                <div class="text-[65.376px] [letter-spacing:-2.28816px] leading-[115%] text-balance self-stretch font-['PingFangSC-Medium','PingFang_SC',system-ui,sans-serif] font-medium text-[#121211]">
+                <div class="text-[65.376px] [letter-spacing:-2.28816px] leading-[115%] text-balance self-stretch font-['PingFangSC-Medium','PingFang_SC',system-ui,sans-serif] font-medium text-[#121211] case-header-title rise" style="--rise-step: 2">
                   承接专业开发，让简单体验不变复杂
                 </div>
               </div>
-              <div class="text-[21.792px] leading-[185%] text-pretty self-stretch font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
+              <div class="text-[21.792px] leading-[185%] text-pretty self-stretch font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38] case-header-intro rise" style="--rise-step: 3">
                 将 aPaaS 4.0 的专业能力融入妙搭，保留“说需求 → 看效果 → 修改 → 发布”
                 的简单开发路径，按需展开协作、数据隔离与集成等能力，让简单需求轻松起步，专业需求也有路可走
               </div>
             </div>
-            <div class="flex py-8 gap-10 flex-wrap items-start [align-content:start] justify-between self-stretch border-t border-t-solid border-b border-b-solid border-y-[#E6E5DF]">
-              <div class="h-15 flex-1">
-                <div class="text-[13px] leading-[160%] font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
+            <dl class="flex py-8 gap-10 flex-wrap items-start [align-content:start] justify-between self-stretch border-t border-t-solid border-b border-b-solid border-y-[#E6E5DF] w-full case-header-meta rise" style="--rise-step: 4">
+              <div class="flex-1">
+                <dt>
                   设计范围
-                </div>
-                <div class="text-[17px] leading-[180%] mt-2 font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#121211]">
+                </dt>
+                <dd>
                   妙搭产品框架及任务、数据、发布与扩展能力的 UX 设计
-                </div>
+                </dd>
               </div>
               <div class="flex-1">
-                <div class="text-[13px] leading-[160%] font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#6A6964]">
+                <dt>
                   方案成果
-                </div>
-                <div class="text-[17px] leading-[180%] mt-2 font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#121211]">
+                </dt>
+                <dd>
                   守住简单路径，建立进阶路径：专业操作不成为日常必经步骤，复杂需求有对应的操作入口与流程
-                </div>
+                </dd>
               </div>
-            </div>
-            <div class="self-stretch">
+            </dl>
+            <div class="self-stretch mt-16">
               <div class="rounded-2xl overflow-clip bg-white">
                 <div
                   class="aspect-[auto_3200/2000] w-full max-w-full overflow-clip bg-size-[100%_100%] bg-position-[50%] bg-no-repeat"
@@ -137,11 +137,11 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
               </div>
               <div class="flex text-center items-start gap-2.75 self-stretch">
                 <div
-                  class="h-89 rounded-lg w-142.5 shrink-0 bg-cover bg-position-[50%] [outline:0.5px_solid_#D3D2CA4D]"
+                  class="case-hover-image h-89 rounded-lg w-142.5 shrink-0 bg-cover bg-position-[50%] [outline:0.5px_solid_#D3D2CA4D]"
                   style="background-image: url(https://app.paper.design/file-assets/01M60NJ1NA6E6NVB2WBNE0FK0V/01M71E4YMTF0ZKW7E87006KX2R.png)"
                 />
                 <div
-                  class="h-89 rounded-lg w-142.5 shrink-0 bg-cover bg-position-[50%] [outline:0.5px_solid_#D3D2CA4D]"
+                  class="case-hover-image h-89 rounded-lg w-142.5 shrink-0 bg-cover bg-position-[50%] [outline:0.5px_solid_#D3D2CA4D]"
                   style="background-image: url(https://app.paper.design/file-assets/01M60NJ1NA6E6NVB2WBNE0FK0V/01M71E3T72ZPE7PYJ9NM1P5762.png)"
                 />
               </div>
@@ -169,7 +169,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
                 守住简单路径
               </div>
               <div class="text-[17px] leading-[180%] mt-2.5 wrap-break-word text-pretty font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
-                保留熟悉的应用框架，让“说需求 → 看效果 → 修改 → 发布”不增加非必要步骤和概念。
+                保留熟悉的应用框架，让“说需求 → 看效果 → 修改 → 发布”不增加非必要步骤和概念
               </div>
             </div>
             <div class="p-6.5 rounded-[22px] bg-white border border-solid border-[#E6E5DF]">
@@ -177,7 +177,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
                 建立进阶路径
               </div>
               <div class="text-[17px] leading-[180%] mt-2.5 wrap-break-word text-pretty font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
-                当并行开发、多人协作、数据隔离或外部集成需求出现时，提供可发现、可理解、可完成的操作路径。
+                当并行开发、多人协作、数据隔离或外部集成需求出现时，提供可发现、可理解、可完成的操作路径
               </div>
             </div>
           </div>
@@ -527,7 +527,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
           <div class="text-[48px] [letter-spacing:-1.2px] leading-[130%] mb-6 max-w-275 text-balance wrap-normal font-['PingFangSC-Medium','PingFang_SC',system-ui,sans-serif] font-medium whitespace-pre-wrap text-[#121211]">
             让能力成为下一步，
             <br />
-            让简单始终是起点。
+            让简单始终是起点
           </div>
           <div class="text-[18px] leading-[190%] mt-6 text-pretty font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] whitespace-pre-wrap text-[#3B3B38]">
             通过统一框架守住简单路径，再围绕具体场景展开专业能力，让整合目标落实到用户可发现、可理解、可完成的操作中

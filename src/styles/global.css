@@ -502,6 +502,95 @@
   }
 }
 
+/* Shared spacing for the case study headers. */
+.case-header {
+  padding-top: 48px;
+}
+
+.case-header .case-header-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0;
+  font: 400 14px/20px 'Hanken Grotesk', system-ui, sans-serif;
+  color: var(--muted);
+}
+
+.case-header .case-header-breadcrumb [aria-current='page'] {
+  color: var(--ink);
+}
+
+.case-header .case-header-breadcrumb a {
+  color: var(--muted);
+}
+
+.case-header .case-header-breadcrumb a:is(:hover, :focus-visible) {
+  color: var(--ink);
+}
+
+.case-header .case-header-title {
+  margin-top: 48px;
+  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  font-size: clamp(38px, 4.8vw, 68px) !important;
+  font-weight: 500 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.035em !important;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.case-header .case-header-intro {
+  margin-top: 32px;
+  max-width: 1000px !important;
+  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  font-size: clamp(18px, 2.8vw, 22px) !important;
+  font-weight: 400;
+  line-height: 1.85 !important;
+  color: var(--body);
+  text-wrap: pretty;
+}
+
+.case-header .case-header-meta {
+  margin-top: 56px;
+  padding-block: 32px;
+}
+
+.case-header .case-header-meta :is(dt, dd) {
+  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  font-weight: 400;
+}
+
+.case-header .case-header-meta dt {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.case-header .case-header-meta dd {
+  margin-top: 8px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+@media (min-width: 760px) {
+  .case-header .case-header-meta {
+    gap: 40px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .case-media-hover :is(img, .case-hover-image) {
+    transition: translate 350ms cubic-bezier(0.22, 1, 0.36, 1), scale 350ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .case-media-hover :is(img, .case-hover-image):hover {
+    translate: 0 -3px;
+    scale: 1.015;
+  }
+}
+
 @keyframes rise {
   from {
     opacity: 0;

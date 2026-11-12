@@ -1,15 +1,16 @@
 ---
+import { caseStudyCopy } from '@/config/case-studies';
 import Icon from '@/components/ui/Icon.astro';
 import SectionHead from '@/components/ui/SectionHead.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 const detail = '/work/nextpoint/';
 const cases = [
-  { title: 'Aily 技能生态体验设计', href: '/work/aily/', text: '串联市场安装、伙伴能力管理、对话调用与企业后台治理，让前台用户低成本获得使用能力，让管理员从“能配置”到“能持续治理”', tags: ['信息架构重构', '复杂体验配置'], color: '#BDEEDB', image: '/aily-case/市场/技能详情%20安装前.png', contain: true },
-  { title: '妙搭支持专家模式', href: '/work/miaoda/', text: '保留简单对话开发的同时，也支持处理多个任务、与他人协作、区分开发数据库和线上数据库，让专业用户用得起来，普通用户仍然用得简单', tags: ['AI 应用开发平台', '产品整合与渐进式体验'], color: '#DCE8FC', image: '/miaoda-case/workspace.webp', contain: true },
-  { title: '抖音来客首页视图升级', href: '/work/laike/', text: '按用户职责而非行业重构首页，一套平台三套视图，直接贴合各岗位的工作动线', tags: ['APP 设计', '复杂产品视图拆分'], color: '#F3DDE1', image: '/laike-cover-ui.png', layeredLaike: true },
-  { title: '仪表盘优化专项', href: '/work/dashboard/', text: '搭建图表评估体系，同步优化图表组件和仪表盘Demo', tags: ['数据报表设计', '设计驱动业务增长'], color: '#DCD3FB', image: '/dashboard-case/dashboard-hd-19.jpg' },
-  { title: '汽车维保“30分钟快保”', href: '/work/qibao/', text: '用 C 端、B 端、S 端与线下 SOP 的联动，把不确定的小保养做成可承诺、可验真的标准化产品', tags: ['多端服务设计', '流程重构与信任体系'], color: '#232A3D', image: '/qibao-case/cover.jpg', contain: true },
-  { title: '可视化查询重构', href: '/work/viz/', text: '降低新手学习门槛而不牺牲专业能力，重构 BI 编辑器路径，经 4 期灰度陪伴用户完成迁移', tags: ['WEB 设计', '生产力工具产品重构'], color: '#BFE9EE', image: '/viz-case/cover-ui.png', layeredCover: true },
+  { ...caseStudyCopy.aily, href: '/work/aily/', tags: ['Agent skill/mcp/plugin', '信息架构重构', '复杂体验配置'], color: '#FFE7D8', image: '/work-covers/aily.png' },
+  { ...caseStudyCopy.miaoda, href: '/work/miaoda/', tags: ['AI 应用开发平台', '产品整合与渐进式体验'], color: '#DCD3FB', image: '/work-covers/miaoda.png' },
+  { ...caseStudyCopy.laike, href: '/work/laike/', tags: ['APP 设计', '复杂产品视图拆分'], color: '#D2EBFF', image: '/work-covers/laike.png' },
+  { ...caseStudyCopy.dashboard, href: '/work/dashboard/', tags: ['数据报表设计', '设计驱动业务增长'], color: '#FCE0E0', image: '/work-covers/dashboard.png' },
+  { ...caseStudyCopy.qibao, href: '/work/qibao/', tags: ['多端服务设计', '流程重构与信任体系'], color: '#C0E9F7', image: '/work-covers/qibao.png' },
+  { ...caseStudyCopy.viz, href: '/work/viz/', tags: ['WEB 设计', '生产力工具产品重构'], color: '#CCF1E3', image: '/work-covers/viz.png' },
 ];
 const explorations = [
   { title: 'Demo 演示', icon: 'lightbulb' }, { title: 'Figma 插件', icon: 'workflow' },
@@ -18,28 +19,38 @@ const explorations = [
 ---
 <BaseLayout closing={false}>
   <header class="shell grid items-end gap-12 pt-16 pb-20 sm:pt-24 sm:pb-28 lg:grid-cols-[minmax(0,1fr)_352px] lg:gap-16">
-    <div>
-      <p class="rise eyebrow">introduction</p>
-      <h1 class="rise intro-title mt-10" style="--rise-step: 1"><span>你好,我叫</span>戴冠宇</h1>
-      <p class="rise intro-copy mt-10 max-w-[674px]" style="--rise-step: 2">专业能力：可独立承担大型产品需求，深度挖掘关键价值，持续带来正向业务收益<br />协作与项目：跨团队协作与项目管理能力突出，能够主导产设研合作项目并高效拿到结果<br />学习与拓展：自学 SQL，从0成长为产品设计接口人；协同商家制定运营策略（完成 12 条视频的剪辑发布）</p>
-      <div class="rise mt-12" style="--rise-step: 3"><a class="btn btn-primary" href="/resume/">关于我 <Icon name="arrow-right" class="icon-nudge size-4" /></a></div>
+    <div class="flex flex-col items-start gap-12 [font-synthesis:none] antialiased">
+      <div class="flex flex-col items-start gap-10">
+        <p class="rise eyebrow leading-[160%]">introduction</p>
+        <h1 class="rise intro-title text-balance" style="--rise-step: 1"><span>你好,我叫</span>戴冠宇</h1>
+        <ul class="rise flex flex-wrap gap-3" aria-label="专业与经历" style="--rise-step: 2">
+          {['Agent 平台设计', 'B端UX设计', '自学SQL和系统分析师', '工作 10 年'].map((label) => (
+            <li class="flex min-h-7 items-center rounded-full border border-line px-[11.2px] py-[3.2px] text-[13px] font-medium leading-[120%] text-body">{label}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="rise mt-8" style="--rise-step: 3">
+        <a class="btn btn-primary" href="/resume/">关于我 <Icon name="arrow-right" class="icon-nudge size-4" /></a>
+      </div>
     </div>
     <div class="rise relative overflow-hidden rounded-3xl" style="--rise-step: 3">
-      <img src="https://app.paper.design/static/flowers.webp" alt="Flowers" class="aspect-[4/5] w-full object-cover" />
+      <img src="/gaia-portrait.jpg" alt="戴冠宇手持麦克风的照片" class="aspect-[4/5] w-full object-cover" />
       <span class="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-sm font-medium text-[#121211]"><Icon name="map-pin" class="size-3.5" /> Hangzhou, Zhejiang</span>
     </div>
   </header>
   <section id="work" class="shell" aria-labelledby="work-title">
-    <SectionHead id="work-title" eyebrow="Selected work" title="作品案例" text="以下是我在职期间的一些工作产出，包括B端、C端、组件、VibeCoding等" />
+    <div class="reveal [font-synthesis:none] antialiased">
+      <p class="eyebrow leading-[160%]">Selected work</p>
+      <h2 id="work-title" class="mt-4 text-balance text-[48px] font-medium leading-[106%] tracking-[5px] text-ink">作品案例</h2>
+      <p class="work-intro mt-5 text-pretty text-base leading-[155%] text-muted">以下是我在职期间的一些工作产出，包括B端、C端、WEB端等</p>
+    </div>
     <div class="mt-12 grid gap-x-8 gap-y-16 md:grid-cols-2">
       {cases.map((item) => <article class="case-card reveal relative">
-        <div class:list={["relative aspect-5/4 overflow-hidden rounded-card", { "viz-cover": item.layeredCover, "laike-cover": item.layeredLaike }]} style={`background:${item.color}`}>
-          {item.layeredCover && <img class="viz-cover-bg" src="/viz-case/cover-bg.png" alt="" aria-hidden="true" loading="lazy" />}
-          {item.layeredLaike && <img class="laike-cover-bg" src="/laike-cover-oil-bg.png" alt="" aria-hidden="true" loading="lazy" />}
-          {item.layeredLaike ? <a class="laike-image-link" href={item.href} aria-label={`查看${item.title}`}><img src={item.image} alt="" class="case-image laike-cover-ui" loading="lazy" /></a> : item.image ? <img src={item.image} alt={item.title} class:list={["case-image", { "is-contain": item.contain, "viz-cover-ui": item.layeredCover }]} loading="lazy" /> : <div class="case-placeholder absolute top-[12%] left-[8%] aspect-[8/5] w-[115%]"></div>}
+        <div class="relative aspect-5/4 overflow-hidden rounded-card" style={`background-color:${item.color}`}>
+          <img src={item.image} alt={item.title} class="case-cover-image absolute inset-0 size-full object-cover" loading="lazy" />
           <span class="case-arrow absolute top-5 right-5 grid size-11 place-items-center rounded-full bg-inverse text-on-inverse" aria-hidden="true"><Icon name="arrow-up-right" class="size-5" /></span>
         </div>
-        <div class="mt-6"><h3 class="text-title"><a href={item.href ?? detail} class="after:absolute after:inset-0">{item.title}</a></h3><p class="mt-1.5 text-sm leading-7 text-muted">{item.text}</p><ul class="mt-5 flex flex-wrap gap-2" aria-label="项目标签">{item.tags.map((tag) => <li class="chip">{tag}</li>)}</ul></div>
+        <div class="mt-6"><h3 class="text-title"><a href={item.href ?? detail} class="after:absolute after:inset-0">{item.title}</a></h3><p class="mt-1.5 text-sm leading-7 text-muted">{item.description}</p><ul class="mt-5 flex flex-wrap gap-2" aria-label="项目标签">{item.tags.map((tag) => <li class="chip">{tag}</li>)}</ul></div>
       </article>)}
     </div>
   </section>
@@ -55,25 +66,18 @@ const explorations = [
   </section>
 </BaseLayout>
 <style>
-  .intro-title { font-family: 'PingFang SC', sans-serif; font-size: clamp(2.5rem, 5.42vw, 78px); font-weight: 500; letter-spacing: 0.1em; line-height: 1.02; }
+  .intro-title { font-family: 'PingFang SC', system-ui, sans-serif; font-size: clamp(2.5rem, 5.42vw, 78px); font-weight: 500; letter-spacing: clamp(4px, .56vw, 8px); line-height: 1.02; }
   .intro-title span { font-weight: 200; }
-  .intro-copy { color: var(--muted); font-size: 14px; letter-spacing: 0.01em; line-height: 2; }
-  .case-placeholder { border-radius: 14px; box-shadow: 0 2px 6px #1212110f, 0 30px 60px -24px #1212114d; outline: 1px solid #12121114; }
-  .case-image { position: absolute; top: 7.06%; left: 50%; width: 115%; max-width: none; transform: translateX(-50%); border-radius: 14px; }
-  .case-image.is-contain { top: 50%; left: 50%; width: 92%; transform: translate(-50%, -50%); object-fit: contain; border-radius: 10px; }
-  .case-image.is-flat-cover { inset: 0; width: 100%; height: 100%; max-width: 100%; transform: none; object-fit: contain; border-radius: 0; }
-  .viz-cover-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .laike-cover-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .laike-image-link { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-  .case-image.viz-cover-ui { top: 18%; left: 13%; width: 135%; border-radius: 14px; transform: rotate(0deg); transform-origin: center center; box-shadow: 0 8px 22px rgb(32 67 120 / .14); transition: transform 950ms cubic-bezier(.16, 1, .3, 1); will-change: transform; }
-  .case-card:hover .viz-cover-ui, .case-card:focus-within .viz-cover-ui { transform: rotate(-5deg); }
-  .case-image.laike-cover-ui { z-index: 2; top: auto; bottom: 0; left: 11%; width: 96%; border-radius: 0; pointer-events: auto; transform: scale(1); transform-origin: center center; transition: transform 950ms cubic-bezier(.16, 1, .3, 1); will-change: transform; }
-  .case-card:hover .laike-cover-ui, .case-card:focus-within .laike-cover-ui { transform: scale(1.1); }
+  .work-intro { font-family: 'PingFang SC', system-ui, sans-serif; }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .case-cover-image { transition: transform 950ms cubic-bezier(.16, 1, .3, 1); }
+    .case-card:hover .case-cover-image { transform: scale(1.1); }
+  }
   .case-arrow { z-index: 3; opacity: 0; scale: .6; transition: opacity 250ms ease, scale 450ms var(--ease-out-expo); }
   .case-card:hover .case-arrow, .case-card:has(a:focus-visible) .case-arrow { opacity: 1; scale: 1; }
   .case-card:has(a:focus-visible) { outline: 2px solid var(--ink); outline-offset: 8px; border-radius: var(--radius-card); }
   .explore-more { opacity: 0; transition: opacity 200ms ease; }
   .explore-card:hover .explore-more, .explore-card:focus-within .explore-more { opacity: 1; }
   @media (hover: none) { .explore-more { opacity: 1; } }
-  @media (prefers-reduced-motion: reduce) { .case-arrow, .explore-more, .viz-cover-ui, .laike-cover-ui { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .case-arrow, .explore-more { transition: none !important; } }
 </style>

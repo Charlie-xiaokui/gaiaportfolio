@@ -1,5 +1,4 @@
 ---
-import ThemeToggle from '@/components/chrome/ThemeToggle.astro';
 import Icon from '@/components/ui/Icon.astro';
 import Logomark from '@/components/ui/Logomark.astro';
 import { navigation, siteConfig } from '@/config/site';
@@ -28,11 +27,7 @@ const current = (href: string) => (path === href ? 'page' : path.startsWith(href
       </ul>
     </nav>
 
-    <div class="ml-auto flex items-center gap-1.5">
-      <ThemeToggle />
-      <a class="btn btn-primary btn-sm ml-1" href={siteConfig.action.href}>
-        {siteConfig.action.label}
-      </a>
+    <div class:list={["ml-auto flex items-center", path === "/" ? "gap-2 sm:gap-4" : "gap-1.5"]}>
       <button
         type="button"
         class="hidden"
@@ -79,11 +74,6 @@ const current = (href: string) => (path === href ? 'page' : path.startsWith(href
         ))}
       </ul>
     </nav>
-    <div class="shell mt-8">
-      <a class="btn btn-primary w-full" href={siteConfig.action.href}>
-        {siteConfig.action.label}
-      </a>
-    </div>
   </dialog>
 </header>
 

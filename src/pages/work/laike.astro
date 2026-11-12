@@ -1,4 +1,5 @@
 ---
+import { caseStudyCopy } from '@/config/case-studies';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import NextProject from '@/components/work/NextProject.astro';
 import { getProjects } from '@/lib/work';
@@ -16,13 +17,14 @@ const figures = {
   outcome: '/laike-case/laike-21.webp',
   system: '/laike-case/laike-22.webp',
 };
+const caseCopy = caseStudyCopy.laike;
 ---
 <BaseLayout title="抖音来客首页视图升级" description="从行业化到角色化的转型，让首页适配不同岗位的真实工作。" type="article" closing={false}>
   <article class="case-media-hover case-study">
     <header class="shell case-header">
-      <nav aria-label="面包屑" class="case-header-breadcrumb rise"><a href="/">作品案例</a> <span aria-hidden="true"> / </span> <span aria-current="page">抖音来客首页视图升级</span></nav>
+      <nav aria-label="面包屑" class="case-header-breadcrumb rise"><a href="/">作品案例</a> <span aria-hidden="true"> / </span> <span aria-current="page">{caseCopy.title}</span></nav>
       <h1 class="case-title case-header-title rise" style="--rise-step: 2">从行业化到角色化的转型</h1>
-      <p class="case-lead case-header-intro rise" style="--rise-step: 3">商家首页过去按行业拆成外卖版、到店版和综合版，功能越堆越多，却仍接不住不同岗位的工作。这次改版从职责出发，重构成店员、运营、店长三条角色动线</p>
+      <p class="case-lead case-header-intro rise" style="--rise-step: 3">{caseCopy.description}</p>
       <dl class="case-meta case-header-meta rise" style="--rise-step: 4">
         <div><dt>职责</dt><dd>项目设计 OWNER</dd></div>
         <div><dt>工作内容</dt><dd>商家调研与角色动线梳理、线上方案分析与竞品调研、设计探索与原型制作</dd></div>

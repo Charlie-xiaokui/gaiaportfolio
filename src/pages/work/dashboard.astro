@@ -1,4 +1,5 @@
 ---
+import { caseStudyCopy } from '@/config/case-studies';
 import '@/styles/case-unified.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
@@ -12,6 +13,7 @@ const decisions = [
 ];
 
 const demoTabs = ['头部氛围', '指标卡设计', '提取行业特征', '4类仪表盘输出'];
+const caseCopy = caseStudyCopy.dashboard;
 ---
 
 <BaseLayout
@@ -26,14 +28,14 @@ const demoTabs = ['头部氛围', '指标卡设计', '提取行业特征', '4类
         <nav aria-label="面包屑" class="case-header-breadcrumb rise">
           <a href="/">作品案例</a>
           <span aria-hidden="true">/</span>
-          <span aria-current="page">仪表盘优化专项</span>
+          <span aria-current="page">{caseCopy.title}</span>
         </nav>
         <h1 class="case-title text-balance self-stretch case-header-title rise" style="--rise-step: 2">
           让图表更好读，让仪表盘讲清业务
         </h1>
       </div>
       <p class="text-pretty case-header-intro rise" style="--rise-step: 3">
-        客户说“看不清”，售前却需要“讲得清”。从模糊的反馈出发，建立评估标准、优化图表，再把散乱的仪表盘重组为有层次、有行业辨识度的产品演示
+        {caseCopy.description}
       </p>
       <dl class="dashboard-meta case-header-meta rise" style="--rise-step: 4">
         <div>

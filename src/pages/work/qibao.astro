@@ -1,4 +1,5 @@
 ---
+import { caseStudyCopy } from '@/config/case-studies';
 import '@/styles/case-unified.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
@@ -87,6 +88,7 @@ const sopSteps = [
   { t: '转交施工', h: '验证后再转交施工', d: '材料确认后再进入施工，顺序上先解决信任、再进入技术性的保养操作，减少“已经换上才怀疑”的被动。', tags: ['先验证', '后施工', '顺序清晰'] },
   { t: '交还剩余机油', h: '离店时留下证据', d: '结算交车时交还剩余机油，配合环检报告、结算单、安心检测单、发票、车钥匙与定制信封，完成最后一次正品提醒。', tags: ['剩余物料', '完整单据', '可追溯'] },
 ];
+const caseCopy = caseStudyCopy.qibao;
 ---
 
 <BaseLayout
@@ -99,10 +101,10 @@ const sopSteps = [
     <header class="shell case-header">
       <nav aria-label="面包屑" class="case-header-breadcrumb rise">
         <a href="/">作品案例</a> <span aria-hidden="true"> / </span>
-        <span aria-current="page">汽车维保服务体验设计</span>
+        <span aria-current="page">{caseCopy.title}</span>
       </nav>
       <h1 class="case-title case-header-title rise" style="--rise-step: 2">多端协同，提升用户确定感</h1>
-      <p class="case-lead case-header-intro rise" style="--rise-step: 3">联动 C 端、B 端、S 端与线下 SOP，把“时间不确定、材料不放心”的服务，重构成用户敢下单、门店能交付、正品可感知的标准化产品</p>
+      <p class="case-lead case-header-intro rise" style="--rise-step: 3">{caseCopy.description}</p>
       <dl class="case-meta-summary case-header-meta rise" style="--rise-step: 4">
         <div><dt>设计范围</dt><dd>C 端用户、B 端门店、S 端供应链与运营的多端联动设计</dd></div>
         <div><dt>项目成果</dt><dd>快保单 GMV 86W；NPS 80.1%→83.5%；正品可验知晓率 24%→56%</dd></div>

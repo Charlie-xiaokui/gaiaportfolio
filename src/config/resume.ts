@@ -1,61 +1,49 @@
+import codex from '@/assets/logos/codex.svg';
 import figma from '@/assets/logos/figma.svg';
-import framer from '@/assets/logos/framer.svg';
-import shopify from '@/assets/logos/shopify.svg';
-import webflow from '@/assets/logos/webflow.svg';
+import paper from '@/assets/logos/paper.svg';
+import trae from '@/assets/logos/trae.svg';
 
 export const resume = {
-  eyebrow: 'Resume',
-  title: 'I make complicated things feel',
-  highlight: 'clear and easy to use.',
-  text: "I'm Maria, a product designer focused on turning dense workflows, fuzzy requirements, and overloaded interfaces into experiences people can navigate with confidence.",
   snapshot: [
-    { label: 'Location', value: 'Lisbon, Portugal' },
-    { label: 'Focus', value: 'UX and product design' },
-    { label: 'Specialties', value: 'Dashboards, workflows, design systems' },
-    { label: 'Languages', value: 'English, Portuguese, Romanian' },
+    { label: "期望城市", value: "杭州、上海" },
+    { label: "工作经验", value: "9年" },
+    { label: "出生日期", value: "1993.03" },
+    { label: "擅长方向", value: "AI 平台体验、生产力工具、商家工作流、数据可视化" },
   ],
   experience: [
     {
-      role: 'Lead Product Designer',
-      company: 'Independent',
-      period: '2021 - Present',
-      text: 'Leading interface design, product strategy, and design systems work for SaaS and service platforms across legal, nonprofit, and property.',
+      role: "UX 设计师",
+      company: "飞书体验设计",
+      period: "2025.12 – 至今",
+      text: "负责飞书妙搭（AI 应用开发平台）专家模式、Aily（Agent 平台）市场模块，以及妙搭与 Aily 租户管理后台的 UX 设计；主导市场模块从消费用户到管理员用户的企业用户串联",
     },
     {
-      role: 'Senior Product Designer',
-      company: 'Northbound Studio',
-      period: '2017 - 2021',
-      text: "Designed workflows, dashboards, and multi-platform products for startup and enterprise clients. Built the studio's shared component library.",
+      role: "UX 设计师",
+      company: "抖音生活服务",
+      period: "2023.01 – 2025.11",
+      text: "负责抖音来客（商家经营平台）数据、商品管理与首页主框架的 UX 设计；主导首页从行业化到角色化的改造，完成店员版与管理版的设计和上线",
     },
     {
-      role: 'UI/UX Designer',
-      company: 'In-house product teams',
-      period: '2014 - 2017',
-      text: 'Built core interface patterns, user flows, and production-ready visual systems for web and mobile products.',
-    },
-  ],
-  capabilities: [
-    {
-      title: 'Product strategy',
-      text: 'Framing problems, prioritizing experience decisions, and aligning product goals with user value.',
+      role: "UX 设计师",
+      company: "火山引擎",
+      period: "2019.08 – 2022.12",
+      text: "BI数据平台核心设计师，负责可视化查询重构、仪表盘图表与 demo 优化等重点模块；把控小组设计输出质量，协助新同学落地与成长",
     },
     {
-      title: 'UI systems',
-      text: 'Interface languages that scale across flows, features, and implementation teams.',
-    },
-    {
-      title: 'Execution',
-      text: 'Wireframes through high-fidelity UI, refinement, and developer-ready handoff.',
+      role: "交互设计师",
+      company: "滴滴出行",
+      period: "2018.04 – 2019.08",
+      text: "负责小桔自营通 CRM 与维保端的交互设计；主导 “30 分钟快保” 在用户端、技师端的多端联动方案",
     },
   ],
   education: [
-    { title: 'MA, Interaction Design', place: 'University of the Arts', period: '2014' },
-    { title: 'BA, Visual Communication', place: 'National University of Arts', period: '2012' },
+    { title: "上海交通大学", place: "设计学硕士", period: "2015.9-2019.3" },
+    { title: "天津大学", place: "工业设计学士", period: "2011.9-2015.3" },
   ],
   tools: [
-    { name: 'Figma', logo: figma, dark: false },
-    { name: 'Framer', logo: framer, dark: true },
-    { name: 'Webflow', logo: webflow, dark: false },
-    { name: 'Shopify', logo: shopify, dark: false },
+    { name: 'Figma', logo: figma },
+    { name: 'Paper', logo: paper },
+    { name: 'Codex', logo: codex },
+    { name: 'Trae', logo: trae, tone: 'dark' },
   ],
 };

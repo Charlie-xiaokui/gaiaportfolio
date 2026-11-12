@@ -1,7 +1,9 @@
 ---
+import { caseStudyCopy } from '@/config/case-studies';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import '@/styles/case-unified.css';
 const a = (name: string) => `/viz-case/${name}.jpg`;
+const caseCopy = caseStudyCopy.viz;
 ---
 
 <BaseLayout
@@ -14,11 +16,11 @@ const a = (name: string) => `/viz-case/${name}.jpg`;
       <nav aria-label="面包屑" class="case-header-breadcrumb rise">
         <a href="/">作品案例</a>
         <span aria-hidden="true">/</span>
-        <span aria-current="page">可视化查询设计重构</span>
+        <span aria-current="page">{caseCopy.title}</span>
       </nav>
       <h1 class="case-header-title rise" style="--rise-step: 2">从取数到分析，重新理顺工作的路径</h1>
       <p class="intro case-header-intro rise" style="--rise-step: 3">
-        同一套编辑器，要让简单取数更容易，也要承接持续深入的分析。这次重构从产品定位和用户任务出发，重新组织框架、配置、学习与视觉体验
+        {caseCopy.description}
       </p>
       <dl class="case-header-meta rise" style="--rise-step: 4">
         <div>

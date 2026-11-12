@@ -1,5 +1,7 @@
 ---
+import { caseStudyCopy } from '@/config/case-studies';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+const caseCopy = caseStudyCopy.miaoda;
 ---
 
 <BaseLayout title="妙搭支持专家模式" description="承接专业开发，让简单体验不变复杂" closing={false}>
@@ -25,7 +27,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
                   </div>
                   <div>
                     <div aria-current="page">
-                      妙搭支持专家模式
+                      {caseCopy.title}
                     </div>
                   </div>
                 </div>
@@ -34,8 +36,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
                 </div>
               </div>
               <div class="text-[21.792px] leading-[185%] text-pretty self-stretch font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38] case-header-intro rise" style="--rise-step: 3">
-                将 aPaaS 4.0 的专业能力融入妙搭，保留“说需求 → 看效果 → 修改 → 发布”
-                的简单开发路径，按需展开协作、数据隔离与集成等能力，让简单需求轻松起步，专业需求也有路可走
+                {caseCopy.description}
               </div>
             </div>
             <dl class="flex py-8 gap-10 flex-wrap items-start [align-content:start] justify-between self-stretch border-t border-t-solid border-b border-b-solid border-y-[#E6E5DF] w-full case-header-meta rise" style="--rise-step: 4">

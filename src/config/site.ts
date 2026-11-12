@@ -4,8 +4,8 @@ export interface NavLink {
 }
 
 export const siteConfig = {
-  name: "Gaia's Portfolio",
-  title: 'Maria - Product designer portfolio',
+  name: "Guanyu Dai's Portfolio",
+  title: 'Guanyu Dai - Product designer portfolio',
   description:
     'Maria is a product designer who turns dense workflows and fuzzy requirements into clear, trustworthy digital products. Selected work, case studies, and resume.',
   siteUrl: 'https://maria.xocoweb.workers.dev',
@@ -15,10 +15,10 @@ export const siteConfig = {
   socialImage: '/og-image.png',
 
   author: {
-    name: 'Maria Ionescu',
+    name: 'Guanyu Dai',
     role: 'Product Designer',
     location: 'Lisbon, Portugal',
-    email: 'hello@example.com',
+    email: 'daiguanyu@126.com',
   },
 
   /** The pill above the homepage headline. Set `enabled: false` to remove it. */
@@ -28,7 +28,7 @@ export const siteConfig = {
   },
 
   /** The button at the end of the header and in the mobile menu. */
-  action: { label: 'Get in touch', href: 'mailto:hello@example.com' },
+  action: { label: 'Get in touch', href: 'mailto:daiguanyu@126.com' },
 
   /** A PDF in `public/`, offered on the resume page. Leave empty to hide the button. */
   resumePdf: '',

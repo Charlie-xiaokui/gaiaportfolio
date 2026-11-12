@@ -1,4 +1,5 @@
 ---
+import { caseStudyCopy } from '@/config/case-studies';
 import '@/styles/case-unified.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 const sections = [
@@ -9,10 +10,11 @@ const sections = [
  { id:'govern', label:'05 / 管理员 · 持续治理', title:'从“编辑配置项”，走向“判断该向谁开放”。', problem:'只有新建、编辑、删除，无法回答谁能用、凭证是否配好、谁已安装，以及出问题后如何止损。', strategy:'让列表同时呈现名称与描述、来源、可用范围、预授权和启用状态，并就近提供配置范围、配置凭证、详情与启停操作。', value:'预授权状态把后台技术动作翻译成业务结果：管理员配好凭证后，指定范围的员工可以直接使用，将重复且高门槛的配置集中处理。', images:['借助功能列表让管理员围绕范围、凭证、启停状态做决策和治理动作.png'] },
 ];
 const asset = (name: string) => '/aily-case/' + name.split('/').map(encodeURIComponent).join('/');
+const caseCopy = caseStudyCopy.aily;
 ---
 <BaseLayout title="Aily 工作伙伴能力接入与管理体验设计" description="让普通成员敢装、会用，让管理员能配、敢管。" closing={false}>
 <article class="case-media-hover aily-case shell">
- <header class="aily-hero case-header"><nav aria-label="面包屑" class="case-header-breadcrumb rise"><a href="/">作品案例</a><span aria-hidden="true">/</span><span aria-current="page">Aily 工作伙伴能力接入与管理体验设计</span></nav><h1 class="case-header-title rise" style="--rise-step: 2">让 Agent 接得上，也管得住</h1><p class="lead case-header-intro rise" style="--rise-step: 3">让成员在不理解复杂技术配置的情况下获得并使用能力，同时让管理员清晰、可控地完成企业能力配置与治理</p><dl class="case-header-meta rise" style="--rise-step: 4"><div><dt>设计范围</dt><dd>Aily 市场模块 &amp; 企业管理后台设计</dd></div><div><dt>方案成果</dt><dd>Aily前端用户敢装、会用；Aily企业管理员能配、敢管</dd></div></dl></header>
+ <header class="aily-hero case-header"><nav aria-label="面包屑" class="case-header-breadcrumb rise"><a href="/">作品案例</a><span aria-hidden="true">/</span><span aria-current="page">{caseCopy.title}</span></nav><h1 class="case-header-title rise" style="--rise-step: 2">让 Agent 接得上，也管得住</h1><p class="lead case-header-intro rise" style="--rise-step: 3">{caseCopy.description}</p><dl class="case-header-meta rise" style="--rise-step: 4"><div><dt>设计范围</dt><dd>Aily 市场模块 &amp; 企业管理后台设计</dd></div><div><dt>方案成果</dt><dd>Aily前端用户敢装、会用；Aily企业管理员能配、敢管</dd></div></dl></header>
  <section class="aily-bg-section" id="background" aria-labelledby="aily-bg-title">
   <div class="aily-bg-head">
    <p class="aily-bg-eyebrow">01 / 背景与问题</p>

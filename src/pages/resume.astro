@@ -9,42 +9,47 @@ import { profileSchema } from '@/lib/schema';
 
 <BaseLayout
   title="Resume"
-  description={`Resume of ${siteConfig.author.name}: experience, capabilities, education, and tools across ten years of product design.`}
+  description={`Resume of ${siteConfig.author.name}: work experience, education, and design tools.`}
   type="profile"
   structuredData={profileSchema('/resume/')}
 >
-  <header class="shell grid items-end gap-12 pt-16 sm:pt-24 lg:grid-cols-[minmax(0,1fr)_352px] lg:gap-16">
-    <div>
-      <p class="rise eyebrow">{resume.eyebrow}</p>
-      <h1 class="rise mt-6 max-w-[20ch] text-headline" style="--rise-step: 1">
-        {resume.title} <span class="serif">{resume.highlight}</span>
-      </h1>
-      <p class="rise mt-6 max-w-2xl text-lead text-body" style="--rise-step: 2">{resume.text}</p>
-    <div class="rise mt-8 flex flex-wrap gap-3" style="--rise-step: 3">
-      <a class="btn btn-primary" href="/">
-        View works
-        <Icon name="arrow-right" class="icon-nudge size-4" />
+  <header class="shell grid items-end gap-12 pt-16 antialiased [font-synthesis:none] sm:pt-24 lg:grid-cols-[minmax(0,1fr)_352px] lg:gap-16">
+    <div class="flex flex-col items-start gap-12 lg:gap-20">
+      <div class="flex flex-col items-start gap-10">
+        <p class="rise eyebrow leading-[160%]">Resume</p>
+        <h1 class="rise text-balance text-[clamp(2.5rem,5.42vw,78px)] font-medium leading-[102%] tracking-[2px] text-ink self-stretch [font-family:'PingFang_SC',system-ui,sans-serif]" style="--rise-step: 1">戴冠宇, <span class="whitespace-nowrap font-light">UX设计师</span></h1>
+        <p class="rise text-pretty text-sm leading-[200%] tracking-[0.01em] text-muted [font-family:'PingFang_SC',system-ui,sans-serif]" style="--rise-step: 2">
+          专业能力：可独立承担大型产品需求，深度挖掘关键价值，持续带来正向业务收益<br />
+          协作与项目：跨团队协作与项目管理能力突出，能够主导产设研合作项目并高效拿到结果<br />
+          学习与拓展：自学 SQL、系统分析师，从0成长为产品设计接口人；协同商家制定运营策略
+        </p>
+      </div>
+      <a class="rise btn btn-primary" href="/" style="--rise-step: 3">
+        查看作品 <Icon name="arrow-right" class="icon-nudge size-4" />
       </a>
     </div>
-    </div>
     <div class="rise relative overflow-hidden rounded-3xl" style="--rise-step: 3">
-      <img src="https://app.paper.design/static/flowers.webp" alt="Flowers" class="aspect-[4/5] w-full object-cover" />
-      <span class="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-sm font-medium text-[#121211]">
-        <Icon name="map-pin" class="size-3.5" /> Hangzhou, Zhejiang
-      </span>
+      <img src="/gaia-portrait.jpg" alt="戴冠宇手持麦克风的照片" width="960" height="1432" class="aspect-[4/5] w-full object-cover object-top" />
+      <a href="mailto:daiguanyu@126.com" class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/80 px-3.5 py-1.5 text-sm font-medium text-[#121211] backdrop-blur-[8px]">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+        </svg>
+        daiguanyu@126.com
+      </a>
     </div>
   </header>
 
-  <div class="shell mt-20 sm:mt-28">
+  <div class="shell mt-20 antialiased [font-synthesis:none] sm:mt-28">
     <section class="resume-row reveal" aria-labelledby="snapshot-title">
       <h2 id="snapshot-title" class="eyebrow self-start">
         Snapshot
       </h2>
-      <dl class="grid gap-x-10 gap-y-6 sm:grid-cols-2">
-        {resume.snapshot.map((item) => (
-          <div>
+      <dl class="grid grid-cols-3 gap-x-3 gap-y-6 sm:gap-x-10">
+        {resume.snapshot.map((item, index) => (
+          <div class:list={{ "col-span-full": index === resume.snapshot.length - 1 }}>
             <dt class="text-sm text-muted">{item.label}</dt>
-            <dd class="mt-1 text-lg font-medium">{item.value}</dd>
+            <dd class="mt-1 text-lg font-medium leading-7">{item.value}</dd>
           </div>
         ))}
       </dl>
@@ -56,30 +61,16 @@ import { profileSchema } from '@/lib/schema';
       </h2>
       <ol class="grid gap-10">
         {resume.experience.map((job) => (
-          <li class="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-8">
-            <h3 class="text-title">
+          <li class="grid gap-y-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-8">
+            <h3 class="text-balance text-2xl font-medium leading-[120%] tracking-[1px]">
               {job.role}
               <span class="text-muted">, {job.company}</span>
             </h3>
             <p class="text-sm text-muted sm:row-start-1 sm:col-start-2 sm:pt-1.5">{job.period}</p>
-            <p class="max-w-2xl text-body">{job.text}</p>
+            <p class="max-w-2xl text-sm leading-[200%] text-muted">{job.text}</p>
           </li>
         ))}
       </ol>
-    </section>
-
-    <section class="resume-row reveal" aria-labelledby="capabilities-title">
-      <h2 id="capabilities-title" class="eyebrow self-start">
-        Capabilities
-      </h2>
-      <ul class="grid gap-8 sm:grid-cols-3">
-        {resume.capabilities.map((item) => (
-          <li>
-            <h3 class="font-semibold">{item.title}</h3>
-            <p class="mt-2 text-muted">{item.text}</p>
-          </li>
-        ))}
-      </ul>
     </section>
 
     <section class="resume-row reveal" aria-labelledby="education-title">
@@ -89,8 +80,8 @@ import { profileSchema } from '@/lib/schema';
       <ul class="grid gap-6">
         {resume.education.map((item) => (
           <li class="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1">
-            <span>
-              <span class="font-semibold">{item.title}</span>
+            <span class="text-balance text-2xl font-medium leading-[120%] tracking-[1px]">
+              {item.title}
               <span class="text-muted">, {item.place}</span>
             </span>
             <span class="text-sm text-muted">{item.period}</span>
@@ -103,18 +94,18 @@ import { profileSchema } from '@/lib/schema';
       <h2 id="tools-title" class="eyebrow self-start">
         Tools
       </h2>
-      <ul class="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <ul class="grid gap-3 min-[360px]:grid-cols-2 xl:grid-cols-4">
         {resume.tools.map((tool) => (
           <li class="flex items-center gap-3 rounded-panel border border-line bg-surface p-3.5">
             <span
               class:list={[
-                'grid size-11 place-items-center rounded-xl border',
-                tool.dark ? 'border-[#121211] bg-[#121211]' : 'border-line bg-sunken',
+                'grid size-11 shrink-0 place-items-center rounded-xl border',
+                tool.tone === 'dark' ? 'border-[#121211] bg-[#121211]' : 'border-[#E6E5DF] bg-[#F2F2ED]',
               ]}
             >
-              <Image src={tool.logo} alt="" class="size-6 object-contain" />
+              {tool.logo ? <Image src={tool.logo} alt="" class="size-6 object-contain" /> : <span aria-hidden="true" class:list={["font-semibold", { "text-white": tool.tone === 'dark' }]}>{tool.initial}</span>}
             </span>
-            <span class="font-medium">{tool.name}</span>
+            <span class="text-[17px] font-medium leading-[160%]">{tool.name}</span>
           </li>
         ))}
       </ul>

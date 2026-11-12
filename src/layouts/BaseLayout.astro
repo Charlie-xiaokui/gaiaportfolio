@@ -54,9 +54,8 @@ const schema = structuredData ?? websiteSchema();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#fafaf7" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0d0d0c" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#fafaf7" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
@@ -86,45 +85,6 @@ const schema = structuredData ?? websiteSchema();
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={absoluteImage} />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
-    <script is:inline>
-      (() => {
-        const storageKey = 'maria-theme';
-        const root = document.documentElement;
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
-        let stored = null;
-
-        try {
-          stored = localStorage.getItem(storageKey);
-        } catch {}
-
-        const apply = (isDark) => {
-          root.classList.toggle('dark', isDark);
-          document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
-            button.setAttribute('aria-pressed', String(isDark));
-          });
-        };
-
-        apply(stored ? stored === 'dark' : systemDark.matches);
-
-        systemDark.addEventListener('change', (event) => {
-          if (!stored) apply(event.matches);
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-          apply(root.classList.contains('dark'));
-          document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
-            button.addEventListener('click', () => {
-              const isDark = !root.classList.contains('dark');
-              stored = isDark ? 'dark' : 'light';
-              try {
-                localStorage.setItem(storageKey, stored);
-              } catch {}
-              apply(isDark);
-            });
-          });
-        });
-      })();
-    </script>
     <noscript>
       <style>
         [data-needs-js] {

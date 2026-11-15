@@ -88,9 +88,14 @@ const caseCopy = caseStudyCopy.aily;
     <figure><img src="/aily-case/decision/before-3.png" alt="改造前：技能详情评测报告" loading="lazy" /><figcaption>技能详情-评测报告</figcaption></figure>
    </div>
    <div class="aily-decision-stage" data-decision-stage="after" hidden>
-    <figure><img src="/aily-case/decision/after-intro.png" alt="改造后：聚焦技能介绍" loading="lazy" /><figcaption>技能详情-技能介绍</figcaption></figure>
-    <figure><img src="/aily-case/decision/after-version.png" alt="改造后：版本记录" loading="lazy" /><figcaption>技能详情-版本记录</figcaption></figure>
-    <figure><img src="/aily-case/decision/after-review.png" alt="改造后：评测报告" loading="lazy" /><figcaption>技能详情-评测报告</figcaption></figure>
+    <figure>
+      <img src={asset('选择能力-改造后-01.png')} width="5760" height="3764" alt="改造后：市场技能详情" loading="lazy" />
+      <figcaption>市场-技能详情：这个技能做什么、多少人用</figcaption>
+    </figure>
+    <figure>
+      <img src={asset('选择能力-改造后-02.png')} width="5760" height="3764" alt="改造后：我的技能详情" loading="lazy" />
+      <figcaption>我的技能-技能详情：谁能看、是否上架、是否更新、是否删除</figcaption>
+    </figure>
    </div>
   </div>
  </section>
@@ -98,34 +103,36 @@ const caseCopy = caseStudyCopy.aily;
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">03 / 普通用户 · 开始使用</p><h2 id="aily-authorize-title">先获得能力，在任务需要时再授权</h2></div>
   <div class="aily-authorize-body">
    <div class="aily-authorize-reasons"><div><h3>问题：安装阶段要求API Key，用户前置承担配置成本</h3><p>• 安装 / 添加解决的是 “这个伙伴具备这项能力”<br />• 授权解决的是 “这次可以访问我的某个系统”</p></div><div><h3>解决思路：拆分 “安装能力” 和 “完成授权”</h3><p>• 降低首次使用门槛<br />• 当用户在对话里提出明确任务时，再引导授权，用户更容易理解授权的意义</p></div></div>
-   <div class="aily-authorize-tabs" data-case-tabs><div class="aily-authorize-tablist" role="tablist" aria-label="安装与授权方式"><button type="button" role="tab" id="authorize-tab-immediate" aria-controls="authorize-panel-immediate" aria-selected="true" tabindex="0">安装后立刻授权</button><button type="button" role="tab" id="authorize-tab-deferred" aria-controls="authorize-panel-deferred" aria-selected="false" tabindex="-1">安装与授权拆分</button></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="authorize-panel-immediate" aria-labelledby="authorize-tab-immediate"><button type="button" class="aily-authorize-image" data-image="/aily-case/authorize-immediate.png" aria-label="放大查看安装后立刻授权方案"><img src="/aily-case/authorize-immediate.png" width="868" height="543" alt="安装后立刻弹出授权配置，要求填写 API Key" loading="lazy" /></button><p>必须完成授权后才安装成功</p></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="authorize-panel-deferred" aria-labelledby="authorize-tab-deferred" hidden><button type="button" class="aily-authorize-image" data-image={asset('授权01.png')} aria-label="放大查看安装与授权拆分方案"><img src={asset('授权01.png')} width="2440" height="1600" alt="在对话任务中需要连接外部系统时，再引导用户授权" loading="lazy" /></button><p>先完成安装，实际任务需要访问系统时再引导授权</p></div>
+   <div class="aily-authorize-tabs" data-case-tabs><div class="aily-authorize-tablist" role="tablist" aria-label="安装与授权方式"><button type="button" role="tab" id="authorize-tab-immediate" aria-controls="authorize-panel-immediate" aria-selected="true" tabindex="0">改造前-安装后立刻授权</button><button type="button" role="tab" id="authorize-tab-deferred" aria-controls="authorize-panel-deferred" aria-selected="false" tabindex="-1">改造后-安装与授权拆分</button></div>
+<div class="aily-authorize-panel" role="tabpanel" id="authorize-panel-immediate" aria-labelledby="authorize-tab-immediate"><button type="button" class="aily-authorize-image" data-image={asset('开始使用-安装后立刻授权-01.png')} aria-label="放大查看安装后立刻授权方案"><img src={asset('开始使用-安装后立刻授权-01.png')} width="5760" height="3600" alt="安装后立刻弹出授权配置，要求填写 API Key" loading="lazy" /></button><p>必须完成授权后才安装成功</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="authorize-panel-deferred" aria-labelledby="authorize-tab-deferred" hidden><button type="button" class="aily-authorize-image" data-image={asset('开始使用-安装与授权拆分-01.png')} aria-label="放大查看安装与授权拆分方案"><img src={asset('开始使用-安装与授权拆分-01.png')} width="5760" height="3600" alt="在对话任务中需要连接外部系统时，再引导用户授权" loading="lazy" /></button><p>先完成安装，实际任务需要访问系统时再引导授权</p></div>
    </div>
   </div>
  </section> : s.id==='ownership' ? <section class="aily-authorize-section aily-ownership-section" id="ownership" aria-labelledby="aily-ownership-title">
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">03 / 普通用户 · 能力归属</p><h2 id="aily-ownership-title">装给谁、在哪管、何时用，都有明确落点</h2></div>
   <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>难点：多伙伴场景下，能力容易 “装了但找不到归属”</h3><p>• 技能和连接器安装到具体工作伙伴后，用户需要判断装给谁、在哪里管理<br />• 对话时调用了哪些能力<br />• 伙伴越多，能力归属越容易变得不清晰</p></div><div><h3>方案取舍：让能力的安装、管理和调用都回到具体伙伴</h3><p>• 安装时明确目标伙伴，让能力有明确落点<br />• 伙伴详情承接能力查看与启停，让能力归属可见、可控<br />• 对话中保留显式调用入口，降低多伙伴场景下的能力使用困惑</p></div></div>
    <div class="aily-authorize-tabs" data-case-tabs><div class="aily-authorize-tablist" role="tablist" aria-label="能力归属方案"><button type="button" role="tab" id="ownership-tab-install" aria-controls="ownership-panel-install" aria-selected="true" tabindex="0">安装时展示落点</button><button type="button" role="tab" id="ownership-tab-manage" aria-controls="ownership-panel-manage" aria-selected="false" tabindex="-1">能力可见、可控</button><button type="button" role="tab" id="ownership-tab-conversation" aria-controls="ownership-panel-conversation" aria-selected="false" tabindex="-1">保留显示控制</button></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-install" aria-labelledby="ownership-tab-install"><div class="aily-ownership-image-grid"><div><button type="button" class="aily-authorize-image" data-image={asset('安装时提供明确的能力落点01.png')} aria-label="放大查看安装目标伙伴"><img src={asset('安装时提供明确的能力落点01.png')} width="1048" height="1040" alt="安装时选择目标智能体" loading="lazy" /></button><p>安装时支持选择智能体，明确能力落点</p></div><div><button type="button" class="aily-authorize-image" data-image={asset('安装时提供明确的能力落点02.png')} aria-label="放大查看已添加的智能体"><img src={asset('安装时提供明确的能力落点02.png')} width="1200" height="1280" alt="已安装的技能显示已添加的智能体" loading="lazy" /></button><p>已安装的技能展示已添加的智能体</p></div></div></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-manage" aria-labelledby="ownership-tab-manage" hidden><button type="button" class="aily-authorize-image" data-image={asset('把能力边界转化为可理解的信息.png')} aria-label="放大查看伙伴能力管理界面"><img src={asset('把能力边界转化为可理解的信息.png')} width="2440" height="1600" alt="伙伴详情集中展示技能、连接器及启停状态" loading="lazy" /></button><p>伙伴详情承接能力查看与启停，让归属可见、可控</p></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-conversation" aria-labelledby="ownership-tab-conversation" hidden><button type="button" class="aily-authorize-image" data-image={asset('对话中保留显式控制，降低多伙伴场景下的能力管理困惑.png')} aria-label="放大查看对话中的能力控制"><img src={asset('对话中保留显式控制，降低多伙伴场景下的能力管理困惑.png')} width="2880" height="1800" alt="对话中保留显式调用和能力控制入口" loading="lazy" /></button><p>对话中保留显式调用入口，随时确认当前可用能力</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-install" aria-labelledby="ownership-tab-install"><div class="aily-ownership-image-grid"><div><button type="button" class="aily-authorize-image" data-image={asset('能力归属-安装时展示落点-01.png')} aria-label="放大查看安装目标伙伴"><img src={asset('能力归属-安装时展示落点-01.png')} width="5760" height="3600" alt="安装时选择目标智能体" loading="lazy" /></button><p>安装时支持选择智能体，明确能力落点</p></div><div><button type="button" class="aily-authorize-image" data-image={asset('能力归属-安装时展示落点-02.png')} aria-label="放大查看已添加的智能体"><img src={asset('能力归属-安装时展示落点-02.png')} width="2400" height="2560" alt="已安装的技能显示已添加的智能体" loading="lazy" /></button><p>已安装的技能展示已添加的智能体</p></div></div></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-manage" aria-labelledby="ownership-tab-manage" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-能力可见、可控-01.png')} aria-label="放大查看伙伴能力管理界面"><img src={asset('能力归属-能力可见、可控-01.png')} width="5760" height="3600" alt="伙伴详情集中展示技能、连接器及启停状态" loading="lazy" /></button><p>伙伴详情承接能力查看与启停，让归属可见、可控</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-conversation" aria-labelledby="ownership-tab-conversation" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-保留显示控制-01.png')} aria-label="放大查看对话中的能力控制"><img src={asset('能力归属-保留显示控制-01.png')} width="5760" height="3600" alt="对话中保留显式调用和能力控制入口" loading="lazy" /></button><p>对话中保留显式调用入口，随时确认当前可用能力</p></div>
    </div>
   </div>
  </section> : s.id==='configure' ? <section class="aily-authorize-section aily-admin-section aily-configure-section" id="configure" aria-labelledby="aily-configure-title">
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">04 / 管理员用户 · 接入能力</p><h2 id="aily-configure-title">复杂现实要覆盖，复杂字段不必同时出现</h2></div>
   <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：配置信息过于复杂</h3><p>企业自定义技能包的创建非常复杂。管理员可能面对<br />• MCP / CLI 两种连接器<br />• API Key、OAuth 2.0、OAuth 2.1等认证方式<br />• 传输类型、请求头、查询参数、请求体等不同的协议与参数<br />• token 获取、刷新和返回字段映射不同的凭证链路</p></div><div><h3>解决思路：用分步和条件展示，把字段放到正确的配置时刻</h3><p>• 按流程切分：基础信息 → 连接器配置 → 关联技能；<br />• 先定类型，再出字段：先选择 MCP/CLI 和认证方式，再展示对应参数；<br />• 用预览和状态确认结果：管理员能看到员工侧授权表单，以及当前是否配置完成<br />• 首期保覆盖，后续提效率：先兼容标准和非标准服务，再补文件识别和自动填充</p></div></div>
    <div class="aily-authorize-tabs" data-case-tabs><div class="aily-authorize-tablist" role="tablist" aria-label="管理员接入能力方案"><button type="button" role="tab" id="configure-tab-steps" aria-controls="configure-panel-steps" aria-selected="true" tabindex="0">按流程切分</button><button type="button" role="tab" id="configure-tab-conditions" aria-controls="configure-panel-conditions" aria-selected="false" tabindex="-1">先定类型，再出字段</button><button type="button" role="tab" id="configure-tab-preview" aria-controls="configure-panel-preview" aria-selected="false" tabindex="-1">用预览和状态确认结果</button><button type="button" role="tab" id="configure-tab-coverage" aria-controls="configure-panel-coverage" aria-selected="false" tabindex="-1">首期保覆盖，后续提效率</button></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-steps" aria-labelledby="configure-tab-steps"><div class="aily-configure-image-grid">{['配置表单：先覆盖复杂现实，再通过分层降低认知负担01.png','配置表单：先覆盖复杂现实，再通过分层降低认知负担02.png','配置表单：先覆盖复杂现实，再通过分层降低认知负担03.png'].map((name,i)=><div><button type="button" class="aily-authorize-image" data-image={asset(name)} aria-label={`放大查看第 ${i+1} 步配置界面`}><img src={asset(name)} alt={['基础信息配置','连接器与认证配置','关联技能'][i]} loading="lazy" /></button><p>{['01 / 基础信息','02 / 连接器配置','03 / 关联技能'][i]}</p></div>)}</div></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-conditions" aria-labelledby="configure-tab-conditions" hidden><button type="button" class="aily-authorize-image" data-image={asset('配置表单：先覆盖复杂现实，再通过分层降低认知负担02.png')} aria-label="放大查看连接器配置"><img src={asset('配置表单：先覆盖复杂现实，再通过分层降低认知负担02.png')} width="2880" height="3574" alt="选定连接器与认证方式后展示对应字段" loading="lazy" /></button><p>先选择 MCP / CLI 与认证方式，再展示对应参数</p></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-preview" aria-labelledby="configure-tab-preview" hidden><button type="button" class="aily-authorize-image" data-image={asset('授权02.png')} aria-label="放大查看员工侧授权界面"><img src={asset('授权02.png')} width="2440" height="1600" alt="员工侧授权表单预览" loading="lazy" /></button><p>预览员工侧授权流程，确认配置结果与当前状态</p></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-coverage" aria-labelledby="configure-tab-coverage" hidden><button type="button" class="aily-authorize-image" data-image={asset('配置表单：先覆盖复杂现实，再通过分层降低认知负担03.png')} aria-label="放大查看关联技能配置"><img src={asset('配置表单：先覆盖复杂现实，再通过分层降低认知负担03.png')} width="2880" height="2326" alt="配置流程覆盖关联技能等完整接入路径" loading="lazy" /></button><p>首期先覆盖标准与非标准服务，后续补充文件识别和自动填充</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-steps" aria-labelledby="configure-tab-steps">
+      <video class="aily-configure-video" src="/aily-case/configure-steps.mp4" autoplay muted loop playsinline preload="metadata" aria-label="按流程切分：基础信息、连接器配置与关联技能演示"></video>
+    </div>
+    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-conditions" aria-labelledby="configure-tab-conditions" hidden><video class="aily-configure-video" src="/aily-case/configure-conditions.mp4" muted loop playsinline preload="none" aria-label="先定类型，再出字段"></video><p>先选择 MCP / CLI 与认证方式，再展示对应参数</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-preview" aria-labelledby="configure-tab-preview" hidden><video class="aily-configure-video" src="/aily-case/configure-preview.mp4" muted loop playsinline preload="none" aria-label="用预览和状态确认结果"></video><p>预览员工侧授权流程，确认配置结果与当前状态</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-coverage" aria-labelledby="configure-tab-coverage" hidden><video class="aily-configure-video" src="/aily-case/configure-coverage.mp4" muted loop playsinline preload="none" aria-label="首期保覆盖，后期提效率"></video><p>首期先覆盖标准与非标准服务，后续补充文件识别和自动填充</p></div>
    </div>
   </div>
  </section> : s.id==='govern' ? <section class="aily-authorize-section aily-admin-section aily-govern-section" id="govern" aria-labelledby="aily-govern-title">
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">04 / 管理员用户 · 持续治理</p><h2 id="aily-govern-title">让管理员看清能力状态，也能及时管控</h2></div>
   <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：管理员不只关注 “有没有”，也关注 “能不能放心开放”</h3><p>企业能力进入市场后，管理员需要持续判断：<br />• 谁能看到和使用<br />• 凭证是否配置完成<br />• 当前是否启用以及出现风险时能否快速停用<br />如果只提供新建、编辑、删除，管理员很难完成日常治理</p></div><div><h3>解决思路：用关键状态和高频操作，支撑管理员做治理决策</h3><p>• 来源与说明：识别能力来自官方还是企业自定义<br />• 可用范围：明确开放给全员还是指定成员 / 部门<br />• 凭证状态：区分未配置、已配置、不适用<br />• 启用状态：判断当前企业成员是否可用<br />• 管控操作：集中承接范围配置、凭证配置、详情查看和启停</p></div></div>
-   <div class="aily-govern-panel"><button type="button" class="aily-authorize-image" data-image={asset('借助功能列表让管理员围绕范围、凭证、启停状态做决策和治理动作.png')} aria-label="放大查看管理列表页"><img src={asset('借助功能列表让管理员围绕范围、凭证、启停状态做决策和治理动作.png')} width="2880" height="1800" alt="技能包管理列表展示可用范围、凭证状态、启用状态与管控操作" loading="lazy" /></button><p>管理列表页</p></div>
+   <div class="aily-govern-panel"><button type="button" class="aily-authorize-image" data-image={asset('持续治理.png')} aria-label="放大查看管理列表页"><img src={asset('持续治理.png')} width="5760" height="3600" alt="技能包管理列表展示可用范围、凭证状态、启用状态与管控操作" loading="lazy" /></button><p>管理列表页</p></div>
   </div>
  </section> : <section class="chapter" id={s.id}><p class="label">{s.label}</p><h2>{s.title}</h2><div class="reason"><div><h3>设计挑战</h3><p>{s.problem}</p></div><div><h3>设计取舍</h3><p>{s.strategy}</p></div></div><div class="gallery" data-gallery><div class="gallery-toolbar"><span>方案原稿 · 点击图片放大</span><div>{s.images.map((_,i)=><button type="button" aria-label={`查看第 ${i+1} 张方案`} aria-pressed={i===0?'true':'false'} data-slide={i}>{String(i+1).padStart(2,'0')}</button>)}</div></div>{s.images.map((name,i)=><figure hidden={i!==0}><button class="image-open" data-image={asset(name)} aria-label="放大查看方案原稿"><img src={asset(name)} alt={name.replace('.png','')} loading="lazy" /></button><figcaption>{name.replace('.png','').split('/').pop()}</figcaption></figure>)}</div><p class="takeaway">{s.value}</p></section>)}
  <section class="aily-future-section" id="future" aria-labelledby="aily-future-title"><div class="aily-future-head"><p class="aily-strategy-eyebrow">05 / 后续优化</p><h2 id="aily-future-title">从手动选择到按需推荐，<br />让能力添加更主动</h2></div><div class="aily-strategy-grid"><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 1</span><h3>手动选择伙伴 → 基于伙伴类型的推荐添加</h3><p>当用户从市场添加技能包时，可根据伙伴角色、已有能力和当前任务类型，推荐更适合的伙伴；从伙伴详情添加时，则默认当前伙伴，减少重复选择</p></article><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 2</span><h3>用户自行补齐能力 → 模板化能力组合</h3><p>对官方或高频伙伴，可在不影响能力授权边界的前提下，预置推荐能力组合，让伙伴创建后具备更完整的初始能力，但仍保留授权确认和启停控制</p></article></div></section>
@@ -134,12 +141,12 @@ const caseCopy = caseStudyCopy.aily;
 </BaseLayout>
 <script>
 document.querySelectorAll<HTMLElement>('[data-gallery]').forEach(g=>{const buttons=g.querySelectorAll<HTMLButtonElement>('[data-slide]');const figures=g.querySelectorAll('figure');buttons.forEach((b,i)=>b.addEventListener('click',()=>{buttons.forEach((x,j)=>x.setAttribute('aria-pressed',String(i===j)));figures.forEach((f,j)=>f.hidden=i!==j)}))});
-document.querySelectorAll<HTMLElement>('[data-case-tabs]').forEach(group=>{const tabs=Array.from(group.querySelectorAll<HTMLButtonElement>('[role="tab"]'));const panels=Array.from(group.querySelectorAll<HTMLElement>('[role="tabpanel"]'));const select=(index:number,focus=false)=>{tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1});panels.forEach((panel,i)=>panel.hidden=i!==index);if(focus)tabs[index]?.focus()};tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>select(index));tab.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();select((index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length,true)}else if(event.key==='Home'||event.key==='End'){event.preventDefault();select(event.key==='Home'?0:tabs.length-1,true)}})})});
+document.querySelectorAll<HTMLElement>('[data-case-tabs]').forEach(group=>{const tabs=Array.from(group.querySelectorAll<HTMLButtonElement>('[role="tab"]'));const panels=Array.from(group.querySelectorAll<HTMLElement>('[role="tabpanel"]'));const select=(index:number,focus=false)=>{tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1});panels.forEach((panel,i)=>{panel.hidden=i!==index;const video=panel.querySelector('video');if(panel.hidden)video?.pause();else void video?.play().catch(()=>{})});if(focus)tabs[index]?.focus()};tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>select(index));tab.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();select((index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length,true)}else if(event.key==='Home'||event.key==='End'){event.preventDefault();select(event.key==='Home'?0:tabs.length-1,true)}})})});
 document.querySelectorAll<HTMLButtonElement>('[data-decision-tab]').forEach(btn=>btn.addEventListener('click',()=>{const mode=btn.dataset.decisionTab;document.querySelectorAll<HTMLButtonElement>('[data-decision-tab]').forEach(b=>{const on=b.dataset.decisionTab===mode;b.setAttribute('aria-selected',String(on));b.classList.toggle('is-active',on)});document.querySelectorAll<HTMLElement>('[data-decision-stage]').forEach(stage=>{stage.hidden=stage.dataset.decisionStage!==mode})}));
 const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document.querySelectorAll<HTMLButtonElement>('[data-image]').forEach(b=>b.addEventListener('click',()=>{if(!viewer)return;viewer.querySelector('img')!.src=b.dataset.image!;viewer.showModal()}));viewer?.querySelector('button')?.addEventListener('click',()=>viewer.close());viewer?.addEventListener('click',e=>{if(e.target===viewer)viewer.close()});
 </script>
 <style>
-.aily-case{font-family:'PingFang SC',sans-serif;padding-bottom:80px}header{padding:48px 40px 0}nav{font-size:14px;color:var(--muted)}.label{font-size:13px;color:var(--muted);letter-spacing:.06em;margin-bottom:24px}header .label{margin-top:72px}h1{font-size:clamp(40px,5vw,68px);line-height:1.15;letter-spacing:-.035em}.lead{font-size:22px;line-height:1.8;max-width:780px;margin-top:32px;color:var(--body)}dl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;border-block:1px solid var(--line);padding-block:32px;margin-top:64px}dt{font-size:13px;color:var(--muted)}dd{margin-top:8px;line-height:1.8}h2{font-size:clamp(28px,3.4vw,48px);line-height:1.3;letter-spacing:-.025em;max-width:900px}.chapter,.future{margin-top:140px;scroll-margin-top:110px}button{cursor:pointer}.gallery-toolbar button{padding:10px 18px;border:1px solid var(--line-strong);border-radius:999px;font-size:14px}.gallery-toolbar button[aria-pressed=true]{background:var(--accent);color:#121211;border-color:var(--accent)}.chapter>h2,.chapter>.label{margin-left:40px}.reason{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin:40px}.reason h3{font-size:16px;margin-bottom:16px}.reason p,.future p{font-size:17px;line-height:1.9;color:var(--body)}.gallery{background:var(--sunken);border-radius:24px;padding:24px;margin-top:48px}.gallery-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}.gallery-toolbar span{font-size:13px;color:var(--muted)}.gallery-toolbar>div{display:flex;gap:6px;flex-wrap:wrap}.gallery-toolbar button{padding:6px 12px}.image-open{width:100%;display:block}.image-open img{width:100%;height:auto;max-height:760px;object-fit:contain;display:block}.gallery figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:16px}.takeaway{margin:32px 40px 0;max-width:850px;font-size:20px;line-height:1.8}.future{padding-inline:40px}.future details{border-bottom:1px solid var(--line);padding:24px 0}.future summary{cursor:pointer;font-size:20px}.future details p{margin-top:20px;max-width:800px}.closing{margin:120px 40px 0;border-top:1px solid var(--line);padding-top:48px}.closing p{font-size:28px;margin-bottom:32px}.image-dialog{max-width:96vw;max-height:94vh;padding:48px 16px 16px;background:var(--surface);border:0;border-radius:16px;margin:auto}.image-dialog::backdrop{background:#000b}.image-dialog img{max-width:90vw;height:auto}.close-viewer{position:sticky;top:0;display:block;margin-left:auto;margin-bottom:16px;padding:8px 16px;background:var(--inverse);color:var(--on-inverse);border-radius:999px}button:focus-visible,summary:focus-visible{outline:2px solid var(--accent-strong);outline-offset:4px}@media(prefers-reduced-motion:no-preference){figure:not([hidden]){animation:fade 200ms ease-out}@keyframes fade{from{opacity:0}to{opacity:1}}}@media(max-width:767px){header{padding-inline:0}.reason,dl{grid-template-columns:1fr;gap:28px}.reason{margin-inline:0}.chapter>h2,.chapter>.label{margin-left:0}.takeaway{margin-inline:0}.gallery{padding:12px}.future{padding-inline:0}.chapter,.future{margin-top:88px}.closing{margin-inline:0}.lead{font-size:18px}}
+.aily-case{font-family:'PingFang SC',sans-serif;padding-bottom:80px}header{padding:48px 40px 0}nav{font-size:14px;color:var(--muted)}.label{font-size:13px;color:var(--muted);letter-spacing:.06em;margin-bottom:24px}header .label{margin-top:72px}h1{font-size:clamp(40px,5vw,68px);line-height:1.15;letter-spacing:-.035em}.lead{font-size:22px;line-height:1.8;max-width:780px;margin-top:32px;color:var(--body)}dl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;border-block:1px solid var(--line);padding-block:32px;margin-top:64px}dt{font-size:13px;color:var(--muted)}dd{margin-top:8px;line-height:1.8}h2{font-size:clamp(28px,3.4vw,48px);line-height:1.3;letter-spacing:-.025em;max-width:900px}.chapter,.future{margin-top:140px;scroll-margin-top:110px}button{cursor:pointer}.gallery-toolbar button{padding:10px 18px;border:1px solid var(--line-strong);border-radius:999px;font-size:14px}.gallery-toolbar button[aria-pressed=true]{background:var(--accent);color:#121211;border-color:var(--accent)}.chapter>h2,.chapter>.label{margin-left:40px}.reason{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin:40px}.reason h3{font-size:16px;margin-bottom:16px}.reason p,.future p{font-size:17px;line-height:1.9;color:var(--body)}.gallery{background:var(--sunken);border-radius:24px;padding:24px;margin-top:48px}.gallery-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}.gallery-toolbar span{font-size:13px;color:var(--muted)}.gallery-toolbar>div{display:flex;gap:6px;flex-wrap:wrap}.gallery-toolbar button{padding:6px 12px}.image-open{width:100%;display:block}.image-open img{width:100%;height:auto;max-height:760px;object-fit:contain;display:block}.gallery figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:12px}.takeaway{margin:32px 40px 0;max-width:850px;font-size:20px;line-height:1.8}.future{padding-inline:40px}.future details{border-bottom:1px solid var(--line);padding:24px 0}.future summary{cursor:pointer;font-size:20px}.future details p{margin-top:20px;max-width:800px}.closing{margin:120px 40px 0;border-top:1px solid var(--line);padding-top:48px}.closing p{font-size:28px;margin-bottom:32px}.image-dialog{max-width:96vw;max-height:94vh;padding:48px 16px 16px;background:var(--surface);border:0;border-radius:16px;margin:auto}.image-dialog::backdrop{background:#000b}.image-dialog img{max-width:90vw;height:auto}.close-viewer{position:sticky;top:0;display:block;margin-left:auto;margin-bottom:16px;padding:8px 16px;background:var(--inverse);color:var(--on-inverse);border-radius:999px}button:focus-visible,summary:focus-visible{outline:2px solid var(--accent-strong);outline-offset:4px}@media(prefers-reduced-motion:no-preference){figure:not([hidden]){animation:fade 200ms ease-out}@keyframes fade{from{opacity:0}to{opacity:1}}}@media(max-width:767px){header{padding-inline:0}.reason,dl{grid-template-columns:1fr;gap:28px}.reason{margin-inline:0}.chapter>h2,.chapter>.label{margin-left:0}.takeaway{margin-inline:0}.gallery{padding:12px}.future{padding-inline:0}.chapter,.future{margin-top:88px}.closing{margin-inline:0}.lead{font-size:18px}}
 .aily-hero { padding-top: 48px; padding-inline: 40px; font-synthesis: none; }
 .aily-hero nav { display: flex; align-items: center; gap: 8px; }
 .aily-hero h1 { font-family: 'PingFang SC', 'PingFang_SC', system-ui, sans-serif; font-size: clamp(40px, 5.1vw, 65.376px); font-weight: 500; line-height: 1.15; letter-spacing: -.035em; }
@@ -224,9 +231,10 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
 }
 .aily-strategy-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
 .aily-strategy-card {
-  display: flex; flex-direction: column; gap: 10px;
+  display: flex; flex-direction: column; gap: 20px;
   padding: 26px; border-radius: 22px;
   background: #fff; border: 1px solid #e6e5df; min-width: 0;
+  font-synthesis: none; overflow-wrap: anywhere;
 }
 .aily-strategy-tag {
   width: fit-content; display: inline-flex; align-items: center;
@@ -236,7 +244,7 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
 .aily-strategy-tag.tag-blue { background: #eef5ff; color: #0b6bcb; }
 .aily-strategy-tag.tag-amber { background: #fff2df; color: #c45d00; }
 .aily-strategy-card h3 {
-  margin: 6px 0 0; color: #121211;
+  margin: 0; color: #121211;
   font-size: 22px; line-height: 1.6; font-weight: 500; text-wrap: balance;
 }
 .aily-strategy-card p {
@@ -249,7 +257,6 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
   .aily-strategy-head h2 { font-size: 28px; line-height: 1.45; letter-spacing: -.5px; }
   .aily-strategy-lead { font-size: 16px; line-height: 1.8; }
   .aily-strategy-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-  .aily-strategy-card { padding: 24px; }
 }
 .aily-decision-section {
   margin-top: 128px; padding: 0;
@@ -276,7 +283,7 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
 .aily-decision-points p { margin: 0; color: #6a6964; font-size: 14px; line-height: 1.8; white-space: pre-wrap; }
 .aily-decision-panel {
   display: flex; flex-direction: column; gap: 24px;
-  padding: 16px 24px 48px; border-radius: 16px; background: #f2f2ed;
+  padding: 24px; border-radius: 16px; background: #f2f2ed;
 }
 .aily-decision-tabs { display: flex; flex-wrap: wrap; gap: 6px; }
 .aily-decision-tabs button {
@@ -288,14 +295,19 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
 .aily-decision-tabs button:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 3px; }
 .aily-decision-stage { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; }
 .aily-decision-stage[hidden] { display: none; }
+.aily-decision-stage[data-decision-stage="after"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.aily-decision-stage[data-decision-stage="after"] img { border-radius: 12px; }
 .aily-decision-stage figure { margin: 0; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .aily-decision-stage img { width: 100%; height: auto; border-radius: 8px; display: block; }
-.aily-decision-stage figcaption { color: #6a6964; font-size: 13px; line-height: 1; text-align: left; margin: 0; }
+.aily-case .aily-decision-stage figcaption {
+  color: #6a6964; font-size: 13px !important; line-height: 1 !important;
+  text-align: center; margin: 0 !important;
+}
 @media (max-width: 767px) {
   .aily-decision-section { margin-top: 80px; gap: 32px; }
   .aily-decision-head h2 { font-size: 28px; line-height: 1.45; letter-spacing: -.5px; }
   .aily-decision-points { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-  .aily-decision-panel { padding: 16px 16px 32px; gap: 20px; }
+  .aily-decision-panel { gap: 20px; }
   .aily-decision-stage { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 }
 .aily-authorize-section { margin-top: 128px; display: flex; flex-direction: column; gap: 48px; scroll-margin-top: 110px; font-synthesis: none; }
@@ -307,30 +319,20 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
 .aily-authorize-reasons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
 .aily-authorize-reasons h3 { margin: 0 0 4px; color: #121211; font-size: 16px; line-height: 1.6; font-weight: 500; }
 .aily-authorize-reasons p { margin: 0; color: #6a6964; font-size: 14px; line-height: 1.8; }
-.aily-authorize-tabs { display: flex; flex-direction: column; gap: 24px; min-width: 0; padding: 16px 24px 48px; border-radius: 16px; background: #f2f2ed; }
+.aily-authorize-tabs { display: flex; flex-direction: column; gap: 24px; min-width: 0; padding: 24px; border-radius: 16px; background: #f2f2ed; }
 .aily-authorize-tablist { display: flex; flex-wrap: wrap; gap: 6px; }
 .aily-authorize-tablist button { min-height: 44px; padding: 6px 12px; border: 1px solid #d3d2ca; border-radius: 999px; color: #121211; font-size: 14px; line-height: 1.6; background: transparent; transition: background-color .2s ease, border-color .2s ease; }
 .aily-authorize-tablist button[aria-selected="true"] { background: #d4f84a; border-color: #d4f84a; }
 .aily-authorize-tablist button:focus-visible { outline: 2px solid #121211; outline-offset: 3px; }
 .aily-authorize-panel { width: 100%; text-align: center; }
 .aily-authorize-panel[hidden] { display: none; }
-.aily-authorize-image { display: block; width: min(100%, 868px); margin: 0 auto; padding: 0; border: 0; border-radius: 12px; overflow: hidden; background: transparent; }
-.aily-authorize-image img { display: block; width: 100%; height: auto; aspect-ratio: 868 / 543; object-fit: contain; }
-.aily-authorize-panel p { margin: 11px 0 0; color: #6a6964; font-size: 13px; line-height: 1.5; }
-.aily-ownership-image-grid { display: grid; grid-template-columns: minmax(0, 614fr) minmax(0, 359fr); gap: 20px; width: min(100%, 993px); margin: 0 auto; text-align: left; }
+.aily-authorize-image { display: block; width: 100%; margin: 0 auto; padding: 0; border: 0; border-radius: 12px; background: transparent; }
+.aily-authorize-image img { display: block; width: 100%; height: auto; border-radius: inherit; object-fit: contain; }
+.aily-authorize-panel p { margin: 12px 0 0; color: #6a6964; font-size: 13px; line-height: 1.5; text-align: center; }
+.aily-ownership-image-grid { display: grid; grid-template-columns: minmax(0, 128fr) minmax(0, 75fr); gap: 20px; width: 100%; }
 .aily-ownership-image-grid > div { min-width: 0; }
-.aily-ownership-image-grid .aily-authorize-image { width: 100%; height: 384px; background: #fff; }
-.aily-ownership-image-grid .aily-authorize-image img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
-.aily-ownership-image-grid p { text-align: left; }
-.aily-ownership-section .aily-authorize-panel:not(:first-of-type) .aily-authorize-image img { aspect-ratio: auto; }
-.aily-configure-image-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; text-align: center; }
-.aily-configure-image-grid > div { min-width: 0; }
-.aily-configure-image-grid .aily-authorize-image { width: 100%; height: 378px; border-radius: 8px; background: #fff; }
-.aily-configure-image-grid .aily-authorize-image img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
-.aily-configure-section .aily-authorize-panel > .aily-authorize-image img { aspect-ratio: auto; max-height: 680px; }
-.aily-govern-panel { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; padding: 48px 24px; border-radius: 16px; background: #f2f2ed; }
-.aily-govern-panel .aily-authorize-image { width: min(100%, 868px); }
-.aily-govern-panel .aily-authorize-image img { aspect-ratio: 8 / 5; object-fit: contain; }
+.aily-configure-video { display: block; width: 100%; height: auto; border-radius: 12px; }
+.aily-govern-panel { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; padding: 24px; border-radius: 16px; background: #f2f2ed; }
 .aily-govern-panel p { margin: 0; color: #6a6964; font-size: 13px; line-height: 1; text-align: center; }
 .aily-admin-section { position: relative; z-index: 0; color: #f4f3ee; }
 .aily-admin-section::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: #0e0e0c; pointer-events: none; }
@@ -355,14 +357,8 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
   .aily-authorize-section { margin-top: 80px; gap: 32px; }
   .aily-authorize-head h2 { font-size: 28px; line-height: 1.45; letter-spacing: -.5px; }
   .aily-authorize-reasons { grid-template-columns: 1fr; gap: 20px; }
-  .aily-authorize-tabs { padding: 16px 12px 28px; gap: 20px; }
+  .aily-authorize-tabs { gap: 20px; }
   .aily-ownership-image-grid { grid-template-columns: 1fr; gap: 24px; }
-  .aily-ownership-image-grid .aily-authorize-image { height: auto; }
-  .aily-ownership-image-grid .aily-authorize-image img { height: auto; }
-  .aily-configure-image-grid { grid-template-columns: 1fr; gap: 24px; }
-  .aily-configure-image-grid .aily-authorize-image { height: auto; }
-  .aily-configure-image-grid .aily-authorize-image img { height: auto; }
-  .aily-govern-panel { padding: 28px 12px; }
   .aily-configure-section { padding-top: 80px; padding-bottom: 40px; }
   .aily-govern-section { margin-top: 0; padding-top: 40px; padding-bottom: 80px; }
   .aily-future-section { margin-top: 80px; gap: 40px; padding-bottom: 56px; }

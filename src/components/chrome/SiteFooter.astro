@@ -1,9 +1,8 @@
 ---
+import FooterAnimation from './FooterAnimation.astro';
 import Icon from '@/components/ui/Icon.astro';
-import Logomark from '@/components/ui/Logomark.astro';
 import { closing } from '@/config/home';
-import { legalLinks, navigation, siteConfig } from '@/config/site';
-import { socialIcon } from '@/lib/socials';
+import { siteConfig } from '@/config/site';
 
 interface Props {
   closing?: boolean;
@@ -43,99 +42,22 @@ const year = new Date().getFullYear();
   </section>
 )}
 
-<footer class="mt-24 border-t border-line sm:mt-32">
-  <div class="shell grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
-    <div>
-      <a href="/" class="inline-flex items-center gap-2.5 text-[1.15rem] font-semibold tracking-[-0.03em]">
-        <Logomark />
-        <span>{siteConfig.name}</span>
-        <span class="sr-only">, home</span>
-      </a>
-      <p class="mt-5 max-w-xs text-muted">
-        {siteConfig.author.role} based in {siteConfig.author.location}. Working with teams worldwide.
+<footer class="mt-24 sm:mt-32">
+  {import.meta.env.DEV && <FooterAnimation />}
+  <div class="border-t border-line">
+    <div class="shell flex flex-wrap items-center justify-between gap-4 py-6 text-sm text-muted">
+      <p>
+        &copy; {year} {siteConfig.author.name}. All rights reserved.
       </p>
+      <a href="#content" class="inline-flex items-center gap-1.5 hover:text-ink">
+        Back to top
+        <Icon name="arrow-up" class="size-3.5" />
+      </a>
     </div>
-
-    <nav aria-labelledby="footer-pages">
-      <h2 id="footer-pages" class="text-sm font-medium text-muted">
-        Pages
-      </h2>
-      <ul class="mt-4 grid gap-2.5">
-        <li>
-          <a class="footer-link" href="/">
-            Home
-          </a>
-        </li>
-        {navigation.map((link) => (
-          <li>
-            <a class="footer-link" href={link.href}>
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-
-    <nav aria-labelledby="footer-elsewhere">
-      <h2 id="footer-elsewhere" class="text-sm font-medium text-muted">
-        Elsewhere
-      </h2>
-      <ul class="mt-4 grid gap-2.5">
-        {siteConfig.socials.map((social) => (
-          <li>
-            <a class="footer-link inline-flex items-center gap-2.5" href={social.href} rel="me noopener">
-              <Icon name={socialIcon(social.label)} class="size-3.5 text-muted" />
-              {social.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-
-    <nav aria-labelledby="footer-legal">
-      <h2 id="footer-legal" class="text-sm font-medium text-muted">
-        Legal
-      </h2>
-      <ul class="mt-4 grid gap-2.5">
-        {legalLinks.map((link) => (
-          <li>
-            <a class="footer-link" href={link.href}>
-              {link.label}
-            </a>
-          </li>
-        ))}
-        {siteConfig.cookieConsent.enabled && (
-          <li>
-            <button type="button" class="footer-link text-left" data-cookie-preferences data-needs-js>
-              Cookie preferences
-            </button>
-          </li>
-        )}
-      </ul>
-    </nav>
-  </div>
-
-  <div class="shell flex flex-wrap items-center justify-between gap-4 border-t border-line py-6 text-sm text-muted">
-    <p>
-      &copy; {year} {siteConfig.author.name}. All rights reserved.
-    </p>
-    <a href="#content" class="inline-flex items-center gap-1.5 hover:text-ink">
-      Back to top
-      <Icon name="arrow-up" class="size-3.5" />
-    </a>
   </div>
 </footer>
 
 <style>
-  .footer-link {
-    color: var(--ink);
-    transition: color 160ms ease;
-  }
-
-  .footer-link:hover {
-    color: var(--muted);
-  }
-
   .closing-grid {
     position: absolute;
     inset: 0;

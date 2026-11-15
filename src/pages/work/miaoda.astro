@@ -1,4 +1,5 @@
 ---
+import ImageComparison from '@/components/work/ImageComparison.astro';
 import { caseStudyCopy } from '@/config/case-studies';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 const caseCopy = caseStudyCopy.miaoda;
@@ -58,13 +59,12 @@ const caseCopy = caseStudyCopy.miaoda;
               </div>
             </dl>
             <div class="self-stretch mt-16">
-              <div class="rounded-2xl overflow-clip bg-white">
-                <div
-                  class="aspect-[auto_3200/2000] w-full max-w-full overflow-clip bg-size-[100%_100%] bg-position-[50%] bg-no-repeat"
-                  data-placeholder
-                  aria-label="界面示意图待补充"
-                />
-              </div>
+              <ImageComparison
+                before={{ src: '/miaoda-case/background-apaas-01.png', alt: 'Before · 飞书 aPaaS 首页' }}
+                after={{ src: '/miaoda-case/background-miaoda-01.png', alt: 'After · 飞书妙搭首页' }}
+                width={5760}
+                height={3600}
+              />
               <div class="text-[14px] leading-[180%] mt-4 text-center font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#6A6964]">
                 以熟悉的对话与应用工作区为基础，按需扩展专业开发能力
               </div>
@@ -108,24 +108,24 @@ const caseCopy = caseStudyCopy.miaoda;
                 </div>
               </div>
             </div>
-            <div class="rounded-2xl flex flex-col gap-5 self-stretch p-6 bg-[#F2F2ED]">
+            <div class="miaoda-background [font-synthesis:none] wrap-anywhere rounded-2xl flex flex-col gap-5 self-stretch p-6 bg-[#F2F2ED] antialiased">
               <div class="items-center flex flex-wrap gap-4 content-center">
                 <div class="flex flex-wrap gap-1.5">
                   <button
                     type="button"
                     data-case-tab
-                    class="min-h-11 text-center content-center py-1.5 px-3 rounded-[999px] bg-[#D4F84A] border border-solid border-[#D4F84A]"
+                    class="min-h-11 text-center content-center py-1.5 px-4.25 rounded-[999px] bg-[#D4F84A] border border-solid border-[#D4F84A]"
                   >
-                    <div class="text-[14px] leading-[160%] text-center font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#121211]">
+                    <div class="text-[14px] leading-[160%] text-center [align-content:unsafe_center] font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#121211]">
                       飞书妙搭
                     </div>
                   </button>
                   <button
                     type="button"
                     data-case-tab
-                    class="min-h-11 text-center content-center py-1.5 px-3 rounded-[999px] border border-solid border-[#D3D2CA]"
+                    class="min-h-11 text-center content-center py-1.5 px-4.25 rounded-[999px] border border-solid border-[#D3D2CA]"
                   >
-                    <div class="text-[14px] leading-[160%] text-center font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#121211]">
+                    <div class="text-[14px] leading-[160%] text-center [align-content:unsafe_center] font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#121211]">
                       飞书 aPaaS
                     </div>
                   </button>
@@ -136,15 +136,13 @@ const caseCopy = caseStudyCopy.miaoda;
                 <br />
                 产品定位：AI 驱动的应用开发平台，以自然语言描述需求，由 AI 生成并持续修改应用
               </div>
-              <div class="flex text-center items-start gap-2.75 self-stretch">
-                <div
-                  class="case-hover-image h-89 rounded-lg w-142.5 shrink-0 bg-cover bg-position-[50%] [outline:0.5px_solid_#D3D2CA4D]"
-                  style="background-image: url(https://app.paper.design/file-assets/01M60NJ1NA6E6NVB2WBNE0FK0V/01M71E4YMTF0ZKW7E87006KX2R.png)"
-                />
-                <div
-                  class="case-hover-image h-89 rounded-lg w-142.5 shrink-0 bg-cover bg-position-[50%] [outline:0.5px_solid_#D3D2CA4D]"
-                  style="background-image: url(https://app.paper.design/file-assets/01M60NJ1NA6E6NVB2WBNE0FK0V/01M71E3T72ZPE7PYJ9NM1P5762.png)"
-                />
+              <div class="miaoda-image-pair">
+                <figure>
+                  <img class="miaoda-image" src="/miaoda-case/background-miaoda-01.png" alt="飞书妙搭首页" loading="lazy" width="5760" height="3600" />
+                </figure>
+                <figure>
+                  <img class="miaoda-image" src="/miaoda-case/background-miaoda-02.png" alt="飞书妙搭应用工作区" loading="lazy" width="5760" height="3600" />
+                </figure>
               </div>
             </div>
           </div>
@@ -240,11 +238,7 @@ const caseCopy = caseStudyCopy.miaoda;
               <div>
                 <div>
                   <div class="rounded-2xl overflow-clip bg-white">
-                    <div
-                      class="aspect-[auto_3200/2000] w-full max-w-full overflow-clip bg-size-[100%_100%] bg-position-[50%] bg-no-repeat"
-                      data-placeholder
-                      aria-label="界面示意图待补充"
-                    />
+                    <video class="miaoda-video" src="/miaoda-case/expert-entry.mp4" aria-label="保持妙搭站点框架" controls muted loop playsinline preload="none"></video>
                   </div>
                   <div class="text-[14px] leading-[180%] mt-4 text-center font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#C7C7BF]">
                     入口只增加 PRO 按钮和功能说明，不替换用户熟悉的站点组织与开发起点
@@ -333,13 +327,9 @@ const caseCopy = caseStudyCopy.miaoda;
                 <div>
                   <div>
                     <div class="rounded-2xl overflow-clip bg-white">
-                      <div
-                        class="aspect-[auto_3200/2000] w-full max-w-full overflow-clip bg-size-[100%_100%] bg-position-[50%] bg-no-repeat"
-                        data-placeholder
-                        aria-label="界面示意图待补充"
-                      />
+                      <video class="miaoda-video" src="/miaoda-case/message-queue.mp4" aria-label="消息队列引导" controls muted loop playsinline preload="none"></video>
                     </div>
-                    <div class="text-[14px] leading-[180%] mt-4 text-center wrap-normal font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
+                    <div data-video-caption class="text-[14px] leading-[180%] mt-4 text-center wrap-normal font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
                       待执行消息里提供转为并行任务的入口
                     </div>
                   </div>
@@ -362,28 +352,6 @@ const caseCopy = caseStudyCopy.miaoda;
                 </div>
               </div>
               <div class="mt-8 p-6 rounded-2xl bg-[#F2F2ED]">
-                <div class="text-[19px] mb-5 leading-[160%] text-balance tracking-wider font-['PingFangSC-Medium','PingFang_SC',system-ui,sans-serif] font-medium text-[#121211]">
-                  独立分支来协作开发和统一管理
-                </div>
-                <div>
-                  <div>
-                    <div class="rounded-2xl overflow-clip bg-white">
-                      <div
-                        class="aspect-[auto_3200/2000] w-full max-w-full overflow-clip bg-size-[100%_100%] bg-position-[50%] bg-no-repeat"
-                        data-placeholder
-                        aria-label="界面示意图待补充"
-                      />
-                    </div>
-                    <div class="text-[14px] leading-[180%] mt-4 text-center wrap-normal font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
-                      分支管理：当前分支、与源分支的差异、未提交与已提交变更
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-8 p-6 rounded-2xl bg-[#F2F2ED]">
-                <div class="text-[19px] mb-5 leading-[160%] text-balance tracking-wider font-['PingFangSC-Medium','PingFang_SC',system-ui,sans-serif] font-medium text-[#121211]">
-                  支持查看发布分支和发布详情
-                </div>
                 <div class="flex flex-wrap mb-6 gap-2">
                   <button
                     type="button"
@@ -391,7 +359,7 @@ const caseCopy = caseStudyCopy.miaoda;
                     class="min-h-11 text-center content-center py-2.5 px-4 rounded-[99px] bg-[#D4F84A] border border-solid border-[#D4F84A]"
                   >
                     <div class="text-[14px] leading-[140%] text-center wrap-normal font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#121211]">
-                      发布分支
+                      独立分支，统一管理
                     </div>
                   </button>
                   <button
@@ -400,21 +368,17 @@ const caseCopy = caseStudyCopy.miaoda;
                     class="min-h-11 text-center content-center py-2.5 px-4 rounded-[99px] border border-solid border-[#D3D2CA]"
                   >
                     <div class="text-[14px] leading-[140%] text-center wrap-normal font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#121211]">
-                      发布详情
+                      发布支持详细设置
                     </div>
                   </button>
                 </div>
                 <div>
                   <div>
                     <div class="rounded-2xl overflow-clip bg-white">
-                      <div
-                        class="aspect-[auto_3200/2000] w-full max-w-full overflow-clip bg-size-[100%_100%] bg-position-[50%] bg-no-repeat"
-                        data-placeholder
-                        aria-label="界面示意图待补充"
-                      />
+                      <video class="miaoda-video" src="/miaoda-case/branch-management.mp4" aria-label="独立分支与统一管理" controls muted loop playsinline preload="none"></video>
                     </div>
-                    <div class="text-[14px] leading-[180%] mt-4 text-center wrap-normal font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
-                      发布入口：明确发布分支，提示线上已有新代码
+                    <div data-video-caption class="text-[14px] leading-[180%] mt-4 text-center wrap-normal font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
+                      分支管理：当前分支、与源分支的差异、未提交与已提交变更
                     </div>
                   </div>
                 </div>
@@ -436,11 +400,7 @@ const caseCopy = caseStudyCopy.miaoda;
                 <div>
                   <div>
                     <div class="rounded-2xl overflow-clip bg-white">
-                      <div
-                        class="aspect-[auto_3200/2000] w-full max-w-full overflow-clip bg-size-[100%_100%] bg-position-[50%] bg-no-repeat"
-                        data-placeholder
-                        aria-label="界面示意图待补充"
-                      />
+                      <video class="miaoda-video" src="/miaoda-case/environment-isolation.mp4" aria-label="线上环境和开发环境隔离" controls muted loop playsinline preload="none"></video>
                     </div>
                     <div class="text-[14px] leading-[180%] mt-4 text-center font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
                       线上环境和开发环境隔离
@@ -499,20 +459,7 @@ const caseCopy = caseStudyCopy.miaoda;
                   </div>
                 </div>
                 <div class="p-6 rounded-2xl self-stretch bg-[#F2F2ED]">
-                  <div>
-                    <div>
-                      <div class="rounded-2xl overflow-clip bg-white">
-                        <div
-                          class="aspect-[auto_3200/2000] w-full max-w-full overflow-clip bg-size-[100%_100%] bg-position-[50%] bg-no-repeat"
-                          data-placeholder
-                          aria-label="界面示意图待补充"
-                        />
-                      </div>
-                      <div class="text-[14px] leading-[180%] mt-4 text-center wrap-normal font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
-                        代码审查：在扩展工作区查看与确认代码变更
-                      </div>
-                    </div>
-                  </div>
+                  <img class="miaoda-image aspect-[8/5] w-full rounded-2xl bg-white object-contain" src="/miaoda-case/ability-code-review.png" alt="代码审查：在扩展工作区查看与确认代码变更" loading="lazy" />
                 </div>
               </div>
             </div>
@@ -543,7 +490,7 @@ const caseCopy = caseStudyCopy.miaoda;
     .miaoda-paper [role='tablist']:has(#miaoda-tab-0-0) > .flex {
       gap: 6px;
     }
-    .miaoda-paper [id^='miaoda-tab-0-'] {
+    .miaoda-paper .miaoda-background [id^='miaoda-tab-0-'] {
       min-height: 44px;
       padding: 6px 17px;
       display: flex;
@@ -551,26 +498,50 @@ const caseCopy = caseStudyCopy.miaoda;
       justify-content: center;
       border-radius: 999px;
       border: 1px solid #d3d2ca;
-      font-family: 'PingFang SC', system-ui, sans-serif;
+      font-family: 'PingFangSC-Regular', 'PingFang SC', system-ui, sans-serif;
       font-size: 14px;
       line-height: 160%;
       color: #121211;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .miaoda-paper [id^='miaoda-tab-0-'] div {
+    .miaoda-paper .miaoda-background [id^='miaoda-tab-0-'] div {
+      font-family: 'PingFangSC-Regular', 'PingFang SC', system-ui, sans-serif;
       font-size: 14px;
       line-height: 160%;
+      align-content: unsafe center;
       color: #121211;
     }
-    .miaoda-paper [id^='miaoda-tab-0-'][aria-selected='false'] {
+    .miaoda-paper .miaoda-background #miaoda-panel-0 {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-width: 0;
+    }
+    .miaoda-paper .miaoda-background #miaoda-panel-0 > :first-child {
+      margin: 0;
+      font-family: 'PingFangSC-Regular', 'PingFang SC', system-ui, sans-serif;
+      font-size: 13px;
+      line-height: 180%;
+      white-space: pre-wrap;
+      color: #6a6964;
+    }
+    .miaoda-paper .miaoda-background .miaoda-image-pair {
+      margin-top: 0;
+    }
+    .miaoda-paper .miaoda-background .miaoda-image-pair .miaoda-image {
+      aspect-ratio: 570 / 356;
+      object-fit: cover;
+      object-position: 50%;
+      outline: 0.5px solid #d3d2ca4d;
+    }
+    .miaoda-paper .miaoda-background [id^='miaoda-tab-0-'][aria-selected='false'] {
       border-color: #d3d2ca;
       background: transparent;
     }
-    .miaoda-paper [id^='miaoda-tab-0-'][aria-selected='true'] {
+    .miaoda-paper .miaoda-background [id^='miaoda-tab-0-'][aria-selected='true'] {
       border-color: #d4f84a;
       background: #d4f84a;
-    }
-    .miaoda-paper #miaoda-panel-0 > .flex {
-      margin-top: 20px;
     }
     .miaoda-paper [role='tabpanel'] {
       color: #6a6964;
@@ -619,17 +590,49 @@ const caseCopy = caseStudyCopy.miaoda;
       color: #121211;
       font-family: 'PingFang SC', system-ui, sans-serif;
     }
-    .miaoda-paper [data-placeholder] {
-      aspect-ratio: 8/5;
-      background: #dededb;
+    .miaoda-paper .miaoda-image,
+    .miaoda-paper :global(.miaoda-video) {
+      display: block;
+      width: 100%;
+      height: auto;
       border-radius: 16px;
-      display: grid;
-      place-items: center;
     }
-    .miaoda-paper [data-placeholder]::after {
-      content: '界面示意图 · 待补充';
-      color: #77776f;
+    .miaoda-paper :global(.miaoda-video) {
+      aspect-ratio: 8 / 5;
+      background: #121211;
+    }
+    .miaoda-paper .miaoda-image-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+      margin-top: 20px;
+    }
+    .miaoda-paper .miaoda-image-pair figure {
+      min-width: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .miaoda-paper .miaoda-image-pair .miaoda-image {
+      border-radius: 8px;
+      outline: 0.5px solid #d3d2ca4d;
+    }
+    .miaoda-paper .miaoda-image-pair figcaption {
+      color: #6a6964;
+      font-size: 13px;
+      line-height: 1;
+      text-align: center;
+    }
+    .miaoda-paper :global(.miaoda-media-caption) {
+      margin: 12px 0 0;
       font-size: 14px;
+      line-height: 1.8;
+      text-align: center;
+      color: inherit;
+    }
+    @media (max-width: 767px) {
+      .miaoda-paper .miaoda-image-pair { grid-template-columns: minmax(0, 1fr); }
     }
     .miaoda-paper button {
       cursor: pointer;
@@ -739,28 +742,64 @@ const caseCopy = caseStudyCopy.miaoda;
       document.querySelectorAll<HTMLElement>('.miaoda-paper').forEach((root) => {
         if (root.dataset.ready) return;
         root.dataset.ready = 'true';
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const videoObserver = new IntersectionObserver((entries) => {
+          entries.forEach(({ target, isIntersecting }) => {
+            const video = target as HTMLVideoElement;
+            if (isIntersecting && !reducedMotion.matches) {
+              void video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        }, { threshold: 0.2 });
+        const observeVideos = (container: HTMLElement) => {
+          container.querySelectorAll('video').forEach((video) => videoObserver.observe(video));
+        };
+        const createMedia = (name: string, label: string) => {
+          const src = '/miaoda-case/' + name;
+          if (name.endsWith('.mp4')) {
+            const video = document.createElement('video');
+            video.className = 'miaoda-video';
+            video.src = src;
+            video.setAttribute('aria-label', label);
+            video.controls = video.muted = video.loop = video.playsInline = true;
+            video.preload = 'none';
+            return video;
+          }
+          const image = document.createElement('img');
+          image.className = 'miaoda-image';
+          image.src = src;
+          image.alt = label;
+          image.loading = 'lazy';
+          return image;
+        };
         const configs = [
           {
             labels: ['飞书妙搭', '飞书 aPaaS'],
+            media: ['background-apaas-01.png', 'background-apaas-02.png'],
             captions: [
               '目标用户：业务人员、产品、运营、数字化负责人，以及没有深厚编程基础、但能说清业务需求的人。产品定位：AI 驱动的应用开发平台，以自然语言描述需求，由 AI 生成并持续修改应用。',
-              '飞书 aPaaS：面向专业开发场景，承接更复杂的应用开发与管理需求。',
+              '目标用户：企业 IT、数字化团队和专业开发者\n产品定位：企业级低代码开发平台，通过可视化配置和少量代码构建内部应用，更侧重复杂流程、权限、集成和长期治理等企业系统需求',
             ],
           },
           {
             labels: ['保持妙搭站点框架', '专业能力扩展'],
+            media: ['expert-workspace.png'],
             captions: [
               '入口只增加 PRO 按钮和功能说明，不替换用户熟悉的站点组织与开发起点',
-              '多任务侧边栏默认收起，并记录用户习惯；代码编辑器 / Git / API 作为二级入口；多数据环境和多分支在发布时提示',
+              '',
             ],
           },
           {
             labels: ['消息队列引导', '任务导航'],
+            media: ['task-navigation.mp4'],
             captions: ['待执行消息里提供转为并行任务的入口', '任务导航承接任务状态、任务切换与继续对话'],
           },
           {
-            labels: ['发布分支', '发布详情'],
-            captions: ['发布入口：明确发布分支，提示线上已有新代码', '发布详情：汇总代码、数据库变更与环境变量设置'],
+            labels: ['独立分支，统一管理', '发布支持详细设置'],
+            media: ['publish-settings.mp4'],
+            captions: ['', '发布详情：查看发布分支、代码变更与环境变量设置'],
           },
         ];
         configs.forEach((config, groupIndex) => {
@@ -784,7 +823,14 @@ const caseCopy = caseStudyCopy.miaoda;
           }
           list.after(panel);
           const original = panel.innerHTML;
+          let activeIndex = -1;
           const select = (index: number) => {
+            if (index === activeIndex) return;
+            activeIndex = index;
+            panel.querySelectorAll('video').forEach((video) => {
+              video.pause();
+              videoObserver.unobserve(video);
+            });
             buttons.forEach((b, j) => {
               b.id = 'miaoda-tab-' + groupIndex + '-' + j;
               b.setAttribute('role', 'tab');
@@ -793,18 +839,42 @@ const caseCopy = caseStudyCopy.miaoda;
               b.tabIndex = j === index ? 0 : -1;
             });
             panel.setAttribute('aria-labelledby', buttons[index].id);
-            if (index === 0) {
+            if (index === 0 || config.media[0]?.endsWith('.mp4')) {
               panel.innerHTML = original;
+              if (index !== 0) {
+                const video = panel.querySelector('video')!;
+                video.src = '/miaoda-case/' + config.media[0];
+                video.setAttribute('aria-label', config.labels[index]);
+                panel.querySelector('[data-video-caption]')!.textContent = config.captions[index];
+              }
             } else {
               panel.replaceChildren();
-              const placeholder = document.createElement('div');
-              placeholder.dataset.placeholder = '';
-              placeholder.setAttribute('aria-label', config.labels[index] + '界面占位图');
               const caption = document.createElement('p');
+              caption.className = 'miaoda-media-caption';
               caption.textContent = config.captions[index];
-              caption.style.cssText = 'font-size:14px;line-height:1.8;text-align:center;margin-top:16px;color:inherit';
-              panel.append(placeholder, caption);
+              const items = config.media.map((name, i) =>
+                createMedia(name, config.labels[index] + (config.media.length > 1 ? ' ' + (i + 1) : '')),
+              );
+              if (groupIndex === 0) {
+                const pair = document.createElement('div');
+                pair.className = 'miaoda-image-pair';
+                caption.className = 'text-[13px] leading-[180%] whitespace-pre-line text-[#6A6964]';
+                const imageLabels = ['aPaaS 首页', 'aPaaS 开发页'];
+                items.forEach((item, i) => {
+                  const figure = document.createElement('figure');
+                  item.setAttribute('width', '5760');
+                  item.setAttribute('height', '3600');
+                  item.setAttribute('alt', imageLabels[i]);
+                  figure.append(item);
+                  pair.append(figure);
+                });
+                panel.append(caption, pair);
+              } else {
+                panel.append(...items);
+                if (caption.textContent) panel.append(caption);
+              }
             }
+            observeVideos(panel);
             revealPanel(panel);
           };
           buttons.forEach((b, index) => {
@@ -823,13 +893,20 @@ const caseCopy = caseStudyCopy.miaoda;
           });
           select(0);
         });
-        const labels = ['代码审查', '开放 API', '数据库', '环境变量'];
+        observeVideos(root);
+        const abilities = [
+          ['ability-code-review.png', '代码审查：在扩展工作区查看与确认代码变更'],
+          ['ability-open-api.png', '开放 API：连接外部系统'],
+          ['ability-database.png', '数据库：管理应用数据'],
+          ['ability-env-vars.png', '环境变量：配置运行参数'],
+        ];
         const cards = Array.from(root.querySelectorAll<HTMLElement>('.h-26\\.25'));
         if (cards.length === 4) {
           const row = cards[0].parentElement!;
           row.setAttribute('role', 'tablist');
           row.setAttribute('aria-label', '专业开发与集成能力');
           const panel = row.nextElementSibling as HTMLElement;
+          const image = panel.querySelector('img')!;
           panel.id = 'ability-panel';
           panel.setAttribute('role', 'tabpanel');
           const buttons = cards.map((card, index) => {
@@ -851,14 +928,9 @@ const caseCopy = caseStudyCopy.miaoda;
               button.tabIndex = j === index ? 0 : -1;
             });
             panel.setAttribute('aria-labelledby', buttons[index].id);
-            panel.replaceChildren();
-            const placeholder = document.createElement('div');
-            placeholder.dataset.placeholder = '';
-            placeholder.setAttribute('aria-label', labels[index] + '界面占位图');
-            const caption = document.createElement('p');
-            caption.textContent = labels[index] + '：界面示意图待补充';
-            caption.style.cssText = 'text-align:center;font-size:14px;margin-top:16px;color:#6a6964';
-            panel.append(placeholder, caption);
+            const [name, description] = abilities[index];
+            image.src = '/miaoda-case/' + name;
+            image.alt = description;
             revealPanel(panel);
             timer = setTimeout(() => selectAbility((index + 1) % 4), 5000);
           };

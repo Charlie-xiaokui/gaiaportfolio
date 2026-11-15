@@ -10,6 +10,7 @@ const noindexPaths = ['/cookies/', '/privacy/', '/terms/'];
 export default defineConfig({
   site: siteConfig.siteUrl,
   trailingSlash: 'always',
+  devToolbar: { enabled: false },
   integrations: [
     mdx(),
     sitemap({

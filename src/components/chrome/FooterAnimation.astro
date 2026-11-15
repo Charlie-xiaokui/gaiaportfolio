@@ -1,0 +1,284 @@
+<div class="footer-animation" data-footer-animation>
+  <canvas tabindex="-1" aria-label="页脚小人动画"></canvas>
+  <canvas class="footer-animation-icons" aria-hidden="true"></canvas>
+</div>
+
+<style>
+  .footer-animation {
+    position: relative;
+    height: 120px;
+    overflow: hidden;
+    background: #fafaf6;
+  }
+
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: pan-y;
+  }
+
+  canvas:focus-visible {
+    outline: 2px solid #121211;
+    outline-offset: -2px;
+  }
+
+  .footer-animation-icons {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer-animation {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline type="module">
+  const stage = document.querySelector('[data-footer-animation]');
+  if (stage) init(stage);
+
+  function init(stage) {
+    const canvas = stage.querySelector('canvas');
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const compact = matchMedia('(max-width: 600px)');
+    const targets = [];
+    let player;
+    let resize;
+    let ready = false;
+    let loading = false;
+    let visible = false;
+    let frame;
+    const asset =
+      'https://rjdavx8ozyznxeyh.public.blob.vercel-storage.com/production/pages/footer/characters-walking-icons.riv';
+    const runtime = 'https://cdn.jsdelivr.net/npm/@rive-app/canvas@2.37.1';
+
+    const iconCanvas = stage.querySelector('.footer-animation-icons');
+    const iconContext = iconCanvas.getContext('2d');
+    const context = canvas.getContext('2d', { willReadFrequently: true });
+    if (!iconContext || !context) return;
+    const letterG = new Path2D(
+      'M20.631 11.309C18.738 9.222 15.729 8.567 13.14 9.678C10.551 10.789 8.952 13.421 9.16 16.23C9.369 19.04 11.337 21.408 14.062 22.125C16.786 22.843 19.666 21.751 21.231 19.409L21.231 16.209L16.131 16.209',
+    );
+    const face = new Path2D(
+      'M15 10V9 M7.084 14.302a5.12 5.12 0 009.833 0 .24.24 0 00-.235-.302H7.32a.24.24 0 00-.235.302 M9 10V9',
+    );
+    face.moveTo(22, 12);
+    face.arc(12, 12, 10, 0, Math.PI * 2);
+    const search = new Path2D('M21 21l-4.34-4.34');
+    search.moveTo(19, 11);
+    search.arc(11, 11, 8, 0, Math.PI * 2);
+
+    // Measure the colored shapes after Rive draws each frame.
+    function drawIcons() {
+      if (!visible) return;
+      const { width, height } = canvas;
+      if (iconCanvas.width !== width || iconCanvas.height !== height) {
+        iconCanvas.width = width;
+        iconCanvas.height = height;
+      }
+      iconContext.clearRect(0, 0, width, height);
+      const pixels = context.getImageData(0, 0, width, height).data;
+      const groups = new Map([
+        [0xcbf900, []],
+        [0xff9fcd, []],
+        [0x6cdfff, []],
+      ]);
+      for (let offset = 0; offset < pixels.length; offset += 4) {
+        if (pixels[offset + 3] < 230) continue;
+        const color = (pixels[offset] << 16) | (pixels[offset + 1] << 8) | pixels[offset + 2];
+        groups.get(color)?.push(offset / 4);
+      }
+
+      targets.length = 0;
+      for (const [color, points] of groups) {
+        const count = points.length;
+        if (count < 24) continue;
+        let x = 0,
+          y = 0;
+        for (const point of points) {
+          x += point % width;
+          y += Math.floor(point / width);
+        }
+        x /= count;
+        y /= count;
+        targets.push([x / width, y / height]);
+
+        const square = color === 0xcbf900;
+        const rectangle = color === 0xff9fcd;
+        let real = 0,
+          imaginary = 0;
+        if (square || rectangle) {
+          for (const point of points) {
+            const dx = (point % width) - x;
+            const dy = Math.floor(point / width) - y;
+            const a = dx * dx - dy * dy;
+            const b = 2 * dx * dy;
+            real += square ? b * b - a * a : a;
+            imaginary += square ? -2 * a * b : b;
+          }
+        }
+        const angle = Math.atan2(imaginary, real) / (square ? 4 : 2);
+        const size = Math.sqrt(count) * (square ? 0.56 : 0.53);
+        iconContext.save();
+        iconContext.translate(x + 0.5, y + 0.5);
+        iconContext.rotate(angle);
+        iconContext.fillStyle = iconContext.strokeStyle = '#121211';
+        if (square) {
+          // Follow the moving square and cover just the tiny areas outside its rounded corners.
+          const half = Math.sqrt(count) / 2;
+          const radius = Math.min(half / 4, half * 0.095);
+          const corners = new Path2D();
+          for (const left of [-half - 1, half - radius]) {
+            for (const top of [-half - 1, half - radius]) {
+              corners.rect(left, top, radius + 1, radius + 1);
+            }
+          }
+          const rounded = new Path2D();
+          rounded.roundRect(-half, -half, 2 * half, 2 * half, radius);
+          iconContext.save();
+          iconContext.clip(corners);
+          rounded.rect(-half - 2, -half - 2, 2 * half + 4, 2 * half + 4);
+          iconContext.fillStyle = '#FAFAF6';
+          iconContext.fill(rounded, 'evenodd');
+          iconContext.restore();
+          iconContext.scale(size / 21, size / 21);
+          iconContext.translate(-16, -16);
+          iconContext.lineWidth = 2.6;
+          iconContext.lineCap = iconContext.lineJoin = 'round';
+          iconContext.stroke(letterG);
+        } else {
+          iconContext.scale(size / 24, size / 24);
+          iconContext.translate(-12, -12);
+          iconContext.lineWidth = 2;
+          iconContext.lineCap = iconContext.lineJoin = 'round';
+          iconContext.stroke(rectangle ? face : search);
+        }
+        iconContext.restore();
+      }
+      frame = requestAnimationFrame(drawIcons);
+    }
+
+    // Rive solid-color fields use a property tag followed by BGRA bytes.
+    async function loadRecoloredAnimation() {
+      const response = await fetch(asset);
+      if (!response.ok) throw new Error('Rive resource could not be loaded');
+      const buffer = await response.arrayBuffer();
+      const bytes = new Uint8Array(buffer);
+      const palette = new Map([
+        [0xffffff, [0x11, 0x12, 0x12, 70]],
+        [0x1e1e1e, [0x11, 0x12, 0x12, 26]],
+        [0xfba026, [0x00, 0xf9, 0xcb, 4]],
+        [0x498a67, [0xcd, 0x9f, 0xff, 2]],
+        [0xfe4d0e, [0xff, 0xdf, 0x6c, 2]],
+      ]);
+      const counts = new Map();
+      for (let i = 4; i + 4 < bytes.length; i++) {
+        if (bytes[i] !== 0x25 || bytes[i + 4] !== 0xff) continue;
+        const color = (bytes[i + 3] << 16) | (bytes[i + 2] << 8) | bytes[i + 1];
+        const replacement = palette.get(color);
+        if (!replacement) continue;
+        bytes.set(replacement.slice(0, 3), i + 1);
+        // Hide the original artwork so the replacement can follow the same moving shapes.
+        // The two ellipse paints precede the square's own paints in the Rive file.
+        const cornerRing =
+          color === 0xfba026 && bytes[i - 1] === 0x07 && (bytes[i - 2] === 0xf2 || bytes[i - 2] === 0xf4);
+        if (color === 0x1e1e1e || cornerRing) bytes[i + 4] = 0;
+        counts.set(color, (counts.get(color) ?? 0) + 1);
+        i += 4;
+      }
+      for (const [color, [, , , count]] of palette) {
+        if (counts.get(color) !== count) throw new Error('Unexpected Rive palette');
+      }
+      return buffer;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      syncPlayback();
+    });
+    observer.observe(stage);
+    motion.addEventListener('change', syncPlayback);
+
+    function syncPlayback() {
+      cancelAnimationFrame(frame);
+      if (visible && !motion.matches) {
+        if (!loading) void load();
+        if (ready) {
+          player.play();
+          frame = requestAnimationFrame(drawIcons);
+        }
+      } else if (ready) {
+        player.pause();
+      }
+    }
+
+    async function load() {
+      loading = true;
+      try {
+        const [buffer] = await Promise.all([
+          loadRecoloredAnimation(),
+          new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = runtime + '/rive.js';
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.append(script);
+          }),
+        ]);
+        const { Alignment, Fit, Layout, Rive, RuntimeLoader } = window.rive;
+        RuntimeLoader.setWasmUrl(runtime + '/rive.wasm');
+        const layout = () =>
+          new Layout({
+            fit: compact.matches ? Fit.Contain : Fit.FitHeight,
+            alignment: Alignment.BottomCenter,
+          });
+        player = new Rive({
+          buffer,
+          canvas,
+          autoplay: true,
+          stateMachines: 'State Machine 1',
+          layout: layout(),
+          onLoad() {
+            ready = true;
+            canvas.tabIndex = 0;
+            resize = new ResizeObserver(() => {
+              player.layout = layout();
+              player.resizeDrawingSurfaceToCanvas();
+            });
+            resize.observe(stage);
+            syncPlayback();
+          },
+          onLoadError: fail,
+        });
+      } catch {
+        fail();
+      }
+    }
+
+    function fail() {
+      stage.hidden = true;
+      observer.disconnect();
+      motion.removeEventListener('change', syncPlayback);
+    }
+
+    canvas.addEventListener('keydown', (event) => {
+      if ((event.key !== 'Enter' && event.key !== ' ') || !targets.length) return;
+      event.preventDefault();
+      const [x, y] = targets[0];
+      const rect = canvas.getBoundingClientRect();
+      for (const type of ['pointerdown', 'pointerup']) {
+        canvas.dispatchEvent(
+          new PointerEvent(type, {
+            bubbles: true,
+            pointerType: 'mouse',
+            clientX: rect.left + rect.width * x,
+            clientY: rect.top + rect.height * y,
+          }),
+        );
+      }
+    });
+  }
+</script>

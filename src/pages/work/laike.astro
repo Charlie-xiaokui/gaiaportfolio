@@ -77,12 +77,84 @@ const caseCopy = caseStudyCopy.laike;
       <div class="story-copy"><p class="eyebrow">04 / 上线与沉淀</p><h2 id="outcome-title">让不同角色，各得其所</h2><p>店员版和管理版完成从 0 到 1 的设计与上线。角色化视图更贴合个性化需求，同时在版本切换中关注体验稳定性</p></div>
       <figure class="story-figure"><img src={casePreview(figures.outcome)} alt="上线效果：旧版、店员版与管理版的 WAU、周活跃渗透率和 CPO 对比" loading="lazy" /><figcaption>角色视图上线后的核心指标对比</figcaption></figure>
       <figure class="story-figure"><img src={casePreview(figures.system)} alt="管理版首页、常用功能、底部标签和图标等设计规范" loading="lazy" /><figcaption>沉淀视图规范，支持后续迭代</figcaption></figure>
-      <div class="principle"><span>升级感受</span><p>每一次升级都是一次产品思路的转变</p></div>
+      <div class="principle principle-carousel" data-principle-carousel role="region" aria-label="升级感受">
+        <span>升级感受</span>
+        <div class="principle-slides">
+          <p aria-hidden="false">每一次升级都是一次产品思路的转变</p>
+          <p aria-hidden="true">让商家关注线上经营而非产品使用</p>
+          <p aria-hidden="true">减少平衡困境，更精准的差异化创新</p>
+        </div>
+        <div class="principle-dots" role="group" aria-label="切换升级感受">
+          {[1, 2, 3].map((number) => (
+            <button type="button" aria-label={`第 ${number} 页`} aria-pressed={number === 1} />
+          ))}
+        </div>
+      </div>
     </section>
   </article>
   <NextProject slug="laike" />
 </BaseLayout>
 <script>
+  document.querySelectorAll<HTMLElement>('[data-principle-carousel]').forEach((carousel) => {
+    const slides = Array.from(carousel.querySelectorAll('.principle-slides p'));
+    const dots = Array.from(carousel.querySelectorAll('button'));
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    let current = 0;
+    let transitions: Animation[] = [];
+    let visible = false;
+    let timer: ReturnType<typeof setTimeout>;
+
+    const schedule = () => {
+      clearTimeout(timer);
+      if (visible && !document.hidden && !reducedMotion.matches && !carousel.querySelector(':focus-visible')) {
+        timer = setTimeout(() => select((current + 1) % slides.length, 1), 5000);
+      }
+    };
+    const select = (index: number, direction = index > current ? 1 : -1) => {
+      if (index === current) {
+        schedule();
+        return;
+      }
+
+      const outgoing = slides[current];
+      const incoming = slides[index];
+      transitions.forEach((animation) => animation.cancel());
+      transitions = [];
+      current = index;
+      slides.forEach((slide, i) => slide.setAttribute('aria-hidden', String(i !== current)));
+      dots.forEach((dot, i) => dot.setAttribute('aria-pressed', String(i === current)));
+
+      if (!reducedMotion.matches) {
+        const timing = { duration: 500, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' };
+        transitions = [
+          outgoing.animate(
+            [
+              { transform: 'translateX(0)', visibility: 'visible' },
+              { transform: `translateX(${-direction * 100}%)`, visibility: 'visible' },
+            ],
+            timing,
+          ),
+          incoming.animate(
+            [{ transform: `translateX(${direction * 100}%)` }, { transform: 'translateX(0)' }],
+            timing,
+          ),
+        ];
+      }
+      schedule();
+    };
+
+    dots.forEach((dot, index) => dot.addEventListener('click', () => select(index)));
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      schedule();
+    });
+    observer.observe(carousel);
+    carousel.addEventListener('focusin', schedule);
+    carousel.addEventListener('focusout', () => requestAnimationFrame(schedule));
+    document.addEventListener('visibilitychange', schedule);
+    reducedMotion.addEventListener('change', schedule);
+  });
+
   document.querySelectorAll<HTMLElement>('[data-research-tabs]').forEach((container) => {
     const tabs = Array.from(container.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
@@ -177,5 +249,13 @@ const caseCopy = caseStudyCopy.laike;
   .metrics strong { display: block; font-size: clamp(2rem, 4vw, 3rem); font-weight: 500; letter-spacing: -.04em; } .metrics span { display: block; color: var(--muted); margin-top: .5rem; } .metric-note { color: var(--muted); font-size: .875rem; margin-top: 1rem; }
   .closing-thought { max-width: 900px; margin: 7rem auto 0; font-size: clamp(2rem, 4vw, 3.75rem); line-height: 1.35; letter-spacing: -.03em; text-align: center; }
   @media (min-width: 48rem) { .case-meta { grid-template-columns: 168px 480px 1fr; gap: 40px; } .insight-grid { grid-template-columns: repeat(2, 1fr); } .role-list, .metrics { grid-template-columns: repeat(3, 1fr); } }
+  .principle-slides { display: grid; max-width: 800px; overflow: hidden; }
+  .principle-slides p { grid-area: 1 / 1; }
+  .principle-slides p[aria-hidden='true'] { visibility: hidden; }
+  .principle-dots { display: flex; justify-content: center; margin: 24px 0 -24px; }
+  .principle-dots button { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; }
+  .principle-dots button::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #a8a8a2; }
+  .principle-dots button[aria-pressed='true']::before { background: #fafaf7; }
+  .principle-dots button:focus-visible { outline: 2px solid #fafaf7; }
   @media (max-width: 47.99rem) { .principle { padding: 40px 28px; } .principle p { line-height: 1.45; } }
 </style>

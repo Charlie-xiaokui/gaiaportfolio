@@ -1,5 +1,6 @@
 ---
 import { caseStudyCopy } from '@/config/case-studies';
+import NextProject from '@/components/work/NextProject.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import '@/styles/case-unified.css';
 const a = (name: string) => `/viz-case/${name}.jpg`;
@@ -365,6 +366,7 @@ const caseCopy = caseStudyCopy.viz;
     <button class="close">关闭 ×</button>
     <img src={a('hero')} alt="设计方案放大预览" />
   </dialog>
+  <NextProject slug="viz" />
 </BaseLayout>
 <script>
   document.querySelectorAll<HTMLElement>('.flexible-section').forEach((root) => {

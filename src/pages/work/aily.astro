@@ -1,6 +1,7 @@
 ---
 import { caseStudyCopy } from '@/config/case-studies';
 import '@/styles/case-unified.css';
+import NextProject from '@/components/work/NextProject.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 const sections = [
  { id:'decision', label:'01 / 成员 · 选择能力', title:'先回答“能帮我做什么”，再谈如何维护。', problem:'技能详情曾同时承载介绍、评测、版本、文件更新、可见范围和删除。只是来判断技能是否合适的成员，被迫面对一整套资产管理逻辑。', strategy:'将详情拆为安装前了解与试用、安装后资产管理两种场景。市场回答是什么、是否可信、怎么试；对话承接怎么用；管理面板负责维护与治理。', value:'同一个技能，在市场是待选择的能力，在对话是可调用的方法，在后台才是需要维护的资产。', images:['市场/技能详情 安装前.png','市场/技能详情 安装后.png','技能管理弹窗01.png','技能管理弹窗02.png'] },
@@ -138,6 +139,7 @@ const caseCopy = caseStudyCopy.aily;
  <section class="aily-future-section" id="future" aria-labelledby="aily-future-title"><div class="aily-future-head"><p class="aily-strategy-eyebrow">05 / 后续优化</p><h2 id="aily-future-title">从手动选择到按需推荐，<br />让能力添加更主动</h2></div><div class="aily-strategy-grid"><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 1</span><h3>手动选择伙伴 → 基于伙伴类型的推荐添加</h3><p>当用户从市场添加技能包时，可根据伙伴角色、已有能力和当前任务类型，推荐更适合的伙伴；从伙伴详情添加时，则默认当前伙伴，减少重复选择</p></article><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 2</span><h3>用户自行补齐能力 → 模板化能力组合</h3><p>对官方或高频伙伴，可在不影响能力授权边界的前提下，预置推荐能力组合，让伙伴创建后具备更完整的初始能力，但仍保留授权确认和启停控制</p></article></div></section>
 </article>
 <dialog class="image-dialog"><button class="close-viewer" autofocus>关闭 ×</button><img src={asset('市场/技能详情 安装前.png')} alt="方案原稿放大预览" /></dialog>
+  <NextProject slug="aily" />
 </BaseLayout>
 <script>
 document.querySelectorAll<HTMLElement>('[data-gallery]').forEach(g=>{const buttons=g.querySelectorAll<HTMLButtonElement>('[data-slide]');const figures=g.querySelectorAll('figure');buttons.forEach((b,i)=>b.addEventListener('click',()=>{buttons.forEach((x,j)=>x.setAttribute('aria-pressed',String(i===j)));figures.forEach((f,j)=>f.hidden=i!==j)}))});

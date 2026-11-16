@@ -1,6 +1,7 @@
 ---
 import { caseStudyCopy } from '@/config/case-studies';
 import '@/styles/case-unified.css';
+import NextProject from '@/components/work/NextProject.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const a = (name: string) => `/dashboard-case/${name}.jpg`;
@@ -327,6 +328,7 @@ const caseCopy = caseStudyCopy.dashboard;
     </button>
     <div class="dash-lightbox-body" id="dash-lightbox-body"></div>
   </div>
+  <NextProject slug="dashboard" />
 </BaseLayout>
 
 <script>

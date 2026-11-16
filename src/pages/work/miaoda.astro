@@ -1,6 +1,7 @@
 ---
 import ImageComparison from '@/components/work/ImageComparison.astro';
 import { caseStudyCopy } from '@/config/case-studies';
+import NextProject from '@/components/work/NextProject.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 const caseCopy = caseStudyCopy.miaoda;
 ---
@@ -58,7 +59,7 @@ const caseCopy = caseStudyCopy.miaoda;
                 </dd>
               </div>
             </dl>
-            <div class="self-stretch mt-16">
+            <div class="self-stretch mt-16 rounded-2xl bg-[#F2F2ED] p-4 sm:p-6">
               <ImageComparison
                 before={{ src: '/miaoda-case/background-apaas-01.png', alt: 'Before · 飞书 aPaaS 首页' }}
                 after={{ src: '/miaoda-case/background-miaoda-01.png', alt: 'After · 飞书妙搭首页' }}
@@ -955,4 +956,5 @@ const caseCopy = caseStudyCopy.miaoda;
     init();
     document.addEventListener('astro:page-load', init);
   </script>
+  <NextProject slug="miaoda" />
 </BaseLayout>

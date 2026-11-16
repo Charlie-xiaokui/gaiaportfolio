@@ -2,8 +2,6 @@
 import { caseStudyCopy } from '@/config/case-studies';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import NextProject from '@/components/work/NextProject.astro';
-import { getProjects } from '@/lib/work';
-const next = (await getProjects()).find((project) => project.id === 'bcombs');
 
 const figures = {
   problem: '/laike-case/laike-02.webp',
@@ -81,7 +79,7 @@ const caseCopy = caseStudyCopy.laike;
       <div class="principle"><span>升级感受</span><p>每一次升级都是一次产品思路的转变</p></div>
     </section>
   </article>
-  {next && <NextProject project={next} />}
+  <NextProject slug="laike" />
 </BaseLayout>
 <script>
   document.querySelectorAll<HTMLElement>('[data-research-tabs]').forEach((container) => {

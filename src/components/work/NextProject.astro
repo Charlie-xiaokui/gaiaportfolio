@@ -1,68 +1,102 @@
 ---
 import { Image } from 'astro:assets';
 import Icon from '@/components/ui/Icon.astro';
+import { featuredCases } from '@/config/case-studies';
 import { projectHref, type Project } from '@/lib/work';
 
-interface Props {
-  project: Project;
-}
+type Props = { slug: string; project?: never } | { project: Project; slug?: never };
 
-const { project } = Astro.props;
-const { client, title, cover, tint } = project.data;
+const { slug, project } = Astro.props;
+const currentIndex = featuredCases.findIndex((item) => item.slug === slug);
+const featured = currentIndex >= 0 ? featuredCases[(currentIndex + 1) % featuredCases.length] : undefined;
+const next = project
+  ? {
+      href: projectHref(project),
+      title: project.data.title,
+      description: project.data.summary,
+      color: project.data.tint,
+    }
+  : featured && {
+      ...featured,
+      ...(featured.slug === 'aily' && {
+        title: 'Aily 技能生态体验设计',
+        description:
+          '串联市场安装、伙伴能力管理、对话调用与企业后台治理，让前台用户低成本获得使用能力，让管理员从“能配置”到“能持续治理”',
+      }),
+    };
 ---
 
-<aside class="shell mt-24 sm:mt-32" aria-labelledby="next-project">
-  <div class="next-card relative grid overflow-hidden rounded-card border border-line bg-surface md:grid-cols-2">
-    <div class="flex flex-col justify-between gap-10 p-7 sm:p-10">
-      <p id="next-project" class="eyebrow">
-        Next case study
-      </p>
-      <div>
-        <p class="font-medium text-muted">{client}</p>
-        <p class="mt-2 text-title">
-          <a href={projectHref(project)} class="after:absolute after:inset-0 focus-visible:outline-none">
-            {title}
-          </a>
-        </p>
-        <span class="btn btn-primary btn-sm mt-8" aria-hidden="true">
-          Read case study
+{next && (
+  <nav class="shell mt-16 sm:mt-20" aria-label="下一个案例">
+    <a
+      href={next.href}
+      class="next-card grid overflow-hidden rounded-3xl border border-[#E6E5DF] bg-white antialiased md:grid-cols-2"
+      aria-labelledby="next-project-label next-project-title"
+    >
+      <div class="flex flex-col items-start justify-between gap-8 p-6 sm:gap-10 sm:p-10">
+        <span id="next-project-label" class="eyebrow leading-[160%] text-[#6A6964]">
+          Next
+        </span>
+        <div>
+          <h2
+            id="next-project-title"
+            class="text-balance text-[25.143px] leading-[120%] font-medium tracking-[-0.629px] text-[#121211]"
+          >
+            {next.title}
+          </h2>
+          <p class="mt-1.5 text-pretty text-sm leading-[160%] text-[#6A6964]">{next.description}</p>
+        </div>
+        <span class="btn btn-primary btn-sm">
+          查看详情
           <Icon name="arrow-right" class="icon-nudge size-4" />
         </span>
       </div>
-    </div>
-    <div class="tint-panel relative min-h-64 overflow-hidden" style={`--tint: ${tint}`}>
-      <Image
-        src={cover}
-        alt=""
-        widths={[640, 960, 1280, 1600]}
-        sizes="(min-width: 80rem) 50rem, (min-width: 48rem) 65vw, 130vw"
-        quality={90}
-        class="next-shot shot absolute top-[14%] left-[10%] w-[130%] max-w-none"
-      />
-    </div>
-  </div>
-</aside>
+      <div
+        class="relative aspect-[2/1] overflow-hidden md:aspect-auto md:min-h-64"
+        style={{ backgroundColor: next.color }}
+      >
+        {featured && (
+          <img
+            src={featured.image}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            class="next-cover absolute top-0 right-0 w-[85%]"
+          />
+        )}
+        {project && (
+          <Image
+            src={project.data.cover}
+            alt=""
+            widths={[480, 640, 960, 1280]}
+            sizes="(min-width: 80rem) 38rem, (min-width: 48rem) 50vw, 100vw"
+            quality={90}
+            class="next-cover absolute inset-y-0 right-0 h-full w-[85%] object-cover object-right"
+          />
+        )}
+      </div>
+    </a>
+  </nav>
+)}
 
 <style>
-  .next-card:has(a:focus-visible) {
-    outline: 2px solid var(--ink);
-    outline-offset: 6px;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .next-shot {
-      transform-origin: 0 0;
-      transition: scale 700ms var(--ease-out-expo);
-    }
+  .next-card :is(h2, p, span) {
+    font-family: var(--font-sans);
   }
 
   @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-    .next-card:hover .next-shot {
-      scale: 1.04;
+    .next-cover {
+      transform-origin: top right;
+      transition: transform 950ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .next-card:hover .icon-nudge {
-      transform: translateX(3px);
+    .next-card:hover .next-cover {
+      transform: scale(1.1);
     }
+  }
+
+  .next-card:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 6px;
   }
 </style>

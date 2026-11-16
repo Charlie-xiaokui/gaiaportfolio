@@ -1,6 +1,7 @@
 ---
 import { caseStudyCopy } from '@/config/case-studies';
 import '@/styles/case-unified.css';
+import NextProject from '@/components/work/NextProject.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 const fig = {
@@ -257,6 +258,7 @@ const caseCopy = caseStudyCopy.qibao;
     <button type="button" class="qibao-lightbox-close" id="qibao-lightbox-close" aria-label="关闭">×</button>
     <div class="qibao-lightbox-body" id="qibao-lightbox-body"></div>
   </div>
+  <NextProject slug="qibao" />
 </BaseLayout>
 
 <script>

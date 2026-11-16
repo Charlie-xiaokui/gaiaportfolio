@@ -1,0 +1,33 @@
+---
+import { siteConfig } from '@/config/site';
+---
+
+<div class="rise relative overflow-hidden rounded-3xl outline-[6px] outline-white/80" style="--rise-step: 3">
+  <img
+    src="/gaia-portrait.jpg"
+    alt="戴冠宇手持麦克风的照片"
+    width="960"
+    height="1432"
+    class="aspect-[4/5] w-full object-cover"
+  />
+  <a
+    href={`mailto:${siteConfig.author.email}`}
+    class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-full bg-white/80 px-3.5 py-1.5 text-sm font-medium text-[#121211] backdrop-blur-[8px]"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      class="size-3.5 shrink-0"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+    </svg>
+    {siteConfig.author.email}
+  </a>
+</div>

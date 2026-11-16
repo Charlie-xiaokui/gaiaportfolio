@@ -7,7 +7,7 @@ const path = Astro.url.pathname;
 const current = (href: string) => (path === href ? 'page' : path.startsWith(href) ? 'true' : undefined);
 ---
 
-<header class="site-header sticky top-0 z-40 h-(--header-h) border-b border-transparent bg-canvas">
+<header class="site-header sticky top-0 z-40 h-(--header-h) border-b border-transparent bg-canvas" data-transparent-header={path === '/' || path === '/resume/' ? '' : undefined}>
   <div class="shell flex h-full items-center gap-4">
     <a href="/" class="flex items-center gap-2.5 rounded-lg text-[1.15rem] font-semibold tracking-[-0.03em]">
       <Logomark />
@@ -78,6 +78,14 @@ const current = (href: string) => (path === href ? 'page' : path.startsWith(href
 </header>
 
 <script>
+  const transparentHeader = document.querySelector('[data-transparent-header]');
+  if (transparentHeader) {
+    const updateHeader = () => transparentHeader.toggleAttribute('data-scrolled', window.scrollY > 0);
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    window.addEventListener('pageshow', updateHeader);
+  }
+
   const menu = document.getElementById('mobile-nav') as HTMLDialogElement | null;
 
   if (menu && !('command' in HTMLButtonElement.prototype)) {
@@ -95,6 +103,10 @@ const current = (href: string) => (path === href ? 'page' : path.startsWith(href
 </script>
 
 <style>
+  .site-header[data-transparent-header]:not([data-scrolled]) {
+    background-color: transparent;
+  }
+
   @supports (animation-timeline: scroll()) {
     .site-header {
       animation: header-line linear both;

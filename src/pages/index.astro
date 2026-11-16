@@ -1,6 +1,8 @@
 ---
 import { casePreview } from '@/lib/case-media';
 import { featuredCases } from '@/config/case-studies';
+import HomeMeshGradient from '@/components/ui/HomeMeshGradient.astro';
+import ProfilePortrait from '@/components/ui/ProfilePortrait.astro';
 import Icon from '@/components/ui/Icon.astro';
 import SectionHead from '@/components/ui/SectionHead.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -12,26 +14,26 @@ const explorations = [
 ] as const;
 ---
 <BaseLayout closing={false}>
-  <header class="shell grid items-end gap-12 pt-16 pb-20 sm:pt-24 sm:pb-28 lg:grid-cols-[minmax(0,1fr)_352px] lg:gap-16">
-    <div class="flex flex-col items-start gap-12 [font-synthesis:none] antialiased">
-      <div class="flex flex-col items-start gap-10">
-        <p class="rise eyebrow leading-[160%]">introduction</p>
-        <h1 class="rise intro-title text-balance" style="--rise-step: 1"><span>你好,我叫</span>戴冠宇</h1>
-        <ul class="rise flex flex-wrap gap-3" aria-label="专业与经历" style="--rise-step: 2">
-          {['Agent 平台设计', 'B端UX设计', '自学SQL和系统分析师', '工作 10 年'].map((label) => (
-            <li class="flex min-h-7 items-center rounded-full border border-line px-[11.2px] py-[3.2px] text-[13px] font-medium leading-[120%] text-body">{label}</li>
-          ))}
-        </ul>
+  <div class="relative isolate">
+    <HomeMeshGradient />
+    <header class="shell grid items-end gap-12 pt-16 pb-20 sm:pt-24 sm:pb-28 lg:grid-cols-[minmax(0,1fr)_352px] lg:gap-16">
+      <div class="flex flex-col items-start gap-12 [font-synthesis:none] antialiased">
+        <div class="flex flex-col items-start gap-10">
+          <p class="rise eyebrow leading-[160%]">introduction</p>
+          <h1 class="rise intro-title text-balance" style="--rise-step: 1"><span>你好,我叫</span>戴冠宇</h1>
+          <ul class="rise flex flex-wrap gap-3" aria-label="专业与经历" style="--rise-step: 2">
+            {['Agent 平台设计', 'B端UX设计', '自学SQL和系统分析师', '工作 10 年'].map((label) => (
+              <li class="flex min-h-7 items-center rounded-full border border-line px-[11.2px] py-[3.2px] text-[13px] font-medium leading-[120%] text-body">{label}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="rise mt-8" style="--rise-step: 3">
+          <a class="btn btn-primary" href="/resume/">关于我 <Icon name="arrow-right" class="icon-nudge size-4" /></a>
+        </div>
       </div>
-      <div class="rise mt-8" style="--rise-step: 3">
-        <a class="btn btn-primary" href="/resume/">关于我 <Icon name="arrow-right" class="icon-nudge size-4" /></a>
-      </div>
-    </div>
-    <div class="rise relative overflow-hidden rounded-3xl" style="--rise-step: 3">
-      <img src="/gaia-portrait.jpg" alt="戴冠宇手持麦克风的照片" class="aspect-[4/5] w-full object-cover" />
-      <span class="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/90 px-3.5 py-1.5 text-sm font-medium text-[#121211]"><Icon name="map-pin" class="size-3.5" /> Hangzhou, Zhejiang</span>
-    </div>
-  </header>
+      <ProfilePortrait />
+    </header>
+  </div>
   <section id="work" class="shell" aria-labelledby="work-title">
     <div class="reveal [font-synthesis:none] antialiased">
       <p class="eyebrow leading-[160%]">Selected work</p>

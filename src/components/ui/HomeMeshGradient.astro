@@ -1,0 +1,96 @@
+<home-mesh-gradient aria-hidden="true">
+  <div data-shader></div>
+</home-mesh-gradient>
+
+<style>
+  home-mesh-gradient {
+    position: absolute;
+    inset: calc(-1 * var(--header-h)) 0 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0.6;
+    mask-image: linear-gradient(#000 55%, transparent);
+  }
+
+  [data-shader] {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 25%, #c5dfff, transparent 65%),
+      radial-gradient(ellipse at 75% 15%, #e9ffb8, transparent 65%), #fffecd;
+  }
+
+  :global([data-theme='dark']) home-mesh-gradient {
+    opacity: 0.16;
+  }
+</style>
+
+<script>
+  import {
+    ShaderFitOptions,
+    ShaderMount,
+    defaultObjectSizing,
+    getShaderColorFromString,
+    meshGradientFragmentShader,
+    type MeshGradientUniforms,
+  } from '@paper-design/shaders';
+
+  const speed = 1.26;
+  const frame = 800881.6000000357;
+  const colors = ['#C5DFFF', '#E9FFB8', '#FFFECD', '#FAFAF6'];
+  const uniforms = {
+    u_colors: colors.map(getShaderColorFromString),
+    u_colorsCount: colors.length,
+    u_distortion: 0.44,
+    u_swirl: 0.14,
+    u_grainMixer: 0.1,
+    u_grainOverlay: 0,
+    u_fit: ShaderFitOptions[defaultObjectSizing.fit],
+    u_scale: 1,
+    u_rotation: defaultObjectSizing.rotation,
+    u_originX: defaultObjectSizing.originX,
+    u_originY: defaultObjectSizing.originY,
+    u_offsetX: defaultObjectSizing.offsetX,
+    u_offsetY: defaultObjectSizing.offsetY,
+    u_worldWidth: defaultObjectSizing.worldWidth,
+    u_worldHeight: defaultObjectSizing.worldHeight,
+  } satisfies MeshGradientUniforms;
+
+  class HomeMeshGradient extends HTMLElement {
+    private mount?: ShaderMount;
+    private motion = matchMedia('(prefers-reduced-motion: reduce)');
+    private syncSpeed = () => this.mount?.setSpeed(this.motion.matches ? 0 : speed);
+
+    connectedCallback() {
+      const layer = this.querySelector<HTMLElement>('[data-shader]');
+      if (!layer) return;
+
+      try {
+        this.mount = new ShaderMount(
+          layer,
+          meshGradientFragmentShader,
+          uniforms,
+          undefined,
+          this.motion.matches ? 0 : speed,
+          frame,
+          1,
+          1_800_000,
+        );
+        this.motion.addEventListener('change', this.syncSpeed);
+      } catch {
+        layer.querySelector('canvas')?.remove();
+      }
+    }
+
+    disconnectedCallback() {
+      this.motion.removeEventListener('change', this.syncSpeed);
+      this.mount?.dispose();
+      this.mount = undefined;
+    }
+  }
+
+  if (!customElements.get('home-mesh-gradient')) {
+    customElements.define('home-mesh-gradient', HomeMeshGradient);
+  }
+</script>

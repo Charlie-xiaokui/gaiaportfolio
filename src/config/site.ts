@@ -7,12 +7,12 @@ export const siteConfig = {
   name: "Guanyu Dai's Portfolio",
   title: 'Guanyu Dai - Product designer portfolio',
   description:
-    'Maria is a product designer who turns dense workflows and fuzzy requirements into clear, trustworthy digital products. Selected work, case studies, and resume.',
-  siteUrl: 'https://maria.xocoweb.workers.dev',
+    '戴冠宇的产品设计作品集，收录 Agent 平台、企业应用与数据产品的 UX 设计案例。',
+  siteUrl: 'https://gaiaportfolio-nine.vercel.app',
   language: 'en',
   locale: 'en_US',
   dateLocale: 'en-US',
-  socialImage: '/og-image.png',
+  socialImage: '/gaia-home-share.jpg',
 
   author: {
     name: 'Guanyu Dai',

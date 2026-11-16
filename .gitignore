@@ -48,3 +48,6 @@ CLAUDE.md
 .playwright-cli/
 
 .finesse/
+
+# Generated case image previews
+/public/case-previews/

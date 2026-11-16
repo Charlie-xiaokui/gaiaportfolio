@@ -1,9 +1,9 @@
 ---
+import { casePreview } from '@/lib/case-media';
 import { caseStudyCopy } from '@/config/case-studies';
 import NextProject from '@/components/work/NextProject.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import '@/styles/case-unified.css';
-const a = (name: string) => `/viz-case/${name}.jpg`;
 const caseCopy = caseStudyCopy.viz;
 ---
 
@@ -85,7 +85,7 @@ const caseCopy = caseStudyCopy.viz;
         </aside>
         <figure class="product-preview problem-preview" id="legacy-preview">
           <img
-            src="/viz-case/legacy-aeolus.png"
+            src={casePreview('/viz-case/legacy-aeolus.png')}
             alt="重构前的风神可视化查询界面"
             width="1728"
             height="910"
@@ -106,7 +106,7 @@ const caseCopy = caseStudyCopy.viz;
       <div class="mt-16 flex flex-col gap-5">
         {['01', '02', '03'].map((number) => (
           <img
-            src={`/viz-case/research-strategy-${number}.png`}
+            src={casePreview(`/viz-case/research-strategy-${number}.png`)}
             alt={`调研与策略 ${number}`}
             class="aspect-video w-full rounded-3xl object-cover"
             width="1200"
@@ -165,7 +165,7 @@ const caseCopy = caseStudyCopy.viz;
       </div>
       <div id="flex-panel" class="flexible-panel" role="tabpanel" aria-labelledby="flex-tab-0" tabindex="0">
         <img
-          src="/viz-case/flexible-01.png"
+          src={casePreview('/viz-case/flexible-01.png')}
           alt="页面框架：字段、配置与结果"
           width="3840"
           height="2160"
@@ -202,7 +202,7 @@ const caseCopy = caseStudyCopy.viz;
         ))}
       </div>
       <div id="eff-panel" class="flexible-panel" role="tabpanel" aria-labelledby="eff-tab-0" tabindex="0">
-        <img src="/viz-case/efficiency-01.png" alt="图表预设" width="3840" height="2160" />
+        <img src={casePreview('/viz-case/efficiency-01.png')} alt="图表预设" width="3840" height="2160" loading="lazy" />
       </div>
     </section>
     <section class="shell section flexible-section learning-section" id="learning">
@@ -234,7 +234,7 @@ const caseCopy = caseStudyCopy.viz;
         ))}
       </div>
       <div id="learn-panel" class="flexible-panel" role="tabpanel" aria-labelledby="learn-tab-0" tabindex="0">
-        <img src="/viz-case/learning-01.png" alt="复杂配置" width="3840" height="2160" />
+        <img src={casePreview('/viz-case/learning-01.png')} alt="复杂配置" width="3840" height="2160" loading="lazy" />
       </div>
     </section>
     <section class="shell section flexible-section" id="visual">
@@ -275,8 +275,8 @@ const caseCopy = caseStudyCopy.viz;
         aria-labelledby="visual-tab-0"
         tabindex="0"
       >
-        <img src="/viz-case/visual-01.png" alt="图形与界面" width="3840" height="2160" />
-        <img src="/viz-case/visual-02.png" alt="图形与界面补充" width="3840" height="2160" />
+        <img src={casePreview('/viz-case/visual-01.png')} alt="图形与界面" width="3840" height="2160" loading="lazy" />
+        <img src={casePreview('/viz-case/visual-02.png')} alt="图形与界面补充" width="3840" height="2160" loading="lazy" />
       </div>
     </section>
     <section class="validation" id="validation">
@@ -292,7 +292,7 @@ const caseCopy = caseStudyCopy.viz;
             </h3>
             <p>分享关键产出，收集反馈，并提前传达变化，让用户有充足心理缓冲适应新变化</p>
             <div class="validation-image-frame">
-              <img src="/viz-case/testing-01.png?v=de363c02706d" alt="征询用户意见" loading="lazy" />
+              <img src={casePreview('/viz-case/testing-01.png?v=de363c02706d')} alt="征询用户意见" loading="lazy" />
             </div>
           </div>
           <div class="validation-step">
@@ -303,7 +303,7 @@ const caseCopy = caseStudyCopy.viz;
             <div class="validation-image-frame">
               <img
                 class="testing-overlap"
-                src="/viz-case/testing-02.png?v=11719133bc94"
+                src={casePreview('/viz-case/testing-02.png?v=11719133bc94')}
                 alt="可用性测试脚本与用户反馈"
                 loading="lazy"
               />
@@ -315,7 +315,7 @@ const caseCopy = caseStudyCopy.viz;
             </h3>
             <p>关注新版表现，也主动了解旧版用户继续保留旧习惯的原因</p>
             <div class="validation-image-frame">
-              <img src="/viz-case/testing-03.png?v=aca55a0c2bf7" alt="用户监测与回访" loading="lazy" />
+              <img src={casePreview('/viz-case/testing-03.png?v=aca55a0c2bf7')} alt="用户监测与回访" loading="lazy" />
             </div>
           </div>
         </div>
@@ -326,7 +326,7 @@ const caseCopy = caseStudyCopy.viz;
           <p>
             整体项目耗时半年，可视化查询模块全量灰度前，我们对用户发起了一次新版的使用培训，在培训弹幕中，老用户们均表示新版更有吸引力，比原来更好用，模块上线1个月后，旧版UV逐步下降，新版UV波动上升，新版的UV占比均值为66.4%，2个月后，老版完全下线，未引发任何用户负面反馈
           </p>
-          <img src="/viz-case/testing-04.png" alt="项目培训反馈与新版 UV 结果验证" loading="lazy" />
+          <img src={casePreview('/viz-case/testing-04.png')} alt="项目培训反馈与新版 UV 结果验证" loading="lazy" />
         </div>
       </div>
     </section>
@@ -349,7 +349,7 @@ const caseCopy = caseStudyCopy.viz;
               </h3>
               <p>{description}</p>
               <div class="summary-image">
-                <img src={`/viz-case/summary-0${index + 1}.png`} alt={title} loading="lazy" />
+                <img src={casePreview(`/viz-case/summary-0${index + 1}.png`)} alt={title} loading="lazy" />
               </div>
             </div>
           ))}
@@ -364,11 +364,13 @@ const caseCopy = caseStudyCopy.viz;
   </article>
   <dialog id="viz-reader">
     <button class="close">关闭 ×</button>
-    <img src={a('hero')} alt="设计方案放大预览" />
+    <img alt="设计方案放大预览" />
   </dialog>
   <NextProject slug="viz" />
 </BaseLayout>
 <script>
+  import { casePreview } from '@/lib/case-media';
+
   document.querySelectorAll<HTMLElement>('.flexible-section').forEach((root) => {
     const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('.flexible-tab'));
     const panel = root.querySelector<HTMLElement>('.flexible-panel')!;
@@ -386,7 +388,7 @@ const caseCopy = caseStudyCopy.viz;
       const count = root.id === 'visual' ? 2 : 1;
       for (let j = 0; j < count; j++) {
         const img = new Image();
-        img.src = `/viz-case/${prefix}-0${i * count + j + 1}.png`;
+        img.dataset.preview = casePreview(`/viz-case/${prefix}-0${i * count + j + 1}.png`);
         img.alt = tab.querySelector('span')!.textContent!;
         img.width = 3840;
         img.height = 2160;
@@ -400,10 +402,23 @@ const caseCopy = caseStudyCopy.viz;
       request = 0;
     let timer: ReturnType<typeof setTimeout>;
     let animations: Animation[] = [];
+    let inView = false;
+    const loadSlide = (index: number) => {
+      const images = Array.from(slides[index].querySelectorAll('img'));
+      images.forEach((img) => {
+        if (!img.hasAttribute('src')) img.src = img.dataset.preview!;
+      });
+      return images;
+    };
+    const scheduleNext = () => {
+      if (inView && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        timer = setTimeout(() => select((current + 1) % tabs.length), 8000);
+      }
+    };
     const select = async (next: number) => {
       clearTimeout(timer);
       const token = ++request;
-      await Promise.all(Array.from(slides[next].querySelectorAll('img')).map((img) => img.decode().catch(() => {})));
+      await Promise.all(loadSlide(next).map((img) => img.decode().catch(() => {})));
       if (token !== request) return;
       animations.forEach((a) => a.cancel());
       animations = [];
@@ -431,9 +446,12 @@ const caseCopy = caseStudyCopy.viz;
       slides[current].style.transform = 'translateX(-100%)';
       slides[next].style.transform = 'translateX(0)';
       current = next;
-      timer = setTimeout(() => select((current + 1) % tabs.length), 8000);
+      scheduleNext();
     };
     tabs.forEach((tab, i) => {
+      tab.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'mouse') loadSlide(i);
+      });
       tab.addEventListener('click', () => select(i));
       tab.addEventListener('keydown', (e) => {
         let next = i;
@@ -447,11 +465,17 @@ const caseCopy = caseStudyCopy.viz;
         tabs[next].focus();
       });
     });
-    select(0);
+    const slideObserver = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      if (inView) void select(current);
+      else clearTimeout(timer);
+    }, { rootMargin: '150px 0px' });
+    slideObserver.observe(panel);
     document.addEventListener(
       'astro:before-swap',
       () => {
         ++request;
+        slideObserver.disconnect();
         clearTimeout(timer);
         animations.forEach((a) => a.cancel());
       },

@@ -1,4 +1,5 @@
 ---
+import { casePreview, videoPoster } from '@/lib/case-media';
 import { caseStudyCopy } from '@/config/case-studies';
 import '@/styles/case-unified.css';
 import NextProject from '@/components/work/NextProject.astro';
@@ -25,22 +26,22 @@ const caseCopy = caseStudyCopy.aily;
    <article class="aily-bg-card">
     <h3>能聊天，还要能办事</h3>
     <p>真实任务需要读取数据、操作工具，工作伙伴不能只停留在对话里，还要连接企业内外系统</p>
-    <img src="/aily-case/background/bg-chat.png" width="1254" height="1254" alt="工作伙伴连接企业系统的插画" loading="lazy" />
+    <img src={casePreview('/aily-case/background/bg-chat.png')} width="1254" height="1254" alt="工作伙伴连接企业系统的插画" loading="lazy" />
    </article>
    <article class="aily-bg-card">
     <h3>企业需要开放能力，也需要可控</h3>
     <p>企业不仅关心有哪些能力，也需要决定开放给谁、凭证由谁配置，以及何时启用或停用</p>
-    <img src="/aily-case/background/bg-control.png" width="1254" height="1254" alt="企业管控能力开放范围的插画" loading="lazy" />
+    <img src={casePreview('/aily-case/background/bg-control.png')} width="1254" height="1254" alt="企业管控能力开放范围的插画" loading="lazy" />
    </article>
    <article class="aily-bg-card">
     <h3>多个伙伴增加复杂度</h3>
     <p>不同伙伴有不同的技能和连接器，普通用户除了选择能力，还要弄清装给谁、在哪里管理</p>
-    <img src="/aily-case/background/bg-partners.png" width="1254" height="1254" alt="多个伙伴能力安装归属的插画" loading="lazy" />
+    <img src={casePreview('/aily-case/background/bg-partners.png')} width="1254" height="1254" alt="多个伙伴能力安装归属的插画" loading="lazy" />
    </article>
    <article class="aily-bg-card">
     <h3>技术概念增加理解成本</h3>
     <p>技能、技能包、连接器和授权方式各不相同，但普通用户只想知道：它能帮我做什么，怎样开始用</p>
-    <img src="/aily-case/background/bg-concepts.png" width="1254" height="1254" alt="技术概念挡住任务的插画" loading="lazy" />
+    <img src={casePreview('/aily-case/background/bg-concepts.png')} width="1254" height="1254" alt="技术概念挡住任务的插画" loading="lazy" />
    </article>
   </div>
  </section>
@@ -84,17 +85,17 @@ const caseCopy = caseStudyCopy.aily;
     <button type="button" role="tab" aria-selected="false" data-decision-tab="after">改造后</button>
    </div>
    <div class="aily-decision-stage" data-decision-stage="before">
-    <figure><img src="/aily-case/decision/before-1.png" alt="改造前：技能详情承载全量信息" loading="lazy" /><figcaption>技能详情-技能介绍</figcaption></figure>
-    <figure><img src="/aily-case/decision/before-2.png" alt="改造前：技能详情版本记录" loading="lazy" /><figcaption>技能详情-版本记录</figcaption></figure>
-    <figure><img src="/aily-case/decision/before-3.png" alt="改造前：技能详情评测报告" loading="lazy" /><figcaption>技能详情-评测报告</figcaption></figure>
+    <figure><img src={casePreview('/aily-case/decision/before-1.png')} alt="改造前：技能详情承载全量信息" loading="lazy" /><figcaption>技能详情-技能介绍</figcaption></figure>
+    <figure><img src={casePreview('/aily-case/decision/before-2.png')} alt="改造前：技能详情版本记录" loading="lazy" /><figcaption>技能详情-版本记录</figcaption></figure>
+    <figure><img src={casePreview('/aily-case/decision/before-3.png')} alt="改造前：技能详情评测报告" loading="lazy" /><figcaption>技能详情-评测报告</figcaption></figure>
    </div>
    <div class="aily-decision-stage" data-decision-stage="after" hidden>
     <figure>
-      <img src={asset('选择能力-改造后-01.png')} width="5760" height="3764" alt="改造后：市场技能详情" loading="lazy" />
+      <img src={casePreview(asset('选择能力-改造后-01.png'))} width="5760" height="3764" alt="改造后：市场技能详情" loading="lazy" />
       <figcaption>市场-技能详情：这个技能做什么、多少人用</figcaption>
     </figure>
     <figure>
-      <img src={asset('选择能力-改造后-02.png')} width="5760" height="3764" alt="改造后：我的技能详情" loading="lazy" />
+      <img src={casePreview(asset('选择能力-改造后-02.png'))} width="5760" height="3764" alt="改造后：我的技能详情" loading="lazy" />
       <figcaption>我的技能-技能详情：谁能看、是否上架、是否更新、是否删除</figcaption>
     </figure>
    </div>
@@ -105,17 +106,17 @@ const caseCopy = caseStudyCopy.aily;
   <div class="aily-authorize-body">
    <div class="aily-authorize-reasons"><div><h3>问题：安装阶段要求API Key，用户前置承担配置成本</h3><p>• 安装 / 添加解决的是 “这个伙伴具备这项能力”<br />• 授权解决的是 “这次可以访问我的某个系统”</p></div><div><h3>解决思路：拆分 “安装能力” 和 “完成授权”</h3><p>• 降低首次使用门槛<br />• 当用户在对话里提出明确任务时，再引导授权，用户更容易理解授权的意义</p></div></div>
    <div class="aily-authorize-tabs" data-case-tabs><div class="aily-authorize-tablist" role="tablist" aria-label="安装与授权方式"><button type="button" role="tab" id="authorize-tab-immediate" aria-controls="authorize-panel-immediate" aria-selected="true" tabindex="0">改造前-安装后立刻授权</button><button type="button" role="tab" id="authorize-tab-deferred" aria-controls="authorize-panel-deferred" aria-selected="false" tabindex="-1">改造后-安装与授权拆分</button></div>
-<div class="aily-authorize-panel" role="tabpanel" id="authorize-panel-immediate" aria-labelledby="authorize-tab-immediate"><button type="button" class="aily-authorize-image" data-image={asset('开始使用-安装后立刻授权-01.png')} aria-label="放大查看安装后立刻授权方案"><img src={asset('开始使用-安装后立刻授权-01.png')} width="5760" height="3600" alt="安装后立刻弹出授权配置，要求填写 API Key" loading="lazy" /></button><p>必须完成授权后才安装成功</p></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="authorize-panel-deferred" aria-labelledby="authorize-tab-deferred" hidden><button type="button" class="aily-authorize-image" data-image={asset('开始使用-安装与授权拆分-01.png')} aria-label="放大查看安装与授权拆分方案"><img src={asset('开始使用-安装与授权拆分-01.png')} width="5760" height="3600" alt="在对话任务中需要连接外部系统时，再引导用户授权" loading="lazy" /></button><p>先完成安装，实际任务需要访问系统时再引导授权</p></div>
+<div class="aily-authorize-panel" role="tabpanel" id="authorize-panel-immediate" aria-labelledby="authorize-tab-immediate"><button type="button" class="aily-authorize-image" data-image={asset('开始使用-安装后立刻授权-01.png')} aria-label="放大查看安装后立刻授权方案"><img src={casePreview(asset('开始使用-安装后立刻授权-01.png'))} width="5760" height="3600" alt="安装后立刻弹出授权配置，要求填写 API Key" loading="lazy" /></button><p>必须完成授权后才安装成功</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="authorize-panel-deferred" aria-labelledby="authorize-tab-deferred" hidden><button type="button" class="aily-authorize-image" data-image={asset('开始使用-安装与授权拆分-01.png')} aria-label="放大查看安装与授权拆分方案"><img src={casePreview(asset('开始使用-安装与授权拆分-01.png'))} width="5760" height="3600" alt="在对话任务中需要连接外部系统时，再引导用户授权" loading="lazy" /></button><p>先完成安装，实际任务需要访问系统时再引导授权</p></div>
    </div>
   </div>
  </section> : s.id==='ownership' ? <section class="aily-authorize-section aily-ownership-section" id="ownership" aria-labelledby="aily-ownership-title">
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">03 / 普通用户 · 能力归属</p><h2 id="aily-ownership-title">装给谁、在哪管、何时用，都有明确落点</h2></div>
   <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>难点：多伙伴场景下，能力容易 “装了但找不到归属”</h3><p>• 技能和连接器安装到具体工作伙伴后，用户需要判断装给谁、在哪里管理<br />• 对话时调用了哪些能力<br />• 伙伴越多，能力归属越容易变得不清晰</p></div><div><h3>方案取舍：让能力的安装、管理和调用都回到具体伙伴</h3><p>• 安装时明确目标伙伴，让能力有明确落点<br />• 伙伴详情承接能力查看与启停，让能力归属可见、可控<br />• 对话中保留显式调用入口，降低多伙伴场景下的能力使用困惑</p></div></div>
    <div class="aily-authorize-tabs" data-case-tabs><div class="aily-authorize-tablist" role="tablist" aria-label="能力归属方案"><button type="button" role="tab" id="ownership-tab-install" aria-controls="ownership-panel-install" aria-selected="true" tabindex="0">安装时展示落点</button><button type="button" role="tab" id="ownership-tab-manage" aria-controls="ownership-panel-manage" aria-selected="false" tabindex="-1">能力可见、可控</button><button type="button" role="tab" id="ownership-tab-conversation" aria-controls="ownership-panel-conversation" aria-selected="false" tabindex="-1">保留显示控制</button></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-install" aria-labelledby="ownership-tab-install"><div class="aily-ownership-image-grid"><div><button type="button" class="aily-authorize-image" data-image={asset('能力归属-安装时展示落点-01.png')} aria-label="放大查看安装目标伙伴"><img src={asset('能力归属-安装时展示落点-01.png')} width="5760" height="3600" alt="安装时选择目标智能体" loading="lazy" /></button><p>安装时支持选择智能体，明确能力落点</p></div><div><button type="button" class="aily-authorize-image" data-image={asset('能力归属-安装时展示落点-02.png')} aria-label="放大查看已添加的智能体"><img src={asset('能力归属-安装时展示落点-02.png')} width="2400" height="2560" alt="已安装的技能显示已添加的智能体" loading="lazy" /></button><p>已安装的技能展示已添加的智能体</p></div></div></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-manage" aria-labelledby="ownership-tab-manage" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-能力可见、可控-01.png')} aria-label="放大查看伙伴能力管理界面"><img src={asset('能力归属-能力可见、可控-01.png')} width="5760" height="3600" alt="伙伴详情集中展示技能、连接器及启停状态" loading="lazy" /></button><p>伙伴详情承接能力查看与启停，让归属可见、可控</p></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-conversation" aria-labelledby="ownership-tab-conversation" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-保留显示控制-01.png')} aria-label="放大查看对话中的能力控制"><img src={asset('能力归属-保留显示控制-01.png')} width="5760" height="3600" alt="对话中保留显式调用和能力控制入口" loading="lazy" /></button><p>对话中保留显式调用入口，随时确认当前可用能力</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-install" aria-labelledby="ownership-tab-install"><div class="aily-ownership-image-grid"><div><button type="button" class="aily-authorize-image" data-image={asset('能力归属-安装时展示落点-01.png')} aria-label="放大查看安装目标伙伴"><img src={casePreview(asset('能力归属-安装时展示落点-01.png'))} width="5760" height="3600" alt="安装时选择目标智能体" loading="lazy" /></button><p>安装时支持选择智能体，明确能力落点</p></div><div><button type="button" class="aily-authorize-image" data-image={asset('能力归属-安装时展示落点-02.png')} aria-label="放大查看已添加的智能体"><img src={casePreview(asset('能力归属-安装时展示落点-02.png'))} width="2400" height="2560" alt="已安装的技能显示已添加的智能体" loading="lazy" /></button><p>已安装的技能展示已添加的智能体</p></div></div></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-manage" aria-labelledby="ownership-tab-manage" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-能力可见、可控-01.png')} aria-label="放大查看伙伴能力管理界面"><img src={casePreview(asset('能力归属-能力可见、可控-01.png'))} width="5760" height="3600" alt="伙伴详情集中展示技能、连接器及启停状态" loading="lazy" /></button><p>伙伴详情承接能力查看与启停，让归属可见、可控</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-conversation" aria-labelledby="ownership-tab-conversation" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-保留显示控制-01.png')} aria-label="放大查看对话中的能力控制"><img src={casePreview(asset('能力归属-保留显示控制-01.png'))} width="5760" height="3600" alt="对话中保留显式调用和能力控制入口" loading="lazy" /></button><p>对话中保留显式调用入口，随时确认当前可用能力</p></div>
    </div>
   </div>
  </section> : s.id==='configure' ? <section class="aily-authorize-section aily-admin-section aily-configure-section" id="configure" aria-labelledby="aily-configure-title">
@@ -123,27 +124,83 @@ const caseCopy = caseStudyCopy.aily;
   <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：配置信息过于复杂</h3><p>企业自定义技能包的创建非常复杂。管理员可能面对<br />• MCP / CLI 两种连接器<br />• API Key、OAuth 2.0、OAuth 2.1等认证方式<br />• 传输类型、请求头、查询参数、请求体等不同的协议与参数<br />• token 获取、刷新和返回字段映射不同的凭证链路</p></div><div><h3>解决思路：用分步和条件展示，把字段放到正确的配置时刻</h3><p>• 按流程切分：基础信息 → 连接器配置 → 关联技能；<br />• 先定类型，再出字段：先选择 MCP/CLI 和认证方式，再展示对应参数；<br />• 用预览和状态确认结果：管理员能看到员工侧授权表单，以及当前是否配置完成<br />• 首期保覆盖，后续提效率：先兼容标准和非标准服务，再补文件识别和自动填充</p></div></div>
    <div class="aily-authorize-tabs" data-case-tabs><div class="aily-authorize-tablist" role="tablist" aria-label="管理员接入能力方案"><button type="button" role="tab" id="configure-tab-steps" aria-controls="configure-panel-steps" aria-selected="true" tabindex="0">按流程切分</button><button type="button" role="tab" id="configure-tab-conditions" aria-controls="configure-panel-conditions" aria-selected="false" tabindex="-1">先定类型，再出字段</button><button type="button" role="tab" id="configure-tab-preview" aria-controls="configure-panel-preview" aria-selected="false" tabindex="-1">用预览和状态确认结果</button><button type="button" role="tab" id="configure-tab-coverage" aria-controls="configure-panel-coverage" aria-selected="false" tabindex="-1">首期保覆盖，后续提效率</button></div>
     <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-steps" aria-labelledby="configure-tab-steps">
-      <video class="aily-configure-video" src="/aily-case/configure-steps.mp4" autoplay muted loop playsinline preload="metadata" aria-label="按流程切分：基础信息、连接器配置与关联技能演示"></video>
+      <video class="aily-configure-video" src="/aily-case/configure-steps.mp4" poster={videoPoster('/aily-case/configure-steps.mp4')} muted loop playsinline preload="none" aria-label="按流程切分：基础信息、连接器配置与关联技能演示"></video>
     </div>
-    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-conditions" aria-labelledby="configure-tab-conditions" hidden><video class="aily-configure-video" src="/aily-case/configure-conditions.mp4" muted loop playsinline preload="none" aria-label="先定类型，再出字段"></video><p>先选择 MCP / CLI 与认证方式，再展示对应参数</p></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-preview" aria-labelledby="configure-tab-preview" hidden><video class="aily-configure-video" src="/aily-case/configure-preview.mp4" muted loop playsinline preload="none" aria-label="用预览和状态确认结果"></video><p>预览员工侧授权流程，确认配置结果与当前状态</p></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-coverage" aria-labelledby="configure-tab-coverage" hidden><video class="aily-configure-video" src="/aily-case/configure-coverage.mp4" muted loop playsinline preload="none" aria-label="首期保覆盖，后期提效率"></video><p>首期先覆盖标准与非标准服务，后续补充文件识别和自动填充</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-conditions" aria-labelledby="configure-tab-conditions" hidden><video class="aily-configure-video" src="/aily-case/configure-conditions.mp4" data-poster={videoPoster('/aily-case/configure-conditions.mp4')} muted loop playsinline preload="none" aria-label="先定类型，再出字段"></video><p>先选择 MCP / CLI 与认证方式，再展示对应参数</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-preview" aria-labelledby="configure-tab-preview" hidden><video class="aily-configure-video" src="/aily-case/configure-preview.mp4" data-poster={videoPoster('/aily-case/configure-preview.mp4')} muted loop playsinline preload="none" aria-label="用预览和状态确认结果"></video><p>预览员工侧授权流程，确认配置结果与当前状态</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-coverage" aria-labelledby="configure-tab-coverage" hidden><video class="aily-configure-video" src="/aily-case/configure-coverage.mp4" data-poster={videoPoster('/aily-case/configure-coverage.mp4')} muted loop playsinline preload="none" aria-label="首期保覆盖，后期提效率"></video><p>首期先覆盖标准与非标准服务，后续补充文件识别和自动填充</p></div>
    </div>
   </div>
  </section> : s.id==='govern' ? <section class="aily-authorize-section aily-admin-section aily-govern-section" id="govern" aria-labelledby="aily-govern-title">
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">04 / 管理员用户 · 持续治理</p><h2 id="aily-govern-title">让管理员看清能力状态，也能及时管控</h2></div>
   <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：管理员不只关注 “有没有”，也关注 “能不能放心开放”</h3><p>企业能力进入市场后，管理员需要持续判断：<br />• 谁能看到和使用<br />• 凭证是否配置完成<br />• 当前是否启用以及出现风险时能否快速停用<br />如果只提供新建、编辑、删除，管理员很难完成日常治理</p></div><div><h3>解决思路：用关键状态和高频操作，支撑管理员做治理决策</h3><p>• 来源与说明：识别能力来自官方还是企业自定义<br />• 可用范围：明确开放给全员还是指定成员 / 部门<br />• 凭证状态：区分未配置、已配置、不适用<br />• 启用状态：判断当前企业成员是否可用<br />• 管控操作：集中承接范围配置、凭证配置、详情查看和启停</p></div></div>
-   <div class="aily-govern-panel"><button type="button" class="aily-authorize-image" data-image={asset('持续治理.png')} aria-label="放大查看管理列表页"><img src={asset('持续治理.png')} width="5760" height="3600" alt="技能包管理列表展示可用范围、凭证状态、启用状态与管控操作" loading="lazy" /></button><p>管理列表页</p></div>
+   <div class="aily-govern-panel"><button type="button" class="aily-authorize-image" data-image={asset('持续治理.png')} aria-label="放大查看管理列表页"><img src={casePreview(asset('持续治理.png'))} width="5760" height="3600" alt="技能包管理列表展示可用范围、凭证状态、启用状态与管控操作" loading="lazy" /></button><p>管理列表页</p></div>
   </div>
- </section> : <section class="chapter" id={s.id}><p class="label">{s.label}</p><h2>{s.title}</h2><div class="reason"><div><h3>设计挑战</h3><p>{s.problem}</p></div><div><h3>设计取舍</h3><p>{s.strategy}</p></div></div><div class="gallery" data-gallery><div class="gallery-toolbar"><span>方案原稿 · 点击图片放大</span><div>{s.images.map((_,i)=><button type="button" aria-label={`查看第 ${i+1} 张方案`} aria-pressed={i===0?'true':'false'} data-slide={i}>{String(i+1).padStart(2,'0')}</button>)}</div></div>{s.images.map((name,i)=><figure hidden={i!==0}><button class="image-open" data-image={asset(name)} aria-label="放大查看方案原稿"><img src={asset(name)} alt={name.replace('.png','')} loading="lazy" /></button><figcaption>{name.replace('.png','').split('/').pop()}</figcaption></figure>)}</div><p class="takeaway">{s.value}</p></section>)}
+ </section> : <section class="chapter" id={s.id}><p class="label">{s.label}</p><h2>{s.title}</h2><div class="reason"><div><h3>设计挑战</h3><p>{s.problem}</p></div><div><h3>设计取舍</h3><p>{s.strategy}</p></div></div><div class="gallery" data-gallery><div class="gallery-toolbar"><span>方案原稿 · 点击图片放大</span><div>{s.images.map((_,i)=><button type="button" aria-label={`查看第 ${i+1} 张方案`} aria-pressed={i===0?'true':'false'} data-slide={i}>{String(i+1).padStart(2,'0')}</button>)}</div></div>{s.images.map((name,i)=><figure hidden={i!==0}><button class="image-open" data-image={asset(name)} aria-label="放大查看方案原稿"><img src={casePreview(asset(name))} alt={name.replace('.png','')} loading="lazy" /></button><figcaption>{name.replace('.png','').split('/').pop()}</figcaption></figure>)}</div><p class="takeaway">{s.value}</p></section>)}
  <section class="aily-future-section" id="future" aria-labelledby="aily-future-title"><div class="aily-future-head"><p class="aily-strategy-eyebrow">05 / 后续优化</p><h2 id="aily-future-title">从手动选择到按需推荐，<br />让能力添加更主动</h2></div><div class="aily-strategy-grid"><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 1</span><h3>手动选择伙伴 → 基于伙伴类型的推荐添加</h3><p>当用户从市场添加技能包时，可根据伙伴角色、已有能力和当前任务类型，推荐更适合的伙伴；从伙伴详情添加时，则默认当前伙伴，减少重复选择</p></article><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 2</span><h3>用户自行补齐能力 → 模板化能力组合</h3><p>对官方或高频伙伴，可在不影响能力授权边界的前提下，预置推荐能力组合，让伙伴创建后具备更完整的初始能力，但仍保留授权确认和启停控制</p></article></div></section>
 </article>
-<dialog class="image-dialog"><button class="close-viewer" autofocus>关闭 ×</button><img src={asset('市场/技能详情 安装前.png')} alt="方案原稿放大预览" /></dialog>
+<dialog class="image-dialog"><button class="close-viewer" autofocus>关闭 ×</button><img alt="方案原稿放大预览" /></dialog>
   <NextProject slug="aily" />
 </BaseLayout>
 <script>
 document.querySelectorAll<HTMLElement>('[data-gallery]').forEach(g=>{const buttons=g.querySelectorAll<HTMLButtonElement>('[data-slide]');const figures=g.querySelectorAll('figure');buttons.forEach((b,i)=>b.addEventListener('click',()=>{buttons.forEach((x,j)=>x.setAttribute('aria-pressed',String(i===j)));figures.forEach((f,j)=>f.hidden=i!==j)}))});
-document.querySelectorAll<HTMLElement>('[data-case-tabs]').forEach(group=>{const tabs=Array.from(group.querySelectorAll<HTMLButtonElement>('[role="tab"]'));const panels=Array.from(group.querySelectorAll<HTMLElement>('[role="tabpanel"]'));const select=(index:number,focus=false)=>{tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1});panels.forEach((panel,i)=>{panel.hidden=i!==index;const video=panel.querySelector('video');if(panel.hidden)video?.pause();else void video?.play().catch(()=>{})});if(focus)tabs[index]?.focus()};tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>select(index));tab.addEventListener('keydown',event=>{if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();select((index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length,true)}else if(event.key==='Home'||event.key==='End'){event.preventDefault();select(event.key==='Home'?0:tabs.length-1,true)}})})});
+const videoObserver = new IntersectionObserver((entries) => {
+  for (const { target, intersectionRatio } of entries) {
+    const video = target as HTMLVideoElement;
+    if (intersectionRatio >= 0.2 && !video.closest('[hidden]')) void video.play().catch(() => {});
+    else video.pause();
+  }
+}, { threshold: 0.2 });
+
+document.querySelectorAll<HTMLElement>('[data-case-tabs]').forEach((group) => {
+  const tabs = Array.from(group.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+  const panels = Array.from(group.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
+  const showPoster = (video: HTMLVideoElement) => {
+    if (!video.poster && video.dataset.poster) video.poster = video.dataset.poster;
+  };
+  const select = (index: number, focus = false) => {
+    tabs.forEach((tab, i) => {
+      tab.setAttribute('aria-selected', String(i === index));
+      tab.tabIndex = i === index ? 0 : -1;
+    });
+    panels.forEach((panel, i) => {
+      panel.hidden = i !== index;
+      const video = panel.querySelector('video');
+      if (!video) return;
+      if (panel.hidden) video.pause();
+      else {
+        showPoster(video);
+        if (video.getBoundingClientRect().top < innerHeight) void video.play().catch(() => {});
+      }
+    });
+    if (focus) tabs[index]?.focus();
+  };
+
+  panels.forEach((panel) => {
+    const video = panel.querySelector('video');
+    if (video) videoObserver.observe(video);
+  });
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('pointerenter', (event) => {
+      const video = panels[index]?.querySelector('video');
+      if (event.pointerType === 'mouse' && video) {
+        showPoster(video);
+        if (video.preload === 'none') video.preload = 'metadata';
+      }
+    });
+    tab.addEventListener('click', () => select(index));
+    tab.addEventListener('keydown', (event) => {
+      const offset = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+      if (offset) {
+        event.preventDefault();
+        select((index + offset + tabs.length) % tabs.length, true);
+      } else if (event.key === 'Home' || event.key === 'End') {
+        event.preventDefault();
+        select(event.key === 'Home' ? 0 : tabs.length - 1, true);
+      }
+    });
+  });
+});
 document.querySelectorAll<HTMLButtonElement>('[data-decision-tab]').forEach(btn=>btn.addEventListener('click',()=>{const mode=btn.dataset.decisionTab;document.querySelectorAll<HTMLButtonElement>('[data-decision-tab]').forEach(b=>{const on=b.dataset.decisionTab===mode;b.setAttribute('aria-selected',String(on));b.classList.toggle('is-active',on)});document.querySelectorAll<HTMLElement>('[data-decision-stage]').forEach(stage=>{stage.hidden=stage.dataset.decisionStage!==mode})}));
 const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document.querySelectorAll<HTMLButtonElement>('[data-image]').forEach(b=>b.addEventListener('click',()=>{if(!viewer)return;viewer.querySelector('img')!.src=b.dataset.image!;viewer.showModal()}));viewer?.querySelector('button')?.addEventListener('click',()=>viewer.close());viewer?.addEventListener('click',e=>{if(e.target===viewer)viewer.close()});
 </script>
@@ -333,7 +390,7 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
 .aily-authorize-panel p { margin: 12px 0 0; color: #6a6964; font-size: 13px; line-height: 1.5; text-align: center; }
 .aily-ownership-image-grid { display: grid; grid-template-columns: minmax(0, 128fr) minmax(0, 75fr); gap: 20px; width: 100%; }
 .aily-ownership-image-grid > div { min-width: 0; }
-.aily-configure-video { display: block; width: 100%; height: auto; border-radius: 12px; }
+.aily-configure-video { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; border-radius: 12px; }
 .aily-govern-panel { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; padding: 24px; border-radius: 16px; background: #f2f2ed; }
 .aily-govern-panel p { margin: 0; color: #6a6964; font-size: 13px; line-height: 1; text-align: center; }
 .aily-admin-section { position: relative; z-index: 0; color: #f4f3ee; }

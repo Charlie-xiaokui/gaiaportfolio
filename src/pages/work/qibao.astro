@@ -1,4 +1,5 @@
 ---
+import { casePreview } from '@/lib/case-media';
 import { caseStudyCopy } from '@/config/case-studies';
 import '@/styles/case-unified.css';
 import NextProject from '@/components/work/NextProject.astro';
@@ -114,7 +115,7 @@ const caseCopy = caseStudyCopy.qibao;
 
     <div class="shell mt-14">
       <figure class="hero-panel">
-        <img src={fig.model} width="3200" height="1800" alt="汽车维保业务 PDF 最后一页：100% 正品保障与正品可验知晓率提升" fetchpriority="high" data-lightbox />
+        <img src={casePreview(fig.model)} data-original={fig.model} width="3200" height="1800" alt="汽车维保业务 PDF 最后一页：100% 正品保障与正品可验知晓率提升" fetchpriority="high" data-lightbox />
       </figure>
     </div>
 
@@ -168,9 +169,9 @@ const caseCopy = caseStudyCopy.qibao;
           ))}
         </ol>
         <div class="journey-gallery">
-          <img src="/qibao-case/运营首页@4x.png" width="4800" height="2420" alt="运营首页：30 分钟快保活动 Banner 与首页入口" loading="lazy" data-lightbox />
-          <img src="/qibao-case/服务透传@4x.png" width="4800" height="2716" alt="服务透传：C 端首页、服务详情、二维码开单与门店选择" loading="lazy" data-lightbox />
-          <img src="/qibao-case/预约反馈@4x.png" width="4800" height="2672" alt="预约反馈：订单状态卡片与预约流程" loading="lazy" data-lightbox />
+          <img src={casePreview('/qibao-case/运营首页@4x.png')} data-original={'/qibao-case/运营首页@4x.png'} width="4800" height="2420" alt="运营首页：30 分钟快保活动 Banner 与首页入口" loading="lazy" data-lightbox />
+          <img src={casePreview('/qibao-case/服务透传@4x.png')} data-original={'/qibao-case/服务透传@4x.png'} width="4800" height="2716" alt="服务透传：C 端首页、服务详情、二维码开单与门店选择" loading="lazy" data-lightbox />
+          <img src={casePreview('/qibao-case/预约反馈@4x.png')} data-original={'/qibao-case/预约反馈@4x.png'} width="4800" height="2672" alt="预约反馈：订单状态卡片与预约流程" loading="lazy" data-lightbox />
         </div>
       </div>
     </section>
@@ -187,7 +188,7 @@ const caseCopy = caseStudyCopy.qibao;
         <article><span class="badge amber">02 / 分设备设计</span><h3>适配门店差异，区分操作方式</h3><p>Pad 端以中心化工作台承载分散操作，支持灵活切换；手机端将操作串联为连续步骤，引导逐步完成任务</p></article>
       </div>
       <figure class="b-paper-images">
-        <img src="/qibao-case/b-solution-final.png" width="3600" height="5802" alt="B端解决方案：流程重构与分设备设计完整长图" loading="lazy" data-lightbox />
+        <img src={casePreview('/qibao-case/b-solution-final.png')} data-original={'/qibao-case/b-solution-final.png'} width="3600" height="5802" alt="B端解决方案：流程重构与分设备设计完整长图" loading="lazy" data-lightbox />
       </figure>
     </section>
 
@@ -199,10 +200,10 @@ const caseCopy = caseStudyCopy.qibao;
         <p>用户担心的不是“页面有没有写正品”，而是我这次保养用的那瓶机油，能不能被看见、验证并追溯</p>
       </div>
       <div class="trust-paper-gallery">
-        <img src="/qibao-case/trust-paper-17.png" width="2934" height="1650" alt="正品授权线上透传：从首页入口到服务与商品详情" loading="lazy" data-lightbox />
-        <img src="/qibao-case/trust-paper-18.png" width="2934" height="1650" alt="正品授权线上透传：正品页与授权证明" loading="lazy" data-lightbox />
-        <div class="trust-paper-crop"><img src="/qibao-case/trust-paper-20.png" width="2934" height="1650" alt="线下正品告知 SOP：取货、验真、施工与交还剩余机油" loading="lazy" data-lightbox /></div>
-        <img src="/qibao-case/trust-paper-22.png" width="2934" height="1650" alt="交车物品清单：报告、单据、发票、车钥匙与定制信封" loading="lazy" data-lightbox />
+        <img src={casePreview('/qibao-case/trust-paper-17.png')} data-original={'/qibao-case/trust-paper-17.png'} width="2934" height="1650" alt="正品授权线上透传：从首页入口到服务与商品详情" loading="lazy" data-lightbox />
+        <img src={casePreview('/qibao-case/trust-paper-18.png')} data-original={'/qibao-case/trust-paper-18.png'} width="2934" height="1650" alt="正品授权线上透传：正品页与授权证明" loading="lazy" data-lightbox />
+        <div class="trust-paper-crop"><img src={casePreview('/qibao-case/trust-paper-20.png')} data-original={'/qibao-case/trust-paper-20.png'} width="2934" height="1650" alt="线下正品告知 SOP：取货、验真、施工与交还剩余机油" loading="lazy" data-lightbox /></div>
+        <img src={casePreview('/qibao-case/trust-paper-22.png')} data-original={'/qibao-case/trust-paper-22.png'} width="2934" height="1650" alt="交车物品清单：报告、单据、发票、车钥匙与定制信封" loading="lazy" data-lightbox />
       </div>
     </section>
 
@@ -353,6 +354,7 @@ const caseCopy = caseStudyCopy.qibao;
           if (!box || !body) return;
           var clone = img.cloneNode(true) as HTMLImageElement;
           clone.removeAttribute('loading');
+          if (img.dataset.original) clone.src = img.dataset.original;
           clone.style.cursor = 'default';
           body.innerHTML = '';
           body.appendChild(clone);

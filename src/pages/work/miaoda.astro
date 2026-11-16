@@ -1,4 +1,5 @@
 ---
+import { casePreview, videoPoster } from '@/lib/case-media';
 import ImageComparison from '@/components/work/ImageComparison.astro';
 import { caseStudyCopy } from '@/config/case-studies';
 import NextProject from '@/components/work/NextProject.astro';
@@ -61,8 +62,8 @@ const caseCopy = caseStudyCopy.miaoda;
             </dl>
             <div class="self-stretch mt-16 rounded-2xl bg-[#F2F2ED] p-4 sm:p-6">
               <ImageComparison
-                before={{ src: '/miaoda-case/background-apaas-01.png', alt: 'Before · 飞书 aPaaS 首页' }}
-                after={{ src: '/miaoda-case/background-miaoda-01.png', alt: 'After · 飞书妙搭首页' }}
+                before={{ src: casePreview('/miaoda-case/background-apaas-01.png'), alt: 'Before · 飞书 aPaaS 首页' }}
+                after={{ src: casePreview('/miaoda-case/background-miaoda-01.png'), alt: 'After · 飞书妙搭首页' }}
                 width={5760}
                 height={3600}
               />
@@ -139,10 +140,10 @@ const caseCopy = caseStudyCopy.miaoda;
               </div>
               <div class="miaoda-image-pair">
                 <figure>
-                  <img class="miaoda-image" src="/miaoda-case/background-miaoda-01.png" alt="飞书妙搭首页" loading="lazy" width="5760" height="3600" />
+                  <img class="miaoda-image" src={casePreview('/miaoda-case/background-miaoda-01.png')} alt="飞书妙搭首页" loading="lazy" width="5760" height="3600" />
                 </figure>
                 <figure>
-                  <img class="miaoda-image" src="/miaoda-case/background-miaoda-02.png" alt="飞书妙搭应用工作区" loading="lazy" width="5760" height="3600" />
+                  <img class="miaoda-image" src={casePreview('/miaoda-case/background-miaoda-02.png')} alt="飞书妙搭应用工作区" loading="lazy" width="5760" height="3600" />
                 </figure>
               </div>
             </div>
@@ -239,7 +240,7 @@ const caseCopy = caseStudyCopy.miaoda;
               <div>
                 <div>
                   <div class="rounded-2xl overflow-clip bg-white">
-                    <video class="miaoda-video" src="/miaoda-case/expert-entry.mp4" aria-label="保持妙搭站点框架" controls muted loop playsinline preload="none"></video>
+                    <video class="miaoda-video" src="/miaoda-case/expert-entry.mp4" poster={videoPoster('/miaoda-case/expert-entry.mp4')} aria-label="保持妙搭站点框架" controls muted loop playsinline preload="none"></video>
                   </div>
                   <div class="text-[14px] leading-[180%] mt-4 text-center font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#C7C7BF]">
                     入口只增加 PRO 按钮和功能说明，不替换用户熟悉的站点组织与开发起点
@@ -328,7 +329,7 @@ const caseCopy = caseStudyCopy.miaoda;
                 <div>
                   <div>
                     <div class="rounded-2xl overflow-clip bg-white">
-                      <video class="miaoda-video" src="/miaoda-case/message-queue.mp4" aria-label="消息队列引导" controls muted loop playsinline preload="none"></video>
+                      <video class="miaoda-video" src="/miaoda-case/message-queue.mp4" poster={videoPoster('/miaoda-case/message-queue.mp4')} aria-label="消息队列引导" controls muted loop playsinline preload="none"></video>
                     </div>
                     <div data-video-caption class="text-[14px] leading-[180%] mt-4 text-center wrap-normal font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
                       待执行消息里提供转为并行任务的入口
@@ -376,7 +377,7 @@ const caseCopy = caseStudyCopy.miaoda;
                 <div>
                   <div>
                     <div class="rounded-2xl overflow-clip bg-white">
-                      <video class="miaoda-video" src="/miaoda-case/branch-management.mp4" aria-label="独立分支与统一管理" controls muted loop playsinline preload="none"></video>
+                      <video class="miaoda-video" src="/miaoda-case/branch-management.mp4" poster={videoPoster('/miaoda-case/branch-management.mp4')} aria-label="独立分支与统一管理" controls muted loop playsinline preload="none"></video>
                     </div>
                     <div data-video-caption class="text-[14px] leading-[180%] mt-4 text-center wrap-normal font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
                       分支管理：当前分支、与源分支的差异、未提交与已提交变更
@@ -401,7 +402,7 @@ const caseCopy = caseStudyCopy.miaoda;
                 <div>
                   <div>
                     <div class="rounded-2xl overflow-clip bg-white">
-                      <video class="miaoda-video" src="/miaoda-case/environment-isolation.mp4" aria-label="线上环境和开发环境隔离" controls muted loop playsinline preload="none"></video>
+                      <video class="miaoda-video" src="/miaoda-case/environment-isolation.mp4" poster={videoPoster('/miaoda-case/environment-isolation.mp4')} aria-label="线上环境和开发环境隔离" controls muted loop playsinline preload="none"></video>
                     </div>
                     <div class="text-[14px] leading-[180%] mt-4 text-center font-['PingFangSC-Regular','PingFang_SC',system-ui,sans-serif] text-[#3B3B38]">
                       线上环境和开发环境隔离
@@ -460,7 +461,7 @@ const caseCopy = caseStudyCopy.miaoda;
                   </div>
                 </div>
                 <div class="p-6 rounded-2xl self-stretch bg-[#F2F2ED]">
-                  <img class="miaoda-image aspect-[8/5] w-full rounded-2xl bg-white object-contain" src="/miaoda-case/ability-code-review.png" alt="代码审查：在扩展工作区查看与确认代码变更" loading="lazy" />
+                  <img class="miaoda-image aspect-[8/5] w-full rounded-2xl bg-white object-contain" src={casePreview('/miaoda-case/ability-code-review.png')} alt="代码审查：在扩展工作区查看与确认代码变更" loading="lazy" />
                 </div>
               </div>
             </div>
@@ -592,13 +593,13 @@ const caseCopy = caseStudyCopy.miaoda;
       font-family: 'PingFang SC', system-ui, sans-serif;
     }
     .miaoda-paper .miaoda-image,
-    .miaoda-paper :global(.miaoda-video) {
+    .miaoda-paper .miaoda-video {
       display: block;
       width: 100%;
       height: auto;
       border-radius: 16px;
     }
-    .miaoda-paper :global(.miaoda-video) {
+    .miaoda-paper .miaoda-video {
       aspect-ratio: 8 / 5;
       background: #121211;
     }
@@ -625,7 +626,7 @@ const caseCopy = caseStudyCopy.miaoda;
       line-height: 1;
       text-align: center;
     }
-    .miaoda-paper :global(.miaoda-media-caption) {
+    .miaoda-paper .miaoda-media-caption {
       margin: 12px 0 0;
       font-size: 14px;
       line-height: 1.8;
@@ -731,6 +732,8 @@ const caseCopy = caseStudyCopy.miaoda;
     }
   </style>
   <script>
+    import { casePreview, videoPoster } from '@/lib/case-media';
+
     const init = () => {
       const revealPanel = (panel: HTMLElement) => {
         panel.getAnimations().forEach((animation) => animation.cancel());
@@ -763,6 +766,7 @@ const caseCopy = caseStudyCopy.miaoda;
             const video = document.createElement('video');
             video.className = 'miaoda-video';
             video.src = src;
+            video.poster = videoPoster(src);
             video.setAttribute('aria-label', label);
             video.controls = video.muted = video.loop = video.playsInline = true;
             video.preload = 'none';
@@ -770,7 +774,7 @@ const caseCopy = caseStudyCopy.miaoda;
           }
           const image = document.createElement('img');
           image.className = 'miaoda-image';
-          image.src = src;
+          image.src = casePreview(src);
           image.alt = label;
           image.loading = 'lazy';
           return image;
@@ -823,10 +827,12 @@ const caseCopy = caseStudyCopy.miaoda;
             sibling = next;
           }
           list.after(panel);
-          const original = panel.innerHTML;
+          const original = Array.from(panel.childNodes);
+          let alternate: Node[] | undefined;
           let activeIndex = -1;
           const select = (index: number) => {
             if (index === activeIndex) return;
+            const initial = activeIndex === -1;
             activeIndex = index;
             panel.querySelectorAll('video').forEach((video) => {
               video.pause();
@@ -840,16 +846,20 @@ const caseCopy = caseStudyCopy.miaoda;
               b.tabIndex = j === index ? 0 : -1;
             });
             panel.setAttribute('aria-labelledby', buttons[index].id);
-            if (index === 0 || config.media[0]?.endsWith('.mp4')) {
-              panel.innerHTML = original;
-              if (index !== 0) {
-                const video = panel.querySelector('video')!;
-                video.src = '/miaoda-case/' + config.media[0];
-                video.setAttribute('aria-label', config.labels[index]);
-                panel.querySelector('[data-video-caption]')!.textContent = config.captions[index];
-              }
+            if (index === 0) {
+              if (!initial) panel.replaceChildren(...original);
+            } else if (alternate) {
+              panel.replaceChildren(...alternate);
+            } else if (config.media[0]?.endsWith('.mp4')) {
+              alternate = original.map((node) => node.cloneNode(true));
+              panel.replaceChildren(...alternate);
+              const video = panel.querySelector('video')!;
+              const src = '/miaoda-case/' + config.media[0];
+              video.poster = videoPoster(src);
+              video.src = src;
+              video.setAttribute('aria-label', config.labels[index]);
+              panel.querySelector('[data-video-caption]')!.textContent = config.captions[index];
             } else {
-              panel.replaceChildren();
               const caption = document.createElement('p');
               caption.className = 'miaoda-media-caption';
               caption.textContent = config.captions[index];
@@ -869,11 +879,11 @@ const caseCopy = caseStudyCopy.miaoda;
                   figure.append(item);
                   pair.append(figure);
                 });
-                panel.append(caption, pair);
+                alternate = [caption, pair];
               } else {
-                panel.append(...items);
-                if (caption.textContent) panel.append(caption);
+                alternate = caption.textContent ? [...items, caption] : items;
               }
+              panel.replaceChildren(...alternate);
             }
             observeVideos(panel);
             revealPanel(panel);
@@ -930,7 +940,7 @@ const caseCopy = caseStudyCopy.miaoda;
             });
             panel.setAttribute('aria-labelledby', buttons[index].id);
             const [name, description] = abilities[index];
-            image.src = '/miaoda-case/' + name;
+            image.src = casePreview('/miaoda-case/' + name);
             image.alt = description;
             revealPanel(panel);
             timer = setTimeout(() => selectAbility((index + 1) % 4), 5000);

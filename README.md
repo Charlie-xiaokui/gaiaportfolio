@@ -33,6 +33,8 @@ Maria is a free Astro theme for UX designers, product designers, and anyone whos
 - Static output with no framework islands and only a few small scripts
 - Landmarks, labelled controls, visible focus states, and keyboard support throughout
 
+Case-study screenshots in `public/*-case/` and `public/work-covers/` are converted to WebP previews by Astro during development and builds. Preview files are generated under `public/case-previews/`. Image viewers link to the source screenshots. Case videos use a separate `-poster.jpg` alongside each MP4.
+
 ## Tech Stack
 
 - Astro 7 with MDX

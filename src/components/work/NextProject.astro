@@ -1,4 +1,5 @@
 ---
+import { casePreview } from '@/lib/case-media';
 import { Image } from 'astro:assets';
 import Icon from '@/components/ui/Icon.astro';
 import { featuredCases } from '@/config/case-studies';
@@ -57,7 +58,7 @@ const next = project
       >
         {featured && (
           <img
-            src={featured.image}
+            src={casePreview(featured.image)}
             alt=""
             loading="lazy"
             decoding="async"

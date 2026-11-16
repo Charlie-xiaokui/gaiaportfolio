@@ -1,4 +1,5 @@
 ---
+import { casePreview } from '@/lib/case-media';
 import { featuredCases } from '@/config/case-studies';
 import Icon from '@/components/ui/Icon.astro';
 import SectionHead from '@/components/ui/SectionHead.astro';
@@ -40,7 +41,7 @@ const explorations = [
     <div class="mt-12 grid gap-x-8 gap-y-16 md:grid-cols-2">
       {featuredCases.map((item) => <article class="case-card reveal relative">
         <div class="relative aspect-5/4 overflow-hidden rounded-card" style={`background-color:${item.color}`}>
-          <img src={item.image} alt={item.title} class="case-cover-image absolute inset-0 size-full object-cover" loading="lazy" />
+          <img src={casePreview(item.image)} alt={item.title} class="case-cover-image absolute inset-0 size-full object-cover" loading="lazy" />
           <span class="case-arrow absolute top-5 right-5 grid size-11 place-items-center rounded-full bg-inverse text-on-inverse" aria-hidden="true"><Icon name="arrow-up-right" class="size-5" /></span>
         </div>
         <div class="mt-6"><h3 class="text-title"><a href={item.href ?? detail} class="after:absolute after:inset-0">{item.title}</a></h3><p class="mt-1.5 text-sm leading-7 text-muted">{item.description}</p><ul class="mt-5 flex flex-wrap gap-2" aria-label="项目标签">{item.tags.map((tag) => <li class="chip">{tag}</li>)}</ul></div>

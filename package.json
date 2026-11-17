@@ -44,6 +44,7 @@
     "@astrojs/mdx": "^8.1.0",
     "@astrojs/sitemap": "^3.7.4",
     "@paper-design/shaders": "0.0.82",
+    "@rive-app/canvas": "2.37.1",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.4.1",
     "sharp": "^0.35.5",

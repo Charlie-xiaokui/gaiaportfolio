@@ -551,6 +551,21 @@
   text-wrap: pretty;
 }
 
+@media (max-width: 767px) {
+  .case-header .case-header-intro,
+  .case-card h3 + p,
+  .work-intro,
+  .story-copy > p:not(.eyebrow) {
+    text-wrap: wrap;
+    text-align: justify;
+    text-justify: inter-character;
+  }
+
+  .case-header .case-header-intro {
+    width: 100%;
+  }
+}
+
 .case-header .case-header-meta {
   margin-top: 56px;
   padding-block: 32px;

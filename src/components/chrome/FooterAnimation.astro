@@ -1,3 +1,9 @@
+---
+import riveScript from '@rive-app/canvas/rive.js?url';
+import riveWasm from '@rive-app/canvas/rive.wasm?url';
+import riveFallbackWasm from '@rive-app/canvas/rive_fallback.wasm?url';
+---
+
 <div class="footer-animation" data-footer-animation>
   <canvas tabindex="-1" aria-label="页脚小人动画"></canvas>
   <canvas class="footer-animation-icons" aria-hidden="true"></canvas>
@@ -29,6 +35,12 @@
     pointer-events: none;
   }
 
+  @media (max-width: 600px) {
+    .footer-animation {
+      height: clamp(56px, 18vw, 108px);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .footer-animation {
       display: none;
@@ -36,7 +48,7 @@
   }
 </style>
 
-<script is:inline type="module">
+<script type="module" define:vars={{ riveScript, riveWasm, riveFallbackWasm }}>
   const stage = document.querySelector('[data-footer-animation]');
   if (stage) init(stage);
 
@@ -51,9 +63,7 @@
     let loading = false;
     let visible = false;
     let frame;
-    const asset =
-      'https://rjdavx8ozyznxeyh.public.blob.vercel-storage.com/production/pages/footer/characters-walking-icons.riv';
-    const runtime = 'https://cdn.jsdelivr.net/npm/@rive-app/canvas@2.37.1';
+    const asset = '/footer/characters-walking-icons.riv';
 
     const iconCanvas = stage.querySelector('.footer-animation-icons');
     const iconContext = iconCanvas.getContext('2d');
@@ -137,13 +147,15 @@
             }
           }
           const rounded = new Path2D();
-          rounded.roundRect(-half, -half, 2 * half, 2 * half, radius);
-          iconContext.save();
-          iconContext.clip(corners);
-          rounded.rect(-half - 2, -half - 2, 2 * half + 4, 2 * half + 4);
-          iconContext.fillStyle = '#FAFAF6';
-          iconContext.fill(rounded, 'evenodd');
-          iconContext.restore();
+          if (rounded.roundRect) {
+            rounded.roundRect(-half, -half, 2 * half, 2 * half, radius);
+            iconContext.save();
+            iconContext.clip(corners);
+            rounded.rect(-half - 2, -half - 2, 2 * half + 4, 2 * half + 4);
+            iconContext.fillStyle = '#FAFAF6';
+            iconContext.fill(rounded, 'evenodd');
+            iconContext.restore();
+          }
           iconContext.scale(size / 21, size / 21);
           iconContext.translate(-16, -16);
           iconContext.lineWidth = 2.6;
@@ -222,14 +234,15 @@
           loadRecoloredAnimation(),
           new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = runtime + '/rive.js';
+            script.src = riveScript;
             script.onload = resolve;
             script.onerror = reject;
             document.head.append(script);
           }),
         ]);
         const { Alignment, Fit, Layout, Rive, RuntimeLoader } = window.rive;
-        RuntimeLoader.setWasmUrl(runtime + '/rive.wasm');
+        // Use the broadly compatible build on compact devices, including older iPhones.
+        RuntimeLoader.setWasmUrl(compact.matches ? riveFallbackWasm : riveWasm);
         const layout = () =>
           new Layout({
             fit: compact.matches ? Fit.Contain : Fit.FitHeight,
@@ -239,6 +252,7 @@
           buffer,
           canvas,
           autoplay: true,
+          isTouchScrollEnabled: true,
           stateMachines: 'State Machine 1',
           layout: layout(),
           onLoad() {
@@ -246,7 +260,7 @@
             canvas.tabIndex = 0;
             resize = new ResizeObserver(() => {
               player.layout = layout();
-              player.resizeDrawingSurfaceToCanvas();
+              player.resizeDrawingSurfaceToCanvas(compact.matches ? Math.min(devicePixelRatio, 1.5) : devicePixelRatio);
             });
             resize.observe(stage);
             syncPlayback();

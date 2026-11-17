@@ -22,11 +22,11 @@ import { profileSchema } from '@/lib/schema';
         <div class="flex flex-col items-start gap-10">
           <p class="rise eyebrow leading-[160%]">Resume</p>
           <h1 class="rise text-balance text-[clamp(2.5rem,5.42vw,78px)] font-medium leading-[102%] tracking-[2px] text-ink self-stretch [font-family:'PingFang_SC',system-ui,sans-serif]" style="--rise-step: 1">戴冠宇, <span class="whitespace-nowrap font-light">UX设计师</span></h1>
-          <p class="rise text-pretty text-sm leading-[200%] tracking-[0.01em] text-muted [font-family:'PingFang_SC',system-ui,sans-serif]" style="--rise-step: 2">
-            专业能力：可独立承担大型产品需求，深度挖掘关键价值，持续带来正向业务收益<br />
-            协作与项目：跨团队协作与项目管理能力突出，能够主导产设研合作项目并高效拿到结果<br />
-            学习与拓展：自学 SQL、系统分析师，从0成长为产品设计接口人；协同商家制定运营策略
-          </p>
+          <div class="resume-intro rise self-stretch text-sm leading-[200%] tracking-[0.01em] text-muted [font-family:'PingFang_SC',system-ui,sans-serif]" lang="zh-CN" style="--rise-step: 2">
+            <p><strong class="font-semibold">专业能力：</strong>可独立承担大型产品需求，深度挖掘关键价值，持续带来正向业务收益</p>
+            <p><strong class="font-semibold">协作与项目：</strong>跨团队协作与项目管理能力突出，能够主导产设研合作项目并高效拿到结果</p>
+            <p><strong class="font-semibold">学习与拓展：</strong>自学 SQL、系统分析师，从0成长为产品设计接口人；协同商家制定运营策略</p>
+          </div>
         </div>
         <a class="rise btn btn-primary" href="/" style="--rise-step: 3">
           查看作品 <Icon name="arrow-right" class="icon-nudge size-4" />
@@ -67,7 +67,7 @@ import { profileSchema } from '@/lib/schema';
               {job.details.map((detail) => (
                 <li class="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-2">
                   <span aria-hidden="true">•</span>
-                  <p class="min-w-0">
+                  <p class="resume-job-detail min-w-0" lang="zh-CN">
                     <strong class="font-semibold">{detail.label}：</strong>
                     {detail.text}
                     {'link' in detail && (
@@ -133,6 +133,16 @@ import { profileSchema } from '@/lib/schema';
     gap: 1.5rem;
     padding-block: 3rem;
     border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 767px) {
+    .resume-intro p,
+    .resume-job-detail {
+      text-wrap: wrap;
+      text-align: justify;
+      text-align-last: start;
+      text-justify: inter-character;
+    }
   }
 
   @media (min-width: 64rem) {

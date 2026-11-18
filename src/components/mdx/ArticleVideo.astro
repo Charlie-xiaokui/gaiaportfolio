@@ -1,0 +1,54 @@
+---
+interface Props {
+  src?: string;
+  caption?: string;
+  label?: string;
+  poster?: string;
+  ratio?: '16/9' | '4/3' | 'auto';
+}
+
+const { src, caption, label, poster, ratio = '16/9' } = Astro.props;
+---
+
+<figure class="article-video">
+  {src ? (
+    <video
+      {src}
+      {poster}
+      controls
+      playsinline
+      preload="metadata"
+      aria-label={label ?? caption ?? '项目演示视频'}
+      style={`aspect-ratio: ${ratio}`}
+    ></video>
+  ) : (
+    <div class="video-placeholder" style={`aspect-ratio: ${ratio}`}>
+      演示视频待补充
+    </div>
+  )}
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .article-video video,
+  .video-placeholder {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius-card);
+    background: var(--sunken);
+  }
+
+  .video-placeholder {
+    display: grid;
+    place-items: center;
+    border: 1px dashed var(--line-strong);
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  figcaption {
+    margin-top: 0.75rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+</style>

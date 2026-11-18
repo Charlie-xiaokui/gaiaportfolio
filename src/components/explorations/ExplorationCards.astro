@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import Icon from '@/components/ui/Icon.astro';
+import SectionHead from '@/components/ui/SectionHead.astro';
+
+interface Props {
+  headingId: string;
+  title: string;
+  class?: string;
+  excludeId?: string;
+}
+
+const { headingId, title, class: className, excludeId } = Astro.props;
+const related = Boolean(excludeId);
+const explorations = (await getCollection('explorations', ({ id, data }) => id !== excludeId && !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order || a.id.localeCompare(b.id),
+);
+const icons: Record<string, string> = {
+  'vibe-coding-demo': 'lightbulb',
+  'vibe-coding-launch': 'layers',
+};
+---
+
+<section class={className} aria-labelledby={headingId}>
+  <SectionHead id={headingId} eyebrow="explore" {title} />
+  <div
+    class:list={[
+      'mt-12 grid gap-px overflow-hidden rounded-card border border-line bg-line',
+      related ? 'sm:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-3',
+    ]}
+  >
+    {explorations.map(({ id, data }) => (
+      <a
+        href={`/explore/${id}/`}
+        class="exploration-card flex flex-col gap-4 bg-surface p-6 focus-visible:outline-2 focus-visible:-outline-offset-4"
+        aria-label={`阅读文章：${data.title}`}
+      >
+        {data.cover && (
+          <img
+            src={data.cover}
+            alt={data.coverAlt ?? ''}
+            class="aspect-video w-full rounded-card object-cover"
+            loading="lazy"
+          />
+        )}
+        {related && (
+          <span class="grid size-11 place-items-center rounded-xl bg-accent text-night" aria-hidden="true">
+            <Icon name={icons[id] ?? 'workflow'} class="size-5" />
+          </span>
+        )}
+        <h3 class="text-title">{data.title}</h3>
+        {(data.cardDescription ?? data.description) && (
+          <p class="text-sm leading-relaxed text-muted">{data.cardDescription ?? data.description}</p>
+        )}
+        {data.tags.length > 0 && (
+          <ul class="flex flex-wrap gap-2">
+            {data.tags.map((tag) => (
+              <li class="chip">{tag}</li>
+            ))}
+          </ul>
+        )}
+        <span class="read-link mt-auto inline-flex w-fit items-center gap-1.5" aria-hidden="true">
+          阅读文章 <Icon name="arrow-right" class="size-4" />
+        </span>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  @media (hover: hover) and (pointer: fine) {
+    .exploration-card .read-link {
+      opacity: 0;
+    }
+
+    .exploration-card:hover .read-link,
+    .exploration-card:focus-visible .read-link {
+      opacity: 1;
+    }
+  }
+</style>

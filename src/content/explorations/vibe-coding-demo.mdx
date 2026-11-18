@@ -1,0 +1,121 @@
+---
+title: Vibe Coding for Demo
+description: 用 AI Studio 将静态设计稿做成交互 Demo，再用 Figma Agent 探索和对比多套 UI 方案。
+cardDescription: 用 AI Studio 将静态设计稿做成交互 Demo，或者用 Figma Agent 探索和对比多套 UI 方案。
+order: 2
+---
+
+import DemoExamples from '@/components/explorations/DemoExamples.astro';
+
+## 前期快速对齐方向
+
+借助 AI Studio，将初步的 Figma 静态设计稿快速转化为可交互 Demo，并通过多轮对话探索不同的设计方案，辅助团队在设计早期验证思路、对齐方向。
+
+**实践过程：** 基于一版初步的 Figma 静态设计稿，经过约 7–8 轮对话迭代，完成从静态界面到可交互 Demo 的快速构建。
+
+<DemoExamples variant="alignment" />
+
+<div class="scenario-comparison">
+  <div class="scenario-suitable">
+    <p>
+      <strong>优势</strong>
+    </p>
+    <ul>
+      <li>理清楚产品逻辑之后就可以立刻生成 demo 了，非常敏捷（比手撸 figma 快多了）</li>
+      <li>
+        虽然准确度和还原性不够，但是作为方案的方向对齐是足够了的，大量节省了 figma demo-改方案-对齐-改方案-对齐 的时间
+      </li>
+      <li>AI 短时间内能想到的方法比人多 🧠</li>
+    </ul>
+  </div>
+  <div class="scenario-unsuitable">
+    <p>
+      <strong>劣势</strong>
+    </p>
+    <ul>
+      <li>准确度不够，这个 demo 仅可作为思路对齐</li>
+    </ul>
+  </div>
+</div>
+
+## 借助 Figma Agent，快速发散 UI 设计方案
+
+借助 Figma Agent，基于现有的 B 端「权益与用量」页面，围绕信息架构、视觉层级和数据表达方式快速探索多种设计方向，辅助设计前期的方案比较与方向判断。
+
+**实践过程：** 以原始 Figma 设计稿为基础，明确保留现有业务信息、数据和功能，通过 Prompt 限定不同的设计策略，让 Agent 一次性产出 4 套方案，并从信息查找效率、视觉重点及信息组织方式等维度进行对比评估。
+
+<div class="my-6 grid gap-4 sm:grid-cols-2">
+  <figure class="m-0 min-w-0">
+    <img
+      src="/explore/demo/figma-agent-a.webp"
+      alt="A｜经典表格型的权益与用量页面"
+      class="block h-auto w-full rounded-card border border-line"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption class="mt-2">
+      <strong class="block">A · 经典表格型</strong>
+      保持原有信息分区，通过数值分列、对齐和紧凑布局提升查找效率，改动成本较低。
+    </figcaption>
+  </figure>
+  <figure class="m-0 min-w-0">
+    <img
+      src="/explore/demo/figma-agent-b.webp"
+      alt="B｜指标仪表盘型的权益与用量页面"
+      class="block h-auto w-full rounded-card border border-line"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption class="mt-2">
+      <strong class="block">B · 指标仪表盘型</strong>
+      将资源用量集中为进度条看板，并与套餐信息并排展示，强化不同资源使用比例的比较。
+    </figcaption>
+  </figure>
+  <figure class="m-0 min-w-0">
+    <img
+      src="/explore/demo/figma-agent-c.webp"
+      alt="C｜重点突出型的权益与用量页面"
+      class="block h-auto w-full rounded-card border border-line"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption class="mt-2">
+      <strong class="block">C · 重点突出型</strong>
+      优先突出使用比例最高的文件存储资源，帮助用户快速识别最值得关注的指标。
+    </figcaption>
+  </figure>
+  <figure class="m-0 min-w-0">
+    <img
+      src="/explore/demo/figma-agent-d.webp"
+      alt="D｜权益清单型的权益与用量页面"
+      class="block h-auto w-full rounded-card border border-line"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption class="mt-2">
+      <strong class="block">D · 权益清单型</strong>
+      将套餐与高级功能放在左侧，资源用量与规格权益按类别组织，强化相关能力之间的对应关系。
+    </figcaption>
+  </figure>
+</div>
+
+<div class="scenario-comparison">
+  <div class="scenario-suitable">
+    <p>
+      <strong>优势</strong>
+    </p>
+    <ul>
+      <li>不用自己一版版调整 Figma，给定几个方向就能快速生成不同的 UI 方案，省下不少画稿时间。</li>
+      <li>几个方案放在一起，能直观看出不同布局各自突出了什么、弱化了什么，比自己脑补更容易判断。</li>
+      <li>除了出图，还能从信息查找、视觉重点等角度给出一些分析，有些点是自己一开始没想到的 💡</li>
+    </ul>
+  </div>
+  <div class="scenario-unsuitable">
+    <p>
+      <strong>劣势</strong>
+    </p>
+    <ul>
+      <li>比如「几步能找到信息」这种结论，更多是 AI 自己推测的，不能当作真实用户反馈。</li>
+    </ul>
+  </div>
+</div>

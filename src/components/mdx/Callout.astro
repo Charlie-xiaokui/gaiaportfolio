@@ -1,0 +1,37 @@
+---
+interface Props {
+  type?: 'info' | 'tip' | 'warning';
+  title?: string;
+}
+const { type = 'info', title } = Astro.props;
+const labels = { info: '补充说明', tip: '实用技巧', warning: '注意' };
+---
+
+<aside class:list={['article-callout', type]} aria-label={title ?? labels[type]}>
+  <strong>{title ?? labels[type]}</strong>
+  <div class="callout-content">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .article-callout {
+    --callout-color: #6395b7;
+    padding: 1rem 1.25rem;
+    border-inline-start: 3px solid var(--callout-color);
+    border-radius: 0.375rem;
+    background: color-mix(in oklab, var(--surface) 92%, var(--callout-color));
+  }
+  .tip {
+    --callout-color: #6a9c78;
+  }
+  .warning {
+    --callout-color: #b28c49;
+  }
+  .callout-content {
+    margin-top: 0.35rem;
+  }
+  .callout-content > :global(* + *) {
+    margin-top: 0.7em;
+  }
+</style>

@@ -1,0 +1,126 @@
+---
+interface Props {
+  images: { name: string; alt: string }[];
+}
+
+const { images } = Astro.props;
+const imagePath = '/explore/vibe-coding-launch/tips/';
+---
+
+<article-image-previews>
+  <div class="previews">
+    {images.map(({ name, alt }) => (
+      <a href={`${imagePath}${name}.webp`} aria-label={`放大查看${alt}`}>
+        <img
+          src={`${imagePath}${name}-thumb.webp`}
+          alt={alt}
+          width="320"
+          height="200"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+    ))}
+  </div>
+  <dialog aria-label="截图预览">
+    <form method="dialog">
+      <button type="submit" autofocus aria-label="关闭预览">
+        ×
+      </button>
+    </form>
+    <img alt="" width="5880" height="3676" />
+  </dialog>
+</article-image-previews>
+
+<script>
+  class ArticleImagePreviews extends HTMLElement {
+    connectedCallback() {
+      const dialog = this.querySelector('dialog');
+      const fullImage = dialog?.querySelector('img');
+      if (!dialog || !fullImage) return;
+
+      this.onclick = (event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const link = target.closest('a');
+        if (!link) return;
+
+        event.preventDefault();
+        fullImage.alt = link.querySelector('img')?.alt ?? '';
+        fullImage.src = link.href;
+        dialog.showModal();
+      };
+
+      dialog.onclick = (event) => {
+        if (event.target === dialog) dialog.close();
+      };
+
+      dialog.onclose = () => fullImage.removeAttribute('src');
+    }
+  }
+
+  customElements.define('article-image-previews', ArticleImagePreviews);
+</script>
+
+<style>
+  article-image-previews {
+    display: block;
+    margin-top: 6px;
+  }
+
+  .previews {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  a {
+    display: block;
+    width: min(160px, 100%);
+    border: 1px solid #8886;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+
+  a img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  dialog {
+    max-width: calc(100vw - 24px);
+    max-height: calc(100dvh - 24px);
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    background: #161616;
+  }
+
+  dialog::backdrop {
+    background: #000c;
+  }
+
+  dialog img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100dvh - 24px);
+  }
+
+  button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #161616;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+</style>

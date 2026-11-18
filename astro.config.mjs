@@ -12,6 +12,12 @@ export default defineConfig({
   site: siteConfig.siteUrl,
   trailingSlash: 'always',
   devToolbar: { enabled: false },
+  markdown: {
+    shikiConfig: {
+      themes: { dark: 'github-dark', light: 'github-light' },
+      defaultColor: 'dark',
+    },
+  },
   integrations: [
     mdx(),
     caseImagePreviews(),

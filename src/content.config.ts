@@ -27,4 +27,19 @@ const work = defineCollection({
     }),
 });
 
-export const collections = { work };
+const explorations = defineCollection({
+  loader: glob({ pattern: '*.{md,mdx}', base: './src/content/explorations' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    cardDescription: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    order: z.number().default(100),
+    draft: z.boolean().default(false),
+    cover: z.string().optional(),
+    coverAlt: z.string().optional(),
+    date: z.string().optional(),
+  }),
+});
+
+export const collections = { work, explorations };

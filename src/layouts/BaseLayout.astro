@@ -97,7 +97,11 @@ const schema = structuredData ?? websiteSchema();
     <a class="skip-link" href="#content">
       Skip to content
     </a>
-    <SiteHeader />
+    {Astro.slots.has('header-identity') ? (
+      <SiteHeader><slot name="header-identity" slot="identity" /></SiteHeader>
+    ) : (
+      <SiteHeader />
+    )}
     <main id="content" class="flex-1">
       <slot />
     </main>

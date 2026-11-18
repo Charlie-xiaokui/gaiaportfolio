@@ -1,0 +1,528 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ExplorationCards from '@/components/explorations/ExplorationCards.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { mdxComponents } from '@/components/mdx';
+import ArticleVideo from '@/components/mdx/ArticleVideo.astro';
+import Callout from '@/components/mdx/Callout.astro';
+
+export async function getStaticPaths() {
+  return (await getCollection('explorations', ({ data }) => !data.draft)).map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'explorations'>;
+}
+
+const { entry } = Astro.props;
+const { title, description, cover, coverAlt } = entry.data;
+const { Content, headings } = await render(entry);
+const sections = headings.filter(({ depth }) => depth === 2);
+---
+
+<BaseLayout {title} {description} image={cover} imageAlt={coverAlt} type="article" closing={false}>
+  <nav slot="header-identity" class="article-breadcrumb antialiased" aria-label="面包屑" lang="zh-CN">
+    <a href="/">首页</a>
+    <span aria-hidden="true">/</span>
+    <a href="/#explore-title">AI 设计工作流探索</a>
+  </nav>
+  <article
+    class:list={[
+      'shell exploration-shell',
+      { 'has-toc': sections.length > 1, 'launch-guide': entry.id === 'vibe-coding-launch' },
+    ]}
+    lang="zh-CN"
+  >
+    <header class="article-header case-header antialiased [font-synthesis:none]">
+      <h1 class="case-header-title">{title}</h1>
+      {description && <p class="case-header-intro">{description}</p>}
+      {cover && <img src={cover} alt={coverAlt ?? ''} class="article-cover" />}
+    </header>
+    <div class="article-layout">
+      <div class="prose article-prose" data-exploration-body>
+        <Content components={{ ...mdxComponents, ArticleVideo, Callout }} />
+      </div>
+      {sections.length > 1 && (
+        <nav class="article-toc" aria-label="文章目录">
+          <p>目录</p>
+          <ul>
+            {sections.map(({ slug, text }) => (
+              <li>
+                <a href={`#${slug}`}>{text}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+    </div>
+    <ExplorationCards headingId="related-explorations" title="其他探索" excludeId={entry.id} class="mt-24 sm:mt-32" />
+  </article>
+</BaseLayout>
+
+<style>
+  :global(.shell.exploration-shell) {
+    --article-width: 1000px;
+    --toc-width: 13rem;
+    --toc-gap: 3rem;
+    --toc-rail: calc(var(--toc-width) + var(--toc-gap));
+    max-width: var(--article-width);
+    padding-inline: clamp(1rem, 4vw, 2.5rem);
+  }
+  @media (min-width: 64rem) {
+    :global(body:has(.has-toc) .shell.exploration-shell) {
+      width: min(var(--article-width), 100% - var(--toc-rail));
+      margin-inline-start: clamp(0px, 100% - var(--article-width) - var(--toc-rail), (100% - var(--article-width)) / 2);
+    }
+  }
+  .article-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font:
+      400 0.875rem/1.25rem 'Hanken Grotesk',
+      system-ui,
+      sans-serif;
+    color: var(--muted);
+  }
+  .article-breadcrumb a:last-child {
+    color: var(--ink);
+  }
+  .article-breadcrumb a:hover,
+  .article-toc a:hover {
+    text-decoration: underline;
+  }
+  .article-header {
+    max-width: var(--article-width);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-top: 1.875rem;
+  }
+  .article-header .case-header-title {
+    margin-top: 1.5rem;
+    font-size: 2.5rem !important;
+    letter-spacing: -2.38px !important;
+  }
+  .article-header .case-header-intro {
+    margin-top: 0;
+    max-width: none !important;
+    font-size: 16px !important;
+    font-family: var(--font-sans);
+    line-height: 1.7 !important;
+    letter-spacing: 0;
+  }
+  .article-cover {
+    width: 100%;
+    border-radius: var(--radius-card);
+  }
+  .article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, var(--article-width));
+    align-items: start;
+    padding-top: clamp(4rem, 7vw, 6rem);
+  }
+  .article-prose {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    letter-spacing: 0;
+  }
+  .article-prose > :global(*) {
+    max-width: var(--article-width);
+  }
+  .article-prose :global(:is(h1, h2, h3, h4, h5, h6)) {
+    scroll-margin-top: 6rem;
+    text-wrap: wrap;
+  }
+  .article-prose :global(h2) {
+    font-size: clamp(1.375rem, 1.15rem + 0.5vw, 1.625rem);
+    margin-top: 3rem;
+    padding-top: 48px;
+    border-top: 1px solid var(--line);
+  }
+  .article-prose :global(h2:first-child) {
+    margin-top: 0;
+    border-top: 0;
+    padding-top: 0;
+  }
+  .article-prose :global(h3) {
+    font-size: 1.125rem;
+  }
+  .article-prose :global(:is(h4, h5, h6)) {
+    color: var(--ink);
+    font-weight: 600;
+    margin-top: 1.5em;
+  }
+  .article-prose :global(h4) {
+    font-size: 1.08em;
+  }
+  .article-prose :global(h6) {
+    font-size: 0.9em;
+  }
+  .article-prose :global(blockquote) {
+    padding-inline-start: 1rem;
+    border-inline-start: 2px solid var(--line-strong);
+    font: inherit;
+  }
+  .article-prose :global(blockquote p::before),
+  .article-prose :global(blockquote p::after) {
+    content: none;
+  }
+  .article-prose :global(pre) {
+    overflow-x: auto;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    line-height: 1.55;
+  }
+  .article-prose :global(pre code) {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    overflow-wrap: normal;
+  }
+  .article-prose :global(table) {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+  }
+  .article-prose :global(:is(th, td)) {
+    padding: 0.75rem 1rem;
+  }
+  .article-prose :global(:is(th, td):first-child) {
+    white-space: nowrap;
+  }
+  .article-prose :global(tbody tr:last-child td) {
+    border-bottom: 0;
+  }
+  .article-prose :global(:not(pre) > code) {
+    border: 0;
+    border-radius: 0.25rem;
+    background: color-mix(in oklab, var(--canvas) 78%, var(--accent));
+    color: var(--ink);
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .article-prose :global(pre.astro-code) {
+    min-width: 0;
+    border: 1px solid var(--line);
+    background: var(--sunken) !important;
+    counter-reset: code-line;
+  }
+  .article-prose :global(pre .line::before) {
+    counter-increment: code-line;
+    content: counter(code-line);
+    display: inline-block;
+    width: 2.5ch;
+    margin-inline-end: 1.25ch;
+    color: var(--muted);
+    text-align: end;
+    user-select: none;
+  }
+  :global(:root:not(.dark)) .article-prose :global(.astro-code),
+  :global(:root:not(.dark)) .article-prose :global(.astro-code span) {
+    color: var(--shiki-light, var(--ink)) !important;
+  }
+  .article-prose :global(.scenario-comparison) {
+    display: grid;
+    gap: 1rem;
+  }
+  .article-prose :global(.scenario-comparison > div) {
+    padding: 1rem;
+    border: 1px solid color-mix(in oklab, var(--line) 70%, var(--scenario-color));
+    border-radius: 0.75rem;
+    background: color-mix(in oklab, var(--surface) 90%, var(--scenario-color));
+  }
+  .article-prose :global(.scenario-comparison p + p) {
+    margin-top: 0.35rem;
+  }
+  .article-prose :global(.scenario-suitable) {
+    --scenario-color: #659157;
+  }
+  .article-prose :global(.scenario-unsuitable) {
+    --scenario-color: #c77a75;
+  }
+  @media (min-width: 40rem) {
+    .article-prose :global(.scenario-comparison) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .article-toc {
+    display: none;
+  }
+  @media (min-width: 64rem) {
+    .has-toc .article-layout {
+      grid-template-columns: minmax(0, 1fr) var(--toc-width);
+      column-gap: var(--toc-gap);
+      margin-inline-end: calc(-1 * var(--toc-rail));
+    }
+    .article-toc {
+      display: block;
+      position: sticky;
+      top: 6rem;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      padding-inline-start: 1rem;
+      border-inline-start: 1px solid var(--line);
+      font-size: 0.875rem;
+    }
+    .article-toc p {
+      font-weight: 600;
+    }
+    .article-toc ul {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 0.8rem;
+      color: var(--muted);
+    }
+  }
+</style>
+
+<style>
+  /* finesse · register=brand · A=existing-neutral+lime · B=600/400
+   * C=reading-column+chapter-rail · D=scroll-position-feedback · E=field-guide
+   * SOUL=4 SPECTACLE=1 DENSITY=6 · preserve existing identity and all copy */
+  .launch-guide {
+    --guide-edge: color-mix(in oklab, var(--ink) 10%, transparent);
+    --guide-fill: color-mix(in oklab, var(--canvas) 65%, var(--sunken));
+  }
+  .launch-guide .article-header {
+    max-width: var(--article-width);
+    gap: 1.5rem;
+    padding-top: clamp(2.25rem, 5vw, 4rem);
+  }
+  .launch-guide .article-header .case-header-title {
+    margin: 0;
+    font-size: clamp(2rem, 3.6vw, 3rem) !important;
+    letter-spacing: -0.04em !important;
+    line-height: 1.22 !important;
+    overflow-wrap: anywhere;
+  }
+  .launch-guide .article-header .case-header-intro {
+    font-size: 1rem !important;
+    line-height: 1.9 !important;
+    color: var(--body);
+    text-wrap: pretty;
+  }
+  .launch-guide .article-layout {
+    padding-top: clamp(2.75rem, 5vw, 4rem);
+  }
+  .launch-guide .article-prose {
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+  .launch-guide .article-prose > :global(*) {
+    max-width: 100%;
+  }
+  .launch-guide .article-prose > :global(* + *) {
+    margin-top: 1.25rem;
+  }
+  .launch-guide .article-prose :global(:is(h2, h3, h4)) {
+    color: var(--ink);
+    font-weight: 600;
+    text-wrap: pretty;
+    scroll-margin-top: calc(var(--header-h) + 2rem);
+  }
+  .launch-guide .article-prose :global(h2) {
+    margin-top: 4.5rem;
+    padding-top: 2.75rem;
+    border-color: var(--guide-edge);
+    font-size: clamp(1.5rem, 2vw, 1.875rem);
+    line-height: 1.35;
+    letter-spacing: -0.025em;
+  }
+  .launch-guide .article-prose :global(h2:first-child) {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .launch-guide .article-prose :global(h2 + p) {
+    margin-top: 2rem;
+    padding: 1.35rem 1.5rem;
+    border: 1px solid color-mix(in oklab, var(--ink) 12%, var(--accent));
+    border-radius: 0.75rem;
+    background: color-mix(in oklab, var(--canvas) 84%, var(--accent));
+    color: var(--ink);
+    font-size: 0.9375rem;
+    line-height: 1.9;
+  }
+  .launch-guide .article-prose :global(h2) {
+    counter-increment: guide-stage;
+    counter-reset: guide-subsection;
+  }
+  .launch-guide .article-prose {
+    counter-reset: guide-stage;
+  }
+  .launch-guide .article-prose :global(h2::before) {
+    content: counter(guide-stage) '. ';
+    font-variant-numeric: tabular-nums;
+  }
+  .launch-guide .article-prose :global(h3) {
+    counter-increment: guide-subsection;
+  }
+  .launch-guide .article-prose :global(h3::before) {
+    content: counter(guide-stage) '.' counter(guide-subsection) ' ';
+    font-variant-numeric: tabular-nums;
+  }
+  .launch-guide .article-prose :global(ul li + li) {
+    margin-top: 0.4rem;
+  }
+  .launch-guide .article-prose :global(.supplementary-note) {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .launch-guide .article-prose :global(.supplementary-note strong) {
+    color: inherit;
+    font-weight: 500;
+  }
+  .launch-guide .article-prose :global(.supplementary-note + .supplementary-note) {
+    margin-top: 0.5rem;
+  }
+  .launch-guide .article-prose :global(h3) {
+    margin-top: 2.75rem;
+    font-size: 1.1875rem;
+    line-height: 1.55;
+    letter-spacing: -0.015em;
+  }
+  .launch-guide .article-prose :global(h4) {
+    margin-top: 2rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .launch-guide .article-prose :global(:is(h3, h4) + *) {
+    margin-top: 1rem;
+  }
+  .launch-guide .article-prose :global(:is(ol, ul)) {
+    padding-inline-start: 1.5rem;
+  }
+  .launch-guide .article-prose :global(li) {
+    padding-inline-start: 0.25rem;
+  }
+  .launch-guide .article-prose :global(li + li) {
+    margin-top: 0.85rem;
+  }
+  .launch-guide .article-prose :global(li > :is(ol, ul)) {
+    margin-top: 0.75rem;
+  }
+  .launch-guide .article-prose :global(li::marker) {
+    font-size: 0.875em;
+  }
+  .launch-guide .article-prose :global(.keep-word) {
+    white-space: nowrap;
+  }
+  .launch-guide .article-prose :global(:not(pre) > code) {
+    padding: 0.14em 0.38em;
+    border: 1px solid var(--guide-edge);
+    border-radius: 0.3rem;
+    background: var(--sunken);
+    font-size: 0.83em;
+  }
+  .launch-guide .article-prose :global(pre.astro-code) {
+    margin-block: 0.8rem;
+    padding: 1.125rem 1.25rem;
+    border-color: var(--guide-edge);
+    border-radius: 0.625rem;
+    background: var(--guide-fill) !important;
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    tab-size: 2;
+  }
+  .launch-guide .article-prose :global(pre code) {
+    font-size: 0.85em;
+  }
+  .launch-guide .article-prose :global(pre .line::before) {
+    width: 2ch;
+    margin-inline-end: 2ch;
+    opacity: 0.65;
+    font-size: 0.9em;
+  }
+  .launch-guide .article-prose :global(blockquote) {
+    margin-block: 1.75rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--guide-edge);
+    border-radius: 0.625rem;
+    background: var(--guide-fill);
+    font-size: 0.9375rem;
+    line-height: 1.85;
+    font-style: normal;
+    letter-spacing: 0;
+    color: var(--body);
+  }
+  .launch-guide .article-prose :global(table) {
+    margin-block: 1.5rem;
+    border: 1px solid var(--guide-edge);
+    border-spacing: 0;
+    border-radius: 0.625rem;
+    background: var(--guide-fill);
+    font-size: 0.875rem;
+    line-height: 1.85;
+  }
+  .launch-guide .article-prose :global(:is(th, td)) {
+    padding: 1rem 1.125rem;
+    border-color: var(--guide-edge);
+  }
+  .launch-guide .article-prose :global(th) {
+    background: var(--sunken);
+  }
+  .launch-guide .article-prose :global(td) {
+    min-width: 12rem;
+  }
+  .launch-guide .article-prose :global(:is(th, td):first-child) {
+    min-width: 8rem;
+    white-space: normal;
+  }
+  .launch-guide .article-prose :global(.scenario-comparison) {
+    gap: 1rem;
+  }
+  .launch-guide .article-prose :global(.scenario-comparison > div) {
+    padding: 1.25rem;
+    border-radius: 0.625rem;
+    background: color-mix(in oklab, var(--canvas) 96%, var(--scenario-color));
+    border-color: color-mix(in oklab, var(--guide-edge) 85%, var(--scenario-color));
+    font-size: 0.9375rem;
+    line-height: 1.85;
+  }
+  .launch-guide .article-prose :global(.scenario-comparison p + p) {
+    margin-top: 0.5rem;
+  }
+  @media (max-width: 39.999rem) {
+    .launch-guide .article-prose {
+      font-size: 0.9375rem;
+      line-height: 1.85;
+    }
+    .launch-guide .article-prose :global(h2) {
+      margin-top: 3.25rem;
+      padding-top: 2rem;
+    }
+    .launch-guide .article-prose :global(h3) {
+      margin-top: 2.25rem;
+      font-size: 1.0625rem;
+    }
+    .launch-guide .article-prose :global(:is(h2 + p, blockquote)) {
+      padding: 1rem;
+    }
+    .launch-guide .article-prose :global(pre.astro-code) {
+      padding: 0.875rem;
+    }
+  }
+</style>
+
+<script>
+  const guide = document.querySelector<HTMLElement>('.launch-guide');
+  if (guide) {
+    for (const table of guide.querySelectorAll<HTMLTableElement>('.article-prose table')) {
+      table.tabIndex = 0;
+      const previousHeading = Array.from(guide.querySelectorAll<HTMLElement>('h2, h3'))
+        .filter((heading) => Boolean(heading.compareDocumentPosition(table) & Node.DOCUMENT_POSITION_FOLLOWING))
+        .at(-1);
+      if (previousHeading?.id) table.setAttribute('aria-labelledby', previousHeading.id);
+    }
+  }
+</script>

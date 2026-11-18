@@ -1,0 +1,128 @@
+---
+interface Props {
+  variant: 'cards' | 'process' | 'alignment';
+}
+const { variant } = Astro.props;
+
+const cards = [
+  { caption: '输入：原始设计稿', region: [29, 366, 247, 533] },
+  { caption: '多卡片', region: [326, 366, 259, 524] },
+  { caption: '输出：带有音轨', region: [628, 366, 259, 524] },
+  { caption: '输出：风格选择', region: [930, 366, 260, 524] },
+  { caption: '输出：风格调节', region: [1233, 366, 259, 524] },
+];
+
+const process = [
+  { caption: '从简单的示意图开始，让 AI 补充完整', region: [24, 1107, 334, 188] },
+  { caption: '调整方案中不符合规则的地方', region: [983, 1199, 136, 74] },
+  { caption: '抽象为设计元素，再应用到设计中', region: [1172, 1118, 306, 164] },
+];
+
+const examples = variant === 'cards' ? cards : process;
+---
+
+{variant === 'cards' && (
+  <dl class="demo-facts">
+    <div>
+      <dt>工具</dt>
+      <dd>Figma Make</dd>
+    </div>
+    <div>
+      <dt>耗时</dt>
+      <dd>10–15 min</dd>
+    </div>
+    <div>
+      <dt>产出</dt>
+      <dd>Demo</dd>
+    </div>
+  </dl>
+)}
+
+{variant === 'alignment' ? (
+  <div class="demo-gallery alignment">
+    {Array.from({ length: 6 }, (_, index) => (
+      <img
+        src={`/explore/demo/alignment-${index + 1}.${index === 5 ? 'png' : 'gif'}`}
+        alt={`方向对齐 Demo 示例 ${index + 1}`}
+        loading="lazy"
+        decoding="async"
+      />
+    ))}
+  </div>
+) : (
+  <div class:list={['demo-gallery', variant]}>
+    {examples.map(({ caption, region: [x, y, width, height] }) => (
+      <figure>
+        <div
+          class="demo-crop"
+          style={`aspect-ratio:${width}/${height};--image-width:${(1570 / width) * 100}%;--image-x:${(-x / 1570) * 100}%;--image-y:${(-y / 1654) * 100}%`}
+        >
+          <img src="/explore/demo/figma-make-reference.png" alt="" loading="lazy" decoding="async" />
+        </div>
+        <figcaption>{caption}</figcaption>
+      </figure>
+    ))}
+  </div>
+)}
+
+<style>
+  .demo-facts,
+  .demo-gallery {
+    display: grid;
+    gap: 1rem;
+  }
+  .demo-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 1.25rem;
+  }
+  .demo-facts > div {
+    padding: 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--sunken);
+  }
+  dt,
+  figcaption {
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+  dd {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .demo-crop {
+    position: relative;
+    overflow: hidden;
+    background: var(--sunken);
+  }
+  .demo-crop img {
+    position: absolute;
+    width: var(--image-width);
+    max-width: none;
+    height: auto;
+    transform: translate(var(--image-x), var(--image-y));
+  }
+  figcaption {
+    margin-top: 0.45rem;
+  }
+  .alignment img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+  }
+  @media (min-width: 40rem) {
+    .cards {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .process {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .alignment {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

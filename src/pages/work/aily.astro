@@ -7,8 +7,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 const sections = [
  { id:'decision', label:'01 / 成员 · 选择能力', title:'先回答“能帮我做什么”，再谈如何维护。', problem:'技能详情曾同时承载介绍、评测、版本、文件更新、可见范围和删除。只是来判断技能是否合适的成员，被迫面对一整套资产管理逻辑。', strategy:'将详情拆为安装前了解与试用、安装后资产管理两种场景。市场回答是什么、是否可信、怎么试；对话承接怎么用；管理面板负责维护与治理。', value:'同一个技能，在市场是待选择的能力，在对话是可调用的方法，在后台才是需要维护的资产。', images:['市场/技能详情 安装前.png','市场/技能详情 安装后.png','技能管理弹窗01.png','技能管理弹窗02.png'] },
  { id:'authorize', label:'02 / 成员 · 开始使用', title:'先获得能力，在任务需要时再授权。', problem:'还没感知技能价值，就要求填写 API Key，用户需要先承担配置成本，也难以理解授权的对象和目的。', strategy:'把安装与授权拆开：安装决定伙伴具备什么能力，授权决定这次允许访问哪个系统。当用户提出“查我的 GitHub 仓库”时，再解释为什么需要连接 GitHub。', value:'把空白表单里的系统配置，变成具体任务中的一次确认，让授权对象、目的与收益同时可见。', images:['技能安装01.png','技能安装02.png','技能安装03.png','授权01.png','授权02.png','授权03.png'] },
- { id:'ownership', label:'03 / 成员 · 能力归属', title:'装给谁、在哪管、何时用，都有明确落点。', problem:'多 Agent 平台里的能力并非装上就全局生效。一次安装需要选择一个或多个伙伴，否则用户难以建立每位伙伴能做什么的预期。', strategy:'安装时明确伙伴选择；伙伴详情的能力页集中展示技能、连接器和开关；对话里通过 /、+ 等显式入口查看或指定能力，与自动调用共同工作。', value:'增加一次有意义的选择，换来伙伴级能力边界的可见与可控。', images:['安装时提供明确的能力落点01.png','安装时提供明确的能力落点02.png','把能力边界转化为可理解的信息.png','对话中保留显式控制，降低多伙伴场景下的能力管理困惑.png'] },
- { id:'configure', label:'04 / 管理员 · 接入能力', title:'复杂现实要覆盖，复杂字段不必同时出现。', problem:'MCP、CLI、API Key、OAuth、传输类型、参数与 token 映射共同构成企业接入的真实复杂度。过度简化会让非标准系统无法配通。', strategy:'按基础信息 → 配置连接器 → 关联技能分三步；随连接器、认证与传输选择动态展开字段；提供员工授权界面的实时预览，并支持管理员预先配置授权。', value:'首期可以接受效率仍待优化，但接入路径必须闭环。控制力来自完整能力与清晰反馈，而非所有字段同时可见。', images:['配置表单：先覆盖复杂现实，再通过分层降低认知负担01.png','配置表单：先覆盖复杂现实，再通过分层降低认知负担02.png','配置表单：先覆盖复杂现实，再通过分层降低认知负担03.png'] },
+ { id:'ownership', label:'03 / 成员 · 能力归属', title:'装给谁、在哪管、如何调用，都有明确落点。', problem:'多 Agent 平台里的能力并非装上就全局生效。一次安装需要选择一个或多个伙伴，否则用户难以建立每位伙伴能做什么的预期。', strategy:'安装时明确伙伴选择；伙伴详情的能力页集中展示技能、连接器和开关；对话里通过 /、+ 等显式入口查看或指定能力，与自动调用共同工作。', value:'增加一次有意义的选择，换来伙伴级能力边界的可见与可控。', images:['安装时提供明确的能力落点01.png','安装时提供明确的能力落点02.png','把能力边界转化为可理解的信息.png','对话中保留显式控制，降低多伙伴场景下的能力管理困惑.png'] },
+ { id:'configure', label:'04 / 管理员 · 接入能力', title:'把复杂配置变得清晰可控。', problem:'MCP、CLI、API Key、OAuth、传输类型、参数与 token 映射共同构成企业接入的真实复杂度。过度简化会让非标准系统无法配通。', strategy:'按基础信息 → 配置连接器 → 关联技能分三步；随连接器、认证与传输选择动态展开字段；提供员工授权界面的实时预览，并支持管理员预先配置授权。', value:'首期可以接受效率仍待优化，但接入路径必须闭环。控制力来自完整能力与清晰反馈，而非所有字段同时可见。', images:['配置表单：先覆盖复杂现实，再通过分层降低认知负担01.png','配置表单：先覆盖复杂现实，再通过分层降低认知负担02.png','配置表单：先覆盖复杂现实，再通过分层降低认知负担03.png'] },
  { id:'govern', label:'05 / 管理员 · 持续治理', title:'从“编辑配置项”，走向“判断该向谁开放”。', problem:'只有新建、编辑、删除，无法回答谁能用、凭证是否配好、谁已安装，以及出问题后如何止损。', strategy:'让列表同时呈现名称与描述、来源、可用范围、预授权和启用状态，并就近提供配置范围、配置凭证、详情与启停操作。', value:'预授权状态把后台技术动作翻译成业务结果：管理员配好凭证后，指定范围的员工可以直接使用，将重复且高门槛的配置集中处理。', images:['借助功能列表让管理员围绕范围、凭证、启停状态做决策和治理动作.png'] },
 ];
 const asset = (name: string) => '/aily-case/' + name.split('/').map(encodeURIComponent).join('/');
@@ -16,7 +16,7 @@ const caseCopy = caseStudyCopy.aily;
 ---
 <BaseLayout title="Aily 工作伙伴能力接入与管理体验设计" description="让普通成员敢装、会用，让管理员能配、敢管。" closing={false}>
 <article class="case-media-hover aily-case shell">
- <header class="aily-hero case-header"><nav aria-label="面包屑" class="case-header-breadcrumb rise"><a href="/">作品案例</a><span aria-hidden="true">/</span><span aria-current="page">{caseCopy.title}</span></nav><h1 class="case-header-title rise" style="--rise-step: 2">让 Agent 接得上，也管得住</h1><p class="lead case-header-intro rise" style="--rise-step: 3">{caseCopy.description}</p><dl class="case-header-meta rise" style="--rise-step: 4"><div><dt>设计范围</dt><dd>Aily 市场模块 &amp; 企业管理后台设计</dd></div><div><dt>方案成果</dt><dd>Aily前端用户敢装、会用；Aily企业管理员能配、敢管</dd></div></dl></header>
+ <header class="aily-hero case-header"><nav aria-label="面包屑" class="case-header-breadcrumb rise"><a href="/">作品案例</a><span aria-hidden="true">/</span><span aria-current="page">{caseCopy.title}</span></nav><h1 class="case-header-title rise" style="--rise-step: 2">让 Agent 接得上，也管得住</h1><p class="lead case-header-intro rise" style="--rise-step: 3">{caseCopy.description}</p><dl class="case-header-meta rise" style="--rise-step: 4"><div><dt>设计范围</dt><dd>Aily 市场模块 &amp; 企业管理后台设计</dd></div><div><dt>方案成果</dt><dd>Aily 前端用户敢装、会用；Aily 企业管理员敢配、能管</dd></div></dl></header>
  <section class="aily-bg-section" id="background" aria-labelledby="aily-bg-title">
   <div class="aily-bg-head">
    <p class="aily-bg-eyebrow">01 / 背景与问题</p>
@@ -49,7 +49,7 @@ const caseCopy = caseStudyCopy.aily;
   <div class="aily-strategy-head">
    <p class="aily-strategy-eyebrow">02 / 设计策略</p>
    <h2 id="aily-strategy-title">拆分：普通用户敢装会用、管理员敢配能管</h2>
-   <p class="aily-strategy-lead">同一套能力接入体系，对不同角色呈现不同信息密度：成员侧聚焦 “判断、安装与使用”，管理员侧聚焦 “配置、范围与管控”</p>
+   <p class="aily-strategy-lead">同一套能力接入体系，对不同角色呈现不同信息密度：普通用户侧聚焦 “判断、安装与使用”，管理员侧聚焦 “配置、范围与管控”</p>
   </div>
   <div class="aily-strategy-grid">
    <article class="aily-strategy-card">
@@ -76,7 +76,7 @@ const caseCopy = caseStudyCopy.aily;
    </div>
    <div>
     <h3>解决思路：安装链路做轻，管理链路做全</h3>
-    <p>• 市场详情回答 “是什么、是否可信、怎么试”<br />• 技能管理回答 “如何维护、发布和治理”</p>
+    <p>• 市场详情回答 “能做什么、多少人安装、怎么开始使用”<br />• 技能管理回答 “如何维护、发布和治理”</p>
    </div>
   </div>
   <div class="aily-decision-panel">
@@ -111,33 +111,44 @@ const caseCopy = caseStudyCopy.aily;
    </div>
   </div>
  </section> : s.id==='ownership' ? <section class="aily-authorize-section aily-ownership-section" id="ownership" aria-labelledby="aily-ownership-title">
-  <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">03 / 普通用户 · 能力归属</p><h2 id="aily-ownership-title">装给谁、在哪管、何时用，都有明确落点</h2></div>
+  <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">03 / 普通用户 · 能力归属</p><h2 id="aily-ownership-title">装给谁、在哪管、如何调用，都有明确落点</h2></div>
   <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>难点：多伙伴场景下，能力容易 “装了但找不到归属”</h3><p>• 技能和连接器安装到具体工作伙伴后，用户需要判断装给谁、在哪里管理<br />• 对话时调用了哪些能力<br />• 伙伴越多，能力归属越容易变得不清晰</p></div><div><h3>方案取舍：让能力的安装、管理和调用都回到具体伙伴</h3><p>• 安装时明确目标伙伴，让能力有明确落点<br />• 伙伴详情承接能力查看与启停，让能力归属可见、可控<br />• 对话中保留显式调用入口，降低多伙伴场景下的能力使用困惑</p></div></div>
    <div class="aily-authorize-tabs" data-case-tabs><div class="aily-authorize-tablist" role="tablist" aria-label="能力归属方案"><button type="button" role="tab" id="ownership-tab-install" aria-controls="ownership-panel-install" aria-selected="true" tabindex="0">安装时展示落点</button><button type="button" role="tab" id="ownership-tab-manage" aria-controls="ownership-panel-manage" aria-selected="false" tabindex="-1">能力可见、可控</button><button type="button" role="tab" id="ownership-tab-conversation" aria-controls="ownership-panel-conversation" aria-selected="false" tabindex="-1">保留显示控制</button></div>
     <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-install" aria-labelledby="ownership-tab-install"><div class="aily-ownership-image-grid"><div><button type="button" class="aily-authorize-image" data-image={asset('能力归属-安装时展示落点-01.png')} aria-label="放大查看安装目标伙伴"><img src={casePreview(asset('能力归属-安装时展示落点-01.png'))} width="5760" height="3600" alt="安装时选择目标智能体" loading="lazy" /></button><p>安装时支持选择智能体，明确能力落点</p></div><div><button type="button" class="aily-authorize-image" data-image={asset('能力归属-安装时展示落点-02.png')} aria-label="放大查看已添加的智能体"><img src={casePreview(asset('能力归属-安装时展示落点-02.png'))} width="2400" height="2560" alt="已安装的技能显示已添加的智能体" loading="lazy" /></button><p>已安装的技能展示已添加的智能体</p></div></div></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-manage" aria-labelledby="ownership-tab-manage" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-能力可见、可控-01.png')} aria-label="放大查看伙伴能力管理界面"><img src={casePreview(asset('能力归属-能力可见、可控-01.png'))} width="5760" height="3600" alt="伙伴详情集中展示技能、连接器及启停状态" loading="lazy" /></button><p>伙伴详情承接能力查看与启停，让归属可见、可控</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-manage" aria-labelledby="ownership-tab-manage" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-能力可见、可控-01.png')} aria-label="放大查看伙伴能力管理界面"><img src={casePreview(asset('能力归属-能力可见、可控-01.png'))} width="5760" height="3600" alt="伙伴详情集中展示技能、连接器及启停状态" loading="lazy" /></button><p>智能体详情支持能力查看与启停，让归属可见、可控</p></div>
     <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-conversation" aria-labelledby="ownership-tab-conversation" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-保留显示控制-01.png')} aria-label="放大查看对话中的能力控制"><img src={casePreview(asset('能力归属-保留显示控制-01.png'))} width="5760" height="3600" alt="对话中保留显式调用和能力控制入口" loading="lazy" /></button><p>对话中保留显式调用入口，随时确认当前可用能力</p></div>
    </div>
   </div>
  </section> : s.id==='configure' ? <section class="aily-authorize-section aily-admin-section aily-configure-section" id="configure" aria-labelledby="aily-configure-title">
-  <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">04 / 管理员用户 · 接入能力</p><h2 id="aily-configure-title">复杂现实要覆盖，复杂字段不必同时出现</h2></div>
-  <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：配置信息过于复杂</h3><p>企业自定义技能包的创建非常复杂。管理员可能面对<br />• MCP / CLI 两种连接器<br />• API Key、OAuth 2.0、OAuth 2.1等认证方式<br />• 传输类型、请求头、查询参数、请求体等不同的协议与参数<br />• token 获取、刷新和返回字段映射不同的凭证链路</p></div><div><h3>解决思路：用分步和条件展示，把字段放到正确的配置时刻</h3><p>• 按流程切分：基础信息 → 连接器配置 → 关联技能；<br />• 先定类型，再出字段：先选择 MCP/CLI 和认证方式，再展示对应参数；<br />• 用预览和状态确认结果：管理员能看到员工侧授权表单，以及当前是否配置完成<br />• 首期保覆盖，后续提效率：先兼容标准和非标准服务，再补文件识别和自动填充</p></div></div>
-   <div class="aily-authorize-tabs" data-case-tabs><div class="aily-authorize-tablist" role="tablist" aria-label="管理员接入能力方案"><button type="button" role="tab" id="configure-tab-steps" aria-controls="configure-panel-steps" aria-selected="true" tabindex="0">按流程切分</button><button type="button" role="tab" id="configure-tab-conditions" aria-controls="configure-panel-conditions" aria-selected="false" tabindex="-1">先定类型，再出字段</button><button type="button" role="tab" id="configure-tab-preview" aria-controls="configure-panel-preview" aria-selected="false" tabindex="-1">用预览和状态确认结果</button><button type="button" role="tab" id="configure-tab-coverage" aria-controls="configure-panel-coverage" aria-selected="false" tabindex="-1">首期保覆盖，后续提效率</button></div>
+  <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">04 / 管理员用户 · 接入能力</p><h2 id="aily-configure-title">把复杂配置变得清晰可控</h2></div>
+  <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：要满足完整诉求，配置信息非常复杂</h3><p>企业自定义技能包的创建非常复杂。管理员可能面对<br />• MCP / CLI 两种连接器<br />• API Key、OAuth 2.0、OAuth 2.1等认证方式<br />• 传输类型、请求头、查询参数、请求体等不同的协议与参数<br />• token 获取、刷新和返回字段映射不同的凭证链路</p></div><div><h3>解决思路：用分步和条件展示，把字段放到正确的配置时刻</h3><p>• 按流程切分：基础信息 → 配置连接器 → 关联技能；<br />• 先定类型，再出字段：根据用户选择的连接器类型和配置方式，动态展示对应的配置项；<br />• 用效果预览确认结果：管理员能看到员工侧授权表单，以及当前是否配置完成<br />• 首期保覆盖，后续提效率：先兼容标准和非标准服务，再补文件识别和自动填充</p></div></div>
+   <div class="aily-authorize-tabs" data-case-tabs><div class="aily-authorize-tablist" role="tablist" aria-label="管理员接入能力方案"><button type="button" role="tab" id="configure-tab-steps" aria-controls="configure-panel-steps" aria-selected="true" tabindex="0">按流程切分</button><button type="button" role="tab" id="configure-tab-conditions" aria-controls="configure-panel-conditions" aria-selected="false" tabindex="-1">先定类型，再出字段</button><button type="button" role="tab" id="configure-tab-preview" aria-controls="configure-panel-preview" aria-selected="false" tabindex="-1">用效果预览确认结果</button><button type="button" role="tab" id="configure-tab-coverage" aria-controls="configure-panel-coverage" aria-selected="false" tabindex="-1">首期保覆盖，后续提效率</button></div>
     <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-steps" aria-labelledby="configure-tab-steps">
       <video class="aily-configure-video" src="/aily-case/configure-steps.mp4" poster={videoPoster('/aily-case/configure-steps.mp4')} muted loop playsinline preload="none" aria-label="按流程切分：基础信息、连接器配置与关联技能演示"></video>
+      <p>基础信息 → 配置连接器 → 关联技能</p>
     </div>
-    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-conditions" aria-labelledby="configure-tab-conditions" hidden><video class="aily-configure-video" src="/aily-case/configure-conditions.mp4" data-poster={videoPoster('/aily-case/configure-conditions.mp4')} muted loop playsinline preload="none" aria-label="先定类型，再出字段"></video><p>先选择 MCP / CLI 与认证方式，再展示对应参数</p></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-preview" aria-labelledby="configure-tab-preview" hidden><video class="aily-configure-video" src="/aily-case/configure-preview.mp4" data-poster={videoPoster('/aily-case/configure-preview.mp4')} muted loop playsinline preload="none" aria-label="用预览和状态确认结果"></video><p>预览员工侧授权流程，确认配置结果与当前状态</p></div>
-    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-coverage" aria-labelledby="configure-tab-coverage" hidden><video class="aily-configure-video" src="/aily-case/configure-coverage.mp4" data-poster={videoPoster('/aily-case/configure-coverage.mp4')} muted loop playsinline preload="none" aria-label="首期保覆盖，后期提效率"></video><p>首期先覆盖标准与非标准服务，后续补充文件识别和自动填充</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-conditions" aria-labelledby="configure-tab-conditions" hidden><video class="aily-configure-video" src="/aily-case/configure-conditions.mp4" data-poster={videoPoster('/aily-case/configure-conditions.mp4')} muted loop playsinline preload="none" aria-label="先定类型，再出字段"></video><p>根据用户选择的连接器类型和配置方式，动态展示对应的配置项</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-preview" aria-labelledby="configure-tab-preview" hidden><video class="aily-configure-video" src="/aily-case/configure-preview.mp4" data-poster={videoPoster('/aily-case/configure-preview.mp4')} muted loop playsinline preload="none" aria-label="用效果预览确认结果"></video><p>管理员能看到员工侧授权表单，以及当前是否配置完成</p></div>
+    <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-coverage" aria-labelledby="configure-tab-coverage" hidden><video class="aily-configure-video" src="/aily-case/configure-coverage.mp4" data-poster={videoPoster('/aily-case/configure-coverage.mp4')} muted loop playsinline preload="none" aria-label="首期保覆盖，后期提效率"></video><p>先兼容标准和非标准服务，再补文件识别和自动填充</p></div>
    </div>
   </div>
  </section> : s.id==='govern' ? <section class="aily-authorize-section aily-admin-section aily-govern-section" id="govern" aria-labelledby="aily-govern-title">
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">04 / 管理员用户 · 持续治理</p><h2 id="aily-govern-title">让管理员看清能力状态，也能及时管控</h2></div>
-  <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：管理员不只关注 “有没有”，也关注 “能不能放心开放”</h3><p>企业能力进入市场后，管理员需要持续判断：<br />• 谁能看到和使用<br />• 凭证是否配置完成<br />• 当前是否启用以及出现风险时能否快速停用<br />如果只提供新建、编辑、删除，管理员很难完成日常治理</p></div><div><h3>解决思路：用关键状态和高频操作，支撑管理员做治理决策</h3><p>• 来源与说明：识别能力来自官方还是企业自定义<br />• 可用范围：明确开放给全员还是指定成员 / 部门<br />• 凭证状态：区分未配置、已配置、不适用<br />• 启用状态：判断当前企业成员是否可用<br />• 管控操作：集中承接范围配置、凭证配置、详情查看和启停</p></div></div>
+  <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：管理员不只关注 “有没有”，也关注 “能不能放心开放”</h3><p>企业能力进入市场后，管理员需要持续判断：<br />• 谁能看到和使用<br />• 凭证是否配置完成<br />• 当前是否启用以及出现风险时能否快速停用<br />如果只提供新建、编辑、删除，管理员很难完成日常治理</p></div><div><h3>解决思路：用关键状态和高频操作，支撑管理员做治理决策</h3><p>• 能力来源：识别能力来自官方还是企业自定义<br />• 可用范围：明确开放给全员还是指定成员 / 部门<br />• 凭证状态：区分未配置、已配置、不适用<br />• 启用状态：判断当前企业成员是否可用<br />• 管控操作：集中承接范围配置、凭证配置、详情查看和启停</p></div></div>
    <div class="aily-govern-panel"><button type="button" class="aily-authorize-image" data-image={asset('持续治理.png')} aria-label="放大查看管理列表页"><img src={casePreview(asset('持续治理.png'))} width="5760" height="3600" alt="技能包管理列表展示可用范围、凭证状态、启用状态与管控操作" loading="lazy" /></button><p>管理列表页</p></div>
   </div>
  </section> : <section class="chapter" id={s.id}><p class="label">{s.label}</p><h2>{s.title}</h2><div class="reason"><div><h3>设计挑战</h3><p>{s.problem}</p></div><div><h3>设计取舍</h3><p>{s.strategy}</p></div></div><div class="gallery" data-gallery><div class="gallery-toolbar"><span>方案原稿 · 点击图片放大</span><div>{s.images.map((_,i)=><button type="button" aria-label={`查看第 ${i+1} 张方案`} aria-pressed={i===0?'true':'false'} data-slide={i}>{String(i+1).padStart(2,'0')}</button>)}</div></div>{s.images.map((name,i)=><figure hidden={i!==0}><button class="image-open" data-image={asset(name)} aria-label="放大查看方案原稿"><img src={casePreview(asset(name))} alt={name.replace('.png','')} loading="lazy" /></button><figcaption>{name.replace('.png','').split('/').pop()}</figcaption></figure>)}</div><p class="takeaway">{s.value}</p></section>)}
- <section class="aily-future-section" id="future" aria-labelledby="aily-future-title"><div class="aily-future-head"><p class="aily-strategy-eyebrow">05 / 后续优化</p><h2 id="aily-future-title">从手动选择到按需推荐，<br />让能力添加更主动</h2></div><div class="aily-strategy-grid"><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 1</span><h3>手动选择伙伴 → 基于伙伴类型的推荐添加</h3><p>当用户从市场添加技能包时，可根据伙伴角色、已有能力和当前任务类型，推荐更适合的伙伴；从伙伴详情添加时，则默认当前伙伴，减少重复选择</p></article><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 2</span><h3>用户自行补齐能力 → 模板化能力组合</h3><p>对官方或高频伙伴，可在不影响能力授权边界的前提下，预置推荐能力组合，让伙伴创建后具备更完整的初始能力，但仍保留授权确认和启停控制</p></article></div></section>
+ <section class="aily-future-section" id="future" aria-labelledby="aily-future-title"><div class="aily-future-head"><p class="aily-strategy-eyebrow">05 / 后续优化</p><h2 id="aily-future-title">用户少主动一点，平台多主动一点</h2></div><div class="aily-strategy-grid"><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 1</span><h3>手动选择伙伴 → 基于伙伴的能力推荐</h3><p>可结合用户对agent的定位和历史任务进行推荐；如用户从市场添加技能包时，可以推荐由哪些agent来安装，而在agent对话页或详情页的时候，也可以推荐相应的技能或技能包</p><button type="button" class="aily-future-image" data-image={asset('优化点1_能力智能推荐_高清.png')} aria-label="放大查看优化点1_能力智能推荐_高清"><img src={asset('优化点1_能力智能推荐_高清.png')} width="2241" height="1374" alt="优化点1_能力智能推荐_高清" loading="lazy" decoding="async" /></button></article><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 2</span><h3>用户自行补齐能力 → 能力组合模板化</h3><p>对官方或高频的agent，可预设常用能力。用户创建agent后，可直接获得相对完整的初始能力，无需逐个寻找和安装。企业场景还需要继续考虑权限和安全问题</p><button type="button" class="aily-future-image" data-image={asset('优化点2_能力组合模板化_高清.png')} aria-label="放大查看优化点2_能力组合模板化_高清"><img src={asset('优化点2_能力组合模板化_高清.png')} width="2301" height="1374" alt="优化点2_能力组合模板化_高清" loading="lazy" decoding="async" /></button></article></div></section>
+ <section class="aily-summary" aria-labelledby="aily-summary-title">
+  <div class="aily-summary-card">
+   <p class="aily-summary-label">总结思考</p>
+   <h2 id="aily-summary-title">如何让复杂的 Agent 能力体系被企业用户理解和使用</h2>
+   <p class="aily-summary-transition"><span aria-hidden="true">↓</span>做减法和转译</p>
+   <p class="aily-summary-statement">角色分层 + 信息组织 + 流程拆解 + 创建能力AI化</p>
+   <p class="aily-summary-transition"><span aria-hidden="true">↓</span>核心价值</p>
+   <p class="aily-summary-statement">不牺牲企业级能力完整性和治理要求的前提下，降低角色的认知与操作成本</p>
+  </div>
+ </section>
 </article>
 <dialog class="image-dialog"><button class="close-viewer" autofocus>关闭 ×</button><img alt="方案原稿放大预览" /></dialog>
   <NextProject slug="aily" />
@@ -411,6 +422,8 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
 .aily-admin-section .aily-authorize-tablist button:focus-visible { outline-color: #d4f84a; }
 .aily-future-section { display: flex; flex-direction: column; gap: 64px; margin-top: 128px; padding-bottom: 88px; scroll-margin-top: 110px; font-synthesis: none; }
 .aily-future-head { max-width: 840px; }
+.aily-future-image { display: block; width: 100%; margin-top: auto; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+.aily-future-image img { display: block; width: 100%; height: auto; }
 .aily-future-head h2 { margin: 20px 0 0; max-width: none; color: #121211; font-size: 48px; line-height: 1.5; letter-spacing: -.849225px; font-weight: 500; }
 @media (max-width: 767px) {
   .aily-authorize-section { margin-top: 80px; gap: 32px; }
@@ -422,5 +435,19 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
   .aily-govern-section { margin-top: 0; padding-top: 40px; padding-bottom: 80px; }
   .aily-future-section { margin-top: 80px; gap: 40px; padding-bottom: 56px; }
   .aily-future-head h2 { font-size: 28px; line-height: 1.45; letter-spacing: -.5px; }
+}
+
+.aily-summary { padding: 80px 0; font-synthesis: none; -webkit-font-smoothing: antialiased; overflow-wrap: anywhere; }
+.aily-summary-card { display: flex; flex-direction: column; gap: 32px; padding: 80px; border-radius: 24px; background: #171716; font-family: 'PingFangSC-Regular', 'PingFang SC', system-ui, sans-serif; font-size-adjust: none; }
+.aily-summary-label { margin: 0; color: #a8a8a2; font-size: 14px; line-height: 18px; }
+.aily-case .aily-summary #aily-summary-title,
+.aily-summary-statement { margin: 0; max-width: none; color: #fafaf7; font-size: 40px !important; line-height: 58px !important; font-weight: 400 !important; letter-spacing: normal !important; text-wrap: wrap; }
+.aily-summary-transition { display: flex; align-items: center; gap: 10px; margin: 0; color: #d4f84a; font-size: 14px; line-height: 18px; }
+.aily-summary-transition span { flex-shrink: 0; font-size: 32px; line-height: 1.7; }
+@media (max-width: 767px) {
+ .aily-summary { padding: 40px 0; }
+ .aily-summary-card { padding: 32px 24px; gap: 24px; }
+ .aily-case .aily-summary #aily-summary-title,
+ .aily-summary-statement { font-size: 28px !important; line-height: 1.5 !important; }
 }
 </style>

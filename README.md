@@ -99,3 +99,23 @@ MIT — free for personal and commercial projects. See [LICENSE](./LICENSE), whi
 - [Instrument Serif](https://github.com/Instrument/instrument-serif) by Instrument, under the SIL Open Font License
 - [Lucide](https://lucide.dev/), under the ISC License
 - [Bootstrap Icons](https://icons.getbootstrap.com/), under the MIT License
+
+### Private analytics administration
+
+The static admin shell is at `/admin/`. Visitor records and aggregate counts are returned only after server-side authentication in `api/admin.mjs` and `api/analytics.mjs`. The API uses an HttpOnly Secure cookie with an eight-hour expiry. Rotate `ADMIN_SESSION_SECRET` to invalidate all sessions. Data collection respects analytics consent and Do Not Track, and excludes logged-in administrators. Device descriptions are inferred and session IDs identify a browser tab, not a person or physical device.
+
+Execute `database/portfolio-analytics.sql` in your existing Supabase project's SQL editor. The tables have RLS enabled and permit access only through the server's service role. Use a dedicated project or schema review before running against a shared production database. The SQL adds only names prefixed with `portfolio_`.
+
+Set these server-only Vercel environment variables for Production and redeploy:
+
+- `SUPABASE_URL` — your project URL.
+- `SUPABASE_SERVICE_ROLE_KEY` — service role JWT or Supabase server secret key.
+- `ADMIN_PASSWORD_HASH` — salted scrypt hash, generated below.
+- `ADMIN_SESSION_SECRET` — random signing secret, generated below.
+- `APP_ORIGIN` — `https://gaiadai.xyz`.
+
+Run `node scripts/create-admin-secret.mjs /absolute/private/path/portfolio-admin.txt` once to generate credentials in a new file with mode 0600. Transfer only the hash and signing secret into Vercel. The `ADMIN_PASSWORD` value is the login password, which stays in your password manager and is never added as a public environment variable or committed. Future admin APIs should reuse `authenticated()` from `server/analytics.mjs` and keep database credentials server-only.
+
+Visit records are pruned on ingestion after 30 days; rate-limit records are pruned on rate-limit requests after one day. If strict scheduled deletion during idle periods is needed, schedule the same cleanup in Supabase. Recent visits shows up to 200 session/page records. Counts include visits with activity in the selected time range and may include the earlier views from a session/page that is still active. Active sessions are those with a heartbeat in the last five minutes, not an exact online-person count.
+
+Vercel serves the root `api/` functions alongside Astro's static `dist/`. Astro dev alone does not emulate these functions. Test the integrated setup with `vercel dev` or a Vercel deployment with the variables set. Preview domains require a matching `APP_ORIGIN` and Secure cookies require HTTPS.

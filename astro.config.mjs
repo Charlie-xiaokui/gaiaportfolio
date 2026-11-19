@@ -22,7 +22,7 @@ export default defineConfig({
     mdx(),
     caseImagePreviews(),
     sitemap({
-      filter: (page) => !noindexPaths.includes(new URL(page).pathname),
+      filter: (page) => !noindexPaths.includes(new URL(page).pathname) && !new URL(page).pathname.startsWith('/admin/'),
     }),
   ],
   image: {

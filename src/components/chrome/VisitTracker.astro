@@ -1,0 +1,49 @@
+<script>
+  type ConsentWindow = Window & { mariaCookieConsent?: { canUse: (category: string) => boolean } };
+  let timer: ReturnType<typeof setInterval> | undefined;
+  let lastPath = '';
+  function allowed() {
+    return (
+      (window as ConsentWindow).mariaCookieConsent?.canUse('analytics') === true &&
+      navigator.doNotTrack !== '1' &&
+      !location.pathname.startsWith('/admin/')
+    );
+  }
+  async function send(type: 'pageview' | 'heartbeat') {
+    if (!allowed() || document.visibilityState !== 'visible') return;
+    try {
+      let session = sessionStorage.getItem('portfolio-visit-session');
+      if (!session) {
+        session = crypto.randomUUID();
+        sessionStorage.setItem('portfolio-visit-session', session);
+      }
+      await fetch('/api/analytics', {
+        method: 'POST',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type, session, path: location.pathname }),
+      });
+    } catch {
+      /* Analytics failure does not interrupt navigation. */
+    }
+  }
+  function start() {
+    clearInterval(timer);
+    if (!allowed()) {
+      sessionStorage.removeItem('portfolio-visit-session');
+      lastPath = '';
+      return;
+    }
+    if (lastPath !== location.pathname) {
+      lastPath = location.pathname;
+      void send('pageview');
+    }
+    timer = setInterval(() => void send('heartbeat'), 60000);
+  }
+  start();
+  window.addEventListener('maria:cookieConsentChanged', start);
+  document.addEventListener('astro:page-load', start);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') start();
+  });
+</script>

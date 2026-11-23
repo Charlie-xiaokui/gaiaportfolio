@@ -7,18 +7,18 @@ import AilySkillGallery from '@/components/work/AilySkillGallery.astro';
 import AiDesignNote from '@/components/work/AiDesignNote.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 const sections = [
- { id:'decision', label:'01 / 成员 · 选择能力', title:'先回答“能帮我做什么”，再谈如何维护。', problem:'技能详情曾同时承载介绍、评测、版本、文件更新、可见范围和删除。只是来判断技能是否合适的成员，被迫面对一整套资产管理逻辑。', strategy:'将详情拆为安装前了解与试用、安装后资产管理两种场景。市场回答是什么、是否可信、怎么试；对话承接怎么用；管理面板负责维护与治理。', value:'同一个技能，在市场是待选择的能力，在对话是可调用的方法，在后台才是需要维护的资产。', images:['市场/技能详情 安装前.png','市场/技能详情 安装后.png','技能管理弹窗01.png','技能管理弹窗02.png'] },
- { id:'authorize', label:'02 / 成员 · 开始使用', title:'先获得能力，在任务需要时再授权。', problem:'还没感知技能价值，就要求填写 API Key，用户需要先承担配置成本，也难以理解授权的对象和目的。', strategy:'把安装与授权拆开：安装决定伙伴具备什么能力，授权决定这次允许访问哪个系统。当用户提出“查我的 GitHub 仓库”时，再解释为什么需要连接 GitHub。', value:'把空白表单里的系统配置，变成具体任务中的一次确认，让授权对象、目的与收益同时可见。', images:['技能安装01.png','技能安装02.png','技能安装03.png','授权01.png','授权02.png','授权03.png'] },
- { id:'ownership', label:'03 / 成员 · 能力归属', title:'装给谁、在哪管、如何调用，都有明确落点。', problem:'多 Agent 平台里的能力并非装上就全局生效。一次安装需要选择一个或多个伙伴，否则用户难以建立每位伙伴能做什么的预期。', strategy:'安装时明确伙伴选择；伙伴详情的能力页集中展示技能、连接器和开关；对话里通过 /、+ 等显式入口查看或指定能力，与自动调用共同工作。', value:'增加一次有意义的选择，换来伙伴级能力边界的可见与可控。', images:['安装时提供明确的能力落点01.png','安装时提供明确的能力落点02.png','把能力边界转化为可理解的信息.png','对话中保留显式控制，降低多伙伴场景下的能力管理困惑.png'] },
+ { id:'decision', label:'01 / 普通用户 · 选择能力', title:'先回答“能帮我做什么”，再谈如何维护。', problem:'技能详情曾同时承载介绍、评测、版本、文件更新、可见范围和删除。只是来判断技能是否合适的普通用户，被迫面对一整套资产管理逻辑。', strategy:'将详情拆为安装前了解与试用、安装后资产管理两种场景。市场回答是什么、是否可信、怎么试；对话承接怎么用；管理面板负责维护与治理。', value:'同一个技能，在市场是待选择的能力，在对话是可调用的方法，在后台才是需要维护的资产。', images:['市场/技能详情 安装前.png','市场/技能详情 安装后.png','技能管理弹窗01.png','技能管理弹窗02.png'] },
+ { id:'authorize', label:'02 / 普通用户 · 开始使用', title:'先获得能力，在任务需要时再授权。', problem:'还没感知技能价值，就要求填写 API Key，用户需要先承担配置成本，也难以理解授权的对象和目的。', strategy:'把安装与授权拆开：安装决定伙伴具备什么能力，授权决定这次允许访问哪个系统。当用户提出“查我的 GitHub 仓库”时，再解释为什么需要连接 GitHub。', value:'把空白表单里的系统配置，变成具体任务中的一次确认，让授权对象、目的与收益同时可见。', images:['技能安装01.png','技能安装02.png','技能安装03.png','授权01.png','授权02.png','授权03.png'] },
+ { id:'ownership', label:'03 / 普通用户 · 能力归属', title:'装给谁、在哪管、如何调用，都有明确落点。', problem:'多 Agent 平台里的能力并非装上就全局生效。一次安装需要选择一个或多个伙伴，否则用户难以建立每位伙伴能做什么的预期。', strategy:'安装时明确伙伴选择；伙伴详情的能力页集中展示技能、连接器和开关；对话里通过 /、+ 等显式入口查看或指定能力，与自动调用共同工作。', value:'增加一次有意义的选择，换来伙伴级能力边界的可见与可控。', images:['安装时提供明确的能力落点01.png','安装时提供明确的能力落点02.png','把能力边界转化为可理解的信息.png','对话中保留显式控制，降低多伙伴场景下的能力管理困惑.png'] },
  { id:'configure', label:'04 / 管理员 · 接入能力', title:'把复杂配置变得清晰可控。', problem:'MCP、CLI、API Key、OAuth、传输类型、参数与 token 映射共同构成企业接入的真实复杂度。过度简化会让非标准系统无法配通。', strategy:'按基础信息 → 配置连接器 → 关联技能分三步；随连接器、认证与传输选择动态展开字段；提供员工授权界面的实时预览，并支持管理员预先配置授权。', value:'首期可以接受效率仍待优化，但接入路径必须闭环。控制力来自完整能力与清晰反馈，而非所有字段同时可见。', images:['配置表单：先覆盖复杂现实，再通过分层降低认知负担01.png','配置表单：先覆盖复杂现实，再通过分层降低认知负担02.png','配置表单：先覆盖复杂现实，再通过分层降低认知负担03.png'] },
  { id:'govern', label:'05 / 管理员 · 持续治理', title:'从“编辑配置项”，走向“判断该向谁开放”。', problem:'只有新建、编辑、删除，无法回答谁能用、凭证是否配好、谁已安装，以及出问题后如何止损。', strategy:'让列表同时呈现名称与描述、来源、可用范围、预授权和启用状态，并就近提供配置范围、配置凭证、详情与启停操作。', value:'预授权状态把后台技术动作翻译成业务结果：管理员配好凭证后，指定范围的员工可以直接使用，将重复且高门槛的配置集中处理。', images:['借助功能列表让管理员围绕范围、凭证、启停状态做决策和治理动作.png'] },
 ];
 const asset = (name: string) => '/aily-case/' + name.split('/').map(encodeURIComponent).join('/');
 const caseCopy = caseStudyCopy.aily;
 ---
-<BaseLayout title="Aily 工作伙伴能力接入与管理体验设计" description="让普通成员敢装、会用，让管理员能配、敢管。" closing={false}>
+<BaseLayout title="豆包工作伙伴能力接入与管理体验设计" description="让普通用户敢装、会用，让管理员能配、敢管。" closing={false}>
 <article class="case-media-hover aily-case shell">
- <header class="aily-hero case-header"><nav aria-label="面包屑" class="case-header-breadcrumb rise"><a href="/">作品案例</a><span aria-hidden="true">/</span><span aria-current="page">{caseCopy.title}</span></nav><h1 class="case-header-title rise" style="--rise-step: 2">让 Agent 接得上，也管得住</h1><p class="lead case-header-intro rise" style="--rise-step: 3">{caseCopy.description}</p><dl class="case-header-meta rise" style="--rise-step: 4"><div><dt>设计范围</dt><dd>Aily 市场模块 &amp; 企业管理后台设计</dd></div><div><dt>方案成果</dt><dd>Aily 前端用户敢装、会用；Aily 企业管理员敢配、能管</dd></div></dl></header>
+ <header class="aily-hero case-header"><nav aria-label="面包屑" class="case-header-breadcrumb rise"><a href="/">作品案例</a><span aria-hidden="true">/</span><span aria-current="page">{caseCopy.title}</span></nav><h1 class="case-header-title rise" style="--rise-step: 2">让 Agent 接得上，也管得住</h1><p class="lead case-header-intro rise" style="--rise-step: 3">{caseCopy.description}</p><dl class="case-header-meta rise" style="--rise-step: 4"><div><dt>设计范围</dt><dd>豆包市场模块 &amp; 企业管理后台设计</dd></div><div><dt>方案成果</dt><dd>普通用户敢装、会用；企业管理员敢配、能管</dd></div></dl></header>
  <section class="aily-bg-section" id="background" aria-labelledby="aily-bg-title">
   <div class="aily-bg-head">
    <p class="aily-bg-eyebrow">01 / 背景与问题</p>
@@ -75,7 +75,7 @@ const caseCopy = caseStudyCopy.aily;
   <div class="aily-decision-points">
    <div>
     <h3>问题：技能弹窗信息过载，影响用户决策</h3>
-    <p>• 市场详情承载了介绍、评测、版本、文件更新、可见范围、下架、删除等信息<br />• 普通成员的主任务是判断和试用，但页面混入了管理动作</p>
+    <p>• 市场详情承载了介绍、评测、版本、文件更新、可见范围、下架、删除等信息<br />• 普通用户的主任务是判断和试用，但页面混入了管理动作</p>
    </div>
    <div>
     <h3>解决思路：安装链路做轻，管理链路做全</h3>
@@ -141,7 +141,7 @@ const caseCopy = caseStudyCopy.aily;
   </div>
  </section> : s.id='govern' ? <section class="aily-authorize-section aily-admin-section aily-govern-section" id="govern" aria-labelledby="aily-govern-title">
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">04 / 管理员用户 · 持续治理</p><h2 id="aily-govern-title">让管理员看清能力状态，也能及时管控</h2></div>
-  <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：管理员不只关注 “有没有”，也关注 “能不能放心开放”</h3><p>企业能力进入市场后，管理员需要持续判断：<br />• 谁能看到和使用<br />• 凭证是否配置完成<br />• 当前是否启用以及出现风险时能否快速停用<br />如果只提供新建、编辑、删除，管理员很难完成日常治理</p></div><div><h3>解决思路：用关键状态和高频操作，支撑管理员做治理决策</h3><p>• 能力来源：识别能力来自官方还是企业自定义<br />• 可用范围：明确开放给全员还是指定成员 / 部门<br />• 凭证状态：区分未配置、已配置、不适用<br />• 启用状态：判断当前企业成员是否可用<br />• 管控操作：集中承接范围配置、凭证配置、详情查看和启停</p></div></div>
+  <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：管理员不只关注 “有没有”，也关注 “能不能放心开放”</h3><p>企业能力进入市场后，管理员需要持续判断：<br />• 谁能看到和使用<br />• 凭证是否配置完成<br />• 当前是否启用以及出现风险时能否快速停用<br />如果只提供新建、编辑、删除，管理员很难完成日常治理</p></div><div><h3>解决思路：用关键状态和高频操作，支撑管理员做治理决策</h3><p>• 能力来源：识别能力来自官方还是企业自定义<br />• 可用范围：明确开放给全员还是指定普通用户 / 部门<br />• 凭证状态：区分未配置、已配置、不适用<br />• 启用状态：判断当前企业普通用户是否可用<br />• 管控操作：集中承接范围配置、凭证配置、详情查看和启停</p></div></div>
    <div class="aily-govern-panel"><button type="button" class="aily-authorize-image" data-image={asset('持续治理.png')} aria-label="放大查看管理列表页"><img src={casePreview(asset('持续治理.png'))} width="5760" height="3600" alt="技能包管理列表展示可用范围、凭证状态、启用状态与管控操作" loading="lazy" /></button><p>管理列表页</p></div>
    <AiDesignNote dark title="在已有组件库基础上，vibecoding完成典型页面的前端开发"><AilySkillGallery govern /></AiDesignNote>
   </div>

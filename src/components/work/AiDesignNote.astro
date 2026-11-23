@@ -1,0 +1,65 @@
+---
+interface Props {
+  title: string;
+  dark?: boolean;
+}
+const { title, dark = false } = Astro.props;
+---
+
+<details class:list={["note", { dark }]}>
+  <summary>
+    <span class="heading">
+      <span class="badge">
+        <svg width="17" height="17" viewBox="3.5 3.187 17 17" aria-hidden="true">
+          <path fill="currentColor" d="M11.411 17.51L10.78 14.176Q10.64 13.36 9.824 13.22L6.49 12.589a.6.6 0 0 1 0-1.178L9.824 10.78Q10.64 10.64 10.78 9.824L11.411 6.489a.6.6 0 0 1 1.178 0L13.22 9.824Q13.36 10.64 14.176 10.78L17.511 11.411a.6.6 0 0 1 0 1.178L14.176 13.22Q13.36 13.36 13.22 14.176L12.589 17.51a.6.6 0 0 1-1.178 0Z" />
+        </svg>
+        AI辅助
+      </span>
+      <span>{title}</span>
+    </span>
+    <svg class="arrows" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path class="closed" d="m8 9 4-4 4 4m-8 6 4 4 4-4" />
+      <path class="opened" d="m8 6 4 4 4-4m-8 12 4-4 4 4" />
+    </svg>
+  </summary>
+  <div class="content">
+    <slot><div class="placeholder" aria-label="AI 辅助设计素材待补充" role="img"></div></slot>
+  </div>
+</details>
+
+<style>
+  .note { border-radius: 16px; background: #fafaf6; outline: 1px solid #e7e7e7; color: #575757; font: 14px/1.6 PingFang SC, system-ui, sans-serif; font-synthesis: none; -webkit-font-smoothing: antialiased; }
+  .note.dark { background: transparent; outline-color: #454542; color: #deded8; }
+  .dark .badge { background: #d4f84a; color: #000; }
+  .dark .arrows { color: #b5b5ae; }
+  summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px 24px 16px 16px; cursor: pointer; list-style: none; border-radius: inherit; }
+  summary::-webkit-details-marker { display: none; }
+  summary:focus-visible { outline: 2px solid #575757; outline-offset: 3px; }
+  .heading, .badge { display: flex; align-items: center; }
+  .heading { flex-wrap: wrap; gap: 12px; overflow-wrap: anywhere; }
+  .badge { gap: 4px; padding: 2px 8px; border-radius: 8px; background: #d4f84a; color: #000; white-space: nowrap; }
+  .arrows { flex: none; color: #8b8b8b; }
+  .opened, [open] .closed { display: none; }
+  [open] .opened { display: inline; }
+  @media (hover: hover) and (pointer: fine) {
+    .arrows { opacity: 0; }
+    .note:hover .arrows,
+    .note > summary:focus-visible .arrows { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .arrows { transition: opacity 150ms ease; }
+
+    @supports (interpolate-size: allow-keywords) and selector(details::details-content) {
+      .note { interpolate-size: allow-keywords; }
+      .note::details-content {
+        block-size: 0;
+        overflow: clip;
+        transition: block-size 320ms cubic-bezier(.22, 1, .36, 1), content-visibility 320ms allow-discrete;
+      }
+      .note[open]::details-content { block-size: auto; }
+    }
+  }
+  .content { padding: 4px 24px 16px 16px; }
+  .placeholder { height: clamp(200px, 44vw, 497px); background: #ddd; }
+</style>

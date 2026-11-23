@@ -3,6 +3,8 @@ import { casePreview, videoPoster } from '@/lib/case-media';
 import { caseStudyCopy } from '@/config/case-studies';
 import '@/styles/case-unified.css';
 import NextProject from '@/components/work/NextProject.astro';
+import AilySkillGallery from '@/components/work/AilySkillGallery.astro';
+import AiDesignNote from '@/components/work/AiDesignNote.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 const sections = [
  { id:'decision', label:'01 / 成员 · 选择能力', title:'先回答“能帮我做什么”，再谈如何维护。', problem:'技能详情曾同时承载介绍、评测、版本、文件更新、可见范围和删除。只是来判断技能是否合适的成员，被迫面对一整套资产管理逻辑。', strategy:'将详情拆为安装前了解与试用、安装后资产管理两种场景。市场回答是什么、是否可信、怎么试；对话承接怎么用；管理面板负责维护与治理。', value:'同一个技能，在市场是待选择的能力，在对话是可调用的方法，在后台才是需要维护的资产。', images:['市场/技能详情 安装前.png','市场/技能详情 安装后.png','技能管理弹窗01.png','技能管理弹窗02.png'] },
@@ -69,6 +71,7 @@ const caseCopy = caseStudyCopy.aily;
    <p class="aily-decision-eyebrow">03 / 普通用户 · 选择能力</p>
    <h2 id="aily-decision-title">先回答“能帮我做什么”，再谈如何维护</h2>
   </div>
+  <div class="aily-decision-body">
   <div class="aily-decision-points">
    <div>
     <h3>问题：技能弹窗信息过载，影响用户决策</h3>
@@ -100,6 +103,8 @@ const caseCopy = caseStudyCopy.aily;
     </figure>
    </div>
   </div>
+  <AiDesignNote title="人工输入方案上下文，AI输出方案初稿"><AilySkillGallery /></AiDesignNote>
+  </div>
  </section>
  {sections.filter(s=>s.id!=='decision').map(s=>s.id==='authorize' ? <section class="aily-authorize-section" id="authorize" aria-labelledby="aily-authorize-title">
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">03 / 普通用户 · 开始使用</p><h2 id="aily-authorize-title">先获得能力，在任务需要时再授权</h2></div>
@@ -118,6 +123,7 @@ const caseCopy = caseStudyCopy.aily;
     <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-manage" aria-labelledby="ownership-tab-manage" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-能力可见、可控-01.png')} aria-label="放大查看伙伴能力管理界面"><img src={casePreview(asset('能力归属-能力可见、可控-01.png'))} width="5760" height="3600" alt="伙伴详情集中展示技能、连接器及启停状态" loading="lazy" /></button><p>智能体详情支持能力查看与启停，让归属可见、可控</p></div>
     <div class="aily-authorize-panel" role="tabpanel" id="ownership-panel-conversation" aria-labelledby="ownership-tab-conversation" hidden><button type="button" class="aily-authorize-image" data-image={asset('能力归属-保留显示控制-01.png')} aria-label="放大查看对话中的能力控制"><img src={casePreview(asset('能力归属-保留显示控制-01.png'))} width="5760" height="3600" alt="对话中保留显式调用和能力控制入口" loading="lazy" /></button><p>对话中保留显式调用入口，随时确认当前可用能力</p></div>
    </div>
+   <AiDesignNote title="多轮对话，逐步形成判断，并最终收敛到一个可落地的方案"><AilySkillGallery ownership /></AiDesignNote>
   </div>
  </section> : s.id==='configure' ? <section class="aily-authorize-section aily-admin-section aily-configure-section" id="configure" aria-labelledby="aily-configure-title">
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">04 / 管理员用户 · 接入能力</p><h2 id="aily-configure-title">把复杂配置变得清晰可控</h2></div>
@@ -131,11 +137,13 @@ const caseCopy = caseStudyCopy.aily;
     <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-preview" aria-labelledby="configure-tab-preview" hidden><video class="aily-configure-video" src="/aily-case/configure-preview.mp4" data-poster={videoPoster('/aily-case/configure-preview.mp4')} muted loop playsinline preload="none" aria-label="用效果预览确认结果"></video><p>管理员能看到员工侧授权表单，以及当前是否配置完成</p></div>
     <div class="aily-authorize-panel" role="tabpanel" id="configure-panel-coverage" aria-labelledby="configure-tab-coverage" hidden><video class="aily-configure-video" src="/aily-case/configure-coverage.mp4" data-poster={videoPoster('/aily-case/configure-coverage.mp4')} muted loop playsinline preload="none" aria-label="首期保覆盖，后期提效率"></video><p>先兼容标准和非标准服务，再补文件识别和自动填充</p></div>
    </div>
+   <AiDesignNote dark title="对复杂技术概念做内容转译和架构梳理，输出分类合理、重点突出、表达易懂的创建类表单"><AilySkillGallery configure /></AiDesignNote>
   </div>
- </section> : s.id==='govern' ? <section class="aily-authorize-section aily-admin-section aily-govern-section" id="govern" aria-labelledby="aily-govern-title">
+ </section> : s.id='govern' ? <section class="aily-authorize-section aily-admin-section aily-govern-section" id="govern" aria-labelledby="aily-govern-title">
   <div class="aily-authorize-head"><p class="aily-authorize-eyebrow">04 / 管理员用户 · 持续治理</p><h2 id="aily-govern-title">让管理员看清能力状态，也能及时管控</h2></div>
   <div class="aily-authorize-body"><div class="aily-authorize-reasons"><div><h3>问题：管理员不只关注 “有没有”，也关注 “能不能放心开放”</h3><p>企业能力进入市场后，管理员需要持续判断：<br />• 谁能看到和使用<br />• 凭证是否配置完成<br />• 当前是否启用以及出现风险时能否快速停用<br />如果只提供新建、编辑、删除，管理员很难完成日常治理</p></div><div><h3>解决思路：用关键状态和高频操作，支撑管理员做治理决策</h3><p>• 能力来源：识别能力来自官方还是企业自定义<br />• 可用范围：明确开放给全员还是指定成员 / 部门<br />• 凭证状态：区分未配置、已配置、不适用<br />• 启用状态：判断当前企业成员是否可用<br />• 管控操作：集中承接范围配置、凭证配置、详情查看和启停</p></div></div>
    <div class="aily-govern-panel"><button type="button" class="aily-authorize-image" data-image={asset('持续治理.png')} aria-label="放大查看管理列表页"><img src={casePreview(asset('持续治理.png'))} width="5760" height="3600" alt="技能包管理列表展示可用范围、凭证状态、启用状态与管控操作" loading="lazy" /></button><p>管理列表页</p></div>
+   <AiDesignNote dark title="在已有组件库基础上，vibecoding完成典型页面的前端开发"><AilySkillGallery govern /></AiDesignNote>
   </div>
  </section> : <section class="chapter" id={s.id}><p class="label">{s.label}</p><h2>{s.title}</h2><div class="reason"><div><h3>设计挑战</h3><p>{s.problem}</p></div><div><h3>设计取舍</h3><p>{s.strategy}</p></div></div><div class="gallery" data-gallery><div class="gallery-toolbar"><span>方案原稿 · 点击图片放大</span><div>{s.images.map((_,i)=><button type="button" aria-label={`查看第 ${i+1} 张方案`} aria-pressed={i===0?'true':'false'} data-slide={i}>{String(i+1).padStart(2,'0')}</button>)}</div></div>{s.images.map((name,i)=><figure hidden={i!==0}><button class="image-open" data-image={asset(name)} aria-label="放大查看方案原稿"><img src={casePreview(asset(name))} alt={name.replace('.png','')} loading="lazy" /></button><figcaption>{name.replace('.png','').split('/').pop()}</figcaption></figure>)}</div><p class="takeaway">{s.value}</p></section>)}
  <section class="aily-future-section" id="future" aria-labelledby="aily-future-title"><div class="aily-future-head"><p class="aily-strategy-eyebrow">05 / 后续优化</p><h2 id="aily-future-title">用户少主动一点，平台多主动一点</h2></div><div class="aily-strategy-grid"><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 1</span><h3>手动选择伙伴 → 基于伙伴的能力推荐</h3><p>可结合用户对agent的定位和历史任务进行推荐；如用户从市场添加技能包时，可以推荐由哪些agent来安装，而在agent对话页或详情页的时候，也可以推荐相应的技能或技能包</p><button type="button" class="aily-future-image" data-image={asset('优化点1_能力智能推荐_高清.png')} aria-label="放大查看优化点1_能力智能推荐_高清"><img src={asset('优化点1_能力智能推荐_高清.png')} width="2241" height="1374" alt="优化点1_能力智能推荐_高清" loading="lazy" decoding="async" /></button></article><article class="aily-strategy-card"><span class="aily-strategy-tag tag-blue">优化点 2</span><h3>用户自行补齐能力 → 能力组合模板化</h3><p>对官方或高频的agent，可预设常用能力。用户创建agent后，可直接获得相对完整的初始能力，无需逐个寻找和安装。企业场景还需要继续考虑权限和安全问题</p><button type="button" class="aily-future-image" data-image={asset('优化点2_能力组合模板化_高清.png')} aria-label="放大查看优化点2_能力组合模板化_高清"><img src={asset('优化点2_能力组合模板化_高清.png')} width="2301" height="1374" alt="优化点2_能力组合模板化_高清" loading="lazy" decoding="async" /></button></article></div></section>
@@ -348,6 +356,7 @@ const viewer=document.querySelector<HTMLDialogElement>('.image-dialog');document
   font-size: 48px; line-height: 1.3; letter-spacing: -1.2px;
   font-weight: 500; text-wrap: balance;
 }
+.aily-decision-body { display: grid; gap: 28px; }
 .aily-decision-points { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
 .aily-decision-points h3 { margin: 0 0 4px; color: #121211; font-size: 16px; line-height: 1.6; font-weight: 500; text-wrap: balance; }
 .aily-decision-points p { margin: 0; color: #6a6964; font-size: 14px; line-height: 1.8; white-space: pre-wrap; }

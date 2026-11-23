@@ -1,0 +1,133 @@
+---
+import { casePreview } from '@/lib/case-media';
+
+const { ownership = false, configure = false, govern = false } = Astro.props;
+const groups = ['1、明确设计目标、场景边界和信息取舍原则', '2、收敛方案，完成确认'];
+---
+<aily-skill-gallery class:list={{ ownership, configure, govern }}>
+  {govern ? <>
+    <p>对于逻辑简单、变动量较小的列表页，可直接完成设计稿的代码交付，完成CR后，走常规需求测试流程</p>
+    <div class="thumbnails">{[1, 2, 3, 4].map(index => {
+      const source = `/aily-case/ai-govern/${index}.png`;
+      return <button type="button" data-source={source} aria-label={`放大查看第 ${index} 张前端开发记录`}><img src={casePreview(source)} alt={`持续治理 AI 辅助前端开发 · 图 ${index}`} loading="lazy" /></button>;
+    })}</div>
+  </> : configure ? <>
+    {[
+      { title: '1、Review所有字段，并完成改写、重构分组和认知负荷诊断', images: [1, 2, 3, 4] },
+      { title: '2、结合上轮输出和人工确认结果，完成Schema和初稿设计', images: [5, 6, 7] },
+    ].map(group => <section><h3>{group.title}</h3><div class="thumbnails">{group.images.map(index => {
+      const source = `/aily-case/ai-configure/${index}.png`;
+      return <button type="button" data-source={source} aria-label={`放大查看第 ${index} 张表单设计记录`}><img src={casePreview(source)} alt={`接入能力 AI 辅助设计 · 图 ${index}`} loading="lazy" /></button>;
+    })}</div></section>)}
+  </> : ownership ? <>
+    <p>在真实 UX 工作中，一开始就能把需求、约束、信息架构全部定义清楚的情况并不多。可将AI协作设计的过程分成多个阶段并约定好协作原则</p>
+    <h3>1、定义协作：把 AI 的协作方式约定清楚，包括协作流程、协作原则、输入输出等</h3>
+    <div><h3>2、分阶段工作：探索阶段-判断阶段-收敛阶段-方案阶段</h3></div>
+    <div class="thumbnails">{[1, 2, 3, 4, 5].map(index => {
+      const source = `/aily-case/ai-ownership/${index}.png`;
+      return <button type="button" data-source={source} aria-label={`放大查看第 ${index} 张协作记录`}><img src={casePreview(source)} alt={`能力归属 AI 协作记录 · 图 ${index}`} loading="lazy" /></button>;
+    })}</div>
+    <div><h3>3、协作原则：</h3><p class="supporting">简单克制，一个界面一个主要任务，只展示必须关注的信息。<br />区分用户任务、业务逻辑和视觉排版问题。<br />不需要迎合我的判断。如果存在逻辑漏洞，请指出原因。<br />不必为了赶进度而提前出图，也不要在关键问题明确后继续无意义地讨论。</p></div>
+  </> : <>
+  <p>技能弹窗的问题和目标相对聚焦，故先明确设计目标、场景边界和信息取舍原则，再收敛方案，并使用AI初稿完成确认</p>
+  {groups.map((title, group) => (
+    <section>
+      <h3>{title}</h3>
+      <div class="thumbnails">
+        {[1, 2, 3].map((offset) => {
+          const index = group * 3 + offset;
+          const source = `/aily-case/ai-note/${index}.png`;
+          return <button type="button" data-source={source} aria-label={`放大查看第 ${index} 张图`}>
+            <img src={casePreview(source)} alt={`${title.slice(2)} · 图 ${offset}`} loading="lazy" />
+          </button>;
+        })}
+      </div>
+    </section>
+  ))}
+  </>}
+  <dialog aria-label="AI辅助设计大图">
+    <button class="page-button previous" type="button" data-step="-1" aria-label="上一张">←</button>
+    <button class="page-button next" type="button" data-step="1" aria-label="下一张">→</button>
+    <form method="dialog"><button class="close-button" autofocus aria-label="关闭预览"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></form>
+    <div class="image-scroll"><img alt="" /></div>
+    <span class="page-count" aria-live="polite"></span>
+  </dialog>
+</aily-skill-gallery>
+
+<script>
+  class AilySkillGallery extends HTMLElement {
+    connectedCallback() {
+      const dialog = this.querySelector('dialog')!;
+      const photo = dialog.querySelector('img')!;
+      const buttons = [...this.querySelectorAll<HTMLButtonElement>('[data-source]')];
+      let current = 0;
+      const show = (index: number) => {
+        current = (index + buttons.length) % buttons.length;
+        photo.src = buttons[current].dataset.source!;
+        photo.alt = buttons[current].querySelector('img')!.alt;
+        dialog.querySelector('span')!.textContent = `${current + 1} / ${buttons.length}`;
+        dialog.querySelector('.image-scroll')!.scrollTop = 0;
+      };
+      buttons.forEach((button, index) => button.onclick = () => {
+        dialog.showModal();
+        show(index);
+      });
+      dialog.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((button) => {
+        button.onclick = () => show(current + Number(button.dataset.step));
+      });
+      dialog.onkeydown = (event) => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        event.preventDefault();
+        show(current + (event.key === 'ArrowLeft' ? -1 : 1));
+      };
+      dialog.onclick = (event) => { if (event.target === dialog) dialog.close(); };
+    }
+  }
+
+  customElements.define('aily-skill-gallery', AilySkillGallery);
+</script>
+
+<style>
+  aily-skill-gallery { display: grid; gap: 12px; color: #0e0e0c; }
+  p, h3 { margin: 0; font-size: 14px; line-height: 1.6; }
+  h3 { font-weight: 500; margin-bottom: 12px; }
+  .govern { color: #f0f0ea; }
+  .govern .thumbnails { grid-template-columns: repeat(4, minmax(0, 190px)); }
+  .govern .thumbnails img { width: 100%; height: 96%; object-fit: cover; }
+  .govern .thumbnails button:last-child img { width: 190%; max-width: none; height: 100%; justify-self: start; }
+  @media (max-width: 720px) { .govern .thumbnails { grid-template-columns: repeat(2, minmax(0, 190px)); } }
+  .configure { color: #f0f0ea; }
+  .configure .thumbnails { grid-template-columns: repeat(4, minmax(0, 190px)); }
+  .configure section:last-of-type button:nth-child(n+2) { background: #fff; }
+  .configure section:last-of-type button:nth-child(n+2) img { width: 69%; height: 100%; }
+  @media (max-width: 720px) { .configure .thumbnails { grid-template-columns: repeat(2, minmax(0, 190px)); } }
+  .supporting { color: #484848; }
+  .ownership h3 { margin-bottom: 0; }
+  .ownership .thumbnails { grid-template-columns: repeat(5, minmax(0, 190px)); }
+  @media (max-width: 720px) { .ownership .thumbnails { grid-template-columns: repeat(3, minmax(0, 190px)); } }
+  .thumbnails { display: grid; grid-template-columns: repeat(3, minmax(0, 190px)); gap: 12px; }
+  .thumbnails button { display: grid; place-items: center; aspect-ratio: 1; width: 100%; overflow: hidden; padding: 0; border: 1px solid #e4e4e4; border-radius: 10px; background: #fff; cursor: zoom-in; }
+  .thumbnails img { width: 69%; height: 100%; min-height: 0; object-fit: cover; }
+  section:first-of-type button:nth-child(2) img { object-position: right; }
+  section:last-of-type button:nth-child(n+2) { background: #f7f8fc; }
+  section:last-of-type button:nth-child(n+2) img { width: 100%; height: 67%; }
+  .thumbnails img, dialog img { transform: none !important; translate: none !important; scale: none !important; transition: none !important; }
+  dialog { position: fixed; inset: 0; width: 100vw; max-width: none; height: 100dvh; max-height: none; box-sizing: border-box; margin: 0; padding: 64px 80px 48px; border: 0; background: transparent; color: #0e0e0c; overflow: hidden; }
+  dialog::backdrop { background: #000b; }
+  .image-scroll { height: 100%; overflow: auto; border-radius: 16px; background: white; }
+  dialog img { display: block; max-width: 100%; height: auto; margin-inline: auto; }
+  .page-button, .close-button { position: fixed; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid #ddd; border-radius: 50%; background: white; color: #575757; cursor: pointer; font-size: 24px; line-height: 1; z-index: 1; }
+  .page-button { top: 50%; transform: translateY(-50%); }
+  .previous { left: 18px; }
+  .next { right: 18px; }
+  .close-button svg { display: block; flex: none; }
+  .close-button { top: 12px; right: 18px; font-size: 28px; }
+  .page-count { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); color: white; font-size: 14px; }
+  @media (max-width: 600px) {
+    dialog { padding-inline: 52px; }
+    .page-button { width: 36px; height: 36px; }
+    .previous { left: 8px; }
+    .next { right: 8px; }
+  }
+  button:focus-visible { outline: 2px solid #575757; outline-offset: 2px; }
+</style>

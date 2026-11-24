@@ -17,7 +17,7 @@ const groups = ['1、明确设计目标、场景边界和信息取舍原则', '2
       { title: '2、结合上轮输出和人工确认结果，完成Schema和初稿设计', images: [5, 6, 7] },
     ].map(group => <section><h3>{group.title}</h3><div class="thumbnails">{group.images.map(index => {
       const source = `/aily-case/ai-configure/${index}.png`;
-      return <button type="button" data-source={source} aria-label={`放大查看第 ${index} 张表单设计记录`}><img src={casePreview(source)} alt={`接入能力 AI 辅助设计 · 图 ${index}`} loading="lazy" /></button>;
+      return <button type="button" data-source={source} data-preview-title={group.title} aria-label={`放大查看第 ${index} 张表单设计记录`}><img src={casePreview(source)} alt={`接入能力 AI 辅助设计 · 图 ${index}`} loading="lazy" /></button>;
     })}</div></section>)}
   </> : ownership ? <>
     <p>在真实 UX 工作中，一开始就能把需求、约束、信息架构全部定义清楚的情况并不多。可将AI协作设计的过程分成多个阶段并约定好协作原则</p>
@@ -37,8 +37,8 @@ const groups = ['1、明确设计目标、场景边界和信息取舍原则', '2
         {[1, 2, 3].map((offset) => {
           const index = group * 3 + offset;
           const source = `/aily-case/ai-note/${index}.png`;
-          return <button type="button" data-source={source} aria-label={`放大查看第 ${index} 张图`}>
-            <img src={casePreview(source)} alt={`${title.slice(2)} · 图 ${offset}`} loading="lazy" />
+          return <button type="button" data-source={source} data-preview-title={title} aria-label={`放大查看第 ${index} 张图`}>
+            <img data-hide-timestamp={index === 1 || undefined} src={casePreview(source)} alt={`${title.slice(2)} · 图 ${offset}`} loading="lazy" />
           </button>;
         })}
       </div>
@@ -46,6 +46,7 @@ const groups = ['1、明确设计目标、场景边界和信息取舍原则', '2
   ))}
   </>}
   <dialog aria-label="AI辅助设计大图">
+    <p class="preview-title" aria-live="polite"></p>
     <button class="page-button previous" type="button" data-step="-1" aria-label="上一张">←</button>
     <button class="page-button next" type="button" data-step="1" aria-label="下一张">→</button>
     <form method="dialog"><button class="close-button" autofocus aria-label="关闭预览"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg></button></form>
@@ -65,7 +66,10 @@ const groups = ['1、明确设计目标、场景边界和信息取舍原则', '2
         current = (index + buttons.length) % buttons.length;
         photo.src = buttons[current].dataset.source!;
         photo.alt = buttons[current].querySelector('img')!.alt;
-        dialog.querySelector('span')!.textContent = `${current + 1} / ${buttons.length}`;
+        const title = buttons[current].dataset.previewTitle || this.closest('details')?.querySelector('.heading > span:last-child')?.textContent || '';
+        dialog.querySelector('.preview-title')!.textContent = title.replace(/^\d+[、.．]\s*/, '');
+        photo.toggleAttribute('data-hide-timestamp', buttons[current].querySelector('img')!.hasAttribute('data-hide-timestamp'));
+        dialog.querySelector('.page-count')!.textContent = `${current + 1} / ${buttons.length}`;
         dialog.querySelector('.image-scroll')!.scrollTop = 0;
       };
       buttons.forEach((button, index) => button.onclick = () => {
@@ -113,6 +117,8 @@ const groups = ['1、明确设计目标、场景边界和信息取舍原则', '2
   section:last-of-type button:nth-child(n+2) img { width: 100%; height: 67%; }
   .thumbnails img, dialog img { transform: none !important; translate: none !important; scale: none !important; transition: none !important; }
   dialog { position: fixed; inset: 0; width: 100vw; max-width: none; height: 100dvh; max-height: none; box-sizing: border-box; margin: 0; padding: 64px 80px 48px; border: 0; background: transparent; color: #0e0e0c; overflow: hidden; }
+  .preview-title { position: fixed; top: 12px; left: 80px; right: 80px; height: 40px; display: flex; align-items: center; justify-content: center; margin: 0; color: #fff; font: 400 14px/1.5 PingFang SC, system-ui, sans-serif; text-align: center; }
+  img[data-hide-timestamp] { clip-path: inset(3% 0 0); }
   dialog::backdrop { background: #000b; }
   .image-scroll { height: 100%; overflow: auto; border-radius: 16px; background: white; }
   dialog img { display: block; max-width: 100%; height: auto; margin-inline: auto; }
@@ -121,10 +127,11 @@ const groups = ['1、明确设计目标、场景边界和信息取舍原则', '2
   .previous { left: 18px; }
   .next { right: 18px; }
   .close-button svg { display: block; flex: none; }
-  .close-button { top: 12px; right: 18px; font-size: 28px; }
+  .close-button { top: 12px; right: 18px; background: transparent; border: 0; border-radius: 0; color: #fff; }
   .page-count { position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); color: white; font-size: 14px; }
   @media (max-width: 600px) {
-    dialog { padding-inline: 52px; }
+    dialog { padding: 96px 52px 48px; }
+    .preview-title { left: 52px; right: 72px; height: 72px; font-size: 14px; }
     .page-button { width: 36px; height: 36px; }
     .previous { left: 8px; }
     .next { right: 8px; }
